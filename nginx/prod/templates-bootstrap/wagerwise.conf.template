@@ -1,0 +1,17 @@
+# HTTP-only bootstrap config, used ONCE by scripts/init-ssl.sh to serve the
+# ACME challenge before any certificate exists. The real config (in
+# nginx/prod/templates/) requires cert files to already be present, so nginx
+# can't start with it on a brand new host — this file breaks that chicken-and-egg.
+server {
+    listen 80;
+    server_name ${DOMAIN};
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+
+    location / {
+        return 200 "WagerWise: obtaining SSL certificate, please wait...\n";
+        add_header Content-Type text/plain;
+    }
+}

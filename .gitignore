@@ -1,0 +1,24 @@
+# Environment / secrets
+.env
+
+# WordPress core lives inside the container filesystem only (official image);
+# we bind-mount just wp-content/ and wp-config.php, so no core files appear here.
+
+# Uploads & runtime-generated content
+wp-content/uploads/
+wp-content/upgrade/
+wp-content/cache/
+wp-content/languages/
+wp-content/plugins/polylang/
+wp-content/plugins/seo-by-rank-math/
+wp-content/plugins/redis-cache/
+
+# Docker / DB data
+db_data/
+docker/mysql-data/
+
+# OS / editor
+.DS_Store
+*.log
+.idea/
+.vscode/

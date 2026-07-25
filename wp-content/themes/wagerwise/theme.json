@@ -1,0 +1,102 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 2,
+	"settings": {
+		"appearanceTools": true,
+		"layout": {
+			"contentSize": "1200px",
+			"wideSize": "1400px"
+		},
+		"color": {
+			"palette": [
+				{ "slug": "primary", "color": "oklch(0.7 0.2 195)", "name": "Neon Cyan" },
+				{ "slug": "primary-dark", "color": "oklch(0.6 0.18 195)", "name": "Neon Cyan (dark)" },
+				{ "slug": "accent", "color": "oklch(0.66 0.22 330)", "name": "Neon Magenta" },
+				{ "slug": "ink", "color": "oklch(0.94 0.01 90)", "name": "Off White (text)" },
+				{ "slug": "ink-light", "color": "oklch(0.72 0.02 285)", "name": "Muted Violet-Gray" },
+				{ "slug": "gold", "color": "#FFC13D", "name": "Rating Gold" },
+				{ "slug": "danger", "color": "#FF5C6C", "name": "Danger Red" },
+				{ "slug": "bg", "color": "oklch(0.15 0.03 285)", "name": "Page Background" },
+				{ "slug": "surface", "color": "oklch(0.2 0.03 285)", "name": "Card Surface" },
+				{ "slug": "surface-alt", "color": "oklch(0.12 0.03 285)", "name": "Alt Section" },
+				{ "slug": "border", "color": "oklch(0.3 0.03 285)", "name": "Border" }
+			],
+			"custom": true,
+			"customDuotone": false
+		},
+		"typography": {
+			"fontFamilies": [
+				{
+					"slug": "body",
+					"name": "Work Sans",
+					"fontFamily": "'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+				},
+				{
+					"slug": "heading",
+					"name": "Sora",
+					"fontFamily": "'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+				}
+			],
+			"fontSizes": [
+				{ "slug": "small", "size": "0.875rem", "name": "Small" },
+				{ "slug": "medium", "size": "1rem", "name": "Medium" },
+				{ "slug": "large", "size": "1.25rem", "name": "Large" },
+				{ "slug": "x-large", "size": "1.75rem", "name": "X-Large" },
+				{ "slug": "xx-large", "size": "2.75rem", "name": "XX-Large" }
+			]
+		},
+		"spacing": {
+			"units": [ "px", "%", "rem", "vw" ],
+			"spacingScale": {
+				"steps": 7
+			}
+		},
+		"border": {
+			"radius": true,
+			"width": true
+		}
+	},
+	"styles": {
+		"color": {
+			"background": "var(--wp--preset--color--bg)",
+			"text": "var(--wp--preset--color--ink)"
+		},
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--body)",
+			"fontSize": "var(--wp--preset--font-size--medium)",
+			"lineHeight": "1.6"
+		},
+		"elements": {
+			"heading": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--heading)",
+					"fontWeight": "800"
+				},
+				"color": { "text": "var(--wp--preset--color--ink)" }
+			},
+			"link": {
+				"color": { "text": "var(--wp--preset--color--primary)" },
+				":hover": { "color": { "text": "var(--wp--preset--color--primary-dark)" } }
+			},
+			"button": {
+				"color": {
+					"background": "var(--wp--preset--color--primary)",
+					"text": "#04140B"
+				},
+				"border": { "radius": "8px" },
+				"spacing": {
+					"padding": { "top": "12px", "bottom": "12px", "left": "24px", "right": "24px" }
+				}
+			}
+		},
+		"blocks": {
+			"core/button": {
+				"border": { "radius": "8px" }
+			}
+		}
+	},
+	"templateParts": [
+		{ "name": "header", "title": "Header", "area": "header" },
+		{ "name": "footer", "title": "Footer", "area": "footer" }
+	]
+}

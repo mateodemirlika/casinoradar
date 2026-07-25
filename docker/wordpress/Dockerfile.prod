@@ -1,0 +1,28 @@
+# Production image: the whole wp-content/ tree (theme CSS/JS is plain,
+# hand-authored — no build step) is baked in, so a deploy is "build a new
+# immutable image" rather than pushing source to a live server.
+FROM wordpress:php8.3-fpm
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        default-mysql-client \
+        unzip \
+        rsync \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN curl -o /usr/local/bin/wp -sSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+    && chmod +x /usr/local/bin/wp
+
+COPY docker/php/php.ini /usr/local/etc/php/conf.d/zz-wagerwise.ini
+COPY docker/php/opcache-prod.ini /usr/local/etc/php/conf.d/zz-opcache.ini
+
+# Bake wp-content into an immutable "dist" location; the entrypoint syncs it
+# into the live, volume-backed /var/www/html/wp-content on every start,
+# preserving wp-content/uploads so media survives redeploys.
+COPY wp-content/ /usr/src/wp-content-dist/
+COPY wp-config.php /var/www/html/wp-config.php
+
+COPY docker/wordpress/entrypoint-prod.sh /usr/local/bin/entrypoint-prod.sh
+RUN chmod +x /usr/local/bin/entrypoint-prod.sh
+
+ENTRYPOINT ["entrypoint-prod.sh"]
+CMD ["php-fpm"]

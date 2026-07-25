@@ -1,0 +1,39 @@
+# Auto-loaded by `docker compose` alongside docker-compose.yml for local dev.
+# Do NOT use this file in production (docker-compose.prod.yml replaces it).
+services:
+  wordpress:
+    volumes:
+      - ./docker/php/xdebug-dev.ini:/usr/local/etc/php/conf.d/xdebug-dev.ini:ro
+
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    depends_on:
+      - wordpress
+    volumes:
+      - wp_core:/var/www/html:ro
+      - ./wp-content:/var/www/html/wp-content:ro
+      - ./nginx/dev.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - "8095:80"
+    networks: [wagerwise]
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    restart: unless-stopped
+    ports:
+      - "8025:8025" # web UI
+    networks: [wagerwise]
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_USER: ${DB_USER}
+      PMA_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "8081:80"
+    networks: [wagerwise]

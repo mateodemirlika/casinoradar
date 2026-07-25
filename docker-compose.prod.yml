@@ -1,0 +1,68 @@
+# Used explicitly on the production host:
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+# (docker-compose.override.yml is NOT loaded since it's not named on the CLI)
+services:
+  wordpress:
+    build:
+      context: .
+      dockerfile: docker/wordpress/Dockerfile.prod
+    volumes:
+      - wp_core:/var/www/html
+      - wp_content_prod:/var/www/html/wp-content
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+
+  wpcli:
+    build:
+      context: .
+      dockerfile: docker/wordpress/Dockerfile.prod
+    volumes:
+      - wp_core:/var/www/html
+      - wp_content_prod:/var/www/html/wp-content
+      - ./wp-cli:/var/www/html/wp-cli-scripts
+    entrypoint: ["wp", "--allow-root", "--path=/var/www/html"]
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    networks: [wagerwise]
+
+  nginx:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    depends_on:
+      - wordpress
+    environment:
+      DOMAIN: ${DOMAIN}
+    volumes:
+      - wp_core:/var/www/html:ro
+      - wp_content_prod:/var/www/html/wp-content:ro
+      - ./nginx/prod/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/prod/templates:/etc/nginx/templates:ro
+      - certbot_conf:/etc/letsencrypt:ro
+      - certbot_www:/var/www/certbot:ro
+    ports:
+      - "80:80"
+      - "443:443"
+    networks: [wagerwise]
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - certbot_conf:/etc/letsencrypt
+      - certbot_www:/var/www/certbot
+    entrypoint: >
+      sh -c "trap exit TERM; while :; do certbot renew --webroot -w /var/www/certbot --quiet; sleep 12h; done"
+    networks: [wagerwise]
+
+volumes:
+  wp_core:
+  wp_content_prod:
+  redis_data:
+  certbot_conf:
+  certbot_www:

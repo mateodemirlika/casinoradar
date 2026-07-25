@@ -1,0 +1,633 @@
+/* WagerWise front-end styles. Plain CSS, no build step — uses the CSS custom
+   properties WordPress generates from theme.json (--wp--preset--color--*).
+   Dark, casino.guru-inspired look: deep navy surfaces, a bright trust-green
+   accent, gold ratings, and glowing card hovers. */
+
+:root {
+	--ww-radius: 12px;
+	--ww-radius-sm: 8px;
+	--ww-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 8px 24px rgba(0, 0, 0, 0.35);
+	--ww-shadow-hover: 0 2px 6px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.45);
+	--ww-glow-primary: 0 0 0 1px rgba(34, 197, 103, 0.4), 0 8px 28px rgba(34, 197, 103, 0.18);
+}
+
+body { background: var(--wp--preset--color--bg); }
+
+/* ---------- Badges (generic pill, reused for ranks/tags) ---------- */
+.ww-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 4px 10px;
+	border-radius: 999px;
+	font-size: 0.75rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+	background: rgba(34, 197, 103, 0.12);
+	color: var(--wp--preset--color--primary);
+}
+.ww-badge--gold { background: rgba(255, 193, 61, 0.14); color: var(--wp--preset--color--gold); }
+.ww-badge--accent { background: rgba(155, 107, 255, 0.16); color: var(--wp--preset--color--accent); }
+
+/* ---------- Disclaimer bar ---------- */
+.ww-disclaimer-bar {
+	background: var(--wp--preset--color--surface-alt);
+	color: var(--wp--preset--color--ink-light);
+	text-align: center;
+	padding: 8px 16px;
+	font-size: var(--wp--preset--font-size--small);
+	border-bottom: 1px solid var(--wp--preset--color--border);
+}
+.ww-disclaimer-bar p { margin: 0; }
+
+/* ---------- Header ---------- */
+/* WP wraps the header template part in its own <header class="wp-block-
+   template-part"> tag, exactly the height of its one child (.ww-header).
+   position:sticky is bounded by the height of its nearest ancestor block,
+   so with zero spare room in that wrapper the header immediately "runs out
+   of room" to stick and scrolls away after the first pixel of scroll.
+   display:contents removes the wrapper from the box tree so .ww-header's
+   sticky positioning is bounded by .wp-site-blocks (the full page) instead. */
+header.wp-block-template-part {
+	display: contents;
+}
+.ww-header {
+	padding: 16px 32px;
+	border-bottom: 1px solid var(--wp--preset--color--border);
+	background: var(--wp--preset--color--surface);
+	flex-wrap: wrap;
+	gap: 16px;
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+	z-index: 100;
+	transition: background-color 0.2s ease, backdrop-filter 0.2s ease, box-shadow 0.2s ease;
+}
+/* Added by JS (main.js) once the page scrolls past the top — keeps the
+   header visible while scrolling, but as a translucent/blurred bar instead
+   of a flat opaque one. */
+.ww-header.is-scrolled {
+	background: color-mix(in oklch, var(--wp--preset--color--surface) 82%, transparent);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	box-shadow: var(--ww-shadow);
+}
+.ww-header__brand { align-items: center; gap: 12px; }
+.ww-header__brand .wp-block-site-title a {
+	font-family: var(--wp--preset--font-family--heading);
+	font-weight: 800;
+	letter-spacing: 0.5px;
+	text-decoration: none;
+	background: linear-gradient(90deg, var(--wp--preset--color--primary), var(--wp--preset--color--accent));
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+.ww-header__actions { align-items: center; gap: 16px; }
+.ww-nav-wrap { display: flex; align-items: center; }
+.ww-header__nav { display: flex; gap: 18px; flex-wrap: wrap; }
+.ww-header__nav a { color: var(--wp--preset--color--ink-light); font-weight: 500; font-size: var(--wp--preset--font-size--small); text-decoration: none; }
+.ww-header__nav a:hover, .ww-header__nav a.is-active { color: var(--wp--preset--color--primary); font-weight: 700; }
+
+/* ---------- Mobile nav toggle (burger menu) ---------- */
+.ww-nav-toggle {
+	display: none;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 5px;
+	width: 40px;
+	height: 40px;
+	flex-shrink: 0;
+	background: transparent;
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: 8px;
+	cursor: pointer;
+	padding: 0;
+}
+.ww-nav-toggle__bar {
+	display: block;
+	width: 18px;
+	height: 2px;
+	background: var(--wp--preset--color--ink);
+	border-radius: 2px;
+	transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.ww-nav-toggle[aria-expanded="true"] .ww-nav-toggle__bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.ww-nav-toggle[aria-expanded="true"] .ww-nav-toggle__bar:nth-child(2) { opacity: 0; }
+.ww-nav-toggle[aria-expanded="true"] .ww-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ---------- Language switcher ---------- */
+.ww-lang-switcher ul { list-style: none; display: flex; gap: 4px; margin: 0; padding: 4px; background: var(--wp--preset--color--surface-alt); border-radius: 999px; border: 1px solid var(--wp--preset--color--border); }
+.ww-lang-switcher a {
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 600;
+	color: var(--wp--preset--color--ink-light);
+	text-decoration: none;
+	padding: 4px 10px;
+	border-radius: 999px;
+	display: inline-block;
+}
+.ww-lang-switcher li.is-active a { color: #04140B; background: var(--wp--preset--color--primary); }
+
+/* ---------- Buttons ---------- */
+.ww-btn {
+	display: inline-block;
+	padding: 12px 24px;
+	border-radius: var(--ww-radius-sm);
+	font-weight: 700;
+	text-decoration: none;
+	transition: transform 0.1s ease, box-shadow 0.15s ease, background 0.15s ease;
+	border: 1px solid transparent;
+}
+.ww-btn--primary {
+	background: linear-gradient(90deg, var(--wp--preset--color--primary), var(--wp--preset--color--accent));
+	color: #12121e;
+	border-radius: 999px;
+	border: none;
+	background-clip: padding-box;
+}
+.ww-btn--primary:hover { color: #12121e; transform: translateY(-1px); box-shadow: var(--ww-glow-primary); filter: brightness(1.06); }
+.ww-btn--ghost { background: transparent; color: var(--wp--preset--color--ink); border-color: var(--wp--preset--color--border); border-radius: 999px; }
+.ww-btn--ghost:hover { border-color: var(--wp--preset--color--primary); color: var(--wp--preset--color--primary); }
+.ww-btn--small { padding: 8px 16px; font-size: var(--wp--preset--font-size--small); }
+.ww-btn--large { padding: 16px 32px; font-size: var(--wp--preset--font-size--large); }
+
+/* ---------- Hero ---------- */
+.ww-hero {
+	position: relative;
+	overflow: hidden;
+	text-align: center;
+	padding: 48px 24px 40px;
+	background: radial-gradient(ellipse 60% 70% at 50% 0%, color-mix(in oklch, var(--wp--preset--color--accent) 20%, transparent), transparent 70%);
+	isolation: isolate;
+}
+.ww-hero::before,
+.ww-hero::after {
+	content: "";
+	position: absolute;
+	width: 420px;
+	height: 420px;
+	border-radius: 50%;
+	filter: blur(120px);
+	opacity: 0.28;
+	z-index: -1;
+}
+.ww-hero::before { background: var(--wp--preset--color--primary); top: -160px; left: -80px; }
+.ww-hero::after { background: var(--wp--preset--color--accent); top: -120px; right: -100px; }
+.ww-hero__badge {
+	display: inline-block;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 1.5px;
+	text-transform: uppercase;
+	color: var(--wp--preset--color--primary);
+	border: 1px solid var(--wp--preset--color--primary-dark);
+	border-radius: 20px;
+	padding: 6px 14px;
+	margin-bottom: 20px;
+}
+.ww-hero h1 { font-size: var(--wp--preset--font-size--xx-large); margin-bottom: 12px; color: var(--wp--preset--color--ink); max-width: 720px; margin-left: auto; margin-right: auto; }
+.ww-hero p { font-size: var(--wp--preset--font-size--large); color: var(--wp--preset--color--ink-light); margin: 0 auto 20px; max-width: 560px; }
+.ww-hero__ctas { display: flex; gap: 14px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
+.ww-hero-search { display: flex; max-width: 520px; margin: 0 auto; gap: 8px; }
+.ww-hero-search input {
+	flex: 1;
+	padding: 14px 20px;
+	border-radius: 999px;
+	border: 1px solid var(--wp--preset--color--border);
+	background: var(--wp--preset--color--surface);
+	color: var(--wp--preset--color--ink);
+	font-size: var(--wp--preset--font-size--medium);
+}
+.ww-hero-search input::placeholder { color: var(--wp--preset--color--ink-light); }
+.ww-hero-search button {
+	background: var(--wp--preset--color--primary);
+	color: #04140B;
+	border: none;
+	padding: 14px 28px;
+	border-radius: 999px;
+	font-weight: 700;
+	cursor: pointer;
+	transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+.ww-hero-search button:hover { background: var(--wp--preset--color--primary-dark); box-shadow: var(--ww-glow-primary); }
+
+/* ---------- Sections ---------- */
+.ww-section { padding: 40px 24px; }
+.ww-section--alt { background: var(--wp--preset--color--surface-alt); border-radius: var(--ww-radius); }
+.ww-section--tight { padding: 0 24px 8px; }
+.ww-page-subtitle { color: var(--wp--preset--color--ink-light); font-size: var(--wp--preset--font-size--medium); margin-top: -12px; }
+
+/* ---------- Single post (single.html, single-guide/-review/-news.html) ---------- */
+.ww-single-post .wp-block-post-featured-image {
+	max-height: 420px;
+	overflow: hidden;
+	border-radius: var(--ww-radius);
+	margin-bottom: 24px;
+}
+.ww-single-post .wp-block-post-featured-image img {
+	width: 100%;
+	height: 420px;
+	object-fit: cover;
+	display: block;
+}
+.ww-post-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 20px; color: var(--wp--preset--color--ink-light); font-size: var(--wp--preset--font-size--small); }
+
+/* ---------- List meta (showing count / sort) ---------- */
+.ww-list-meta { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin: 0 24px 16px; font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--ink-light); }
+.ww-list-meta strong { color: var(--wp--preset--color--primary); }
+
+/* ---------- Star rating ---------- */
+.ww-stars { display: inline-flex; align-items: center; gap: 2px; color: var(--wp--preset--color--gold); }
+.ww-star--empty { color: var(--wp--preset--color--border); }
+.ww-rating-number { margin-left: 6px; font-weight: 700; color: var(--wp--preset--color--ink); font-size: var(--wp--preset--font-size--small); }
+
+/* ---------- Top casinos ---------- */
+.ww-top-casinos { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+.ww-casino-card {
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: var(--ww-radius);
+	padding: 20px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	transition: box-shadow 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+.ww-casino-card:hover { box-shadow: var(--ww-shadow-hover), var(--ww-glow-primary); border-color: var(--wp--preset--color--primary); transform: translateY(-2px); }
+.ww-casino-card__logo { display: block; border-radius: var(--ww-radius-sm); overflow: hidden; margin-bottom: 14px; height: 80px; background: repeating-linear-gradient(45deg, var(--wp--preset--color--surface-alt), var(--wp--preset--color--surface-alt) 6px, var(--wp--preset--color--surface) 6px, var(--wp--preset--color--surface) 12px); }
+.ww-casino-card__meta { margin: 4px 0; font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--ink-light); }
+.ww-casino-card__bonus { margin: 0 0 10px; font-size: var(--wp--preset--font-size--medium); font-weight: 600; color: var(--wp--preset--color--primary); }
+.ww-casino-card > .ww-btn { margin-top: auto; text-align: center; }
+.ww-rank {
+	position: absolute;
+	top: 14px;
+	right: 14px;
+	background: var(--wp--preset--color--primary);
+	color: #12121e;
+	font-size: 12px;
+	font-weight: 800;
+	min-width: 26px;
+	height: 26px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 6px;
+	border-radius: 999px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+.ww-casino-card:nth-child(2) .ww-rank,
+.ww-comparison-table tbody tr:nth-child(2) .ww-rank { background: var(--wp--preset--color--accent); }
+.ww-casino-card:nth-child(n+3) .ww-rank { background: var(--wp--preset--color--ink-light); color: var(--wp--preset--color--bg); }
+.ww-casino-card__logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ww-casino-card__name { font-weight: 700; color: var(--wp--preset--color--ink); text-decoration: none; font-size: var(--wp--preset--font-size--large); }
+
+/* ---------- Stats strip ---------- */
+.ww-stats-strip {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+	gap: 16px;
+	margin: 0 auto 8px;
+}
+.ww-stat {
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: var(--ww-radius);
+	padding: 20px;
+	text-align: center;
+}
+.ww-stat__number { display: block; font-size: var(--wp--preset--font-size--x-large); font-weight: 800; color: var(--wp--preset--color--primary); }
+.ww-stat__label { display: block; margin-top: 4px; color: var(--wp--preset--color--ink-light); font-size: var(--wp--preset--font-size--small); }
+
+/* ---------- Provider strip ---------- */
+.ww-provider-strip { display: flex; flex-wrap: wrap; gap: 12px; }
+.ww-provider-tile {
+	flex: 1 1 160px;
+	text-align: center;
+	padding: 20px 16px;
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: var(--ww-radius-sm);
+	color: var(--wp--preset--color--ink);
+	font-weight: 800;
+	letter-spacing: 0.02em;
+	text-decoration: none;
+	transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.ww-provider-tile:hover { border-color: var(--wp--preset--color--primary); color: var(--wp--preset--color--primary); transform: translateY(-2px); }
+
+/* ---------- Category strip: chip (filter row) + tile (icon grid) ---------- */
+.ww-category-strip--chip { display: flex; flex-wrap: wrap; gap: 10px; }
+.ww-category-pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 16px;
+	background: transparent;
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: 999px;
+	color: var(--wp--preset--color--ink-light);
+	font-weight: 600;
+	font-size: var(--wp--preset--font-size--small);
+	text-decoration: none;
+	transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+.ww-category-pill:hover { border-color: var(--wp--preset--color--primary); color: var(--wp--preset--color--primary); }
+.ww-category-pill.is-active {
+	background: linear-gradient(90deg, var(--wp--preset--color--primary), var(--wp--preset--color--accent));
+	color: #12121e;
+	border-color: transparent;
+	font-weight: 700;
+}
+.ww-category-pill__count {
+	background: var(--wp--preset--color--surface-alt);
+	color: var(--wp--preset--color--ink-light);
+	font-size: 0.75rem;
+	font-weight: 700;
+	padding: 2px 8px;
+	border-radius: 999px;
+}
+.ww-category-pill.is-active .ww-category-pill__count { background: rgba(18, 18, 30, 0.25); color: #12121e; }
+
+.ww-category-strip--tile { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
+.ww-category-tile {
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: var(--ww-radius);
+	padding: 22px;
+	text-decoration: none;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.ww-category-tile:hover { border-color: var(--wp--preset--color--primary); transform: translateY(-2px); }
+.ww-category-tile__icon {
+	width: 44px;
+	height: 44px;
+	border-radius: 10px;
+	background: linear-gradient(135deg, var(--wp--preset--color--primary), var(--wp--preset--color--accent));
+	margin-bottom: 10px;
+}
+.ww-category-tile__name { font-weight: 700; font-size: var(--wp--preset--font-size--medium); color: var(--wp--preset--color--ink); }
+.ww-category-tile__count { font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--ink-light); }
+
+/* ---------- Game grid ---------- */
+.ww-game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+.ww-game-card {
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: var(--ww-radius);
+	overflow: hidden;
+	box-shadow: var(--ww-shadow);
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding-bottom: 16px;
+	transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+.ww-game-card:hover { box-shadow: var(--ww-shadow-hover), var(--ww-glow-primary); transform: translateY(-2px); }
+.ww-game-card__thumb { position: relative; display: block; }
+.ww-game-card__thumb img { width: 100%; height: 160px; object-fit: cover; display: block; }
+.ww-game-card__rtp { position: absolute; top: 10px; right: 10px; background: rgba(11, 18, 28, 0.85); }
+.ww-game-card__body { padding: 0 16px; display: flex; flex-direction: column; gap: 2px; }
+.ww-game-card__name { font-weight: 700; color: var(--wp--preset--color--ink); text-decoration: none; }
+.ww-game-card__provider { color: var(--wp--preset--color--ink-light); font-size: var(--wp--preset--font-size--small); }
+.ww-game-card > .ww-btn { margin: 4px 16px 0; }
+.ww-game-hero__provider { color: var(--wp--preset--color--ink-light); margin-top: -8px; }
+
+/* ---------- Comparison table ---------- */
+.ww-comparison-table { width: 100%; border-collapse: collapse; background: var(--wp--preset--color--surface); border: 1px solid var(--wp--preset--color--border); border-radius: var(--ww-radius); overflow: hidden; box-shadow: var(--ww-shadow); }
+.ww-comparison-table th, .ww-comparison-table td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--wp--preset--color--border); }
+.ww-comparison-table th { background: var(--wp--preset--color--surface-alt); font-size: var(--wp--preset--font-size--small); text-transform: uppercase; letter-spacing: 0.04em; color: var(--wp--preset--color--ink-light); }
+.ww-comparison-table tbody tr:hover { background: var(--wp--preset--color--surface-alt); }
+.ww-comparison-table tbody tr:last-child td { border-bottom: none; }
+
+/* ---------- Bonus grid ---------- */
+.ww-bonus-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+.ww-bonus-card {
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--preset--color--border);
+	border-top: 3px solid var(--wp--preset--color--primary);
+	border-radius: var(--ww-radius);
+	box-shadow: var(--ww-shadow);
+	padding: 20px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+.ww-bonus-card:hover { box-shadow: var(--ww-shadow-hover), var(--ww-glow-primary); transform: translateY(-2px); }
+.ww-bonus-card__type { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--wp--preset--color--primary); }
+.ww-bonus-card__value { font-size: var(--wp--preset--font-size--x-large); font-weight: 800; color: var(--wp--preset--color--ink); }
+.ww-bonus-card__casino { color: var(--wp--preset--color--ink-light); font-size: var(--wp--preset--font-size--small); }
+.ww-bonus-card__code code { background: var(--wp--preset--color--surface-alt); border: 1px dashed var(--wp--preset--color--border); color: var(--wp--preset--color--ink); padding: 2px 8px; border-radius: 6px; }
+.ww-bonus-card > .ww-btn { margin-top: auto; }
+
+/* ---------- Pros / cons ---------- */
+.ww-pros-cons {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 24px;
+	margin: 24px 0;
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: var(--ww-radius);
+	padding: 24px;
+}
+.ww-pros-cons ul { list-style: none; margin: 0; padding: 0; }
+.ww-pros-cons li { padding: 6px 0; color: var(--wp--preset--color--ink-light); }
+.ww-pros h4 { color: var(--wp--preset--color--primary); margin-top: 0; }
+.ww-cons h4 { color: var(--wp--preset--color--danger); margin-top: 0; }
+
+/* ---------- Casino / bonus hero ---------- */
+.ww-casino-hero, .ww-bonus-hero {
+	display: flex;
+	align-items: center;
+	gap: 24px;
+	flex-wrap: wrap;
+	background: linear-gradient(135deg, var(--wp--preset--color--surface-alt), var(--wp--preset--color--surface));
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: var(--ww-radius);
+	padding: 32px;
+	margin-bottom: 32px;
+}
+.ww-casino-hero__logo, .ww-bonus-hero__logo { background: #fff; border-radius: var(--ww-radius-sm); padding: 12px; display: inline-flex; }
+.ww-casino-hero__logo img, .ww-bonus-hero__logo img { max-height: 80px; }
+.ww-casino-hero__body, .ww-bonus-hero__body { flex: 1; min-width: 240px; }
+.ww-casino-hero__facts { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 16px; color: var(--wp--preset--color--ink-light); font-size: var(--wp--preset--font-size--small); }
+.ww-bonus-hero__value { font-size: var(--wp--preset--font-size--xx-large); font-weight: 800; color: var(--wp--preset--color--primary); margin: 8px 0; }
+
+/* ---------- Blog grid ---------- */
+.ww-blog-grid, .ww-blog-index .wp-block-post-template { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+.ww-blog-card { display: block; text-decoration: none; color: inherit; background: var(--wp--preset--color--surface); border: 1px solid var(--wp--preset--color--border); border-radius: var(--ww-radius); overflow: hidden; box-shadow: var(--ww-shadow); transition: box-shadow 0.15s ease, transform 0.15s ease; }
+.ww-blog-card:hover { box-shadow: var(--ww-shadow-hover); transform: translateY(-2px); }
+.ww-blog-card img { width: 100%; height: 180px; object-fit: cover; }
+.ww-blog-card h4, .ww-blog-card p { padding: 0 16px; }
+.ww-blog-card h4 { margin-top: 12px; color: var(--wp--preset--color--ink); }
+.ww-blog-card p { color: var(--wp--preset--color--ink-light); padding-bottom: 16px; }
+
+/* ---------- Footer ---------- */
+.ww-footer { background: var(--wp--preset--color--surface-alt); color: var(--wp--preset--color--ink-light); padding: 40px 32px 24px; margin-top: 64px; border-top: 1px solid var(--wp--preset--color--border); font-size: 12px; }
+.ww-footer .ww-header__nav { display: flex; flex-direction: column; gap: 8px; }
+.ww-footer h3, .ww-footer h4 { color: var(--wp--preset--color--ink); }
+.ww-footer a { color: var(--wp--preset--color--ink-light); text-decoration: none; }
+.ww-footer a:hover { color: var(--wp--preset--color--primary); }
+.ww-footer__top { flex-wrap: wrap; gap: 32px; align-items: flex-start; }
+.ww-footer__col { min-width: 200px; }
+.ww-footer__bottom { border-top: 1px solid var(--wp--preset--color--border); margin-top: 32px; padding-top: 16px; font-size: var(--wp--preset--font-size--small); flex-wrap: wrap; gap: 8px; }
+.ww-social-links { list-style: none; display: flex; gap: 12px; padding: 0; margin: 12px 0 0; }
+.ww-social-links a { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 999px; border: 1px solid var(--wp--preset--color--border); }
+.ww-social-links a:hover { border-color: var(--wp--preset--color--primary); }
+
+/* ---------- Age gate ---------- */
+.ww-age-gate { position: fixed; inset: 0; background: rgba(4, 8, 14, 0.85); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 24px; backdrop-filter: blur(4px); }
+.ww-age-gate__box { background: var(--wp--preset--color--surface); border: 1px solid var(--wp--preset--color--border); border-radius: var(--ww-radius); padding: 32px; max-width: 420px; text-align: center; box-shadow: var(--ww-shadow-hover); }
+.ww-age-gate__actions { display: flex; gap: 12px; justify-content: center; margin-top: 16px; }
+
+/* ---------- Tournaments ---------- */
+.ww-tournament-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+.ww-tournament-card {
+	display: block;
+	background: linear-gradient(135deg, var(--wp--preset--color--surface-alt), var(--wp--preset--color--surface));
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: var(--ww-radius);
+	padding: 18px;
+	text-decoration: none;
+	transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.ww-tournament-card:hover { border-color: var(--wp--preset--color--primary); transform: translateY(-2px); }
+.ww-tournament-card__status { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--wp--preset--color--primary); }
+.ww-tournament-card__name { display: block; font-weight: 700; font-size: var(--wp--preset--font-size--medium); color: var(--wp--preset--color--ink); margin: 6px 0; }
+.ww-tournament-card__meta { display: block; font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--ink-light); }
+
+.ww-leaderboard { border: 1px solid var(--wp--preset--color--border); border-radius: var(--ww-radius); overflow: hidden; }
+.ww-leaderboard__row { display: grid; grid-template-columns: 60px 2fr 1fr 1fr; padding: 14px 20px; font-size: var(--wp--preset--font-size--small); border-top: 1px solid var(--wp--preset--color--border); }
+.ww-leaderboard__row:first-child { border-top: none; }
+.ww-leaderboard__row--head { background: var(--wp--preset--color--surface-alt); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--wp--preset--color--ink-light); }
+.ww-leaderboard__rank--first { color: var(--wp--preset--color--primary); font-weight: 700; }
+
+/* ---------- Guide / News: featured card + list rows ---------- */
+.ww-featured-guide {
+	display: grid;
+	grid-template-columns: 1.3fr 1fr;
+	gap: 24px;
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: 16px;
+	overflow: hidden;
+	text-decoration: none;
+	color: inherit;
+}
+.ww-featured-guide__body { padding: 32px; }
+.ww-featured-guide__tag { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--wp--preset--color--primary); margin-bottom: 10px; }
+.ww-featured-guide__body h3 { font-size: var(--wp--preset--font-size--x-large); line-height: 1.25; margin: 0 0 12px; color: var(--wp--preset--color--ink); }
+.ww-featured-guide__body p { font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--ink-light); line-height: 1.6; margin: 0 0 16px; }
+.ww-featured-guide__meta { font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--ink-light); }
+.ww-featured-guide__art { background: linear-gradient(135deg, var(--wp--preset--color--primary-dark), var(--wp--preset--color--accent)); height: 320px; }
+.ww-featured-guide__art img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.ww-guide-list { display: flex; flex-direction: column; gap: 4px; margin-top: 24px; }
+.ww-guide-row { display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--wp--preset--color--border); text-decoration: none; color: inherit; }
+.ww-guide-row:last-child { border-bottom: none; }
+.ww-guide-row__thumb { width: 96px; height: 64px; border-radius: 8px; flex-shrink: 0; overflow: hidden; background: var(--wp--preset--color--surface-alt); }
+.ww-guide-row__thumb img { width: 100%; height: 100%; object-fit: cover; }
+.ww-guide-row__title { display: block; font-weight: 600; font-size: var(--wp--preset--font-size--medium); color: var(--wp--preset--color--ink); }
+.ww-guide-row__meta { display: block; font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--ink-light); margin-top: 4px; }
+
+.ww-news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-top: 24px; }
+.ww-news-card { display: block; background: var(--wp--preset--color--surface); border: 1px solid var(--wp--preset--color--border); border-radius: var(--ww-radius); padding: 18px; text-decoration: none; transition: border-color 0.15s ease; }
+.ww-news-card:hover { border-color: var(--wp--preset--color--primary); }
+.ww-news-card__tag { display: block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--wp--preset--color--primary); margin-bottom: 8px; }
+.ww-news-card__title { display: block; font-weight: 700; font-size: var(--wp--preset--font-size--medium); color: var(--wp--preset--color--ink); margin-bottom: 8px; }
+.ww-news-card__date { display: block; font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--ink-light); }
+
+/* ---------- Reviews ---------- */
+.ww-reviews-list { display: flex; flex-direction: column; gap: 14px; }
+.ww-review-card { display: flex; gap: 18px; background: var(--wp--preset--color--surface); border: 1px solid var(--wp--preset--color--border); border-radius: var(--ww-radius); padding: 20px; }
+.ww-review-card img.avatar { border-radius: 999px; flex-shrink: 0; }
+.ww-review-card__head { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 6px; flex-wrap: wrap; }
+.ww-review-card__author { font-weight: 700; font-size: var(--wp--preset--font-size--medium); color: var(--wp--preset--color--ink); }
+.ww-review-card__on { font-weight: 400; color: var(--wp--preset--color--ink-light); font-size: var(--wp--preset--font-size--small); }
+.ww-review-card__rating { color: var(--wp--preset--color--gold); font-weight: 700; font-size: var(--wp--preset--font-size--small); white-space: nowrap; }
+.ww-review-card__text { font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--ink); line-height: 1.6; margin: 0; }
+.ww-review-card__date { display: block; font-size: 11px; color: var(--wp--preset--color--ink-light); margin-top: 8px; }
+#respond, .comment-form-rating select { background: var(--wp--preset--color--surface); color: var(--wp--preset--color--ink); border: 1px solid var(--wp--preset--color--border); border-radius: 6px; padding: 6px; }
+
+/* ---------- Editorial review grid (the `review` CPT — "Editor's Reviews") ---------- */
+.ww-review-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin: 16px 0 32px; }
+.ww-review-grid-card {
+	display: flex;
+	flex-direction: column;
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: var(--ww-radius);
+	overflow: hidden;
+	box-shadow: var(--ww-shadow);
+	text-decoration: none;
+	transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+.ww-review-grid-card:hover { box-shadow: var(--ww-shadow-hover), var(--ww-glow-primary); transform: translateY(-2px); }
+.ww-review-grid-card img { width: 100%; height: 140px; object-fit: cover; display: block; }
+.ww-review-grid-card__body { padding: 16px; display: flex; flex-direction: column; gap: 6px; }
+.ww-review-grid-card__casino { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--wp--preset--color--primary); }
+.ww-review-grid-card__body h3 { margin: 0; font-size: var(--wp--preset--font-size--large); color: var(--wp--preset--color--ink); }
+.ww-review-grid-card__verdict { margin: 4px 0 0; font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--ink-light); line-height: 1.5; }
+
+/* ---------- Single review meta (single-review.html) ---------- */
+.ww-review-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin: 12px 0 24px; padding: 16px 20px; background: var(--wp--preset--color--surface); border: 1px solid var(--wp--preset--color--border); border-radius: var(--ww-radius); }
+.ww-review-meta__casino { font-weight: 700; color: var(--wp--preset--color--primary); text-decoration: none; }
+.ww-review-meta__casino:hover { text-decoration: underline; }
+.ww-review-meta__verdict { flex-basis: 100%; margin: 4px 0 0; color: var(--wp--preset--color--ink-light); font-size: var(--wp--preset--font-size--medium); font-style: italic; }
+
+/* ---------- Complaints ---------- */
+.ww-complaints-list { display: flex; flex-direction: column; gap: 12px; }
+.ww-complaint-card { background: var(--wp--preset--color--surface); border: 1px solid var(--wp--preset--color--border); border-radius: var(--ww-radius); padding: 18px; }
+.ww-complaint-card__meta { font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--ink-light); margin: 0 0 6px; }
+.ww-complaint-card__summary { font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--ink); line-height: 1.5; margin: 0; }
+.ww-complaint-card__outcome { margin: 10px 0 0; font-size: var(--wp--preset--font-size--small); font-weight: 700; color: var(--wp--preset--color--primary); }
+
+.ww-complaint-form { display: flex; flex-direction: column; gap: 12px; background: var(--wp--preset--color--surface); border: 1px solid var(--wp--preset--color--border); border-radius: var(--ww-radius); padding: 22px; }
+.ww-complaint-form label { display: flex; flex-direction: column; gap: 6px; font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--ink-light); }
+.ww-complaint-form input, .ww-complaint-form select, .ww-complaint-form textarea {
+	background: var(--wp--preset--color--surface-alt);
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: 8px;
+	padding: 10px;
+	color: var(--wp--preset--color--ink);
+	font-family: inherit;
+	font-size: var(--wp--preset--font-size--small);
+}
+.ww-complaint-form__notice { background: rgba(112, 200, 195, 0.12); border: 1px solid var(--wp--preset--color--primary); border-radius: 8px; padding: 10px 14px; font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--primary); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 782px) {
+	.ww-pros-cons { grid-template-columns: 1fr; }
+	.ww-comparison-table { display: block; overflow-x: auto; }
+	.ww-featured-guide { grid-template-columns: 1fr; }
+	.ww-leaderboard__row { grid-template-columns: 40px 1.5fr 1fr 1fr; padding: 12px; }
+
+	.ww-nav-toggle { display: flex; }
+	.ww-header__nav {
+		display: none;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		right: 0;
+		flex-direction: column;
+		align-items: stretch;
+		gap: 2px;
+		background: var(--wp--preset--color--surface);
+		border-bottom: 1px solid var(--wp--preset--color--border);
+		padding: 8px 24px 16px;
+		box-shadow: var(--ww-shadow);
+		z-index: 99;
+	}
+	.ww-header__nav.is-open { display: flex; }
+	.ww-header__nav a { padding: 10px 0; border-bottom: 1px solid var(--wp--preset--color--border); }
+	.ww-header__nav a:last-child { border-bottom: none; }
+}
