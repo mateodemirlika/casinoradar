@@ -1305,4 +1305,27 @@ if ( class_exists( 'PLL_MO' ) && function_exists( 'pll_register_string' ) ) {
 	}
 }
 
+// -----------------------------------------------------------------------------
+// Rank Math only seeds sitemap "include" defaults for post types/taxonomies it
+// knows about at its own activation time — custom ones registered later by
+// wagerwise-core (all of them, here) are otherwise silently absent from the
+// sitemap. Idempotent: just (re)asserts these are "on" every run.
+// -----------------------------------------------------------------------------
+if ( function_exists( 'update_option' ) ) {
+	$rankmath_sitemap_post_types = array( 'casino', 'bonus', 'game', 'tournament', 'complaint', 'guide', 'review', 'news' );
+	$rankmath_sitemap_taxonomies = array(
+		'casino_category', 'software_provider', 'payment_method', 'bonus_type', 'licence',
+		'game_category', 'country', 'guide_category', 'news_category', 'review_category',
+		'tournament_type', 'complaint_issue_type',
+	);
+	$rankmath_sitemap_opt = get_option( 'rank-math-options-sitemap', array() );
+	foreach ( $rankmath_sitemap_post_types as $pt ) {
+		$rankmath_sitemap_opt[ 'pt_' . $pt . '_sitemap' ] = 'on';
+	}
+	foreach ( $rankmath_sitemap_taxonomies as $tax ) {
+		$rankmath_sitemap_opt[ 'tax_' . $tax . '_sitemap' ] = 'on';
+	}
+	update_option( 'rank-math-options-sitemap', $rankmath_sitemap_opt );
+}
+
 WP_CLI::success( 'CasinoRadar demo content seeded (EN/DE/ZH).' );
