@@ -37,6 +37,11 @@ server {
         deny all;
     }
 
-    location = /favicon.ico { log_not_found off; access_log off; }
-    location = /robots.txt  { log_not_found off; access_log off; }
+    # No location blocks for /favicon.ico or /robots.txt here on purpose —
+    # neither exists as a physical file, so they must fall through to the
+    # location / block above and reach index.php. WordPress serves both
+    # dynamically (do_faviconico / do_robots) when no static file exists,
+    # and Rank Math hooks into the robots.txt output to add its
+    # "Sitemap: ..." directive. A location block here with no try_files/
+    # fastcgi_pass would just make nginx 404 both of them directly.
 }
