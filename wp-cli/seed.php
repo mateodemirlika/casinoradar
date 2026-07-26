@@ -1282,6 +1282,7 @@ if ( class_exists( 'PLL_MO' ) && function_exists( 'pll_register_string' ) ) {
 		"Yes, I'm 18+"             => array( 'de' => 'Ja, ich bin 18+', 'zh' => '是的，我已满18岁' ),
 		'Leave Site'               => array( 'de' => 'Seite Verlassen', 'zh' => '离开网站' ),
 		'© 2026 CasinoRadar. 18+. Play responsibly.' => array( 'de' => '© 2026 CasinoRadar. 18+. Bitte verantwortungsvoll spielen.', 'zh' => '© 2026 CasinoRadar。18岁以上。请理性博彩。' ),
+		'No featured picks in this category yet.' => array( 'de' => 'In dieser Kategorie noch keine Top-Empfehlungen.', 'zh' => '该类别暂无精选推荐。' ),
 	);
 
 	foreach ( $ui_strings as $en_string => $translations ) {

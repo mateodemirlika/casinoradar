@@ -1,8 +1,10 @@
 #!/bin/bash
 # Builds the immutable production image and (re)starts the prod stack.
 # Assumes: .env is filled in with real production values, DNS for $DOMAIN
-# already points at this host, and — on a brand new host — scripts/init-ssl.sh
-# has already been run once to obtain the first certificate.
+# already points at this host, and the shared Traefik reverse proxy (external
+# "proxy" Docker network) is already running on this host — it discovers this
+# site via the nginx service's labels and handles TLS/Let's Encrypt itself,
+# so there is no certbot/cert bootstrap step here.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 

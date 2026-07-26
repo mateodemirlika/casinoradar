@@ -1,6 +1,9 @@
 # Environment / secrets
 .env
 
+# Database dumps (contain real user data — hashed passwords, emails)
+*.sql
+
 # WordPress core lives inside the container filesystem only (official image);
 # we bind-mount just wp-content/ and wp-config.php, so no core files appear here.
 

@@ -77,22 +77,47 @@ Production runs the same `docker-compose.yml` plus `docker-compose.prod.yml`
 explicitly). Code is baked into an immutable image per deploy; only the
 database and `wp-content/uploads` persist across deploys.
 
+TLS termination and HTTPS routing are handled by a shared **Traefik** reverse
+proxy that already runs on this host in front of the other sites (an
+external Docker network named `proxy`) — this project does not run its own
+certbot or expose ports 80/443 directly; the `nginx` service just joins the
+`proxy` network and carries Traefik routing labels
+(`traefik.http.routers.casinoradar.*` in `docker-compose.prod.yml`).
+
 1. On the VPS, clone this repo and create `.env` with real production
-   values — a real `DOMAIN`, strong DB/admin credentials, and fresh auth
-   salts (generate at https://api.wordpress.org/secret-key/1.1/salt/).
-   Point the domain's DNS A record at the VPS before continuing.
-2. First-time only — bootstrap the TLS certificate (chicken-and-egg: nginx's
-   real config requires a cert to exist before it can start):
-   ```bash
-   ./scripts/init-ssl.sh
-   ```
-3. Every deploy after that:
+   values — a real `DOMAIN` (`casinoradar.io`), strong DB/admin credentials,
+   and fresh auth salts (generate at
+   https://api.wordpress.org/secret-key/1.1/salt/). Point the domain's DNS A
+   record at the VPS before continuing.
+2. Confirm the shared `proxy` Docker network already exists on the host
+   (`docker network inspect proxy`) — it's created by the Traefik deployment,
+   not by this project. Deploy:
    ```bash
    ./scripts/deploy-prod.sh
    ```
-   This builds a fresh image, restarts the stack, re-runs the (idempotent)
-   bootstrap, and flushes caches. Certbot auto-renews the certificate via a
-   sidecar container.
+   This builds a fresh image, starts the stack (nginx joins `proxy` and
+   Traefik picks it up automatically via its Docker provider), re-runs the
+   (idempotent) bootstrap, and flushes caches. Traefik requests/renews the
+   Let's Encrypt certificate itself — no separate cert step here.
+3. **First deploy only** — seed the database and media. This repo ships a
+   production-ready dump (`casinoradar-production.sql`, all URLs already
+   rewritten to `https://casinoradar.io`) and its images
+   (`casinoradar-uploads.tar.gz`), both at the project root.
+   `entrypoint-prod.sh` deliberately never syncs `wp-content/uploads` from
+   the built image — on every deploy it's excluded on purpose, so a redeploy
+   can never overwrite real production uploads with whatever happens to be
+   in this repo — so the images have to be loaded into the
+   `wp_content_prod` volume once, manually, after the stack is up:
+   ```bash
+   COMPOSE="docker compose -f docker-compose.yml -f docker-compose.prod.yml"
+   $COMPOSE run --rm -v "$(pwd)/casinoradar-uploads.tar.gz:/tmp/uploads.tar.gz:ro" \
+     --entrypoint bash wpcli -c \
+     "tar xzf /tmp/uploads.tar.gz -C /var/www/html/wp-content && chown -R www-data:www-data /var/www/html/wp-content/uploads"
+   $COMPOSE run --rm -v "$(pwd)/casinoradar-production.sql:/tmp/dump.sql:ro" \
+     wpcli db import /tmp/dump.sql
+   ```
+   Skip this step on later redeploys — it would overwrite any real content
+   added after launch.
 4. Back up regularly: `./scripts/backup-db.sh` (run it from a cron job on
    the VPS, or adapt it to push backups off-host).
 

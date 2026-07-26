@@ -273,9 +273,10 @@ function wagerwise_render_casino_cards( array $casinos, string $layout = 'grid' 
 			$cta       = get_post_meta( $casino->ID, 'ww_cta_label', true ) ?: __( 'Visit Casino', 'wagerwise' );
 			$cat_terms = get_the_terms( $casino, 'casino_category' );
 			$cat_name  = ( is_array( $cat_terms ) && ! empty( $cat_terms ) ) ? $cat_terms[0]->name : '';
+			$cat_slugs = ( is_array( $cat_terms ) && ! empty( $cat_terms ) ) ? implode( ' ', wp_list_pluck( $cat_terms, 'slug' ) ) : '';
 			$bonus     = wagerwise_get_first_bonus_for_casino( $casino->ID );
 			?>
-			<div class="ww-casino-card">
+			<div class="ww-casino-card" data-casino-categories="<?php echo esc_attr( $cat_slugs ); ?>">
 				<span class="ww-rank">#<?php echo (int) $i + 1; ?></span>
 				<a class="ww-casino-card__logo" href="<?php echo esc_url( get_permalink( $casino ) ); ?>">
 					<?php echo get_the_post_thumbnail( $casino, 'medium' ); ?>
@@ -366,8 +367,9 @@ function wagerwise_render_block_bonus_grid( array $attrs ): string {
 			$cta        = get_post_meta( $bonus->ID, 'ww_cta_label', true ) ?: __( 'Claim Bonus', 'wagerwise' );
 			$type_terms = get_the_terms( $bonus, 'bonus_type' );
 			$type_label = ( is_array( $type_terms ) && ! empty( $type_terms ) ) ? $type_terms[0]->name : '';
+			$type_slugs = ( is_array( $type_terms ) && ! empty( $type_terms ) ) ? implode( ' ', wp_list_pluck( $type_terms, 'slug' ) ) : '';
 			?>
-			<div class="ww-bonus-card">
+			<div class="ww-bonus-card" data-bonus-types="<?php echo esc_attr( $type_slugs ); ?>">
 				<?php if ( $type_label ) : ?><span class="ww-bonus-card__type"><?php echo esc_html( $type_label ); ?></span><?php endif; ?>
 				<p class="ww-bonus-card__value"><?php echo esc_html( $value ); ?></p>
 				<h4><?php echo esc_html( get_the_title( $bonus ) ); ?></h4>
@@ -607,14 +609,14 @@ function wagerwise_render_block_category_strip( array $attrs ): string {
 	$is_current_archive = ! is_tax( $taxonomy );
 	ob_start();
 	?>
-	<div class="ww-category-strip ww-category-strip--<?php echo esc_attr( $style ); ?>">
+	<div class="ww-category-strip ww-category-strip--<?php echo esc_attr( $style ); ?>" data-taxonomy="<?php echo esc_attr( $taxonomy ); ?>">
 		<?php if ( 'chip' === $style ) : ?>
-			<a class="ww-category-pill<?php echo $is_current_archive ? ' is-active' : ''; ?>" href="<?php echo esc_url( wagerwise_taxonomy_archive_url( $taxonomy ) ); ?>"><?php esc_html_e( 'All', 'wagerwise' ); ?></a>
+			<a class="ww-category-pill<?php echo $is_current_archive ? ' is-active' : ''; ?>" href="<?php echo esc_url( wagerwise_taxonomy_archive_url( $taxonomy ) ); ?>" data-term-slug=""><?php esc_html_e( 'All', 'wagerwise' ); ?></a>
 		<?php endif; ?>
 		<?php foreach ( $terms as $term ) :
 			$active = is_tax( $taxonomy ) && (int) get_queried_object_id() === $term->term_id;
 			?>
-			<a class="<?php echo 'tile' === $style ? 'ww-category-tile' : 'ww-category-pill' . ( $active ? ' is-active' : '' ); ?>" href="<?php echo esc_url( get_term_link( $term ) ); ?>">
+			<a class="<?php echo 'tile' === $style ? 'ww-category-tile' : 'ww-category-pill' . ( $active ? ' is-active' : '' ); ?>" href="<?php echo esc_url( get_term_link( $term ) ); ?>" data-term-slug="<?php echo esc_attr( $term->slug ); ?>">
 				<?php if ( 'tile' === $style ) : ?>
 					<span class="ww-category-tile__icon" aria-hidden="true"></span>
 					<span class="ww-category-tile__name"><?php echo esc_html( $term->name ); ?></span>

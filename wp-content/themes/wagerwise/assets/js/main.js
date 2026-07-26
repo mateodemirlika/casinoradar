@@ -65,4 +65,63 @@
 			} );
 		}
 	}
+
+	// Category-strip filters: filter cards already on the page instead of
+	// navigating to the term archive, as long as both a strip and a matching
+	// grid are present within the same archive container (progressive
+	// enhancement — with JS disabled the pills' real hrefs still work as
+	// normal links to the taxonomy archives). Scoped to a container because
+	// the homepage reuses both the strip and a "Top Picks" grid block as two
+	// separate, unrelated sections — without scoping, clicking a homepage
+	// category pill would wrongly filter that unrelated widget instead of
+	// navigating.
+	var initCategoryFilter = function ( containerSelector, taxonomy, gridSelector, cardSelector, dataAttr ) {
+		var container = document.querySelector( containerSelector );
+		if ( ! container ) {
+			return;
+		}
+		var strip = container.querySelector( '.ww-category-strip[data-taxonomy="' + taxonomy + '"]' );
+		var grid = container.querySelector( gridSelector );
+		if ( ! strip || ! grid ) {
+			return;
+		}
+		var pills = strip.querySelectorAll( '.ww-category-pill' );
+		var cards = grid.querySelectorAll( cardSelector );
+
+		// Small/curated grids (e.g. the homepage's 3 featured casinos) can
+		// easily have zero cards in a given category — show a message
+		// instead of just leaving an empty gap.
+		var emptyMsg = document.createElement( 'p' );
+		emptyMsg.className = 'ww-filter-empty';
+		emptyMsg.hidden = true;
+		emptyMsg.textContent = ( window.wagerwiseI18n && window.wagerwiseI18n.filterEmpty ) || 'No matches in this category yet.';
+		grid.insertAdjacentElement( 'afterend', emptyMsg );
+
+		pills.forEach( function ( pill ) {
+			pill.addEventListener( 'click', function ( e ) {
+				e.preventDefault();
+				var slug = pill.getAttribute( 'data-term-slug' ) || '';
+
+				pills.forEach( function ( p ) {
+					p.classList.remove( 'is-active' );
+				} );
+				pill.classList.add( 'is-active' );
+
+				var visibleCount = 0;
+				cards.forEach( function ( card ) {
+					var terms = ( card.getAttribute( dataAttr ) || '' ).split( ' ' );
+					var matches = ! slug || terms.indexOf( slug ) !== -1;
+					card.classList.toggle( 'is-hidden', ! matches );
+					if ( matches ) {
+						visibleCount++;
+					}
+				} );
+				emptyMsg.hidden = visibleCount !== 0;
+			} );
+		} );
+	};
+
+	initCategoryFilter( '.ww-archive-bonus', 'bonus_type', '.ww-bonus-grid', '.ww-bonus-card', 'data-bonus-types' );
+	initCategoryFilter( '.ww-archive-casino', 'casino_category', '.ww-top-casinos', '.ww-casino-card', 'data-casino-categories' );
+	initCategoryFilter( '.ww-front-page', 'casino_category', '.ww-top-casinos', '.ww-casino-card', 'data-casino-categories' );
 } )();

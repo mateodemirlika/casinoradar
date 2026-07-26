@@ -36,4 +36,12 @@ function wagerwise_enqueue_assets(): void {
 	if ( function_exists( 'pll_current_language' ) ) {
 		wp_add_inline_script( 'wagerwise-main', 'document.documentElement.lang = ' . wp_json_encode( pll_current_language() ) . ';', 'after' );
 	}
+
+	wp_add_inline_script(
+		'wagerwise-main',
+		'var wagerwiseI18n = ' . wp_json_encode( array(
+			'filterEmpty' => wagerwise_pll__( 'No featured picks in this category yet.' ),
+		) ) . ';',
+		'before'
+	);
 }

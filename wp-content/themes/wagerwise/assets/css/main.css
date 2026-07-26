@@ -74,16 +74,8 @@ header.wp-block-template-part {
 	box-shadow: var(--ww-shadow);
 }
 .ww-header__brand { align-items: center; gap: 12px; }
-.ww-header__brand .wp-block-site-title a {
-	font-family: var(--wp--preset--font-family--heading);
-	font-weight: 800;
-	letter-spacing: 0.5px;
-	text-decoration: none;
-	background: linear-gradient(90deg, var(--wp--preset--color--primary), var(--wp--preset--color--accent));
-	-webkit-background-clip: text;
-	background-clip: text;
-	-webkit-text-fill-color: transparent;
-}
+.ww-header__logo { display: flex; align-items: center; }
+.ww-header__logo img { height: auto; }
 .ww-header__actions { align-items: center; gap: 16px; }
 .ww-nav-wrap { display: flex; align-items: center; }
 .ww-header__nav { display: flex; gap: 18px; flex-wrap: wrap; }
@@ -246,6 +238,8 @@ header.wp-block-template-part {
 
 /* ---------- Top casinos ---------- */
 .ww-top-casinos { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+.ww-casino-card.is-hidden { display: none; }
+.ww-filter-empty { color: var(--wp--preset--color--ink-light); }
 .ww-casino-card {
 	background: var(--wp--preset--color--surface);
 	border: 1px solid var(--wp--preset--color--border);
@@ -408,6 +402,7 @@ header.wp-block-template-part {
 
 /* ---------- Bonus grid ---------- */
 .ww-bonus-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+.ww-bonus-card.is-hidden { display: none; }
 .ww-bonus-card {
 	background: var(--wp--preset--color--surface);
 	border: 1px solid var(--wp--preset--color--border);

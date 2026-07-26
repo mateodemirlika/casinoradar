@@ -1,32 +1,20 @@
 # Processed by the official nginx image's envsubst entrypoint hook
 # (/etc/nginx/templates/*.template -> /etc/nginx/conf.d/*.conf), substituting
 # ${DOMAIN} from the container environment.
+#
+# Plain HTTP only: the shared Traefik reverse proxy (external "proxy" Docker
+# network) terminates TLS and handles the Let's Encrypt certificate for
+# ${DOMAIN}, then forwards decrypted traffic here over the Docker network.
+# This container is never reached directly from the internet.
 
 server {
     listen 80;
     server_name ${DOMAIN};
 
-    # Certbot ACME HTTP-01 challenge
-    location /.well-known/acme-challenge/ {
-        root /var/www/certbot;
-    }
-
-    location / {
-        return 301 https://$host$request_uri;
-    }
-}
-
-server {
-    listen 443 ssl;
-    http2 on;
-    server_name ${DOMAIN};
-
-    ssl_certificate     /etc/letsencrypt/live/${DOMAIN}/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/${DOMAIN}/privkey.pem;
-    ssl_protocols TLSv1.2 TLSv1.3;
-
     root /var/www/html;
     index index.php;
+
+    client_max_body_size 64M;
 
     location / {
         try_files $uri $uri/ /index.php?$args;
