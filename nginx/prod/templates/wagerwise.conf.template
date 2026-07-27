@@ -37,11 +37,27 @@ server {
         deny all;
     }
 
-    # No location blocks for /favicon.ico or /robots.txt here on purpose —
-    # neither exists as a physical file, so they must fall through to the
-    # location / block above and reach index.php. WordPress serves both
-    # dynamically (do_faviconico / do_robots) when no static file exists,
-    # and Rank Math hooks into the robots.txt output to add its
-    # "Sitemap: ..." directive. A location block here with no try_files/
-    # fastcgi_pass would just make nginx 404 both of them directly.
+    # /robots.txt has no location block on purpose — it isn't a physical
+    # file, so it must fall through to the location / block above and reach
+    # index.php. WordPress serves it dynamically (do_robots), and Rank Math
+    # hooks into that output to add its "Sitemap: ..." directive. A location
+    # block here with no try_files/fastcgi_pass would just 404 it directly.
+    #
+    # /favicon.ico DOES get a real static file here (a favicon checker wants
+    # an actual reachable file at the root, not WordPress's redirect-based
+    # virtual fallback) — served straight off disk from the theme, bypassing
+    # PHP entirely.
+    location = /favicon.ico {
+        alias /var/www/html/wp-content/themes/wagerwise/assets/images/favicon.ico;
+        access_log off;
+        log_not_found off;
+    }
+
+    # nginx's bundled mime.types doesn't know .webmanifest, so it'd otherwise
+    # serve it as application/octet-stream.
+    location ~* \.webmanifest$ {
+        default_type application/manifest+json;
+        expires 30d;
+        access_log off;
+    }
 }
