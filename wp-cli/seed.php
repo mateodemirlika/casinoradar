@@ -1326,6 +1326,28 @@ if ( function_exists( 'update_option' ) ) {
 		$rankmath_sitemap_opt[ 'tax_' . $tax . '_sitemap' ] = 'on';
 	}
 	update_option( 'rank-math-options-sitemap', $rankmath_sitemap_opt );
+
+	// update_option() only fires the hook Rank Math listens on to purge its
+	// sitemap cache (wp-content/uploads/rank-math/) when the value actually
+	// changes — harmless on the first run, but this block re-asserts the same
+	// values on every idempotent bootstrap, so later runs are silent no-ops
+	// that leave a stale cached sitemap_index.xml (and any stale per-type
+	// caches) behind forever, e.g. an index cached before these post
+	// types/taxonomies existed, permanently missing them.
+	//
+	// Rank Math's own purge (Cache::invalidate_storage()) goes through
+	// WP_Filesystem, which under WP-CLI running as root against files owned
+	// by www-data gets refused a "direct" filesystem and silently falls back
+	// to an unconfigured FTP transport — so it no-ops instead of erroring.
+	// Bypass it and clear the cache by hand: delete the cached sitemap files,
+	// Rank Math's own index of them, and any DB-transient fallback entries.
+	$rankmath_sitemap_cache_dir = trailingslashit( wp_upload_dir()['basedir'] ) . 'rank-math/';
+	foreach ( glob( $rankmath_sitemap_cache_dir . '*' ) ?: array() as $rankmath_cached_file ) {
+		wp_delete_file( $rankmath_cached_file );
+	}
+	delete_option( 'rank_math_sitemap_cache_files' );
+	global $wpdb;
+	$wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE '\_transient\_sitemap\_%'" );
 }
 
 WP_CLI::success( 'CasinoRadar demo content seeded (EN/DE/ZH).' );
