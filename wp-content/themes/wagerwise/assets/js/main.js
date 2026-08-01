@@ -9,9 +9,12 @@
 	// Sticky header: gains a translucent, blurred background once the page
 	// scrolls past the top (position:sticky, in CSS, is what keeps it from
 	// disappearing), and slides out of view on scroll-down / back in on
-	// scroll-up to give scrolling content more room. Skipped near the very
-	// top and while the mobile menu is open, so it doesn't slide away out
-	// from under someone mid-scroll through the open menu.
+	// scroll-up to give scrolling content more room. Skipped while the
+	// mobile menu is open, so it doesn't slide away out from under someone
+	// mid-scroll through the open menu, and skipped until scrollY passes
+	// the header's own height — sticky elements don't reflow content into
+	// their space when hidden via transform, so hiding any earlier leaves
+	// a blank gap the size of the not-yet-scrolled-past remainder.
 	var header = document.querySelector( '.ww-header' );
 	if ( header ) {
 		var lastScrollY = window.scrollY;
@@ -20,7 +23,7 @@
 			header.classList.toggle( 'is-scrolled', currentScrollY > 8 );
 
 			var navIsOpen = primaryNav && primaryNav.classList.contains( 'is-open' );
-			if ( currentScrollY <= 8 || navIsOpen ) {
+			if ( currentScrollY <= header.offsetHeight || navIsOpen ) {
 				header.classList.remove( 'ww-header--hidden' );
 			} else if ( currentScrollY > lastScrollY ) {
 				header.classList.add( 'ww-header--hidden' );
