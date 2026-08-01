@@ -62,7 +62,12 @@ header.wp-block-template-part {
 	position: sticky;
 	top: 0;
 	z-index: 100;
-	transition: background-color 0.2s ease, backdrop-filter 0.2s ease, box-shadow 0.2s ease;
+	transition: background-color 0.2s ease, backdrop-filter 0.2s ease, box-shadow 0.2s ease, transform 0.3s ease;
+}
+/* Added by JS (main.js) on scroll-down, removed on scroll-up — see main.js
+   for why it's skipped near the top and while the mobile menu is open. */
+.ww-header.ww-header--hidden {
+	transform: translateY(-100%);
 }
 /* Added by JS (main.js) once the page scrolls past the top — keeps the
    header visible while scrolling, but as a translucent/blurred bar instead

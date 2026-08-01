@@ -1,23 +1,37 @@
 ( function () {
 	'use strict';
 
-	// Sticky header: gains a translucent, blurred background once the page
-	// scrolls past the top, instead of staying a flat opaque bar the whole
-	// time. position:sticky (in CSS) is what keeps it from disappearing;
-	// this just toggles the look.
-	var header = document.querySelector( '.ww-header' );
-	if ( header ) {
-		var updateHeaderScrollState = function () {
-			header.classList.toggle( 'is-scrolled', window.scrollY > 8 );
-		};
-		updateHeaderScrollState();
-		window.addEventListener( 'scroll', updateHeaderScrollState, { passive: true } );
-	}
-
 	// Mobile primary nav (burger menu). Markup: .ww-nav-toggle button +
 	// #ww-primary-nav, rendered by wagerwise_render_block_site_nav().
 	var navToggle = document.querySelector( '.ww-nav-toggle' );
 	var primaryNav = document.getElementById( 'ww-primary-nav' );
+
+	// Sticky header: gains a translucent, blurred background once the page
+	// scrolls past the top (position:sticky, in CSS, is what keeps it from
+	// disappearing), and slides out of view on scroll-down / back in on
+	// scroll-up to give scrolling content more room. Skipped near the very
+	// top and while the mobile menu is open, so it doesn't slide away out
+	// from under someone mid-scroll through the open menu.
+	var header = document.querySelector( '.ww-header' );
+	if ( header ) {
+		var lastScrollY = window.scrollY;
+		var updateHeaderScrollState = function () {
+			var currentScrollY = window.scrollY;
+			header.classList.toggle( 'is-scrolled', currentScrollY > 8 );
+
+			var navIsOpen = primaryNav && primaryNav.classList.contains( 'is-open' );
+			if ( currentScrollY <= 8 || navIsOpen ) {
+				header.classList.remove( 'ww-header--hidden' );
+			} else if ( currentScrollY > lastScrollY ) {
+				header.classList.add( 'ww-header--hidden' );
+			} else if ( currentScrollY < lastScrollY ) {
+				header.classList.remove( 'ww-header--hidden' );
+			}
+			lastScrollY = currentScrollY;
+		};
+		updateHeaderScrollState();
+		window.addEventListener( 'scroll', updateHeaderScrollState, { passive: true } );
+	}
 	if ( navToggle && primaryNav ) {
 		var closeNav = function () {
 			primaryNav.classList.remove( 'is-open' );
