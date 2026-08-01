@@ -607,6 +607,15 @@ header.wp-block-template-part {
 	.ww-leaderboard__row { grid-template-columns: 40px 1.5fr 1fr 1fr; padding: 12px; }
 
 	.ww-nav-toggle { display: flex; }
+
+	/* Logo + burger share the first row (.ww-header's own space-between
+	   handles that); the language switcher and Join Free button drop to a
+	   full-width second row with space between them. */
+	.ww-header__actions {
+		width: 100%;
+		justify-content: space-between;
+	}
+
 	.ww-header__nav {
 		display: none;
 		position: absolute;
