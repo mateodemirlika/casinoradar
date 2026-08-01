@@ -96,6 +96,22 @@ function wagerwise_output_footer_scripts(): void {
 	}
 }
 
+/**
+ * Floating "back to top" button. Markup is always in the DOM (so it works
+ * with JS disabled via its plain #-anchor href) — main.js shows/hides and
+ * smooth-scrolls it based on scroll position.
+ */
+add_action( 'wp_footer', 'wagerwise_back_to_top_button' );
+function wagerwise_back_to_top_button(): void {
+	?>
+	<a href="#wp--skip-link--target" id="ww-back-to-top" class="ww-back-to-top" aria-label="<?php echo esc_attr( wagerwise_pll__( 'Back to top' ) ); ?>">
+		<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+			<path d="M5 12l7-7 7 7M12 5v14" />
+		</svg>
+	</a>
+	<?php
+}
+
 /** Header "Join Free" CTA — translated via Polylang string translations. */
 function wagerwise_join_free_button(): void {
 	printf(

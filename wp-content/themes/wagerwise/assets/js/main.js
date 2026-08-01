@@ -35,6 +35,22 @@
 		updateHeaderScrollState();
 		window.addEventListener( 'scroll', updateHeaderScrollState, { passive: true } );
 	}
+
+	// Back-to-top button: shown once scrolled past one viewport height,
+	// scrolls smoothly to the top on click.
+	var backToTop = document.getElementById( 'ww-back-to-top' );
+	if ( backToTop ) {
+		var updateBackToTopVisibility = function () {
+			backToTop.classList.toggle( 'is-visible', window.scrollY > window.innerHeight );
+		};
+		updateBackToTopVisibility();
+		window.addEventListener( 'scroll', updateBackToTopVisibility, { passive: true } );
+		backToTop.addEventListener( 'click', function ( e ) {
+			e.preventDefault();
+			window.scrollTo( { top: 0, behavior: 'smooth' } );
+		} );
+	}
+
 	if ( navToggle && primaryNav ) {
 		var closeNav = function () {
 			primaryNav.classList.remove( 'is-open' );

@@ -161,6 +161,40 @@ header.wp-block-template-part {
 .ww-btn--small { padding: 8px 16px; font-size: var(--wp--preset--font-size--small); }
 .ww-btn--large { padding: 16px 32px; font-size: var(--wp--preset--font-size--large); }
 
+/* ---------- Back to top ---------- */
+/* Always in the DOM (plain #-anchor, works with JS disabled); main.js
+   toggles .is-visible based on scroll position and adds the smooth-scroll
+   behavior on click. */
+.ww-back-to-top {
+	position: fixed;
+	right: 24px;
+	bottom: 24px;
+	width: 48px;
+	height: 48px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	background: linear-gradient(90deg, var(--wp--preset--color--primary), var(--wp--preset--color--accent));
+	color: #12121e;
+	box-shadow: var(--ww-shadow);
+	z-index: 90;
+	opacity: 0;
+	transform: translateY(12px);
+	pointer-events: none;
+	transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.15s ease;
+}
+.ww-back-to-top.is-visible {
+	opacity: 1;
+	transform: translateY(0);
+	pointer-events: auto;
+}
+.ww-back-to-top:hover { box-shadow: var(--ww-glow-primary); filter: brightness(1.06); }
+
+@media (max-width: 782px) {
+	.ww-back-to-top { right: 16px; bottom: 16px; }
+}
+
 /* ---------- Hero ---------- */
 .ww-hero {
 	position: relative;
