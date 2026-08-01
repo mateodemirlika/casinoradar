@@ -52,6 +52,16 @@ body { background: var(--wp--preset--color--bg); }
 header.wp-block-template-part {
 	display: contents;
 }
+/* Core's default block spacing puts margin-block-start:24px on <main> —
+   it's the second child of .wp-site-blocks (the header wrapper is first),
+   so the :first-child override that zeroes that margin doesn't reach it.
+   That's a permanent 24px gap between the header and the page content;
+   it's only ever hidden once scrolled past 24px, behind the opaque sticky
+   header, so it shows as a bare strip of body background at the very top
+   of the page. */
+.ww-main {
+	margin-block-start: 0;
+}
 .ww-header {
 	padding: 16px 32px;
 	border-bottom: 1px solid var(--wp--preset--color--border);
