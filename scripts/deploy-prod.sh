@@ -23,4 +23,12 @@ echo "==> Flushing caches"
 $COMPOSE run --rm wpcli cache flush
 $COMPOSE run --rm wpcli rewrite flush --hard
 
+# `up -d` only recreates wordpress when its image changes, so nginx can be
+# left holding the old wordpress container's IP (fastcgi_pass resolves once
+# per worker process lifetime) -> 502s until nginx happens to restart. Always
+# restart it here so it re-resolves, and so it picks up any nginx config
+# template changes shipped in the same deploy.
+echo "==> Restarting nginx"
+$COMPOSE restart nginx
+
 echo "==> Deploy complete."

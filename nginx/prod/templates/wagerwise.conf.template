@@ -21,7 +21,14 @@ server {
     }
 
     location ~ \.php$ {
-        fastcgi_pass wordpress:9000;
+        # A static fastcgi_pass hostname is resolved once and cached for the
+        # life of the worker process, so nginx keeps talking to the old
+        # wordpress container's IP after a deploy recreates it (502s until
+        # nginx itself restarts). Docker's embedded DNS resolver + a variable
+        # forces re-resolution on each request instead.
+        resolver 127.0.0.11 valid=10s;
+        set $wordpress_upstream wordpress:9000;
+        fastcgi_pass $wordpress_upstream;
         fastcgi_index index.php;
         include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
