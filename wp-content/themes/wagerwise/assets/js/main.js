@@ -48,6 +48,21 @@
 			e.preventDefault();
 			window.scrollTo( { top: 0, behavior: 'smooth' } );
 		} );
+
+		// Keeps the button clear of the footer (5px gap above it) once it
+		// scrolls into view, instead of overlapping it at the usual offset.
+		var footer = document.querySelector( '.ww-footer' );
+		if ( footer ) {
+			var mobileQuery = window.matchMedia( '(max-width: 782px)' );
+			var updateBackToTopPosition = function () {
+				var baseGap = mobileQuery.matches ? 16 : 24;
+				var overlap = window.innerHeight - footer.getBoundingClientRect().top;
+				backToTop.style.setProperty( '--ww-btt-bottom', Math.max( baseGap, overlap + 5 ) + 'px' );
+			};
+			updateBackToTopPosition();
+			window.addEventListener( 'scroll', updateBackToTopPosition, { passive: true } );
+			window.addEventListener( 'resize', updateBackToTopPosition );
+		}
 	}
 
 	if ( navToggle && primaryNav ) {

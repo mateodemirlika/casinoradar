@@ -168,7 +168,10 @@ header.wp-block-template-part {
 .ww-back-to-top {
 	position: fixed;
 	right: 24px;
-	bottom: 24px;
+	/* --ww-btt-bottom is kept in sync with the footer by main.js — 24px from
+	   the viewport bottom normally, switching to 5px clear of the footer's
+	   top edge once it scrolls into view, so the button never overlaps it. */
+	bottom: var(--ww-btt-bottom, 24px);
 	width: 48px;
 	height: 48px;
 	display: flex;
@@ -192,7 +195,7 @@ header.wp-block-template-part {
 .ww-back-to-top:hover { box-shadow: var(--ww-glow-primary); filter: brightness(1.06); }
 
 @media (max-width: 782px) {
-	.ww-back-to-top { right: 16px; bottom: 16px; }
+	.ww-back-to-top { right: 16px; }
 }
 
 /* ---------- Hero ---------- */
