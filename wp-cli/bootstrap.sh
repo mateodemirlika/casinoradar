@@ -45,6 +45,9 @@ $WP rewrite flush --hard
 echo "==> Seeding demo content"
 $WP eval-file /var/www/html/wp-cli-scripts/seed.php
 
+echo "==> Fixing site icon sizes (if needed)"
+$WP eval-file /var/www/html/wp-cli-scripts/fix-site-icon-sizes.php
+
 echo "==> Bootstrap complete."
 echo "    Site:     ${WP_HOME}"
 echo "    wp-admin: ${WP_HOME}/wp-admin  (user: ${WP_ADMIN_USER})"
