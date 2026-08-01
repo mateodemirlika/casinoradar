@@ -600,12 +600,12 @@ header.wp-block-template-part {
 .ww-complaint-form__notice { background: rgba(112, 200, 195, 0.12); border: 1px solid var(--wp--preset--color--primary); border-radius: 8px; padding: 10px 14px; font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--primary); }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 782px) {
-	.ww-pros-cons { grid-template-columns: 1fr; }
-	.ww-comparison-table { display: block; overflow-x: auto; }
-	.ww-featured-guide { grid-template-columns: 1fr; }
-	.ww-leaderboard__row { grid-template-columns: 40px 1.5fr 1fr 1fr; padding: 12px; }
-
+/* Wider than the 782px breakpoint below: with 9 nav links plus the logo,
+   language switcher, and Join Free button, there's no width between ~783px
+   and 1024px (tablets, portrait and landscape) where the desktop nav fits
+   on one line — it was wrapping across 2-3 ragged rows. The burger toggle
+   needs to take over well before content-grid layouts do. */
+@media (max-width: 1024px) {
 	.ww-nav-toggle { display: flex; }
 
 	/* Logo + burger share the first row (.ww-header's own space-between
@@ -634,4 +634,11 @@ header.wp-block-template-part {
 	.ww-header__nav.is-open { display: flex; }
 	.ww-header__nav a { padding: 10px 0; border-bottom: 1px solid var(--wp--preset--color--border); }
 	.ww-header__nav a:last-child { border-bottom: none; }
+}
+
+@media (max-width: 782px) {
+	.ww-pros-cons { grid-template-columns: 1fr; }
+	.ww-comparison-table { display: block; overflow-x: auto; }
+	.ww-featured-guide { grid-template-columns: 1fr; }
+	.ww-leaderboard__row { grid-template-columns: 40px 1.5fr 1fr 1fr; padding: 12px; }
 }
