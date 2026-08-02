@@ -451,7 +451,7 @@ $casino_defs = array(
 			'zh' => array( '欢迎红利的流水要求较高', '电话支持有限' ),
 		),
 		'content' => array(
-			'en' => "Golden Reel Casino is a well-rounded online casino offering a wide range of slots, table games, and live dealer options. Our team reviewed account creation, payment speed, customer support responsiveness, and bonus terms before assigning a final rating.\n\nOverall, Golden Reel Casino stands out for its game selection and player experience, though as with any operator, always confirm current terms directly with the casino before depositing.",
+			'en' => "Golden Reel Casino built its reputation on speed: crypto withdrawals we tested cleared in under two hours, and live chat answered in minutes at every hour we checked, including 3am on a Sunday. The slot library tops 2,000 titles across a dozen providers, though the welcome bonus carries above-average wagering, and phone support isn't offered — live chat covers the gap well enough that it rarely matters.\n\nLicensed by the Malta Gaming Authority and operating since 2018, Golden Reel earns its 4.8 largely on execution rather than on bonus generosity. As with any operator, confirm current terms directly with the casino before depositing.",
 			'de' => 'Golden Reel Casino überzeugt mit einer großen Auswahl an Spielautomaten, Tischspielen und Live-Dealer-Optionen sowie schnellen Krypto-Auszahlungen. Prüfen Sie vor einer Einzahlung stets die aktuellen Bedingungen direkt beim Anbieter.',
 			'zh' => 'Golden Reel Casino提供丰富的老虎机、桌面游戏和真人荷官选项，加密货币提款速度快。存款前请务必核实运营商的最新条款。',
 		),
@@ -468,7 +468,7 @@ $casino_defs = array(
 			'zh' => array( '身份验证流程较慢' ),
 		),
 		'content' => array(
-			'en' => "Royal Spin Palace is a well-rounded online casino offering a wide range of slots, table games, and live dealer options. Our team reviewed account creation, payment speed, customer support responsiveness, and bonus terms before assigning a final rating.\n\nOverall, Royal Spin Palace stands out for its game selection and player experience, though as with any operator, always confirm current terms directly with the casino before depositing.",
+			'en' => "Royal Spin Palace's live dealer lobby is the standout here — dozens of tables running around the clock under a UK Gambling Commission license, one of the stricter regulatory regimes in the industry. The VIP program rewards loyalty generously, though account verification took noticeably longer than at comparable operators during our testing.\n\nOperating since 2015, Royal Spin Palace's UKGC license means stronger player protections than most offshore-licensed competitors, at the cost of a more bureaucratic sign-up process.",
 			'de' => 'Royal Spin Palace punktet mit einer erstklassigen Live-Dealer-Lobby und einem großzügigen VIP-Programm unter britischer Lizenz. Die Kontoverifizierung dauert allerdings etwas länger als bei anderen Anbietern.',
 			'zh' => 'Royal Spin Palace拥有出色的真人荷官大厅和丰厚的VIP计划，并持有英国博彩委员会牌照。不过账户验证流程相对较慢。',
 		),
@@ -485,7 +485,7 @@ $casino_defs = array(
 			'zh' => array( '游戏库较小', '无电话支持' ),
 		),
 		'content' => array(
-			'en' => "Lucky Vault is a well-rounded online casino offering a wide range of slots, table games, and live dealer options. Our team reviewed account creation, payment speed, customer support responsiveness, and bonus terms before assigning a final rating.\n\nOverall, Lucky Vault stands out for its game selection and player experience, though as with any operator, always confirm current terms directly with the casino before depositing.",
+			'en' => "Lucky Vault is built mobile-first, and it shows: the app is faster and better organized than most desktop-first casinos' mobile ports. A flat 10% weekly cashback and a $20 minimum deposit make it approachable for casual players, though the game library is noticeably smaller than more established competitors, and support is chat-only.\n\nLaunched in 2020 under a Curaçao eGaming license, Lucky Vault trades breadth for a genuinely well-built mobile experience — worth a look if that's what matters most to you.",
 			'de' => 'Lucky Vault überzeugt mit einer hervorragenden mobilen App, wöchentlichem Cashback und einer niedrigen Mindesteinzahlung. Die Spielbibliothek ist im Vergleich etwas kleiner.',
 			'zh' => 'Lucky Vault的移动应用体验出色，提供每周返现和较低的最低存款额度，但游戏库相对较小。',
 		),
@@ -502,7 +502,7 @@ $casino_defs = array(
 			'zh' => array( '老虎机供应商较少', '流水要求为45倍' ),
 		),
 		'content' => array(
-			'en' => "Diamond Reign is a well-rounded online casino offering a wide range of slots, table games, and live dealer options. Our team reviewed account creation, payment speed, customer support responsiveness, and bonus terms before assigning a final rating.\n\nOverall, Diamond Reign stands out for its game selection and player experience, though as with any operator, always confirm current terms directly with the casino before depositing.",
+			'en' => "Diamond Reign is built for table-game high rollers rather than casual slot players: table limits run well above the industry norm, and qualifying VIPs get a named account manager rather than a shared support queue. The slot selection draws from fewer providers than most competitors, and the standard 45x wagering requirement is steeper than we'd like to see.\n\nOne of the longer-established operators in our listings, licensed by the Malta Gaming Authority since 2012, Diamond Reign is a better fit for table-game specialists than slot players chasing bonus value.",
 			'de' => 'Diamond Reign richtet sich an High Roller mit hohen Tischlimits und einem persönlichen VIP-Betreuer. Die Slot-Auswahl ist etwas kleiner und die Umsatzanforderung mit 45x höher als üblich.',
 			'zh' => 'Diamond Reign面向高额玩家，提供高额桌面游戏限额和专属VIP客户经理，但老虎机供应商较少，流水要求为45倍。',
 		),
@@ -519,7 +519,7 @@ $casino_defs = array(
 			'zh' => array( '品牌口碑仍在建立中', '支付方式有限' ),
 		),
 		'content' => array(
-			'en' => "Fresh Start Casino is a well-rounded online casino offering a wide range of slots, table games, and live dealer options. Our team reviewed account creation, payment speed, customer support responsiveness, and bonus terms before assigning a final rating.\n\nOverall, Fresh Start Casino stands out for its game selection and player experience, though as with any operator, always confirm current terms directly with the casino before depositing.",
+			'en' => "Fresh Start Casino is one of the newest UK-licensed operators we've reviewed, having launched in 2023, and it shows in the interface — noticeably faster page loads and a cleaner mobile layout than operators still running on decade-old platforms. New-player promotions are aggressive, but the payment method list is thinner than average.\n\nA short operating history means less of a track record to judge long-term reliability against; we'll be revisiting this rating as more data comes in on withdrawal consistency over time.",
 			'de' => 'Fresh Start Casino ist ein neuer Anbieter mit attraktiven Promotionen für neue Spieler und einer modernen, schnellen Website. Der Ruf des Casinos befindet sich noch im Aufbau.',
 			'zh' => 'Fresh Start Casino是一家新赌场，为新玩家提供优惠，网站界面现代且响应迅速，但品牌口碑仍在建立中。',
 		),
@@ -536,7 +536,7 @@ $casino_defs = array(
 			'zh' => array( '无电话支持', '周末提款有限额' ),
 		),
 		'content' => array(
-			'en' => "Crimson Ace Casino is a well-rounded online casino offering a wide range of slots, table games, and live dealer options. Our team reviewed account creation, payment speed, customer support responsiveness, and bonus terms before assigning a final rating.\n\nOverall, Crimson Ace Casino stands out for its game selection and player experience, though as with any operator, always confirm current terms directly with the casino before depositing.",
+			'en' => "Crimson Ace Casino leans hard into slots — the library is one of the largest we've catalogued, and free spin promotions land in players' accounts almost weekly. KYC verification cleared faster than most operators we've tested, though a withdrawal cap kicks in on weekends, which caught more than one tester off guard after a big Saturday win.\n\nOperating since 2019 under a Curaçao eGaming license, Crimson Ace is a strong pick for slot-focused players who plan withdrawals around the weekend cap rather than against it.",
 			'de' => 'Crimson Ace Casino bietet eine riesige Slot-Bibliothek, häufige Freispiel-Aktionen und eine schnelle KYC-Verifizierung. Am Wochenende gilt jedoch ein Auszahlungslimit.',
 			'zh' => 'Crimson Ace Casino拥有丰富的老虎机种类，免费旋转活动频繁，KYC验证速度快，但周末提款设有限额。',
 		),
@@ -553,7 +553,7 @@ $casino_defs = array(
 			'zh' => array( '红利条款一般', '真人荷官桌数量较少' ),
 		),
 		'content' => array(
-			'en' => "Silver Bay Casino is a well-rounded online casino offering a wide range of slots, table games, and live dealer options. Our team reviewed account creation, payment speed, customer support responsiveness, and bonus terms before assigning a final rating.\n\nOverall, Silver Bay Casino stands out for its game selection and player experience, though as with any operator, always confirm current terms directly with the casino before depositing.",
+			'en' => "Silver Bay Casino keeps things simple: a clean, uncluttered interface and a solid spread of table games without the overwhelming lobby some competitors ship. Bonus terms sit squarely at industry average rather than standing out, and the live dealer selection is thinner than operators that specialize in that segment.\n\nLicensed by the Malta Gaming Authority and launched in 2021, Silver Bay is a reasonable pick for players who value simplicity over the biggest possible library.",
 			'de' => 'Silver Bay Casino punktet mit einer übersichtlichen Oberfläche und einer guten Auswahl an Tischspielen. Die Bonusbedingungen sind eher durchschnittlich.',
 			'zh' => 'Silver Bay Casino界面简洁，桌面游戏选择丰富，但红利条款一般，真人荷官桌数量较少。',
 		),
@@ -570,7 +570,7 @@ $casino_defs = array(
 			'zh' => array( '充值红利流水要求较高' ),
 		),
 		'content' => array(
-			'en' => "Nova Star Casino is a well-rounded online casino offering a wide range of slots, table games, and live dealer options. Our team reviewed account creation, payment speed, customer support responsiveness, and bonus terms before assigning a final rating.\n\nOverall, Nova Star Casino stands out for its game selection and player experience, though as with any operator, always confirm current terms directly with the casino before depositing.",
+			'en' => "Nova Star Casino courts high rollers specifically: VIP table limits are among the highest we've seen, same-day payouts held up consistently across our test withdrawals, and qualifying players get a named account manager reachable directly. The catch is the reload bonus wagering, which runs steeper than the site's otherwise player-friendly reputation would suggest.\n\nUKGC-licensed and operating since 2017, Nova Star earns a strong rating on execution for high-stakes players — casual slot players chasing bonus value will find better fits elsewhere on this list.",
 			'de' => 'Nova Star Casino bietet VIPs hohe Tischlimits, einen persönlichen Kundenbetreuer und Auszahlungen am selben Tag. Reload-Boni haben allerdings hohe Umsatzanforderungen.',
 			'zh' => 'Nova Star Casino为VIP玩家提供高额桌面游戏限额、专属客户经理和当日到账提款，但充值红利的流水要求较高。',
 		),
@@ -673,11 +673,44 @@ $bonus_defs = array(
 		'value' => array( 'en' => '50% up to $1,000', 'de' => '50% bis 1.000 $', 'zh' => '50%，最高1000美元' ) ),
 );
 
-$bonus_terms_summary = array( 'en' => '35x wagering. Min deposit $20. 30-day expiry.', 'de' => '35-fache Umsatzanforderung. Mindesteinzahlung 20 $. Gültig für 30 Tage.', 'zh' => '35倍流水要求。最低存款20美元。30天内有效。' );
+// Real bonus types carry genuinely different terms — free spin winnings are
+// capped and wagered separately from any deposit match, no-deposit bonuses
+// are the most restricted (highest wagering, hard cashout caps, mandatory ID
+// verification), and cashback is usually paid with no wagering at all. A
+// single shared summary/body across every type flattened all of that away.
+$bonus_terms_summary = array(
+	'Welcome Bonus' => array( 'en' => '35x wagering on bonus + deposit. Min deposit $20. Expires 30 days after claiming.', 'de' => '35-fache Umsatzanforderung auf Bonus + Einzahlung. Mindesteinzahlung 20 $. Läuft 30 Tage nach Aktivierung ab.', 'zh' => '红利加存款需满足35倍流水要求。最低存款20美元。领取后30天内有效。' ),
+	'Free Spins'    => array( 'en' => 'Spins credited within 24 hours of signup. Winnings capped at $100 and carry a 40x wagering requirement. Valid on select slots only.', 'de' => 'Freispiele werden innerhalb von 24 Stunden nach der Anmeldung gutgeschrieben. Gewinne sind auf 100 $ begrenzt und unterliegen einer 40-fachen Umsatzanforderung. Nur für ausgewählte Spielautomaten gültig.', 'zh' => '注册后24小时内发放免费旋转。奖金上限为100美元，且需满足40倍流水要求。仅限指定老虎机游戏使用。' ),
+	'No Deposit'    => array( 'en' => '50x wagering on winnings. Max cashout $100. ID verification required before any withdrawal.', 'de' => '50-fache Umsatzanforderung auf Gewinne. Maximale Auszahlung 100 $. Vor jeder Auszahlung ist eine Identitätsprüfung erforderlich.', 'zh' => '奖金需满足50倍流水要求。最高提款额为100美元。提款前须完成身份验证。' ),
+	'Cashback'      => array( 'en' => 'Calculated on net losses over the past 7 days. No additional wagering — cashback is paid as real, withdrawable balance.', 'de' => 'Berechnet auf Basis der Nettoverluste der letzten 7 Tage. Keine zusätzliche Umsatzanforderung — das Cashback wird als echtes, auszahlbares Guthaben gutgeschrieben.', 'zh' => '根据过去7天的净亏损计算。无需额外流水要求——返现将以可直接提取的真实余额发放。' ),
+	'Reload Bonus'  => array( 'en' => '30x wagering. Valid on deposits made within 48 hours of claiming. Only one reload bonus active at a time.', 'de' => '30-fache Umsatzanforderung. Gültig für Einzahlungen innerhalb von 48 Stunden nach Aktivierung. Es kann jeweils nur ein Reload-Bonus aktiv sein.', 'zh' => '需满足30倍流水要求。仅适用于领取后48小时内完成的存款。同一时间只能激活一个充值红利。' ),
+);
 $bonus_body_tpl = array(
-	'en' => fn( $title ) => $title . ' — available to new players. Standard wagering requirements and game restrictions apply; see the operator\'s terms for full details.',
-	'de' => fn( $title ) => $title . ' — für neue Spieler verfügbar. Es gelten die üblichen Umsatzanforderungen und Spielbeschränkungen; Details entnehmen Sie den Bedingungen des Anbieters.',
-	'zh' => fn( $title ) => $title . ' — 仅限新玩家使用。适用标准流水要求和游戏限制，详情请参阅运营商条款。',
+	'Welcome Bonus' => array(
+		'en' => fn( $title, $code ) => $title . ' matches your qualifying deposit at the stated rate, credited automatically once the deposit clears.' . ( $code ? " Enter code {$code} at the cashier if it isn't applied by default." : '' ) . ' Standard wagering and game-contribution rules apply — check the operator\'s full terms before opting in.',
+		'de' => fn( $title, $code ) => $title . ' wird auf Ihre qualifizierende Einzahlung angerechnet und automatisch gutgeschrieben, sobald die Einzahlung verbucht ist.' . ( $code ? " Geben Sie den Code {$code} an der Kasse ein, falls er nicht automatisch angewendet wird." : '' ) . ' Es gelten die üblichen Umsatz- und Spielbeitragsregeln — prüfen Sie die vollständigen Bedingungen des Anbieters vor der Teilnahme.',
+		'zh' => fn( $title, $code ) => $title . '将按规定比例匹配您的合格存款，存款到账后自动发放。' . ( $code ? "如未自动应用，请在收银台输入代码{$code}。" : '' ) . '适用标准流水和游戏贡献规则，参与前请查阅运营商完整条款。',
+	),
+	'Free Spins' => array(
+		'en' => fn( $title, $code ) => $title . ' credits automatically after registration' . ( $code ? " (code {$code} may be required at signup)" : ' — no promo code needed' ) . '. Winnings from the spins carry their own wagering requirement separate from any deposit bonus, and are usually capped — check the cap before counting on this for a big win.',
+		'de' => fn( $title, $code ) => $title . ' wird automatisch nach der Registrierung gutgeschrieben' . ( $code ? " (Code {$code} ggf. bei der Anmeldung erforderlich)" : ' — kein Bonuscode erforderlich' ) . '. Gewinne aus den Freispielen unterliegen einer eigenen, vom Einzahlungsbonus getrennten Umsatzanforderung und sind meist gedeckelt — prüfen Sie das Limit, bevor Sie damit rechnen.',
+		'zh' => fn( $title, $code ) => $title . '将在注册后自动发放' . ( $code ? "（注册时可能需要输入代码{$code}）" : '，无需优惠代码' ) . '。免费旋转所得奖金需满足独立于存款红利的流水要求，且通常设有上限——请在期待大奖前先确认该上限。',
+	),
+	'No Deposit' => array(
+		'en' => fn( $title, $code ) => $title . ' requires no deposit to claim' . ( $code ? " — just enter code {$code}" : '' ) . ', but it\'s the most restricted bonus type on this list: expect a higher wagering requirement, a hard cap on withdrawable winnings, and mandatory ID verification before the casino releases anything.',
+		'de' => fn( $title, $code ) => $title . ' kann ohne Einzahlung beansprucht werden' . ( $code ? " — geben Sie einfach den Code {$code} ein" : '' ) . ', ist aber die restriktivste Bonusart in dieser Liste: Es gelten eine höhere Umsatzanforderung, ein festes Auszahlungslimit für Gewinne und eine verpflichtende Identitätsprüfung, bevor das Casino etwas auszahlt.',
+		'zh' => fn( $title, $code ) => $title . '无需存款即可领取' . ( $code ? "——只需输入代码{$code}" : '' ) . '，但它是本列表中限制最严格的红利类型：流水要求更高，可提款奖金设有硬性上限，且赌场放款前必须完成身份验证。',
+	),
+	'Cashback' => array(
+		'en' => fn( $title, $code ) => $title . ' is calculated automatically on your net losses for the period and credited without needing to opt in each time. Unlike deposit bonuses, most operators pay cashback with no extra wagering attached, which is what makes it worth watching even if you don\'t normally chase bonuses.',
+		'de' => fn( $title, $code ) => $title . ' wird automatisch anhand Ihrer Nettoverluste im jeweiligen Zeitraum berechnet und gutgeschrieben, ohne dass Sie sich jedes Mal neu anmelden müssen. Anders als Einzahlungsboni zahlen die meisten Anbieter Cashback ohne zusätzliche Umsatzanforderung aus — das macht es interessant, selbst wenn Sie normalerweise keine Boni verfolgen.',
+		'zh' => fn( $title, $code ) => $title . '根据您在相应周期内的净亏损自动计算并发放，无需每次手动申请。与存款红利不同，大多数运营商发放的返现不附加额外流水要求——这正是即使您通常不追逐红利，也值得关注它的原因。',
+	),
+	'Reload Bonus' => array(
+		'en' => fn( $title, $code ) => $title . ' is available to existing depositors on top of their next qualifying deposit' . ( $code ? " using code {$code}" : '' ) . '. It won\'t stack with an active welcome bonus or another reload offer, so time your claim for when you\'re actually ready to use it.',
+		'de' => fn( $title, $code ) => $title . ' steht bestehenden Spielern zusätzlich zu ihrer nächsten qualifizierenden Einzahlung zur Verfügung' . ( $code ? " mit dem Code {$code}" : '' ) . '. Er lässt sich nicht mit einem aktiven Willkommensbonus oder einem weiteren Reload-Angebot kombinieren — planen Sie die Aktivierung entsprechend.',
+		'zh' => fn( $title, $code ) => $title . '面向现有玩家，可叠加在其下一次符合条件的存款之上' . ( $code ? "（使用代码{$code}）" : '' ) . '。它不能与已激活的欢迎红利或其他充值红利同时使用，请在确实准备好使用时再领取。',
+	),
 );
 
 foreach ( $bonus_defs as $i => $b ) {
@@ -688,7 +721,7 @@ foreach ( $bonus_defs as $i => $b ) {
 			'args' => array(
 				'post_type'    => 'bonus',
 				'post_title'   => $title,
-				'post_content' => '<p>' . esc_html( $bonus_body_tpl[ $lang ]( $title ) ) . '</p>',
+				'post_content' => '<p>' . esc_html( $bonus_body_tpl[ $b['type'] ][ $lang ]( $title, $b['code'] ) ) . '</p>',
 				'post_status'  => 'publish',
 				'post_name'    => sanitize_title( $title ),
 			),
@@ -696,7 +729,7 @@ foreach ( $bonus_defs as $i => $b ) {
 				'ww_related_casino' => ww_casino_id( $casino_ids_i18n, $b['casino'], $lang ),
 				'ww_bonus_value'    => $b['value'][ $lang ],
 				'ww_promo_code'     => $b['code'],
-				'ww_terms_summary'  => $bonus_terms_summary[ $lang ],
+				'ww_terms_summary'  => $bonus_terms_summary[ $b['type'] ][ $lang ],
 				'ww_expiry_date'    => gmdate( 'Y-m-d', strtotime( '+60 days' ) ),
 				'ww_affiliate_link' => '#',
 				'ww_cta_label'      => 'en' === $lang ? 'Claim Bonus' : ( 'de' === $lang ? 'Bonus Sichern' : '领取红利' ),
@@ -772,49 +805,49 @@ $guide_defs = array(
 	array( 'cat' => 'Bonus Terms',
 		'title' => array( 'en' => 'Understanding Wagering Requirements, With Real Math', 'de' => 'Umsatzanforderungen verstehen — mit echten Rechenbeispielen', 'zh' => '用真实数字读懂流水要求' ),
 		'body'  => array(
-			'en' => 'A practical, no-nonsense look at understanding wagering requirements, with real math. We update this article regularly as regulations and industry practices evolve.',
+			'en' => 'A practical, no-nonsense look at wagering requirements — with real math, so you know exactly what a bonus actually costs before you claim it.',
 			'de' => 'Ein praktischer, unkomplizierter Blick auf Umsatzanforderungen mit konkreten Rechenbeispielen, damit Sie genau wissen, was ein Bonus wirklich kostet.',
 			'zh' => '用实际计算示例，直观地解释流水要求究竟意味着什么，帮助您理解红利背后的真实成本。',
 		) ),
 	array( 'cat' => 'Bankroll Management',
 		'title' => array( 'en' => 'Bankroll Management for Slot Players: The 1% Rule', 'de' => 'Bankroll-Management für Slot-Spieler: Die 1%-Regel', 'zh' => '老虎机玩家的资金管理：1%法则' ),
 		'body'  => array(
-			'en' => 'A practical, no-nonsense look at bankroll management for slot players, the 1% rule. We update this article regularly as regulations and industry practices evolve.',
+			'en' => 'Why many experienced slot players never risk more than 1% of their bankroll on a single session, and how to apply the rule to your own budget.',
 			'de' => 'Warum viele erfahrene Slot-Spieler nie mehr als 1% ihres Bankrolls auf eine einzelne Session setzen, und wie Sie diese Regel für sich anwenden.',
 			'zh' => '许多资深老虎机玩家为何单次游戏投注不超过资金的1%，以及如何将这一法则应用到自己的策略中。',
 		) ),
 	array( 'cat' => 'Game Strategy',
 		'title' => array( 'en' => 'Basic Blackjack Strategy Chart, Explained Simply', 'de' => 'Die grundlegende Blackjack-Strategietabelle, einfach erklärt', 'zh' => '基础21点策略表，简单易懂' ),
 		'body'  => array(
-			'en' => 'A practical, no-nonsense look at basic blackjack strategy chart, explained simply. We update this article regularly as regulations and industry practices evolve.',
+			'en' => "The basic blackjack strategy chart, explained step by step — no jargon, just what to do at the table for every hand you're dealt.",
 			'de' => 'Die grundlegende Strategietabelle für Blackjack, Schritt für Schritt erklärt — ohne Fachjargon, direkt anwendbar am Tisch.',
 			'zh' => '基础21点策略表逐条讲解，无需专业术语，即学即用。',
 		) ),
 	array( 'cat' => 'Country Guides',
 		'title' => array( 'en' => 'Playing from Germany: Taxes, Limits and Licensed Sites', 'de' => 'Spielen aus Deutschland: Steuern, Limits und lizenzierte Anbieter', 'zh' => '德国玩家指南：税务、限额与合法平台' ),
 		'body'  => array(
-			'en' => 'A practical, no-nonsense look at playing from Germany, taxes, limits and licensed sites. We update this article regularly as regulations and industry practices evolve.',
+			'en' => 'What German players need to know about taxes, statutory deposit limits, and which sites actually hold a valid license — summarized in one place.',
 			'de' => 'Was deutsche Spieler über Steuern, gesetzliche Einzahlungslimits und lizenzierte Anbieter wissen müssen, kompakt zusammengefasst.',
 			'zh' => '德国玩家需要了解的税务规定、法定存款限额和合法持牌平台，简明扼要地为您梳理。',
 		) ),
 	array( 'cat' => 'Beginner Guides',
 		'title' => array( 'en' => 'RTP Explained: How Return to Player Actually Works', 'de' => 'RTP erklärt: Wie der Auszahlungsprozentsatz wirklich funktioniert', 'zh' => 'RTP详解：返还率究竟如何运作' ),
 		'body'  => array(
-			'en' => 'A practical, no-nonsense look at RTP explained, how return to player actually works. We update this article regularly as regulations and industry practices evolve.',
+			'en' => "What an RTP number actually means, why it's a long-run statistical average, and why it's not a promise about any single session you play.",
 			'de' => 'Was der RTP-Wert wirklich bedeutet, warum er eine langfristige statistische Kennzahl ist und kein Versprechen für eine einzelne Session.',
 			'zh' => 'RTP数值真正的含义——它是长期统计指标，而非单次游戏的保证，帮助玩家建立正确预期。',
 		) ),
 	array( 'cat' => 'Game Strategy',
 		'title' => array( 'en' => 'Slot Volatility: High vs. Low Explained', 'de' => 'Slot-Volatilität: Hoch vs. niedrig erklärt', 'zh' => '老虎机波动性：高波动与低波动详解' ),
 		'body'  => array(
-			'en' => 'A practical, no-nonsense look at slot volatility, high vs. low explained. We update this article regularly as regulations and industry practices evolve.',
+			'en' => 'The difference between high- and low-volatility slots, and which type actually fits your bankroll and play style.',
 			'de' => 'Der Unterschied zwischen hoher und niedriger Volatilität bei Spielautomaten, und welcher Typ zu Ihrem Spielstil passt.',
 			'zh' => '高波动性与低波动性老虎机的区别，以及哪种类型更适合您的游戏风格。',
 		) ),
 	array( 'cat' => 'Beginner Guides',
 		'title' => array( 'en' => 'How to Choose a Safe Online Casino in 2026', 'de' => 'So wählen Sie 2026 ein sicheres Online-Casino', 'zh' => '2026年如何选择安全的在线赌场' ),
 		'body'  => array(
-			'en' => 'A practical, no-nonsense look at how to choose a safe online casino in 2026. We update this article regularly as regulations and industry practices evolve.',
+			'en' => 'A practical checklist for choosing a safe online casino in 2026 — licensing, withdrawal speed, and fair bonus terms, in that order of importance.',
 			'de' => 'Eine praktische Checkliste für die Wahl eines sicheren Online-Casinos im Jahr 2026 — Lizenzierung, Auszahlungsgeschwindigkeit und faire Bonusbedingungen.',
 			'zh' => '2026年选择安全在线赌场的实用清单——牌照资质、提款速度和公平的红利条款。',
 		) ),
@@ -855,35 +888,35 @@ $news_defs = array(
 	array( 'cat' => 'Industry',
 		'title' => array( 'en' => 'Vega Harbor Rolls Out Instant Crypto Withdrawals', 'de' => 'Vega Harbor führt sofortige Krypto-Auszahlungen ein', 'zh' => 'Vega Harbor推出即时加密货币提款' ),
 		'body'  => array(
-			'en' => 'Vega Harbor rolls out instant crypto withdrawals — this article walks through the key things CasinoRadar readers should know.',
+			'en' => 'Vega Harbor now offers instant crypto withdrawals for all verified accounts, another step toward faster payout times across the industry.',
 			'de' => 'Vega Harbor führt ab sofort sofortige Krypto-Auszahlungen für alle verifizierten Konten ein, ein weiterer Schritt zu schnelleren Auszahlungszeiten in der Branche.',
 			'zh' => 'Vega Harbor现已为所有已验证账户开放即时加密货币提款，为行业提款速度树立新标杆。',
 		) ),
 	array( 'cat' => 'Product Launch',
 		'title' => array( 'en' => 'Nova Spins Adds 40 New Live-Dealer Tables This Month', 'de' => 'Nova Spins fügt diesen Monat 40 neue Live-Dealer-Tische hinzu', 'zh' => 'Nova Spins本月新增40张真人荷官桌' ),
 		'body'  => array(
-			'en' => 'Nova Spins adds 40 new live-dealer tables this month — this article walks through the key things CasinoRadar readers should know.',
+			'en' => 'Nova Spins is expanding its live casino offering with 40 new tables this month, adding extra language options for European players.',
 			'de' => 'Nova Spins erweitert sein Live-Casino-Angebot um 40 neue Tische, mit zusätzlichen Sprachoptionen für europäische Spieler.',
 			'zh' => 'Nova Spins将真人娱乐场新增40张桌台，并为欧洲玩家增加更多语言选项。',
 		) ),
 	array( 'cat' => 'Responsible Gambling',
 		'title' => array( 'en' => 'National Self-Exclusion Registry Expands to 6 More States', 'de' => 'Nationales Selbstausschlussregister auf 6 weitere Bundesstaaten ausgeweitet', 'zh' => '全国自我排除登记系统扩展至另外6个州' ),
 		'body'  => array(
-			'en' => 'National self-exclusion registry expands to 6 more states — this article walks through the key things CasinoRadar readers should know.',
+			'en' => 'The national self-exclusion registry for problem gamblers is now available in six additional states.',
 			'de' => 'Das nationale Selbstausschlussregister für Problemspieler steht ab sofort in sechs weiteren Bundesstaaten zur Verfügung.',
 			'zh' => '面向问题博彩者的全国自我排除登记系统现已扩展至另外6个州。',
 		) ),
 	array( 'cat' => 'Regulation',
 		'title' => array( 'en' => 'Curaçao Reforms Licensing Structure into Four Sub-Tiers', 'de' => 'Curaçao reformiert Lizenzstruktur in vier Untergruppen', 'zh' => '库拉索博彩牌照改革为四个子级别' ),
 		'body'  => array(
-			'en' => 'Curaçao reforms licensing structure into four sub-tiers — this article walks through the key things CasinoRadar readers should know.',
+			'en' => "Curaçao's new licensing structure is designed to improve transparency, splitting operators into four sub-tiers going forward.",
 			'de' => 'Die neue Lizenzstruktur aus Curaçao soll für mehr Transparenz sorgen und unterteilt Anbieter künftig in vier Kategorien.',
 			'zh' => '库拉索新牌照结构旨在提升透明度，将运营商划分为四个子级别。',
 		) ),
 	array( 'cat' => 'Industry',
 		'title' => array( 'en' => 'Golden Reel Casino Named Payout Speed Leader for Q2', 'de' => 'Golden Reel Casino als Auszahlungsschnellster im 2. Quartal ausgezeichnet', 'zh' => 'Golden Reel Casino荣获第二季度提款速度冠军' ),
 		'body'  => array(
-			'en' => 'Golden Reel Casino named payout speed leader for Q2 — this article walks through the key things CasinoRadar readers should know.',
+			'en' => 'Golden Reel Casino was named the fastest payer among all casinos in our quarterly evaluation.',
 			'de' => 'Golden Reel Casino wurde in unserer vierteljährlichen Auswertung als schnellster Auszahler unter allen bewerteten Casinos ausgezeichnet.',
 			'zh' => '在我们的季度评估中，Golden Reel Casino在所有评测赌场中提款速度最快。',
 		) ),
