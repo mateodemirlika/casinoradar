@@ -42,7 +42,22 @@
 		} );
 	}
 
+	// registerBlockType() silently no-ops (just a console.warn) without a
+	// title — every block below was missing one, so none of them were ever
+	// actually registered client-side; the editor showed all of them as
+	// "doesn't include support for this block" even though the PHP side
+	// (server-side rendering, both on the front end and in the
+	// ServerSideRender preview below) worked fine the whole time.
+
 	registerBlockType( 'wagerwise/top-casinos', {
+		title: __( 'Top Casinos', 'wagerwise' ),
+		category: 'widgets',
+		attributes: {
+			number: { type: 'number', default: 5 },
+			categoryId: { type: 'number', default: 0 },
+			featuredOnly: { type: 'boolean', default: false },
+			layout: { type: 'string', default: 'list' },
+		},
 		edit: withServerPreview( 'wagerwise/top-casinos', function ( props ) {
 			return el(
 				PanelBody,
@@ -59,6 +74,12 @@
 	} );
 
 	registerBlockType( 'wagerwise/casino-comparison-table', {
+		title: __( 'Casino Comparison Table', 'wagerwise' ),
+		category: 'widgets',
+		attributes: {
+			number: { type: 'number', default: 5 },
+			categoryId: { type: 'number', default: 0 },
+		},
 		edit: withServerPreview( 'wagerwise/casino-comparison-table', function ( props ) {
 			return el(
 				PanelBody,
@@ -70,6 +91,12 @@
 	} );
 
 	registerBlockType( 'wagerwise/bonus-grid', {
+		title: __( 'Bonus Grid', 'wagerwise' ),
+		category: 'widgets',
+		attributes: {
+			number: { type: 'number', default: 6 },
+			bonusTypeId: { type: 'number', default: 0 },
+		},
 		edit: withServerPreview( 'wagerwise/bonus-grid', function ( props ) {
 			return el(
 				PanelBody,
@@ -81,11 +108,20 @@
 	} );
 
 	registerBlockType( 'wagerwise/pros-cons', {
+		title: __( 'Pros & Cons', 'wagerwise' ),
+		category: 'widgets',
+		attributes: {},
 		edit: withServerPreview( 'wagerwise/pros-cons', null ),
 		save: function () { return null; },
 	} );
 
 	registerBlockType( 'wagerwise/cta-button', {
+		title: __( 'CTA Button', 'wagerwise' ),
+		category: 'widgets',
+		attributes: {
+			url: { type: 'string', default: '' },
+			label: { type: 'string', default: 'Play Now' },
+		},
 		edit: withServerPreview( 'wagerwise/cta-button', function ( props ) {
 			return el(
 				PanelBody,
@@ -106,6 +142,12 @@
 	} );
 
 	registerBlockType( 'wagerwise/blog-grid', {
+		title: __( 'Blog Grid', 'wagerwise' ),
+		category: 'widgets',
+		attributes: {
+			number: { type: 'number', default: 3 },
+			categoryId: { type: 'number', default: 0 },
+		},
 		edit: withServerPreview( 'wagerwise/blog-grid', function ( props ) {
 			return el(
 				PanelBody,
@@ -117,11 +159,19 @@
 	} );
 
 	registerBlockType( 'wagerwise/stats-strip', {
+		title: __( 'Stats Strip', 'wagerwise' ),
+		category: 'widgets',
+		attributes: {},
 		edit: withServerPreview( 'wagerwise/stats-strip', null ),
 		save: function () { return null; },
 	} );
 
 	registerBlockType( 'wagerwise/provider-strip', {
+		title: __( 'Provider Strip', 'wagerwise' ),
+		category: 'widgets',
+		attributes: {
+			number: { type: 'number', default: 8 },
+		},
 		edit: withServerPreview( 'wagerwise/provider-strip', function ( props ) {
 			return el(
 				PanelBody,
@@ -133,6 +183,12 @@
 	} );
 
 	registerBlockType( 'wagerwise/category-strip', {
+		title: __( 'Taxonomy Strip', 'wagerwise' ),
+		category: 'widgets',
+		attributes: {
+			taxonomy: { type: 'string', default: 'casino_category' },
+			style: { type: 'string', default: 'chip' },
+		},
 		edit: withServerPreview( 'wagerwise/category-strip', function ( props ) {
 			return el(
 				PanelBody,
@@ -149,6 +205,13 @@
 	} );
 
 	registerBlockType( 'wagerwise/game-grid', {
+		title: __( 'Game Grid', 'wagerwise' ),
+		category: 'widgets',
+		attributes: {
+			number: { type: 'number', default: 8 },
+			categoryId: { type: 'number', default: 0 },
+			providerId: { type: 'number', default: 0 },
+		},
 		edit: withServerPreview( 'wagerwise/game-grid', function ( props ) {
 			return el(
 				PanelBody,
@@ -160,6 +223,11 @@
 	} );
 
 	registerBlockType( 'wagerwise/review-grid', {
+		title: __( 'Editorial Review Grid', 'wagerwise' ),
+		category: 'widgets',
+		attributes: {
+			number: { type: 'number', default: 6 },
+		},
 		edit: withServerPreview( 'wagerwise/review-grid', function ( props ) {
 			return el(
 				PanelBody,
@@ -171,6 +239,12 @@
 	} );
 
 	registerBlockType( 'wagerwise/hero-search', {
+		title: __( 'Hero', 'wagerwise' ),
+		category: 'widgets',
+		attributes: {
+			heading: { type: 'string', default: '' },
+			subheading: { type: 'string', default: '' },
+		},
 		edit: withServerPreview( 'wagerwise/hero-search', function ( props ) {
 			return el(
 				PanelBody,
@@ -185,6 +259,22 @@
 					value: props.attributes.subheading,
 					onChange: function ( value ) { props.setAttributes( { subheading: value } ); },
 				} )
+			);
+		} ),
+		save: function () { return null; },
+	} );
+
+	registerBlockType( 'wagerwise/tournament-grid', {
+		title: __( 'Tournament Grid', 'wagerwise' ),
+		category: 'widgets',
+		attributes: {
+			number: { type: 'number', default: 3 },
+		},
+		edit: withServerPreview( 'wagerwise/tournament-grid', function ( props ) {
+			return el(
+				PanelBody,
+				{ title: __( 'Tournament Grid', 'wagerwise' ) },
+				numberControl( __( 'Number of tournaments', 'wagerwise' ), 'number', props, 1, 12 )
 			);
 		} ),
 		save: function () { return null; },
