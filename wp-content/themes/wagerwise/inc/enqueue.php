@@ -47,17 +47,21 @@ function wagerwise_enqueue_assets(): void {
 }
 
 /**
- * Extra favicon/PWA tags WordPress's own wp_site_icon() doesn't cover:
- * a 16x16 icon (core only emits 32x32 + 192x192) and a web app manifest
- * (192x192 + 512x512 icons, required for Android "add to home screen").
- * The actual /favicon.ico file is served as a static asset directly by
- * nginx (see nginx/prod/templates/wagerwise.conf.template) rather than
- * through PHP, so it isn't handled here.
+ * Extra favicon/PWA tags WordPress's own wp_site_icon() doesn't cover: a
+ * 16x16 and 96x96 icon (core only emits 32x32 + 192x192), a scalable SVG
+ * icon, a web app manifest (192x192 + 512x512 icons, required for Android
+ * "add to home screen"), and the iOS home-screen label. The actual
+ * /favicon.ico file is served as a static asset directly by nginx (see
+ * nginx/prod/templates/wagerwise.conf.template) rather than through PHP,
+ * so it isn't handled here.
  */
 add_action( 'wp_head', 'wagerwise_extra_favicon_tags', 5 );
 function wagerwise_extra_favicon_tags(): void {
 	$images_uri = WAGERWISE_THEME_URI . '/assets/images';
+	printf( '<link rel="icon" href="%s/favicon.svg" type="image/svg+xml" />' . "\n", esc_url( $images_uri ) );
 	printf( '<link rel="icon" href="%s/favicon-16x16.png" sizes="16x16" type="image/png" />' . "\n", esc_url( $images_uri ) );
+	printf( '<link rel="icon" href="%s/favicon-96x96.png" sizes="96x96" type="image/png" />' . "\n", esc_url( $images_uri ) );
 	printf( '<link rel="manifest" href="%s/site.webmanifest" />' . "\n", esc_url( $images_uri ) );
 	echo '<meta name="theme-color" content="#12121e" />' . "\n";
+	echo '<meta name="apple-mobile-web-app-title" content="CasinoRadar" />' . "\n";
 }
