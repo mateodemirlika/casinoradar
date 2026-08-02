@@ -279,4 +279,124 @@
 		} ),
 		save: function () { return null; },
 	} );
+
+	registerBlockType( 'wagerwise/news-featured', {
+		title: __( 'Featured News', 'wagerwise' ),
+		category: 'widgets',
+		attributes: {
+			category: { type: 'string', default: '' },
+		},
+		edit: withServerPreview( 'wagerwise/news-featured', function ( props ) {
+			return el(
+				PanelBody,
+				{ title: __( 'Featured News', 'wagerwise' ) },
+				el( TextControl, {
+					label: __( 'Category slug (blank = any)', 'wagerwise' ),
+					value: props.attributes.category,
+					onChange: function ( value ) { props.setAttributes( { category: value } ); },
+				} )
+			);
+		} ),
+		save: function () { return null; },
+	} );
+
+	registerBlockType( 'wagerwise/news-grid', {
+		title: __( 'News Grid', 'wagerwise' ),
+		category: 'widgets',
+		attributes: {
+			number: { type: 'number', default: 6 },
+			category: { type: 'string', default: '' },
+			skipFirst: { type: 'boolean', default: false },
+		},
+		edit: withServerPreview( 'wagerwise/news-grid', function ( props ) {
+			return el(
+				PanelBody,
+				{ title: __( 'News Grid', 'wagerwise' ) },
+				numberControl( __( 'Number of posts', 'wagerwise' ), 'number', props, 1, 12 ),
+				el( TextControl, {
+					label: __( 'Category slug (blank = any)', 'wagerwise' ),
+					value: props.attributes.category,
+					onChange: function ( value ) { props.setAttributes( { category: value } ); },
+				} ),
+				el( ToggleControl, {
+					label: __( 'Skip first (avoid repeating the featured post)', 'wagerwise' ),
+					checked: props.attributes.skipFirst,
+					onChange: function ( value ) { props.setAttributes( { skipFirst: value } ); },
+				} )
+			);
+		} ),
+		save: function () { return null; },
+	} );
+
+	registerBlockType( 'wagerwise/guide-featured', {
+		title: __( 'Featured Guide', 'wagerwise' ),
+		category: 'widgets',
+		attributes: {},
+		edit: withServerPreview( 'wagerwise/guide-featured', null ),
+		save: function () { return null; },
+	} );
+
+	registerBlockType( 'wagerwise/guide-list', {
+		title: __( 'Guide List', 'wagerwise' ),
+		category: 'widgets',
+		attributes: {
+			number: { type: 'number', default: 8 },
+		},
+		edit: withServerPreview( 'wagerwise/guide-list', function ( props ) {
+			return el(
+				PanelBody,
+				{ title: __( 'Guide List', 'wagerwise' ) },
+				numberControl( __( 'Number of guides', 'wagerwise' ), 'number', props, 1, 20 )
+			);
+		} ),
+		save: function () { return null; },
+	} );
+
+	registerBlockType( 'wagerwise/reviews-list', {
+		title: __( 'Reviews List', 'wagerwise' ),
+		category: 'widgets',
+		attributes: {
+			number: { type: 'number', default: 12 },
+		},
+		edit: withServerPreview( 'wagerwise/reviews-list', function ( props ) {
+			return el(
+				PanelBody,
+				{ title: __( 'Reviews List', 'wagerwise' ) },
+				numberControl( __( 'Number of reviews', 'wagerwise' ), 'number', props, 1, 20 )
+			);
+		} ),
+		save: function () { return null; },
+	} );
+
+	registerBlockType( 'wagerwise/complaints-stats', {
+		title: __( 'Complaints Stats', 'wagerwise' ),
+		category: 'widgets',
+		attributes: {},
+		edit: withServerPreview( 'wagerwise/complaints-stats', null ),
+		save: function () { return null; },
+	} );
+
+	registerBlockType( 'wagerwise/complaints-list', {
+		title: __( 'Complaints List', 'wagerwise' ),
+		category: 'widgets',
+		attributes: {
+			number: { type: 'number', default: 6 },
+		},
+		edit: withServerPreview( 'wagerwise/complaints-list', function ( props ) {
+			return el(
+				PanelBody,
+				{ title: __( 'Complaints List', 'wagerwise' ) },
+				numberControl( __( 'Number of complaints', 'wagerwise' ), 'number', props, 1, 20 )
+			);
+		} ),
+		save: function () { return null; },
+	} );
+
+	registerBlockType( 'wagerwise/complaint-form', {
+		title: __( 'Complaint Form', 'wagerwise' ),
+		category: 'widgets',
+		attributes: {},
+		edit: withServerPreview( 'wagerwise/complaint-form', null ),
+		save: function () { return null; },
+	} );
 } )( window.wp );
