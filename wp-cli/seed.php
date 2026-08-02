@@ -14,6 +14,25 @@ if ( function_exists( 'wagerwise_bootstrap_polylang_languages' ) ) {
 	wagerwise_bootstrap_polylang_languages();
 }
 
+/**
+ * Off by default: every insert below is guarded by an "already exists?"
+ * check, so re-running this script (e.g. on every deploy, via bootstrap.sh)
+ * never touches a post that's already there — protecting any hand-edits an
+ * editor made in wp-admin since it was first seeded.
+ *
+ * Pass `refresh-content` as an extra arg to `wp eval-file` to opt into the
+ * opposite: overwrite the content/meta/taxonomy terms of already-existing
+ * seed posts with whatever's currently in this file. Use this to push a copy
+ * update (like this file's own demo content) to an environment that was
+ * already seeded — it will discard any manual edits made directly to those
+ * specific posts since.
+ */
+// eval-file runs this script's top level inside a WP-CLI command method, not
+// truly global scope, so a plain assignment here wouldn't be visible to
+// ww_seed_post()'s own `global $ww_refresh_content;` — must globalize here too.
+global $ww_refresh_content;
+$ww_refresh_content = in_array( 'refresh-content', $args ?? array(), true );
+
 function ww_seed_lang( int $object_id, string $type = 'post', string $lang = 'en' ): void {
 	if ( 'post' === $type && function_exists( 'pll_set_post_language' ) ) {
 		pll_set_post_language( $object_id, $lang );
@@ -246,6 +265,23 @@ function ww_seed_post( array $args, array $meta = array(), array $tax = array(),
 	}
 	if ( ! empty( $existing ) ) {
 		$existing_id = (int) $existing[0];
+
+		global $ww_refresh_content;
+		if ( ! empty( $ww_refresh_content ) ) {
+			$args['ID'] = $existing_id;
+			wp_update_post( $args );
+			foreach ( $meta as $key => $value ) {
+				update_post_meta( $existing_id, $key, $value );
+			}
+			foreach ( $tax as $taxonomy => $terms ) {
+				wp_set_object_terms( $existing_id, $terms, $taxonomy );
+			}
+			if ( $thumbnail_id ) {
+				set_post_thumbnail( $existing_id, $thumbnail_id );
+			}
+			return $existing_id;
+		}
+
 		// WordPress core auto-creates a draft "Privacy Policy" page on
 		// install; adopt (and publish) it rather than skipping, so the seed
 		// still results in a live page instead of a 404.
