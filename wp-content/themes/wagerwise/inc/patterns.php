@@ -5,7 +5,7 @@
  * the demo pages start out already composed. Also registered as block
  * patterns so an editor can re-insert a page's default layout later.
  *
- * Each function takes a $lang ('en'/'de'/'zh') because these are baked once
+ * Each function takes a $lang ('en'/'de'/'zh'/'es') because these are baked once
  * into a language-specific Page's post_content at seed time — unlike the
  * header/footer nav chrome (translated at render time via Polylang string
  * translations), this static heading/paragraph text needs to be correct
@@ -22,14 +22,14 @@ function wagerwise_pattern_string( array $strings, string $lang ): string {
 function wagerwise_homepage_pattern_markup( string $lang = 'en' ): string {
 	$s = fn( array $strings ) => esc_html( wagerwise_pattern_string( $strings, $lang ) );
 
-	$top_picks   = $s( array( 'en' => 'Top Picks This Week', 'de' => 'Top-Empfehlungen der Woche', 'zh' => '本周精选推荐' ) );
-	$live_tourn  = $s( array( 'en' => 'Live Tournaments', 'de' => 'Laufende Turniere', 'zh' => '正在进行的锦标赛' ) );
-	$why_trust   = $s( array( 'en' => 'Why Trust CasinoRadar', 'de' => 'Warum CasinoRadar Vertrauen', 'zh' => '为何信赖CasinoRadar' ) );
-	$trust_1     = $s( array( 'en' => '✓ Every casino is manually reviewed against our published methodology', 'de' => '✓ Jedes Casino wird manuell nach unserer veröffentlichten Methodik geprüft', 'zh' => '✓ 每家赌场均按我们公开的方法论人工审核' ) );
-	$trust_2     = $s( array( 'en' => '✓ Ratings weigh licensing, payout speed, and bonus fairness', 'de' => '✓ Bewertungen berücksichtigen Lizenzierung, Auszahlungsgeschwindigkeit und faire Boni', 'zh' => '✓ 评级综合考量牌照、提款速度与红利公平性' ) );
-	$trust_3     = $s( array( 'en' => '✓ Licences are cross-checked against MGA, UKGC, and Curaçao registries', 'de' => '✓ Lizenzen werden mit MGA-, UKGC- und Curaçao-Registern abgeglichen', 'zh' => '✓ 牌照信息与MGA、UKGC及库拉索登记系统交叉核实' ) );
-	$trust_4     = $s( array( 'en' => '✓ Reviews are revisited as operators change their terms', 'de' => '✓ Testberichte werden aktualisiert, sobald Anbieter ihre Bedingungen ändern', 'zh' => '✓ 运营商条款变更时，评测将同步更新' ) );
-	$latest_news = $s( array( 'en' => 'Latest News', 'de' => 'Aktuelle Neuigkeiten', 'zh' => '最新资讯' ) );
+	$top_picks   = $s( array( 'en' => 'Top Picks This Week', 'de' => 'Top-Empfehlungen der Woche', 'zh' => '本周精选推荐', 'es' => 'Mejores Opciones de la Semana' ) );
+	$live_tourn  = $s( array( 'en' => 'Live Tournaments', 'de' => 'Laufende Turniere', 'zh' => '正在进行的锦标赛', 'es' => 'Torneos en Vivo' ) );
+	$why_trust   = $s( array( 'en' => 'Why Trust CasinoRadar', 'de' => 'Warum CasinoRadar Vertrauen', 'zh' => '为何信赖CasinoRadar', 'es' => 'Por Qué Confiar en CasinoRadar' ) );
+	$trust_1     = $s( array( 'en' => '✓ Every casino is manually reviewed against our published methodology', 'de' => '✓ Jedes Casino wird manuell nach unserer veröffentlichten Methodik geprüft', 'zh' => '✓ 每家赌场均按我们公开的方法论人工审核', 'es' => '✓ Cada casino es revisado manualmente según nuestra metodología publicada' ) );
+	$trust_2     = $s( array( 'en' => '✓ Ratings weigh licensing, payout speed, and bonus fairness', 'de' => '✓ Bewertungen berücksichtigen Lizenzierung, Auszahlungsgeschwindigkeit und faire Boni', 'zh' => '✓ 评级综合考量牌照、提款速度与红利公平性', 'es' => '✓ Las calificaciones consideran la licencia, la velocidad de pago y la equidad de los bonos' ) );
+	$trust_3     = $s( array( 'en' => '✓ Licences are cross-checked against MGA, UKGC, and Curaçao registries', 'de' => '✓ Lizenzen werden mit MGA-, UKGC- und Curaçao-Registern abgeglichen', 'zh' => '✓ 牌照信息与MGA、UKGC及库拉索登记系统交叉核实', 'es' => '✓ Las licencias se verifican con los registros de MGA, UKGC y Curazao' ) );
+	$trust_4     = $s( array( 'en' => '✓ Reviews are revisited as operators change their terms', 'de' => '✓ Testberichte werden aktualisiert, sobald Anbieter ihre Bedingungen ändern', 'zh' => '✓ 运营商条款变更时，评测将同步更新', 'es' => '✓ Las reseñas se actualizan cuando los operadores cambian sus condiciones' ) );
+	$latest_news = $s( array( 'en' => 'Latest News', 'de' => 'Aktuelle Neuigkeiten', 'zh' => '最新资讯', 'es' => 'Últimas Noticias' ) );
 
 	return <<<HTML
 <!-- wp:wagerwise/hero-search /-->
@@ -99,8 +99,8 @@ HTML;
 function wagerwise_guide_page_markup( string $lang = 'en' ): string {
 	$s = fn( array $strings ) => esc_html( wagerwise_pattern_string( $strings, $lang ) );
 
-	$h1      = $s( array( 'en' => 'Player Guide', 'de' => 'Spieler-Ratgeber', 'zh' => '玩家指南' ) );
-	$subtitle = $s( array( 'en' => 'Straightforward explainers, no jargon, no upsell.', 'de' => 'Klare Erklärungen, ohne Fachjargon, ohne Verkaufsdruck.', 'zh' => '简单明了的说明，没有行话，没有推销。' ) );
+	$h1      = $s( array( 'en' => 'Player Guide', 'de' => 'Spieler-Ratgeber', 'zh' => '玩家指南', 'es' => 'Guía del Jugador' ) );
+	$subtitle = $s( array( 'en' => 'Straightforward explainers, no jargon, no upsell.', 'de' => 'Klare Erklärungen, ohne Fachjargon, ohne Verkaufsdruck.', 'zh' => '简单明了的说明，没有行话，没有推销。', 'es' => 'Explicaciones claras, sin jerga, sin ventas encubiertas.' ) );
 
 	return <<<HTML
 <!-- wp:group {"className":"ww-section","layout":{"type":"constrained"}} -->
@@ -132,10 +132,10 @@ HTML;
 function wagerwise_reviews_page_markup( string $lang = 'en' ): string {
 	$s = fn( array $strings ) => esc_html( wagerwise_pattern_string( $strings, $lang ) );
 
-	$h1        = $s( array( 'en' => 'Player Reviews', 'de' => 'Spielerbewertungen', 'zh' => '玩家评测' ) );
-	$subtitle  = $s( array( 'en' => 'Independent editorial reviews, plus real player reviews published after moderation.', 'de' => 'Unabhängige Redaktions-Testberichte sowie echte Spielerbewertungen, veröffentlicht nach Moderation.', 'zh' => '独立编辑评测，以及经审核后发布的真实玩家评价。' ) );
-	$editors   = $s( array( 'en' => "Editor's Reviews", 'de' => 'Redaktionelle Testberichte', 'zh' => '编辑评测' ) );
-	$players   = $s( array( 'en' => 'Player Reviews', 'de' => 'Spielerbewertungen', 'zh' => '玩家评价' ) );
+	$h1        = $s( array( 'en' => 'Player Reviews', 'de' => 'Spielerbewertungen', 'zh' => '玩家评测', 'es' => 'Reseñas de Jugadores' ) );
+	$subtitle  = $s( array( 'en' => 'Independent editorial reviews, plus real player reviews published after moderation.', 'de' => 'Unabhängige Redaktions-Testberichte sowie echte Spielerbewertungen, veröffentlicht nach Moderation.', 'zh' => '独立编辑评测，以及经审核后发布的真实玩家评价。', 'es' => 'Reseñas editoriales independientes, además de reseñas reales de jugadores publicadas tras moderación.' ) );
+	$editors   = $s( array( 'en' => "Editor's Reviews", 'de' => 'Redaktionelle Testberichte', 'zh' => '编辑评测', 'es' => 'Reseñas Editoriales' ) );
+	$players   = $s( array( 'en' => 'Player Reviews', 'de' => 'Spielerbewertungen', 'zh' => '玩家评价', 'es' => 'Reseñas de Jugadores' ) );
 
 	return <<<HTML
 <!-- wp:group {"className":"ww-section","layout":{"type":"constrained"}} -->
@@ -162,10 +162,10 @@ HTML;
 function wagerwise_complaints_page_markup( string $lang = 'en' ): string {
 	$s = fn( array $strings ) => esc_html( wagerwise_pattern_string( $strings, $lang ) );
 
-	$h1        = $s( array( 'en' => 'Complaint Resolution Center', 'de' => 'Beschwerde-Schlichtungsstelle', 'zh' => '投诉解决中心' ) );
-	$subtitle  = $s( array( 'en' => 'Free mediation between players and licensed casinos.', 'de' => 'Kostenlose Vermittlung zwischen Spielern und lizenzierten Casinos.', 'zh' => '为玩家与持牌赌场提供免费调解服务。' ) );
-	$file_h    = $s( array( 'en' => 'File a Complaint', 'de' => 'Beschwerde Einreichen', 'zh' => '提交投诉' ) );
-	$resolved_h = $s( array( 'en' => 'Recently Resolved', 'de' => 'Kürzlich Gelöst', 'zh' => '近期已解决' ) );
+	$h1        = $s( array( 'en' => 'Complaint Resolution Center', 'de' => 'Beschwerde-Schlichtungsstelle', 'zh' => '投诉解决中心', 'es' => 'Centro de Resolución de Quejas' ) );
+	$subtitle  = $s( array( 'en' => 'Free mediation between players and licensed casinos.', 'de' => 'Kostenlose Vermittlung zwischen Spielern und lizenzierten Casinos.', 'zh' => '为玩家与持牌赌场提供免费调解服务。', 'es' => 'Mediación gratuita entre jugadores y casinos con licencia.' ) );
+	$file_h    = $s( array( 'en' => 'File a Complaint', 'de' => 'Beschwerde Einreichen', 'zh' => '提交投诉', 'es' => 'Presentar una Queja' ) );
+	$resolved_h = $s( array( 'en' => 'Recently Resolved', 'de' => 'Kürzlich Gelöst', 'zh' => '近期已解决', 'es' => 'Resueltas Recientemente' ) );
 
 	return <<<HTML
 <!-- wp:group {"className":"ww-section","layout":{"type":"constrained"}} -->

@@ -45,6 +45,15 @@ $WP rewrite flush --hard
 echo "==> Seeding demo content"
 $WP eval-file /var/www/html/wp-cli-scripts/seed.php
 
+# seed.php can register a new Polylang language (wagerwise_bootstrap_polylang_
+# languages(), called directly at its top) — its URL prefix (e.g. /es/) needs
+# a rewrite flush to take effect, and that has to happen in a separate WP-CLI
+# process from the one that added the language: within the same request,
+# Polylang's rewrite-rule generation reads a language list it already cached
+# before the new language was added, so flushing inline there is a no-op.
+echo "==> Flushing rewrite rules (in case seeding just added a language)"
+$WP rewrite flush --hard
+
 echo "==> Fixing site icon sizes (if needed)"
 $WP eval-file /var/www/html/wp-cli-scripts/fix-site-icon-sizes.php
 

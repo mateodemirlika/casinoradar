@@ -8,18 +8,18 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Seed a starter set of Polylang languages on first activation, so the site
- * is immediately multilingual-ready. Safe to run repeatedly — it only acts
- * once (guarded by an option) and never removes languages an admin later
- * changes. Additional languages remain fully configurable from
+ * Seed a starter set of Polylang languages, so the site is immediately
+ * multilingual-ready. Safe to run repeatedly and safe to extend later —
+ * each language in the list is added only if it's not already registered,
+ * checked individually rather than via an all-or-nothing "already ran once"
+ * flag, so appending a new language here is enough to roll it out to an
+ * already-bootstrapped site too. Never removes or renames a language an
+ * admin later changes. Additional languages remain fully configurable from
  * Languages → Languages in wp-admin.
  */
 add_action( 'admin_init', 'wagerwise_bootstrap_polylang_languages' );
 
 function wagerwise_bootstrap_polylang_languages(): void {
-	if ( get_option( 'wagerwise_polylang_bootstrapped' ) ) {
-		return;
-	}
 	if ( ! function_exists( 'PLL' ) || ! class_exists( 'PLL_Language' ) ) {
 		return;
 	}
@@ -28,29 +28,51 @@ function wagerwise_bootstrap_polylang_languages(): void {
 		array( 'slug' => 'en', 'locale' => 'en_US', 'name' => 'English', 'flag' => 'us', 'rtl' => 0 ),
 		array( 'slug' => 'de', 'locale' => 'de_DE', 'name' => 'Deutsch', 'flag' => 'de', 'rtl' => 0 ),
 		array( 'slug' => 'zh', 'locale' => 'zh_CN', 'name' => '中文', 'flag' => 'cn', 'rtl' => 0 ),
+		array( 'slug' => 'es', 'locale' => 'es_ES', 'name' => 'Español', 'flag' => 'es', 'rtl' => 0 ),
 	);
 
-	if ( ! PLL()->model->get_languages_list() ) {
-		foreach ( $languages as $i => $lang ) {
-			PLL()->model->add_language(
-				array(
-					'slug'       => $lang['slug'],
-					'locale'     => $lang['locale'],
-					'name'       => $lang['name'],
-					'flag'       => $lang['flag'],
-					'rtl'        => $lang['rtl'],
-					'term_group' => $i,
-				)
-			);
+	$existing_list  = PLL()->model->get_languages_list();
+	$is_first_run   = empty( $existing_list );
+	$existing_slugs = wp_list_pluck( $existing_list, 'slug' );
+	$added_any      = false;
+
+	foreach ( $languages as $i => $lang ) {
+		if ( in_array( $lang['slug'], $existing_slugs, true ) ) {
+			continue;
 		}
-		// English is the default/reference language.
+		PLL()->model->add_language(
+			array(
+				'slug'       => $lang['slug'],
+				'locale'     => $lang['locale'],
+				'name'       => $lang['name'],
+				'flag'       => $lang['flag'],
+				'rtl'        => $lang['rtl'],
+				'term_group' => $i,
+			)
+		);
+		$added_any = true;
+	}
+
+	// A new language's URL prefix (e.g. /es/) only takes effect once the
+	// rewrite rules are rebuilt. This covers the admin_init path (an admin
+	// visiting wp-admin normally); it's a no-op in practice when this same
+	// function is called directly and synchronously from seed.php — within
+	// that single request/process, Polylang's rewrite-rule generation reads
+	// a language list it already cached before add_language() ran here, so
+	// the actual fix for that path is bootstrap.sh's separate `wp rewrite
+	// flush` step, run as its own process after seeding completes.
+	if ( $added_any ) {
+		flush_rewrite_rules();
+	}
+
+	// English is the default/reference language — only meaningful to set on
+	// the very first run; an admin may have deliberately changed it since.
+	if ( $is_first_run ) {
 		$en = PLL()->model->get_language( 'en' );
 		if ( $en ) {
 			update_option( 'polylang', array_merge( (array) get_option( 'polylang', array() ), array( 'default_lang' => 'en' ) ) );
 		}
 	}
-
-	update_option( 'wagerwise_polylang_bootstrapped', 1 );
 }
 
 /**

@@ -375,99 +375,99 @@ function ww_lang_ids( array $terms_map, string $lang ): array {
 }
 
 $payment_methods = ww_terms_map( 'payment_method', array(
-	'Visa'       => array( 'en' => 'Visa', 'de' => 'Visa', 'zh' => 'Visa' ),
-	'Mastercard' => array( 'en' => 'Mastercard', 'de' => 'Mastercard', 'zh' => 'Mastercard' ),
-	'Skrill'     => array( 'en' => 'Skrill', 'de' => 'Skrill', 'zh' => 'Skrill' ),
-	'Neteller'   => array( 'en' => 'Neteller', 'de' => 'Neteller', 'zh' => 'Neteller' ),
-	'PayPal'     => array( 'en' => 'PayPal', 'de' => 'PayPal', 'zh' => 'PayPal' ),
-	'Bitcoin'    => array( 'en' => 'Bitcoin', 'de' => 'Bitcoin', 'zh' => '比特币' ),
+	'Visa'       => array( 'en' => 'Visa', 'de' => 'Visa', 'zh' => 'Visa', 'es' => 'Visa' ),
+	'Mastercard' => array( 'en' => 'Mastercard', 'de' => 'Mastercard', 'zh' => 'Mastercard', 'es' => 'Mastercard' ),
+	'Skrill'     => array( 'en' => 'Skrill', 'de' => 'Skrill', 'zh' => 'Skrill', 'es' => 'Skrill' ),
+	'Neteller'   => array( 'en' => 'Neteller', 'de' => 'Neteller', 'zh' => 'Neteller', 'es' => 'Neteller' ),
+	'PayPal'     => array( 'en' => 'PayPal', 'de' => 'PayPal', 'zh' => 'PayPal', 'es' => 'PayPal' ),
+	'Bitcoin'    => array( 'en' => 'Bitcoin', 'de' => 'Bitcoin', 'zh' => '比特币', 'es' => 'Bitcoin' ),
 ) );
 
 $providers = ww_terms_map( 'software_provider', array(
-	'NetEnt'           => array( 'en' => 'NetEnt', 'de' => 'NetEnt', 'zh' => 'NetEnt' ),
-	'Microgaming'      => array( 'en' => 'Microgaming', 'de' => 'Microgaming', 'zh' => 'Microgaming' ),
-	'Pragmatic Play'   => array( 'en' => 'Pragmatic Play', 'de' => 'Pragmatic Play', 'zh' => 'Pragmatic Play' ),
-	'Evolution Gaming' => array( 'en' => 'Evolution Gaming', 'de' => 'Evolution Gaming', 'zh' => 'Evolution Gaming' ),
-	"Play'n GO"        => array( 'en' => "Play'n GO", 'de' => "Play'n GO", 'zh' => "Play'n GO" ),
-	'Yggdrasil'        => array( 'en' => 'Yggdrasil', 'de' => 'Yggdrasil', 'zh' => 'Yggdrasil' ),
-	'Novomatic'        => array( 'en' => 'Novomatic', 'de' => 'Novomatic', 'zh' => 'Novomatic' ),
-	'Red Tiger'        => array( 'en' => 'Red Tiger', 'de' => 'Red Tiger', 'zh' => 'Red Tiger' ),
+	'NetEnt'           => array( 'en' => 'NetEnt', 'de' => 'NetEnt', 'zh' => 'NetEnt', 'es' => 'NetEnt' ),
+	'Microgaming'      => array( 'en' => 'Microgaming', 'de' => 'Microgaming', 'zh' => 'Microgaming', 'es' => 'Microgaming' ),
+	'Pragmatic Play'   => array( 'en' => 'Pragmatic Play', 'de' => 'Pragmatic Play', 'zh' => 'Pragmatic Play', 'es' => 'Pragmatic Play' ),
+	'Evolution Gaming' => array( 'en' => 'Evolution Gaming', 'de' => 'Evolution Gaming', 'zh' => 'Evolution Gaming', 'es' => 'Evolution Gaming' ),
+	"Play'n GO"        => array( 'en' => "Play'n GO", 'de' => "Play'n GO", 'zh' => "Play'n GO", 'es' => "Play'n GO" ),
+	'Yggdrasil'        => array( 'en' => 'Yggdrasil', 'de' => 'Yggdrasil', 'zh' => 'Yggdrasil', 'es' => 'Yggdrasil' ),
+	'Novomatic'        => array( 'en' => 'Novomatic', 'de' => 'Novomatic', 'zh' => 'Novomatic', 'es' => 'Novomatic' ),
+	'Red Tiger'        => array( 'en' => 'Red Tiger', 'de' => 'Red Tiger', 'zh' => 'Red Tiger', 'es' => 'Red Tiger' ),
 ) );
 
 $bonus_types = ww_terms_map( 'bonus_type', array(
-	'Welcome Bonus' => array( 'en' => 'Welcome Bonus', 'de' => 'Willkommensbonus', 'zh' => '欢迎红利' ),
-	'No Deposit'    => array( 'en' => 'No Deposit', 'de' => 'Ohne Einzahlung', 'zh' => '免存款红利' ),
-	'Free Spins'    => array( 'en' => 'Free Spins', 'de' => 'Freispiele', 'zh' => '免费旋转' ),
-	'Cashback'      => array( 'en' => 'Cashback', 'de' => 'Cashback', 'zh' => '返现' ),
-	'Reload Bonus'  => array( 'en' => 'Reload Bonus', 'de' => 'Reload-Bonus', 'zh' => '充值红利' ),
-	'High Roller'   => array( 'en' => 'High Roller', 'de' => 'High Roller', 'zh' => '高额投注红利' ),
+	'Welcome Bonus' => array( 'en' => 'Welcome Bonus', 'de' => 'Willkommensbonus', 'zh' => '欢迎红利', 'es' => 'Bono de Bienvenida' ),
+	'No Deposit'    => array( 'en' => 'No Deposit', 'de' => 'Ohne Einzahlung', 'zh' => '免存款红利', 'es' => 'Sin Depósito' ),
+	'Free Spins'    => array( 'en' => 'Free Spins', 'de' => 'Freispiele', 'zh' => '免费旋转', 'es' => 'Giros Gratis' ),
+	'Cashback'      => array( 'en' => 'Cashback', 'de' => 'Cashback', 'zh' => '返现', 'es' => 'Reembolso' ),
+	'Reload Bonus'  => array( 'en' => 'Reload Bonus', 'de' => 'Reload-Bonus', 'zh' => '充值红利', 'es' => 'Bono de Recarga' ),
+	'High Roller'   => array( 'en' => 'High Roller', 'de' => 'High Roller', 'zh' => '高额投注红利', 'es' => 'Altas Apuestas' ),
 ) );
 
 $licences = ww_terms_map( 'licence', array(
-	'Malta Gaming Authority'  => array( 'en' => 'Malta Gaming Authority', 'de' => 'Malta Gaming Authority (MGA)', 'zh' => '马耳他博彩管理局' ),
-	'UK Gambling Commission'  => array( 'en' => 'UK Gambling Commission', 'de' => 'Britische Glücksspielkommission (UKGC)', 'zh' => '英国博彩委员会' ),
-	'Curaçao eGaming'         => array( 'en' => 'Curaçao eGaming', 'de' => 'Curaçao eGaming', 'zh' => '库拉索博彩牌照' ),
+	'Malta Gaming Authority'  => array( 'en' => 'Malta Gaming Authority', 'de' => 'Malta Gaming Authority (MGA)', 'zh' => '马耳他博彩管理局', 'es' => 'Autoridad de Juego de Malta (MGA)' ),
+	'UK Gambling Commission'  => array( 'en' => 'UK Gambling Commission', 'de' => 'Britische Glücksspielkommission (UKGC)', 'zh' => '英国博彩委员会', 'es' => 'Comisión de Juego del Reino Unido (UKGC)' ),
+	'Curaçao eGaming'         => array( 'en' => 'Curaçao eGaming', 'de' => 'Curaçao eGaming', 'zh' => '库拉索博彩牌照', 'es' => 'Curaçao eGaming' ),
 ) );
 
 $countries = ww_terms_map( 'country', array(
-	'United Kingdom' => array( 'en' => 'United Kingdom', 'de' => 'Vereinigtes Königreich', 'zh' => '英国' ),
-	'Canada'         => array( 'en' => 'Canada', 'de' => 'Kanada', 'zh' => '加拿大' ),
-	'Germany'        => array( 'en' => 'Germany', 'de' => 'Deutschland', 'zh' => '德国' ),
-	'Ireland'        => array( 'en' => 'Ireland', 'de' => 'Irland', 'zh' => '爱尔兰' ),
-	'New Zealand'    => array( 'en' => 'New Zealand', 'de' => 'Neuseeland', 'zh' => '新西兰' ),
+	'United Kingdom' => array( 'en' => 'United Kingdom', 'de' => 'Vereinigtes Königreich', 'zh' => '英国', 'es' => 'Reino Unido' ),
+	'Canada'         => array( 'en' => 'Canada', 'de' => 'Kanada', 'zh' => '加拿大', 'es' => 'Canadá' ),
+	'Germany'        => array( 'en' => 'Germany', 'de' => 'Deutschland', 'zh' => '德国', 'es' => 'Alemania' ),
+	'Ireland'        => array( 'en' => 'Ireland', 'de' => 'Irland', 'zh' => '爱尔兰', 'es' => 'Irlanda' ),
+	'New Zealand'    => array( 'en' => 'New Zealand', 'de' => 'Neuseeland', 'zh' => '新西兰', 'es' => 'Nueva Zelanda' ),
 ) );
 
 $categories = ww_terms_map( 'casino_category', array(
-	'New Casinos'    => array( 'en' => 'New Casinos', 'de' => 'Neue Casinos', 'zh' => '新赌场' ),
-	'Crypto Casinos' => array( 'en' => 'Crypto Casinos', 'de' => 'Krypto-Casinos', 'zh' => '加密货币赌场' ),
-	'Live Dealer'    => array( 'en' => 'Live Dealer', 'de' => 'Live-Dealer', 'zh' => '真人荷官' ),
-	'High Roller'    => array( 'en' => 'High Roller', 'de' => 'High Roller', 'zh' => '高额玩家' ),
-	'Mobile Casinos' => array( 'en' => 'Mobile Casinos', 'de' => 'Mobile Casinos', 'zh' => '移动赌场' ),
+	'New Casinos'    => array( 'en' => 'New Casinos', 'de' => 'Neue Casinos', 'zh' => '新赌场', 'es' => 'Casinos Nuevos' ),
+	'Crypto Casinos' => array( 'en' => 'Crypto Casinos', 'de' => 'Krypto-Casinos', 'zh' => '加密货币赌场', 'es' => 'Casinos de Criptomonedas' ),
+	'Live Dealer'    => array( 'en' => 'Live Dealer', 'de' => 'Live-Dealer', 'zh' => '真人荷官', 'es' => 'Crupier en Vivo' ),
+	'High Roller'    => array( 'en' => 'High Roller', 'de' => 'High Roller', 'zh' => '高额玩家', 'es' => 'Altas Apuestas' ),
+	'Mobile Casinos' => array( 'en' => 'Mobile Casinos', 'de' => 'Mobile Casinos', 'zh' => '移动赌场', 'es' => 'Casinos Móviles' ),
 ) );
 
 $game_categories = ww_terms_map( 'game_category', array(
-	'Slots'       => array( 'en' => 'Slots', 'de' => 'Spielautomaten', 'zh' => '老虎机' ),
-	'Roulette'    => array( 'en' => 'Roulette', 'de' => 'Roulette', 'zh' => '轮盘' ),
-	'Blackjack'   => array( 'en' => 'Blackjack', 'de' => 'Blackjack', 'zh' => '21点' ),
-	'Video Poker' => array( 'en' => 'Video Poker', 'de' => 'Video Poker', 'zh' => '视频扑克' ),
-	'Live Games'  => array( 'en' => 'Live Games', 'de' => 'Live-Spiele', 'zh' => '真人游戏' ),
-	'Bingo'       => array( 'en' => 'Bingo', 'de' => 'Bingo', 'zh' => '宾果' ),
+	'Slots'       => array( 'en' => 'Slots', 'de' => 'Spielautomaten', 'zh' => '老虎机', 'es' => 'Tragamonedas' ),
+	'Roulette'    => array( 'en' => 'Roulette', 'de' => 'Roulette', 'zh' => '轮盘', 'es' => 'Ruleta' ),
+	'Blackjack'   => array( 'en' => 'Blackjack', 'de' => 'Blackjack', 'zh' => '21点', 'es' => 'Blackjack' ),
+	'Video Poker' => array( 'en' => 'Video Poker', 'de' => 'Video Poker', 'zh' => '视频扑克', 'es' => 'Video Póker' ),
+	'Live Games'  => array( 'en' => 'Live Games', 'de' => 'Live-Spiele', 'zh' => '真人游戏', 'es' => 'Juegos en Vivo' ),
+	'Bingo'       => array( 'en' => 'Bingo', 'de' => 'Bingo', 'zh' => '宾果', 'es' => 'Bingo' ),
 ) );
 
 $guide_categories = ww_terms_map( 'guide_category', array(
-	'Beginner Guides'      => array( 'en' => 'Beginner Guides', 'de' => 'Einsteiger-Guides', 'zh' => '新手指南' ),
-	'Bankroll Management'  => array( 'en' => 'Bankroll Management', 'de' => 'Bankroll-Management', 'zh' => '资金管理' ),
-	'Game Strategy'        => array( 'en' => 'Game Strategy', 'de' => 'Spielstrategie', 'zh' => '游戏策略' ),
-	'Bonus Terms'          => array( 'en' => 'Bonus Terms', 'de' => 'Bonusbedingungen', 'zh' => '红利条款' ),
-	'Country Guides'       => array( 'en' => 'Country Guides', 'de' => 'Länder-Guides', 'zh' => '国家指南' ),
+	'Beginner Guides'      => array( 'en' => 'Beginner Guides', 'de' => 'Einsteiger-Guides', 'zh' => '新手指南', 'es' => 'Guías para Principiantes' ),
+	'Bankroll Management'  => array( 'en' => 'Bankroll Management', 'de' => 'Bankroll-Management', 'zh' => '资金管理', 'es' => 'Gestión de Bankroll' ),
+	'Game Strategy'        => array( 'en' => 'Game Strategy', 'de' => 'Spielstrategie', 'zh' => '游戏策略', 'es' => 'Estrategia de Juego' ),
+	'Bonus Terms'          => array( 'en' => 'Bonus Terms', 'de' => 'Bonusbedingungen', 'zh' => '红利条款', 'es' => 'Términos de Bonos' ),
+	'Country Guides'       => array( 'en' => 'Country Guides', 'de' => 'Länder-Guides', 'zh' => '国家指南', 'es' => 'Guías por País' ),
 ) );
 
 $news_categories = ww_terms_map( 'news_category', array(
-	'Industry'              => array( 'en' => 'Industry', 'de' => 'Branche', 'zh' => '行业' ),
-	'Product Launch'        => array( 'en' => 'Product Launch', 'de' => 'Produkteinführung', 'zh' => '产品发布' ),
-	'Responsible Gambling'  => array( 'en' => 'Responsible Gambling', 'de' => 'Verantwortungsvolles Spielen', 'zh' => '负责任博彩' ),
-	'Regulation'            => array( 'en' => 'Regulation', 'de' => 'Regulierung', 'zh' => '监管' ),
+	'Industry'              => array( 'en' => 'Industry', 'de' => 'Branche', 'zh' => '行业', 'es' => 'Industria' ),
+	'Product Launch'        => array( 'en' => 'Product Launch', 'de' => 'Produkteinführung', 'zh' => '产品发布', 'es' => 'Lanzamiento de Producto' ),
+	'Responsible Gambling'  => array( 'en' => 'Responsible Gambling', 'de' => 'Verantwortungsvolles Spielen', 'zh' => '负责任博彩', 'es' => 'Juego Responsable' ),
+	'Regulation'            => array( 'en' => 'Regulation', 'de' => 'Regulierung', 'zh' => '监管', 'es' => 'Regulación' ),
 ) );
 
 $review_categories = ww_terms_map( 'review_category', array(
-	'Casino Reviews' => array( 'en' => 'Casino Reviews', 'de' => 'Casino-Testberichte', 'zh' => '赌场评测' ),
-	'Game Reviews'   => array( 'en' => 'Game Reviews', 'de' => 'Spiel-Testberichte', 'zh' => '游戏评测' ),
-	'Bonus Reviews'  => array( 'en' => 'Bonus Reviews', 'de' => 'Bonus-Testberichte', 'zh' => '红利评测' ),
+	'Casino Reviews' => array( 'en' => 'Casino Reviews', 'de' => 'Casino-Testberichte', 'zh' => '赌场评测', 'es' => 'Reseñas de Casinos' ),
+	'Game Reviews'   => array( 'en' => 'Game Reviews', 'de' => 'Spiel-Testberichte', 'zh' => '游戏评测', 'es' => 'Reseñas de Juegos' ),
+	'Bonus Reviews'  => array( 'en' => 'Bonus Reviews', 'de' => 'Bonus-Testberichte', 'zh' => '红利评测', 'es' => 'Reseñas de Bonos' ),
 ) );
 
 $tournament_types = ww_terms_map( 'tournament_type', array(
-	'Slot Race'          => array( 'en' => 'Slot Race', 'de' => 'Slot-Race', 'zh' => '老虎机竞赛' ),
-	'Table Game Ladder'  => array( 'en' => 'Table Game Ladder', 'de' => 'Tischspiel-Rangliste', 'zh' => '桌面游戏排位赛' ),
-	'Free Roll'          => array( 'en' => 'Free Roll', 'de' => 'Freeroll', 'zh' => '免费锦标赛' ),
-	'Loyalty Leaderboard' => array( 'en' => 'Loyalty Leaderboard', 'de' => 'Treue-Rangliste', 'zh' => '忠诚度排行榜' ),
+	'Slot Race'          => array( 'en' => 'Slot Race', 'de' => 'Slot-Race', 'zh' => '老虎机竞赛', 'es' => 'Carrera de Tragamonedas' ),
+	'Table Game Ladder'  => array( 'en' => 'Table Game Ladder', 'de' => 'Tischspiel-Rangliste', 'zh' => '桌面游戏排位赛', 'es' => 'Ranking de Juegos de Mesa' ),
+	'Free Roll'          => array( 'en' => 'Free Roll', 'de' => 'Freeroll', 'zh' => '免费锦标赛', 'es' => 'Torneo Gratuito' ),
+	'Loyalty Leaderboard' => array( 'en' => 'Loyalty Leaderboard', 'de' => 'Treue-Rangliste', 'zh' => '忠诚度排行榜', 'es' => 'Tabla de Lealtad' ),
 ) );
 
 $issue_types = ww_terms_map( 'complaint_issue_type', array(
-	'Withdrawal Delay' => array( 'en' => 'Withdrawal Delay', 'de' => 'Auszahlungsverzögerung', 'zh' => '提款延迟' ),
-	'Bonus Dispute'    => array( 'en' => 'Bonus Dispute', 'de' => 'Bonusstreit', 'zh' => '红利争议' ),
-	'Account Closure'  => array( 'en' => 'Account Closure', 'de' => 'Kontoschließung', 'zh' => '账户关闭' ),
-	'KYC Delay'        => array( 'en' => 'KYC Delay', 'de' => 'KYC-Verzögerung', 'zh' => 'KYC延迟' ),
-	'Unfair Terms'     => array( 'en' => 'Unfair Terms', 'de' => 'Unfaire Bedingungen', 'zh' => '不公平条款' ),
+	'Withdrawal Delay' => array( 'en' => 'Withdrawal Delay', 'de' => 'Auszahlungsverzögerung', 'zh' => '提款延迟', 'es' => 'Retraso en el Retiro' ),
+	'Bonus Dispute'    => array( 'en' => 'Bonus Dispute', 'de' => 'Bonusstreit', 'zh' => '红利争议', 'es' => 'Disputa de Bono' ),
+	'Account Closure'  => array( 'en' => 'Account Closure', 'de' => 'Kontoschließung', 'zh' => '账户关闭', 'es' => 'Cierre de Cuenta' ),
+	'KYC Delay'        => array( 'en' => 'KYC Delay', 'de' => 'KYC-Verzögerung', 'zh' => 'KYC延迟', 'es' => 'Retraso en KYC' ),
+	'Unfair Terms'     => array( 'en' => 'Unfair Terms', 'de' => 'Unfaire Bedingungen', 'zh' => '不公平条款', 'es' => 'Términos Injustos' ),
 ) );
 
 // -----------------------------------------------------------------------------
@@ -480,16 +480,19 @@ $casino_defs = array(
 			'en' => array( 'Fast crypto withdrawals', '2,000+ slot titles', '24/7 live chat support' ),
 			'de' => array( 'Schnelle Krypto-Auszahlungen', 'Über 2.000 Spielautomaten', 'Live-Chat-Support rund um die Uhr' ),
 			'zh' => array( '加密货币提款速度快', '超过2000款老虎机游戏', '24/7在线客服支持' ),
+			'es' => array( 'Retiros rápidos en criptomonedas', 'Más de 2.000 tragamonedas', 'Soporte por chat en vivo 24/7' ),
 		),
 		'cons' => array(
 			'en' => array( 'High wagering on welcome bonus', 'Limited phone support' ),
 			'de' => array( 'Hohe Umsatzanforderungen beim Willkommensbonus', 'Eingeschränkter Telefonsupport' ),
 			'zh' => array( '欢迎红利的流水要求较高', '电话支持有限' ),
+			'es' => array( 'Alto requisito de apuesta en el bono de bienvenida', 'Soporte telefónico limitado' ),
 		),
 		'content' => array(
 			'en' => "Golden Reel Casino built its reputation on speed: crypto withdrawals we tested cleared in under two hours, and live chat answered in minutes at every hour we checked, including 3am on a Sunday. The slot library tops 2,000 titles across a dozen providers, though the welcome bonus carries above-average wagering, and phone support isn't offered — live chat covers the gap well enough that it rarely matters.\n\nLicensed by the Malta Gaming Authority and operating since 2018, Golden Reel earns its 4.8 largely on execution rather than on bonus generosity. As with any operator, confirm current terms directly with the casino before depositing.",
 			'de' => 'Golden Reel Casino überzeugt mit einer großen Auswahl an Spielautomaten, Tischspielen und Live-Dealer-Optionen sowie schnellen Krypto-Auszahlungen. Prüfen Sie vor einer Einzahlung stets die aktuellen Bedingungen direkt beim Anbieter.',
 			'zh' => 'Golden Reel Casino提供丰富的老虎机、桌面游戏和真人荷官选项，加密货币提款速度快。存款前请务必核实运营商的最新条款。',
+			'es' => "Golden Reel Casino construyó su reputación en la velocidad: los retiros en criptomonedas que probamos se completaron en menos de dos horas, y el chat en vivo respondió en minutos a cualquier hora, incluidas las 3am de un domingo. La biblioteca de tragamonedas supera los 2.000 títulos de una docena de proveedores, aunque el bono de bienvenida tiene un requisito de apuesta superior a la media, y no ofrece soporte telefónico — el chat en vivo cubre esa carencia lo suficientemente bien como para que rara vez importe.\n\nCon licencia de la Autoridad de Juego de Malta y en funcionamiento desde 2018, Golden Reel obtiene su 4.8 principalmente por su ejecución, más que por la generosidad de sus bonos. Como con cualquier operador, confirme las condiciones actuales directamente con el casino antes de depositar.",
 		),
 	),
 	array( 'name' => 'Royal Spin Palace', 'rating' => 4.6, 'year' => 2015, 'colour' => '#142033', 'featured' => true, 'category' => 'Live Dealer',
@@ -497,16 +500,19 @@ $casino_defs = array(
 			'en' => array( 'Excellent live dealer lobby', 'Generous VIP program', 'UKGC licensed' ),
 			'de' => array( 'Exzellente Live-Dealer-Lobby', 'Großzügiges VIP-Programm', 'UKGC-lizenziert' ),
 			'zh' => array( '真人荷官大厅体验出色', 'VIP计划丰厚', '持有UKGC牌照' ),
+			'es' => array( 'Excelente sala de crupier en vivo', 'Programa VIP generoso', 'Con licencia de la UKGC' ),
 		),
 		'cons' => array(
 			'en' => array( 'Slower verification process' ),
 			'de' => array( 'Langsamerer Verifizierungsprozess' ),
 			'zh' => array( '身份验证流程较慢' ),
+			'es' => array( 'Proceso de verificación más lento' ),
 		),
 		'content' => array(
 			'en' => "Royal Spin Palace's live dealer lobby is the standout here — dozens of tables running around the clock under a UK Gambling Commission license, one of the stricter regulatory regimes in the industry. The VIP program rewards loyalty generously, though account verification took noticeably longer than at comparable operators during our testing.\n\nOperating since 2015, Royal Spin Palace's UKGC license means stronger player protections than most offshore-licensed competitors, at the cost of a more bureaucratic sign-up process.",
 			'de' => 'Royal Spin Palace punktet mit einer erstklassigen Live-Dealer-Lobby und einem großzügigen VIP-Programm unter britischer Lizenz. Die Kontoverifizierung dauert allerdings etwas länger als bei anderen Anbietern.',
 			'zh' => 'Royal Spin Palace拥有出色的真人荷官大厅和丰厚的VIP计划，并持有英国博彩委员会牌照。不过账户验证流程相对较慢。',
+			'es' => "La sala de crupier en vivo de Royal Spin Palace es lo más destacado — decenas de mesas funcionando las 24 horas bajo una licencia de la Comisión de Juego del Reino Unido, uno de los regímenes regulatorios más estrictos del sector. El programa VIP recompensa la fidelidad generosamente, aunque la verificación de cuenta tardó notablemente más que en operadores comparables durante nuestras pruebas.\n\nEn funcionamiento desde 2015, la licencia UKGC de Royal Spin Palace implica mayores protecciones para el jugador que la mayoría de competidores con licencias offshore, a costa de un proceso de registro más burocrático.",
 		),
 	),
 	array( 'name' => 'Lucky Vault', 'rating' => 4.5, 'year' => 2020, 'colour' => '#FFB800', 'featured' => true, 'category' => 'Mobile Casinos',
@@ -514,16 +520,19 @@ $casino_defs = array(
 			'en' => array( 'Great mobile app', 'Weekly cashback', 'Low min. deposit' ),
 			'de' => array( 'Hervorragende mobile App', 'Wöchentliches Cashback', 'Niedrige Mindesteinzahlung' ),
 			'zh' => array( '移动应用体验出色', '每周返现', '最低存款额度低' ),
+			'es' => array( 'Excelente aplicación móvil', 'Reembolso semanal', 'Depósito mínimo bajo' ),
 		),
 		'cons' => array(
 			'en' => array( 'Smaller game library', 'No phone support' ),
 			'de' => array( 'Kleinere Spielauswahl', 'Kein Telefonsupport' ),
 			'zh' => array( '游戏库较小', '无电话支持' ),
+			'es' => array( 'Biblioteca de juegos más pequeña', 'Sin soporte telefónico' ),
 		),
 		'content' => array(
 			'en' => "Lucky Vault is built mobile-first, and it shows: the app is faster and better organized than most desktop-first casinos' mobile ports. A flat 10% weekly cashback and a $20 minimum deposit make it approachable for casual players, though the game library is noticeably smaller than more established competitors, and support is chat-only.\n\nLaunched in 2020 under a Curaçao eGaming license, Lucky Vault trades breadth for a genuinely well-built mobile experience — worth a look if that's what matters most to you.",
 			'de' => 'Lucky Vault überzeugt mit einer hervorragenden mobilen App, wöchentlichem Cashback und einer niedrigen Mindesteinzahlung. Die Spielbibliothek ist im Vergleich etwas kleiner.',
 			'zh' => 'Lucky Vault的移动应用体验出色，提供每周返现和较低的最低存款额度，但游戏库相对较小。',
+			'es' => "Lucky Vault está construido con enfoque móvil desde el principio, y se nota: la aplicación es más rápida y está mejor organizada que las versiones móviles de la mayoría de casinos de escritorio adaptados. Un reembolso semanal fijo del 10% y un depósito mínimo de 20$ lo hacen accesible para jugadores casuales, aunque la biblioteca de juegos es notablemente más pequeña que la de competidores más consolidados, y el soporte es solo por chat.\n\nLanzado en 2020 bajo licencia de Curaçao eGaming, Lucky Vault sacrifica variedad a cambio de una experiencia móvil genuinamente bien construida — vale la pena si eso es lo que más te importa.",
 		),
 	),
 	array( 'name' => 'Diamond Reign', 'rating' => 4.3, 'year' => 2012, 'colour' => '#5B6472', 'featured' => false, 'category' => 'High Roller',
@@ -531,16 +540,19 @@ $casino_defs = array(
 			'en' => array( 'High table limits', 'Dedicated VIP host' ),
 			'de' => array( 'Hohe Tischlimits', 'Persönlicher VIP-Betreuer' ),
 			'zh' => array( '桌面游戏限额高', '专属VIP客户经理' ),
+			'es' => array( 'Límites de mesa altos', 'Anfitrión VIP dedicado' ),
 		),
 		'cons' => array(
 			'en' => array( 'Fewer slot providers', 'Wagering 45x' ),
 			'de' => array( 'Weniger Slot-Anbieter', '45-fache Umsatzanforderung' ),
 			'zh' => array( '老虎机供应商较少', '流水要求为45倍' ),
+			'es' => array( 'Menos proveedores de tragamonedas', 'Requisito de apuesta de 45x' ),
 		),
 		'content' => array(
 			'en' => "Diamond Reign is built for table-game high rollers rather than casual slot players: table limits run well above the industry norm, and qualifying VIPs get a named account manager rather than a shared support queue. The slot selection draws from fewer providers than most competitors, and the standard 45x wagering requirement is steeper than we'd like to see.\n\nOne of the longer-established operators in our listings, licensed by the Malta Gaming Authority since 2012, Diamond Reign is a better fit for table-game specialists than slot players chasing bonus value.",
 			'de' => 'Diamond Reign richtet sich an High Roller mit hohen Tischlimits und einem persönlichen VIP-Betreuer. Die Slot-Auswahl ist etwas kleiner und die Umsatzanforderung mit 45x höher als üblich.',
 			'zh' => 'Diamond Reign面向高额玩家，提供高额桌面游戏限额和专属VIP客户经理，但老虎机供应商较少，流水要求为45倍。',
+			'es' => "Diamond Reign está pensado para grandes apostadores de juegos de mesa más que para jugadores casuales de tragamonedas: los límites de mesa superan ampliamente la norma del sector, y los VIP que califican obtienen un gestor de cuenta asignado en lugar de una cola de soporte compartida. La selección de tragamonedas proviene de menos proveedores que la mayoría de competidores, y el requisito de apuesta estándar de 45x es más exigente de lo que nos gustaría ver.\n\nUno de los operadores más consolidados de nuestro listado, con licencia de la Autoridad de Juego de Malta desde 2012, Diamond Reign encaja mejor con especialistas en juegos de mesa que con jugadores de tragamonedas que buscan valor en bonos.",
 		),
 	),
 	array( 'name' => 'Fresh Start Casino', 'rating' => 4.1, 'year' => 2023, 'colour' => '#008151', 'featured' => false, 'category' => 'New Casinos',
@@ -548,16 +560,19 @@ $casino_defs = array(
 			'en' => array( 'New player promotions', 'Modern, fast site' ),
 			'de' => array( 'Promotionen für neue Spieler', 'Moderne, schnelle Website' ),
 			'zh' => array( '新玩家专属优惠', '网站现代化且加载快速' ),
+			'es' => array( 'Promociones para nuevos jugadores', 'Sitio moderno y rápido' ),
 		),
 		'cons' => array(
 			'en' => array( 'Still building reputation', 'Limited payment options' ),
 			'de' => array( 'Noch im Aufbau befindlicher Ruf', 'Eingeschränkte Zahlungsmethoden' ),
 			'zh' => array( '品牌口碑仍在建立中', '支付方式有限' ),
+			'es' => array( 'Reputación aún en construcción', 'Opciones de pago limitadas' ),
 		),
 		'content' => array(
 			'en' => "Fresh Start Casino is one of the newest UK-licensed operators we've reviewed, having launched in 2023, and it shows in the interface — noticeably faster page loads and a cleaner mobile layout than operators still running on decade-old platforms. New-player promotions are aggressive, but the payment method list is thinner than average.\n\nA short operating history means less of a track record to judge long-term reliability against; we'll be revisiting this rating as more data comes in on withdrawal consistency over time.",
 			'de' => 'Fresh Start Casino ist ein neuer Anbieter mit attraktiven Promotionen für neue Spieler und einer modernen, schnellen Website. Der Ruf des Casinos befindet sich noch im Aufbau.',
 			'zh' => 'Fresh Start Casino是一家新赌场，为新玩家提供优惠，网站界面现代且响应迅速，但品牌口碑仍在建立中。',
+			'es' => "Fresh Start Casino es uno de los operadores con licencia del Reino Unido más recientes que hemos analizado, tras su lanzamiento en 2023, y se nota en la interfaz — tiempos de carga notablemente más rápidos y un diseño móvil más limpio que operadores que aún funcionan sobre plataformas de una década de antigüedad. Las promociones para nuevos jugadores son agresivas, pero la lista de métodos de pago es más reducida que la media.\n\nUn historial operativo corto significa menos trayectoria para juzgar la fiabilidad a largo plazo; revisaremos esta calificación a medida que dispongamos de más datos sobre la consistencia de los retiros con el tiempo.",
 		),
 	),
 	array( 'name' => 'Crimson Ace Casino', 'rating' => 4.4, 'year' => 2019, 'colour' => '#B3283D', 'featured' => true, 'category' => 'Mobile Casinos',
@@ -565,16 +580,19 @@ $casino_defs = array(
 			'en' => array( 'Huge slot library', 'Frequent free spin drops', 'Fast KYC verification' ),
 			'de' => array( 'Riesige Slot-Bibliothek', 'Häufige Freispiel-Aktionen', 'Schnelle KYC-Verifizierung' ),
 			'zh' => array( '老虎机种类丰富', '免费旋转活动频繁', 'KYC验证速度快' ),
+			'es' => array( 'Enorme biblioteca de tragamonedas', 'Entregas frecuentes de giros gratis', 'Verificación KYC rápida' ),
 		),
 		'cons' => array(
 			'en' => array( 'No phone support', 'Withdrawal cap on weekends' ),
 			'de' => array( 'Kein Telefonsupport', 'Auszahlungslimit am Wochenende' ),
 			'zh' => array( '无电话支持', '周末提款有限额' ),
+			'es' => array( 'Sin soporte telefónico', 'Límite de retiro los fines de semana' ),
 		),
 		'content' => array(
 			'en' => "Crimson Ace Casino leans hard into slots — the library is one of the largest we've catalogued, and free spin promotions land in players' accounts almost weekly. KYC verification cleared faster than most operators we've tested, though a withdrawal cap kicks in on weekends, which caught more than one tester off guard after a big Saturday win.\n\nOperating since 2019 under a Curaçao eGaming license, Crimson Ace is a strong pick for slot-focused players who plan withdrawals around the weekend cap rather than against it.",
 			'de' => 'Crimson Ace Casino bietet eine riesige Slot-Bibliothek, häufige Freispiel-Aktionen und eine schnelle KYC-Verifizierung. Am Wochenende gilt jedoch ein Auszahlungslimit.',
 			'zh' => 'Crimson Ace Casino拥有丰富的老虎机种类，免费旋转活动频繁，KYC验证速度快，但周末提款设有限额。',
+			'es' => "Crimson Ace Casino apuesta fuerte por las tragamonedas — su biblioteca es una de las más grandes que hemos catalogado, y las promociones de giros gratis llegan a las cuentas de los jugadores casi semanalmente. La verificación KYC se completó más rápido que en la mayoría de operadores que hemos probado, aunque un límite de retiro entra en vigor los fines de semana, lo que sorprendió a más de un evaluador tras un gran premio en sábado.\n\nEn funcionamiento desde 2019 bajo licencia de Curaçao eGaming, Crimson Ace es una buena opción para jugadores centrados en tragamonedas que planifiquen sus retiros en torno al límite de fin de semana en lugar de en contra de él.",
 		),
 	),
 	array( 'name' => 'Silver Bay Casino', 'rating' => 3.9, 'year' => 2021, 'colour' => '#3C6E71', 'featured' => false, 'category' => 'Live Dealer',
@@ -582,16 +600,19 @@ $casino_defs = array(
 			'en' => array( 'Clean, simple interface', 'Good range of table games' ),
 			'de' => array( 'Übersichtliche, einfache Oberfläche', 'Gute Auswahl an Tischspielen' ),
 			'zh' => array( '界面简洁清晰', '桌面游戏种类丰富' ),
+			'es' => array( 'Interfaz limpia y sencilla', 'Buena variedad de juegos de mesa' ),
 		),
 		'cons' => array(
 			'en' => array( 'Average bonus terms', 'Fewer live dealer tables' ),
 			'de' => array( 'Durchschnittliche Bonusbedingungen', 'Weniger Live-Dealer-Tische' ),
 			'zh' => array( '红利条款一般', '真人荷官桌数量较少' ),
+			'es' => array( 'Condiciones de bono promedio', 'Menos mesas de crupier en vivo' ),
 		),
 		'content' => array(
 			'en' => "Silver Bay Casino keeps things simple: a clean, uncluttered interface and a solid spread of table games without the overwhelming lobby some competitors ship. Bonus terms sit squarely at industry average rather than standing out, and the live dealer selection is thinner than operators that specialize in that segment.\n\nLicensed by the Malta Gaming Authority and launched in 2021, Silver Bay is a reasonable pick for players who value simplicity over the biggest possible library.",
 			'de' => 'Silver Bay Casino punktet mit einer übersichtlichen Oberfläche und einer guten Auswahl an Tischspielen. Die Bonusbedingungen sind eher durchschnittlich.',
 			'zh' => 'Silver Bay Casino界面简洁，桌面游戏选择丰富，但红利条款一般，真人荷官桌数量较少。',
+			'es' => "Silver Bay Casino mantiene la simplicidad: una interfaz limpia y ordenada y una buena variedad de juegos de mesa, sin el vestíbulo abrumador que ofrecen algunos competidores. Las condiciones de los bonos se sitúan justo en la media del sector en lugar de destacar, y la selección de crupier en vivo es más reducida que la de operadores especializados en ese segmento.\n\nCon licencia de la Autoridad de Juego de Malta y lanzado en 2021, Silver Bay es una opción razonable para jugadores que valoran la simplicidad por encima de la biblioteca más amplia posible.",
 		),
 	),
 	array( 'name' => 'Nova Star Casino', 'rating' => 4.7, 'year' => 2017, 'colour' => '#5B3CB3', 'featured' => true, 'category' => 'High Roller',
@@ -599,21 +620,24 @@ $casino_defs = array(
 			'en' => array( 'High table limits for VIPs', 'Personal account manager', 'Same-day payouts' ),
 			'de' => array( 'Hohe Tischlimits für VIPs', 'Persönlicher Kundenbetreuer', 'Auszahlung am selben Tag' ),
 			'zh' => array( 'VIP桌面游戏限额高', '专属客户经理', '当日到账提款' ),
+			'es' => array( 'Límites de mesa altos para VIP', 'Gestor de cuenta personal', 'Pagos el mismo día' ),
 		),
 		'cons' => array(
 			'en' => array( 'Steep wagering on reload bonuses' ),
 			'de' => array( 'Hohe Umsatzanforderung bei Reload-Boni' ),
 			'zh' => array( '充值红利流水要求较高' ),
+			'es' => array( 'Requisito de apuesta elevado en bonos de recarga' ),
 		),
 		'content' => array(
 			'en' => "Nova Star Casino courts high rollers specifically: VIP table limits are among the highest we've seen, same-day payouts held up consistently across our test withdrawals, and qualifying players get a named account manager reachable directly. The catch is the reload bonus wagering, which runs steeper than the site's otherwise player-friendly reputation would suggest.\n\nUKGC-licensed and operating since 2017, Nova Star earns a strong rating on execution for high-stakes players — casual slot players chasing bonus value will find better fits elsewhere on this list.",
 			'de' => 'Nova Star Casino bietet VIPs hohe Tischlimits, einen persönlichen Kundenbetreuer und Auszahlungen am selben Tag. Reload-Boni haben allerdings hohe Umsatzanforderungen.',
 			'zh' => 'Nova Star Casino为VIP玩家提供高额桌面游戏限额、专属客户经理和当日到账提款，但充值红利的流水要求较高。',
+			'es' => "Nova Star Casino corteja específicamente a los grandes apostadores: los límites de mesa VIP están entre los más altos que hemos visto, los pagos el mismo día se mantuvieron consistentes en nuestros retiros de prueba, y los jugadores que califican obtienen un gestor de cuenta asignado y accesible directamente. La pega es el requisito de apuesta de los bonos de recarga, más exigente de lo que sugeriría la reputación por lo demás favorable al jugador del sitio.\n\nCon licencia UKGC y en funcionamiento desde 2017, Nova Star obtiene una calificación sólida por su ejecución para jugadores de altas apuestas — los jugadores casuales de tragamonedas que buscan valor en bonos encontrarán mejores opciones en el resto de esta lista.",
 		),
 	),
 );
 
-$cta_labels = array( 'en' => 'Play Now', 'de' => 'Jetzt Spielen', 'zh' => '立即游玩' );
+$cta_labels = array( 'en' => 'Play Now', 'de' => 'Jetzt Spielen', 'zh' => '立即游玩', 'es' => 'Jugar Ahora' );
 
 $casino_ids  = array(); // en id list, index-aligned with $casino_defs, for meta references elsewhere
 $casino_ids_i18n = array(); // index => [lang => id]
@@ -622,7 +646,7 @@ foreach ( $casino_defs as $i => $c ) {
 	$logo_id = ww_seed_contextual_image( $c['name'], sanitize_title( $c['name'] ) . '-logo', ww_image_keywords( $c['category'] ), $c['colour'], $c['name'] . ' logo' );
 
 	$per_lang = array();
-	foreach ( array( 'en', 'de', 'zh' ) as $lang ) {
+	foreach ( array( 'en', 'de', 'zh', 'es' ) as $lang ) {
 		$payment_method_ids = ww_lang_ids( $payment_methods, $lang );
 		$provider_ids       = ww_lang_ids( $providers, $lang );
 		$licence_list       = array_values( $licences );
@@ -681,32 +705,32 @@ function ww_casino_id( array $casino_ids_i18n, int $index, string $lang ): int {
 
 $bonus_defs = array(
 	array( 'casino' => 0, 'type' => 'Welcome Bonus', 'code' => 'WELCOME500',
-		'title' => array( 'en' => '100% Welcome Bonus up to $500', 'de' => '100% Willkommensbonus bis zu 500 $', 'zh' => '100%欢迎红利，最高500美元' ),
-		'value' => array( 'en' => '100% up to $500', 'de' => '100% bis 500 $', 'zh' => '100%，最高500美元' ) ),
+		'title' => array( 'en' => '100% Welcome Bonus up to $500', 'de' => '100% Willkommensbonus bis zu 500 $', 'zh' => '100%欢迎红利，最高500美元', 'es' => '100% de Bono de Bienvenida hasta $500' ),
+		'value' => array( 'en' => '100% up to $500', 'de' => '100% bis 500 $', 'zh' => '100%，最高500美元', 'es' => '100% hasta $500' ) ),
 	array( 'casino' => 1, 'type' => 'Free Spins', 'code' => 'SPIN50',
-		'title' => array( 'en' => '50 Free Spins on Sign-Up', 'de' => '50 Freispiele bei Anmeldung', 'zh' => '注册即送50次免费旋转' ),
-		'value' => array( 'en' => '50 Free Spins', 'de' => '50 Freispiele', 'zh' => '50次免费旋转' ) ),
+		'title' => array( 'en' => '50 Free Spins on Sign-Up', 'de' => '50 Freispiele bei Anmeldung', 'zh' => '注册即送50次免费旋转', 'es' => '50 Giros Gratis al Registrarte' ),
+		'value' => array( 'en' => '50 Free Spins', 'de' => '50 Freispiele', 'zh' => '50次免费旋转', 'es' => '50 Giros Gratis' ) ),
 	array( 'casino' => 2, 'type' => 'No Deposit', 'code' => 'FREE25',
-		'title' => array( 'en' => '$25 No Deposit Bonus', 'de' => '25 $ Bonus ohne Einzahlung', 'zh' => '25美元免存款红利' ),
-		'value' => array( 'en' => '$25 Free', 'de' => '25 $ gratis', 'zh' => '25美元免费' ) ),
+		'title' => array( 'en' => '$25 No Deposit Bonus', 'de' => '25 $ Bonus ohne Einzahlung', 'zh' => '25美元免存款红利', 'es' => 'Bono Sin Depósito de $25' ),
+		'value' => array( 'en' => '$25 Free', 'de' => '25 $ gratis', 'zh' => '25美元免费', 'es' => '$25 Gratis' ) ),
 	array( 'casino' => 3, 'type' => 'Cashback', 'code' => '',
-		'title' => array( 'en' => '10% Weekly Cashback', 'de' => '10% wöchentliches Cashback', 'zh' => '每周10%返现' ),
-		'value' => array( 'en' => '10% Cashback', 'de' => '10% Cashback', 'zh' => '10%返现' ) ),
+		'title' => array( 'en' => '10% Weekly Cashback', 'de' => '10% wöchentliches Cashback', 'zh' => '每周10%返现', 'es' => '10% de Reembolso Semanal' ),
+		'value' => array( 'en' => '10% Cashback', 'de' => '10% Cashback', 'zh' => '10%返现', 'es' => '10% de Reembolso' ) ),
 	array( 'casino' => 4, 'type' => 'Reload Bonus', 'code' => 'RELOAD75',
-		'title' => array( 'en' => '75% Reload Bonus', 'de' => '75% Reload-Bonus', 'zh' => '75%充值红利' ),
-		'value' => array( 'en' => '75% up to $200', 'de' => '75% bis 200 $', 'zh' => '75%，最高200美元' ) ),
+		'title' => array( 'en' => '75% Reload Bonus', 'de' => '75% Reload-Bonus', 'zh' => '75%充值红利', 'es' => '75% de Bono de Recarga' ),
+		'value' => array( 'en' => '75% up to $200', 'de' => '75% bis 200 $', 'zh' => '75%，最高200美元', 'es' => '75% hasta $200' ) ),
 	array( 'casino' => 5, 'type' => 'Welcome Bonus', 'code' => 'CRYPTO200',
-		'title' => array( 'en' => '200% Crypto Deposit Match', 'de' => '200% Krypto-Einzahlungsbonus', 'zh' => '200%加密货币存款红利' ),
-		'value' => array( 'en' => '200% up to 1 BTC', 'de' => '200% bis 1 BTC', 'zh' => '200%，最高1个比特币' ) ),
+		'title' => array( 'en' => '200% Crypto Deposit Match', 'de' => '200% Krypto-Einzahlungsbonus', 'zh' => '200%加密货币存款红利', 'es' => '200% de Bono por Depósito en Cripto' ),
+		'value' => array( 'en' => '200% up to 1 BTC', 'de' => '200% bis 1 BTC', 'zh' => '200%，最高1个比特币', 'es' => '200% hasta 1 BTC' ) ),
 	array( 'casino' => 6, 'type' => 'Free Spins', 'code' => 'ACE30',
-		'title' => array( 'en' => '30 Free Spins on Sign-Up', 'de' => '30 Freispiele bei Anmeldung', 'zh' => '注册即送30次免费旋转' ),
-		'value' => array( 'en' => '30 Free Spins', 'de' => '30 Freispiele', 'zh' => '30次免费旋转' ) ),
+		'title' => array( 'en' => '30 Free Spins on Sign-Up', 'de' => '30 Freispiele bei Anmeldung', 'zh' => '注册即送30次免费旋转', 'es' => '30 Giros Gratis al Registrarte' ),
+		'value' => array( 'en' => '30 Free Spins', 'de' => '30 Freispiele', 'zh' => '30次免费旋转', 'es' => '30 Giros Gratis' ) ),
 	array( 'casino' => 7, 'type' => 'No Deposit', 'code' => 'TRY10',
-		'title' => array( 'en' => '$10 No Deposit Bonus', 'de' => '10 $ Bonus ohne Einzahlung', 'zh' => '10美元免存款红利' ),
-		'value' => array( 'en' => '$10 Free', 'de' => '10 $ gratis', 'zh' => '10美元免费' ) ),
+		'title' => array( 'en' => '$10 No Deposit Bonus', 'de' => '10 $ Bonus ohne Einzahlung', 'zh' => '10美元免存款红利', 'es' => 'Bono Sin Depósito de $10' ),
+		'value' => array( 'en' => '$10 Free', 'de' => '10 $ gratis', 'zh' => '10美元免费', 'es' => '$10 Gratis' ) ),
 	array( 'casino' => 0, 'type' => 'Reload Bonus', 'code' => 'VIP50',
-		'title' => array( 'en' => 'VIP 50% Weekly Reload', 'de' => 'VIP 50% wöchentlicher Reload', 'zh' => 'VIP每周50%充值红利' ),
-		'value' => array( 'en' => '50% up to $1,000', 'de' => '50% bis 1.000 $', 'zh' => '50%，最高1000美元' ) ),
+		'title' => array( 'en' => 'VIP 50% Weekly Reload', 'de' => 'VIP 50% wöchentlicher Reload', 'zh' => 'VIP每周50%充值红利', 'es' => 'Recarga Semanal VIP del 50%' ),
+		'value' => array( 'en' => '50% up to $1,000', 'de' => '50% bis 1.000 $', 'zh' => '50%，最高1000美元', 'es' => '50% hasta $1.000' ) ),
 );
 
 // Real bonus types carry genuinely different terms — free spin winnings are
@@ -715,43 +739,48 @@ $bonus_defs = array(
 // verification), and cashback is usually paid with no wagering at all. A
 // single shared summary/body across every type flattened all of that away.
 $bonus_terms_summary = array(
-	'Welcome Bonus' => array( 'en' => '35x wagering on bonus + deposit. Min deposit $20. Expires 30 days after claiming.', 'de' => '35-fache Umsatzanforderung auf Bonus + Einzahlung. Mindesteinzahlung 20 $. Läuft 30 Tage nach Aktivierung ab.', 'zh' => '红利加存款需满足35倍流水要求。最低存款20美元。领取后30天内有效。' ),
-	'Free Spins'    => array( 'en' => 'Spins credited within 24 hours of signup. Winnings capped at $100 and carry a 40x wagering requirement. Valid on select slots only.', 'de' => 'Freispiele werden innerhalb von 24 Stunden nach der Anmeldung gutgeschrieben. Gewinne sind auf 100 $ begrenzt und unterliegen einer 40-fachen Umsatzanforderung. Nur für ausgewählte Spielautomaten gültig.', 'zh' => '注册后24小时内发放免费旋转。奖金上限为100美元，且需满足40倍流水要求。仅限指定老虎机游戏使用。' ),
-	'No Deposit'    => array( 'en' => '50x wagering on winnings. Max cashout $100. ID verification required before any withdrawal.', 'de' => '50-fache Umsatzanforderung auf Gewinne. Maximale Auszahlung 100 $. Vor jeder Auszahlung ist eine Identitätsprüfung erforderlich.', 'zh' => '奖金需满足50倍流水要求。最高提款额为100美元。提款前须完成身份验证。' ),
-	'Cashback'      => array( 'en' => 'Calculated on net losses over the past 7 days. No additional wagering — cashback is paid as real, withdrawable balance.', 'de' => 'Berechnet auf Basis der Nettoverluste der letzten 7 Tage. Keine zusätzliche Umsatzanforderung — das Cashback wird als echtes, auszahlbares Guthaben gutgeschrieben.', 'zh' => '根据过去7天的净亏损计算。无需额外流水要求——返现将以可直接提取的真实余额发放。' ),
-	'Reload Bonus'  => array( 'en' => '30x wagering. Valid on deposits made within 48 hours of claiming. Only one reload bonus active at a time.', 'de' => '30-fache Umsatzanforderung. Gültig für Einzahlungen innerhalb von 48 Stunden nach Aktivierung. Es kann jeweils nur ein Reload-Bonus aktiv sein.', 'zh' => '需满足30倍流水要求。仅适用于领取后48小时内完成的存款。同一时间只能激活一个充值红利。' ),
+	'Welcome Bonus' => array( 'en' => '35x wagering on bonus + deposit. Min deposit $20. Expires 30 days after claiming.', 'de' => '35-fache Umsatzanforderung auf Bonus + Einzahlung. Mindesteinzahlung 20 $. Läuft 30 Tage nach Aktivierung ab.', 'zh' => '红利加存款需满足35倍流水要求。最低存款20美元。领取后30天内有效。', 'es' => '35x de apuesta sobre el bono + depósito. Depósito mínimo $20. Caduca 30 días después de reclamarlo.' ),
+	'Free Spins'    => array( 'en' => 'Spins credited within 24 hours of signup. Winnings capped at $100 and carry a 40x wagering requirement. Valid on select slots only.', 'de' => 'Freispiele werden innerhalb von 24 Stunden nach der Anmeldung gutgeschrieben. Gewinne sind auf 100 $ begrenzt und unterliegen einer 40-fachen Umsatzanforderung. Nur für ausgewählte Spielautomaten gültig.', 'zh' => '注册后24小时内发放免费旋转。奖金上限为100美元，且需满足40倍流水要求。仅限指定老虎机游戏使用。', 'es' => 'Los giros se acreditan en las primeras 24 horas tras el registro. Las ganancias tienen un tope de $100 y un requisito de apuesta de 40x. Válido solo en tragamonedas seleccionadas.' ),
+	'No Deposit'    => array( 'en' => '50x wagering on winnings. Max cashout $100. ID verification required before any withdrawal.', 'de' => '50-fache Umsatzanforderung auf Gewinne. Maximale Auszahlung 100 $. Vor jeder Auszahlung ist eine Identitätsprüfung erforderlich.', 'zh' => '奖金需满足50倍流水要求。最高提款额为100美元。提款前须完成身份验证。', 'es' => 'Requisito de apuesta de 50x sobre las ganancias. Retiro máximo de $100. Se requiere verificación de identidad antes de cualquier retiro.' ),
+	'Cashback'      => array( 'en' => 'Calculated on net losses over the past 7 days. No additional wagering — cashback is paid as real, withdrawable balance.', 'de' => 'Berechnet auf Basis der Nettoverluste der letzten 7 Tage. Keine zusätzliche Umsatzanforderung — das Cashback wird als echtes, auszahlbares Guthaben gutgeschrieben.', 'zh' => '根据过去7天的净亏损计算。无需额外流水要求——返现将以可直接提取的真实余额发放。', 'es' => 'Calculado sobre las pérdidas netas de los últimos 7 días. Sin requisito de apuesta adicional — el reembolso se abona como saldo real y retirable.' ),
+	'Reload Bonus'  => array( 'en' => '30x wagering. Valid on deposits made within 48 hours of claiming. Only one reload bonus active at a time.', 'de' => '30-fache Umsatzanforderung. Gültig für Einzahlungen innerhalb von 48 Stunden nach Aktivierung. Es kann jeweils nur ein Reload-Bonus aktiv sein.', 'zh' => '需满足30倍流水要求。仅适用于领取后48小时内完成的存款。同一时间只能激活一个充值红利。', 'es' => 'Requisito de apuesta de 30x. Válido para depósitos realizados dentro de las 48 horas posteriores a reclamarlo. Solo un bono de recarga activo a la vez.' ),
 );
 $bonus_body_tpl = array(
 	'Welcome Bonus' => array(
 		'en' => fn( $title, $code ) => $title . ' matches your qualifying deposit at the stated rate, credited automatically once the deposit clears.' . ( $code ? " Enter code {$code} at the cashier if it isn't applied by default." : '' ) . ' Standard wagering and game-contribution rules apply — check the operator\'s full terms before opting in.',
 		'de' => fn( $title, $code ) => $title . ' wird auf Ihre qualifizierende Einzahlung angerechnet und automatisch gutgeschrieben, sobald die Einzahlung verbucht ist.' . ( $code ? " Geben Sie den Code {$code} an der Kasse ein, falls er nicht automatisch angewendet wird." : '' ) . ' Es gelten die üblichen Umsatz- und Spielbeitragsregeln — prüfen Sie die vollständigen Bedingungen des Anbieters vor der Teilnahme.',
 		'zh' => fn( $title, $code ) => $title . '将按规定比例匹配您的合格存款，存款到账后自动发放。' . ( $code ? "如未自动应用，请在收银台输入代码{$code}。" : '' ) . '适用标准流水和游戏贡献规则，参与前请查阅运营商完整条款。',
+		'es' => fn( $title, $code ) => $title . ' iguala tu depósito calificado según la tasa indicada, acreditado automáticamente en cuanto se confirma el depósito.' . ( $code ? " Introduce el código {$code} en caja si no se aplica por defecto." : '' ) . ' Se aplican las reglas estándar de apuesta y contribución por juego — revisa los términos completos del operador antes de participar.',
 	),
 	'Free Spins' => array(
 		'en' => fn( $title, $code ) => $title . ' credits automatically after registration' . ( $code ? " (code {$code} may be required at signup)" : ' — no promo code needed' ) . '. Winnings from the spins carry their own wagering requirement separate from any deposit bonus, and are usually capped — check the cap before counting on this for a big win.',
 		'de' => fn( $title, $code ) => $title . ' wird automatisch nach der Registrierung gutgeschrieben' . ( $code ? " (Code {$code} ggf. bei der Anmeldung erforderlich)" : ' — kein Bonuscode erforderlich' ) . '. Gewinne aus den Freispielen unterliegen einer eigenen, vom Einzahlungsbonus getrennten Umsatzanforderung und sind meist gedeckelt — prüfen Sie das Limit, bevor Sie damit rechnen.',
 		'zh' => fn( $title, $code ) => $title . '将在注册后自动发放' . ( $code ? "（注册时可能需要输入代码{$code}）" : '，无需优惠代码' ) . '。免费旋转所得奖金需满足独立于存款红利的流水要求，且通常设有上限——请在期待大奖前先确认该上限。',
+		'es' => fn( $title, $code ) => $title . ' se acredita automáticamente tras el registro' . ( $code ? " (puede requerirse el código {$code} al registrarte)" : ' — sin código promocional necesario' ) . '. Las ganancias de los giros tienen su propio requisito de apuesta, independiente de cualquier bono de depósito, y suelen tener un tope — comprueba el límite antes de contar con esto para un gran premio.',
 	),
 	'No Deposit' => array(
 		'en' => fn( $title, $code ) => $title . ' requires no deposit to claim' . ( $code ? " — just enter code {$code}" : '' ) . ', but it\'s the most restricted bonus type on this list: expect a higher wagering requirement, a hard cap on withdrawable winnings, and mandatory ID verification before the casino releases anything.',
 		'de' => fn( $title, $code ) => $title . ' kann ohne Einzahlung beansprucht werden' . ( $code ? " — geben Sie einfach den Code {$code} ein" : '' ) . ', ist aber die restriktivste Bonusart in dieser Liste: Es gelten eine höhere Umsatzanforderung, ein festes Auszahlungslimit für Gewinne und eine verpflichtende Identitätsprüfung, bevor das Casino etwas auszahlt.',
 		'zh' => fn( $title, $code ) => $title . '无需存款即可领取' . ( $code ? "——只需输入代码{$code}" : '' ) . '，但它是本列表中限制最严格的红利类型：流水要求更高，可提款奖金设有硬性上限，且赌场放款前必须完成身份验证。',
+		'es' => fn( $title, $code ) => $title . ' no requiere depósito para reclamarlo' . ( $code ? " — solo introduce el código {$code}" : '' ) . ', pero es el tipo de bono más restrictivo de esta lista: espera un requisito de apuesta más alto, un tope estricto sobre las ganancias retirables y verificación de identidad obligatoria antes de que el casino libere cualquier pago.',
 	),
 	'Cashback' => array(
 		'en' => fn( $title, $code ) => $title . ' is calculated automatically on your net losses for the period and credited without needing to opt in each time. Unlike deposit bonuses, most operators pay cashback with no extra wagering attached, which is what makes it worth watching even if you don\'t normally chase bonuses.',
 		'de' => fn( $title, $code ) => $title . ' wird automatisch anhand Ihrer Nettoverluste im jeweiligen Zeitraum berechnet und gutgeschrieben, ohne dass Sie sich jedes Mal neu anmelden müssen. Anders als Einzahlungsboni zahlen die meisten Anbieter Cashback ohne zusätzliche Umsatzanforderung aus — das macht es interessant, selbst wenn Sie normalerweise keine Boni verfolgen.',
 		'zh' => fn( $title, $code ) => $title . '根据您在相应周期内的净亏损自动计算并发放，无需每次手动申请。与存款红利不同，大多数运营商发放的返现不附加额外流水要求——这正是即使您通常不追逐红利，也值得关注它的原因。',
+		'es' => fn( $title, $code ) => $title . ' se calcula automáticamente sobre tus pérdidas netas del período y se acredita sin necesidad de solicitarlo cada vez. A diferencia de los bonos de depósito, la mayoría de operadores pagan el reembolso sin requisito de apuesta adicional, lo que lo hace interesante incluso si normalmente no persigues bonos.',
 	),
 	'Reload Bonus' => array(
 		'en' => fn( $title, $code ) => $title . ' is available to existing depositors on top of their next qualifying deposit' . ( $code ? " using code {$code}" : '' ) . '. It won\'t stack with an active welcome bonus or another reload offer, so time your claim for when you\'re actually ready to use it.',
 		'de' => fn( $title, $code ) => $title . ' steht bestehenden Spielern zusätzlich zu ihrer nächsten qualifizierenden Einzahlung zur Verfügung' . ( $code ? " mit dem Code {$code}" : '' ) . '. Er lässt sich nicht mit einem aktiven Willkommensbonus oder einem weiteren Reload-Angebot kombinieren — planen Sie die Aktivierung entsprechend.',
 		'zh' => fn( $title, $code ) => $title . '面向现有玩家，可叠加在其下一次符合条件的存款之上' . ( $code ? "（使用代码{$code}）" : '' ) . '。它不能与已激活的欢迎红利或其他充值红利同时使用，请在确实准备好使用时再领取。',
+		'es' => fn( $title, $code ) => $title . ' está disponible para jugadores existentes además de su próximo depósito calificado' . ( $code ? " usando el código {$code}" : '' ) . '. No se puede combinar con un bono de bienvenida activo ni con otra oferta de recarga, así que planifica cuándo reclamarlo para cuando realmente vayas a usarlo.',
 	),
 );
 
 foreach ( $bonus_defs as $i => $b ) {
 	$per_lang = array();
-	foreach ( array( 'en', 'de', 'zh' ) as $lang ) {
+	foreach ( array( 'en', 'de', 'zh', 'es' ) as $lang ) {
 		$title = $b['title'][ $lang ];
 		$per_lang[ $lang ] = array(
 			'args' => array(
@@ -768,7 +797,7 @@ foreach ( $bonus_defs as $i => $b ) {
 				'ww_terms_summary'  => $bonus_terms_summary[ $b['type'] ][ $lang ],
 				'ww_expiry_date'    => gmdate( 'Y-m-d', strtotime( '+60 days' ) ),
 				'ww_affiliate_link' => '#',
-				'ww_cta_label'      => 'en' === $lang ? 'Claim Bonus' : ( 'de' === $lang ? 'Bonus Sichern' : '领取红利' ),
+				'ww_cta_label'      => array( 'en' => 'Claim Bonus', 'de' => 'Bonus Sichern', 'zh' => '领取红利', 'es' => 'Reclamar Bono' )[ $lang ],
 			),
 			'tax' => array( 'bonus_type' => array( $bonus_types[ $b['type'] ][ $lang ] ) ),
 		);
@@ -782,27 +811,27 @@ foreach ( $bonus_defs as $i => $b ) {
 
 $game_defs = array(
 	array( 'name' => 'Mega Fortune Reels', 'colour' => '#C97A1F', 'rtp' => '96.4%', 'min_bet' => '$0.10', 'max_win' => '5,000x', 'provider' => 0, 'category' => 'Slots',
-		'desc' => array( 'en' => 'Mega Fortune Reels is available to play for free in demo mode, no download or registration required.', 'de' => 'Mega Fortune Reels kann kostenlos im Demomodus gespielt werden — kein Download oder Registrierung nötig.', 'zh' => 'Mega Fortune Reels可免费试玩，无需下载或注册。' ) ),
+		'desc' => array( 'en' => 'Mega Fortune Reels is available to play for free in demo mode, no download or registration required.', 'de' => 'Mega Fortune Reels kann kostenlos im Demomodus gespielt werden — kein Download oder Registrierung nötig.', 'zh' => 'Mega Fortune Reels可免费试玩，无需下载或注册。', 'es' => 'Mega Fortune Reels está disponible para jugar gratis en modo demo, sin necesidad de descarga ni registro.' ) ),
 	array( 'name' => 'Diamond Roulette', 'colour' => '#1F2C39', 'rtp' => '97.3%', 'min_bet' => '$1', 'max_win' => '35x', 'provider' => 3, 'category' => 'Roulette',
-		'desc' => array( 'en' => 'Diamond Roulette is available to play for free in demo mode, no download or registration required.', 'de' => 'Diamond Roulette kann kostenlos im Demomodus gespielt werden — kein Download oder Registrierung nötig.', 'zh' => 'Diamond Roulette可免费试玩，无需下载或注册。' ) ),
+		'desc' => array( 'en' => 'Diamond Roulette is available to play for free in demo mode, no download or registration required.', 'de' => 'Diamond Roulette kann kostenlos im Demomodus gespielt werden — kein Download oder Registrierung nötig.', 'zh' => 'Diamond Roulette可免费试玩，无需下载或注册。', 'es' => 'Diamond Roulette está disponible para jugar gratis en modo demo, sin necesidad de descarga ni registro.' ) ),
 	array( 'name' => 'Classic Blackjack Pro', 'colour' => '#0F5132', 'rtp' => '99.5%', 'min_bet' => '$1', 'max_win' => '3x', 'provider' => 1, 'category' => 'Blackjack',
-		'desc' => array( 'en' => 'Classic Blackjack Pro is available to play for free in demo mode, no download or registration required.', 'de' => 'Classic Blackjack Pro kann kostenlos im Demomodus gespielt werden — kein Download oder Registrierung nötig.', 'zh' => 'Classic Blackjack Pro可免费试玩，无需下载或注册。' ) ),
+		'desc' => array( 'en' => 'Classic Blackjack Pro is available to play for free in demo mode, no download or registration required.', 'de' => 'Classic Blackjack Pro kann kostenlos im Demomodus gespielt werden — kein Download oder Registrierung nötig.', 'zh' => 'Classic Blackjack Pro可免费试玩，无需下载或注册。', 'es' => 'Classic Blackjack Pro está disponible para jugar gratis en modo demo, sin necesidad de descarga ni registro.' ) ),
 	array( 'name' => 'Jacks or Better Video Poker', 'colour' => '#7A1FA2', 'rtp' => '99.1%', 'min_bet' => '$0.25', 'max_win' => '800x', 'provider' => 2, 'category' => 'Video Poker',
-		'desc' => array( 'en' => 'Jacks or Better Video Poker is available to play for free in demo mode, no download or registration required.', 'de' => 'Jacks or Better Video Poker kann kostenlos im Demomodus gespielt werden — kein Download oder Registrierung nötig.', 'zh' => 'Jacks or Better Video Poker可免费试玩，无需下载或注册。' ) ),
+		'desc' => array( 'en' => 'Jacks or Better Video Poker is available to play for free in demo mode, no download or registration required.', 'de' => 'Jacks or Better Video Poker kann kostenlos im Demomodus gespielt werden — kein Download oder Registrierung nötig.', 'zh' => 'Jacks or Better Video Poker可免费试玩，无需下载或注册。', 'es' => 'Jacks or Better Video Poker está disponible para jugar gratis en modo demo, sin necesidad de descarga ni registro.' ) ),
 	array( 'name' => 'Live Lightning Baccarat', 'colour' => '#A21F3D', 'rtp' => '98.8%', 'min_bet' => '$0.50', 'max_win' => '250x', 'provider' => 3, 'category' => 'Live Games',
-		'desc' => array( 'en' => 'Live Lightning Baccarat is available to play for free in demo mode, no download or registration required.', 'de' => 'Live Lightning Baccarat kann kostenlos im Demomodus gespielt werden — kein Download oder Registrierung nötig.', 'zh' => 'Live Lightning Baccarat可免费试玩，无需下载或注册。' ) ),
+		'desc' => array( 'en' => 'Live Lightning Baccarat is available to play for free in demo mode, no download or registration required.', 'de' => 'Live Lightning Baccarat kann kostenlos im Demomodus gespielt werden — kein Download oder Registrierung nötig.', 'zh' => 'Live Lightning Baccarat可免费试玩，无需下载或注册。', 'es' => 'Live Lightning Baccarat está disponible para jugar gratis en modo demo, sin necesidad de descarga ni registro.' ) ),
 	array( 'name' => 'Golden Bingo Hall', 'colour' => '#B3941F', 'rtp' => '95.0%', 'min_bet' => '$0.10', 'max_win' => '1,000x', 'provider' => 5, 'category' => 'Bingo',
-		'desc' => array( 'en' => 'Golden Bingo Hall is available to play for free in demo mode, no download or registration required.', 'de' => 'Golden Bingo Hall kann kostenlos im Demomodus gespielt werden — kein Download oder Registrierung nötig.', 'zh' => 'Golden Bingo Hall可免费试玩，无需下载或注册。' ) ),
+		'desc' => array( 'en' => 'Golden Bingo Hall is available to play for free in demo mode, no download or registration required.', 'de' => 'Golden Bingo Hall kann kostenlos im Demomodus gespielt werden — kein Download oder Registrierung nötig.', 'zh' => 'Golden Bingo Hall可免费试玩，无需下载或注册。', 'es' => 'Golden Bingo Hall está disponible para jugar gratis en modo demo, sin necesidad de descarga ni registro.' ) ),
 	array( 'name' => 'Wild Frontier Slots', 'colour' => '#8A4B1F', 'rtp' => '96.1%', 'min_bet' => '$0.20', 'max_win' => '10,000x', 'provider' => 6, 'category' => 'Slots',
-		'desc' => array( 'en' => 'Wild Frontier Slots is available to play for free in demo mode, no download or registration required.', 'de' => 'Wild Frontier Slots kann kostenlos im Demomodus gespielt werden — kein Download oder Registrierung nötig.', 'zh' => 'Wild Frontier Slots可免费试玩，无需下载或注册。' ) ),
+		'desc' => array( 'en' => 'Wild Frontier Slots is available to play for free in demo mode, no download or registration required.', 'de' => 'Wild Frontier Slots kann kostenlos im Demomodus gespielt werden — kein Download oder Registrierung nötig.', 'zh' => 'Wild Frontier Slots可免费试玩，无需下载或注册。', 'es' => 'Wild Frontier Slots está disponible para jugar gratis en modo demo, sin necesidad de descarga ni registro.' ) ),
 	array( 'name' => 'Crystal Cascade Megaways', 'colour' => '#1F7A6C', 'rtp' => '96.8%', 'min_bet' => '$0.20', 'max_win' => '20,000x', 'provider' => 7, 'category' => 'Slots',
-		'desc' => array( 'en' => 'Crystal Cascade Megaways is available to play for free in demo mode, no download or registration required.', 'de' => 'Crystal Cascade Megaways kann kostenlos im Demomodus gespielt werden — kein Download oder Registrierung nötig.', 'zh' => 'Crystal Cascade Megaways可免费试玩，无需下载或注册。' ) ),
+		'desc' => array( 'en' => 'Crystal Cascade Megaways is available to play for free in demo mode, no download or registration required.', 'de' => 'Crystal Cascade Megaways kann kostenlos im Demomodus gespielt werden — kein Download oder Registrierung nötig.', 'zh' => 'Crystal Cascade Megaways可免费试玩，无需下载或注册。', 'es' => 'Crystal Cascade Megaways está disponible para jugar gratis en modo demo, sin necesidad de descarga ni registro.' ) ),
 );
 
 foreach ( $game_defs as $g ) {
 	$logo_id = ww_seed_contextual_image( $g['name'], sanitize_title( $g['name'] ) . '-thumb', ww_image_keywords( $g['category'] ), $g['colour'], $g['name'] . ' thumbnail' );
 	$per_lang = array();
-	foreach ( array( 'en', 'de', 'zh' ) as $lang ) {
+	foreach ( array( 'en', 'de', 'zh', 'es' ) as $lang ) {
 		$per_lang[ $lang ] = array(
 			'args' => array(
 				'post_type'    => 'game',
@@ -832,67 +861,75 @@ foreach ( $game_defs as $g ) {
 
 $guide_defs = array(
 	array( 'cat' => 'Beginner Guides',
-		'title' => array( 'en' => 'How to Spot a Fake Casino License in 60 Seconds', 'de' => 'Eine gefälschte Casino-Lizenz in 60 Sekunden erkennen', 'zh' => '60秒识破假冒赌场牌照' ),
+		'title' => array( 'en' => 'How to Spot a Fake Casino License in 60 Seconds', 'de' => 'Eine gefälschte Casino-Lizenz in 60 Sekunden erkennen', 'zh' => '60秒识破假冒赌场牌照', 'es' => 'Cómo Detectar una Licencia de Casino Falsa en 60 Segundos' ),
 		'body'  => array(
 			'en' => 'A step-by-step checklist for verifying MGA, UKGC, and Curaçao registrations before you deposit a single dollar. We update this article regularly as regulations and industry practices evolve.',
 			'de' => 'Eine Schritt-für-Schritt-Checkliste zur Überprüfung von MGA-, UKGC- und Curaçao-Registrierungen, bevor Sie auch nur einen Euro einzahlen. Wir aktualisieren diesen Artikel regelmäßig.',
 			'zh' => '在您存入任何资金之前，逐步核实MGA、UKGC和库拉索牌照的实用清单。我们会定期更新本文内容。',
+			'es' => 'Una lista de verificación paso a paso para comprobar los registros de MGA, UKGC y Curazao antes de depositar un solo dólar. Actualizamos este artículo regularmente a medida que evolucionan las regulaciones y las prácticas del sector.',
 		) ),
 	array( 'cat' => 'Bonus Terms',
-		'title' => array( 'en' => 'Understanding Wagering Requirements, With Real Math', 'de' => 'Umsatzanforderungen verstehen — mit echten Rechenbeispielen', 'zh' => '用真实数字读懂流水要求' ),
+		'title' => array( 'en' => 'Understanding Wagering Requirements, With Real Math', 'de' => 'Umsatzanforderungen verstehen — mit echten Rechenbeispielen', 'zh' => '用真实数字读懂流水要求', 'es' => 'Entendiendo los Requisitos de Apuesta, con Matemáticas Reales' ),
 		'body'  => array(
 			'en' => 'A practical, no-nonsense look at wagering requirements — with real math, so you know exactly what a bonus actually costs before you claim it.',
 			'de' => 'Ein praktischer, unkomplizierter Blick auf Umsatzanforderungen mit konkreten Rechenbeispielen, damit Sie genau wissen, was ein Bonus wirklich kostet.',
 			'zh' => '用实际计算示例，直观地解释流水要求究竟意味着什么，帮助您理解红利背后的真实成本。',
+			'es' => 'Una mirada práctica y directa a los requisitos de apuesta — con matemáticas reales, para que sepas exactamente cuánto cuesta realmente un bono antes de reclamarlo.',
 		) ),
 	array( 'cat' => 'Bankroll Management',
-		'title' => array( 'en' => 'Bankroll Management for Slot Players: The 1% Rule', 'de' => 'Bankroll-Management für Slot-Spieler: Die 1%-Regel', 'zh' => '老虎机玩家的资金管理：1%法则' ),
+		'title' => array( 'en' => 'Bankroll Management for Slot Players: The 1% Rule', 'de' => 'Bankroll-Management für Slot-Spieler: Die 1%-Regel', 'zh' => '老虎机玩家的资金管理：1%法则', 'es' => 'Gestión de Bankroll para Jugadores de Tragamonedas: La Regla del 1%' ),
 		'body'  => array(
 			'en' => 'Why many experienced slot players never risk more than 1% of their bankroll on a single session, and how to apply the rule to your own budget.',
 			'de' => 'Warum viele erfahrene Slot-Spieler nie mehr als 1% ihres Bankrolls auf eine einzelne Session setzen, und wie Sie diese Regel für sich anwenden.',
 			'zh' => '许多资深老虎机玩家为何单次游戏投注不超过资金的1%，以及如何将这一法则应用到自己的策略中。',
+			'es' => 'Por qué muchos jugadores experimentados de tragamonedas nunca arriesgan más del 1% de su bankroll en una sola sesión, y cómo aplicar esta regla a tu propio presupuesto.',
 		) ),
 	array( 'cat' => 'Game Strategy',
-		'title' => array( 'en' => 'Basic Blackjack Strategy Chart, Explained Simply', 'de' => 'Die grundlegende Blackjack-Strategietabelle, einfach erklärt', 'zh' => '基础21点策略表，简单易懂' ),
+		'title' => array( 'en' => 'Basic Blackjack Strategy Chart, Explained Simply', 'de' => 'Die grundlegende Blackjack-Strategietabelle, einfach erklärt', 'zh' => '基础21点策略表，简单易懂', 'es' => 'Tabla Básica de Estrategia de Blackjack, Explicada de Forma Sencilla' ),
 		'body'  => array(
 			'en' => "The basic blackjack strategy chart, explained step by step — no jargon, just what to do at the table for every hand you're dealt.",
 			'de' => 'Die grundlegende Strategietabelle für Blackjack, Schritt für Schritt erklärt — ohne Fachjargon, direkt anwendbar am Tisch.',
 			'zh' => '基础21点策略表逐条讲解，无需专业术语，即学即用。',
+			'es' => "La tabla básica de estrategia de blackjack, explicada paso a paso — sin jerga, solo lo que debes hacer en la mesa con cada mano que te repartan.",
 		) ),
 	array( 'cat' => 'Country Guides',
-		'title' => array( 'en' => 'Playing from Germany: Taxes, Limits and Licensed Sites', 'de' => 'Spielen aus Deutschland: Steuern, Limits und lizenzierte Anbieter', 'zh' => '德国玩家指南：税务、限额与合法平台' ),
+		'title' => array( 'en' => 'Playing from Germany: Taxes, Limits and Licensed Sites', 'de' => 'Spielen aus Deutschland: Steuern, Limits und lizenzierte Anbieter', 'zh' => '德国玩家指南：税务、限额与合法平台', 'es' => 'Jugar desde Alemania: Impuestos, Límites y Sitios con Licencia' ),
 		'body'  => array(
 			'en' => 'What German players need to know about taxes, statutory deposit limits, and which sites actually hold a valid license — summarized in one place.',
 			'de' => 'Was deutsche Spieler über Steuern, gesetzliche Einzahlungslimits und lizenzierte Anbieter wissen müssen, kompakt zusammengefasst.',
 			'zh' => '德国玩家需要了解的税务规定、法定存款限额和合法持牌平台，简明扼要地为您梳理。',
+			'es' => 'Lo que los jugadores alemanes deben saber sobre impuestos, límites legales de depósito y qué sitios realmente cuentan con una licencia válida — resumido en un solo lugar.',
 		) ),
 	array( 'cat' => 'Beginner Guides',
-		'title' => array( 'en' => 'RTP Explained: How Return to Player Actually Works', 'de' => 'RTP erklärt: Wie der Auszahlungsprozentsatz wirklich funktioniert', 'zh' => 'RTP详解：返还率究竟如何运作' ),
+		'title' => array( 'en' => 'RTP Explained: How Return to Player Actually Works', 'de' => 'RTP erklärt: Wie der Auszahlungsprozentsatz wirklich funktioniert', 'zh' => 'RTP详解：返还率究竟如何运作', 'es' => 'RTP Explicado: Cómo Funciona Realmente el Retorno al Jugador' ),
 		'body'  => array(
 			'en' => "What an RTP number actually means, why it's a long-run statistical average, and why it's not a promise about any single session you play.",
 			'de' => 'Was der RTP-Wert wirklich bedeutet, warum er eine langfristige statistische Kennzahl ist und kein Versprechen für eine einzelne Session.',
 			'zh' => 'RTP数值真正的含义——它是长期统计指标，而非单次游戏的保证，帮助玩家建立正确预期。',
+			'es' => "Qué significa realmente un número de RTP, por qué es un promedio estadístico a largo plazo, y por qué no es una promesa sobre ninguna sesión individual que juegues.",
 		) ),
 	array( 'cat' => 'Game Strategy',
-		'title' => array( 'en' => 'Slot Volatility: High vs. Low Explained', 'de' => 'Slot-Volatilität: Hoch vs. niedrig erklärt', 'zh' => '老虎机波动性：高波动与低波动详解' ),
+		'title' => array( 'en' => 'Slot Volatility: High vs. Low Explained', 'de' => 'Slot-Volatilität: Hoch vs. niedrig erklärt', 'zh' => '老虎机波动性：高波动与低波动详解', 'es' => 'Volatilidad de las Tragamonedas: Alta vs. Baja Explicada' ),
 		'body'  => array(
 			'en' => 'The difference between high- and low-volatility slots, and which type actually fits your bankroll and play style.',
 			'de' => 'Der Unterschied zwischen hoher und niedriger Volatilität bei Spielautomaten, und welcher Typ zu Ihrem Spielstil passt.',
 			'zh' => '高波动性与低波动性老虎机的区别，以及哪种类型更适合您的游戏风格。',
+			'es' => 'La diferencia entre tragamonedas de alta y baja volatilidad, y qué tipo se ajusta realmente a tu bankroll y estilo de juego.',
 		) ),
 	array( 'cat' => 'Beginner Guides',
-		'title' => array( 'en' => 'How to Choose a Safe Online Casino in 2026', 'de' => 'So wählen Sie 2026 ein sicheres Online-Casino', 'zh' => '2026年如何选择安全的在线赌场' ),
+		'title' => array( 'en' => 'How to Choose a Safe Online Casino in 2026', 'de' => 'So wählen Sie 2026 ein sicheres Online-Casino', 'zh' => '2026年如何选择安全的在线赌场', 'es' => 'Cómo Elegir un Casino Online Seguro en 2026' ),
 		'body'  => array(
 			'en' => 'A practical checklist for choosing a safe online casino in 2026 — licensing, withdrawal speed, and fair bonus terms, in that order of importance.',
 			'de' => 'Eine praktische Checkliste für die Wahl eines sicheren Online-Casinos im Jahr 2026 — Lizenzierung, Auszahlungsgeschwindigkeit und faire Bonusbedingungen.',
 			'zh' => '2026年选择安全在线赌场的实用清单——牌照资质、提款速度和公平的红利条款。',
+			'es' => 'Una lista de verificación práctica para elegir un casino online seguro en 2026 — licencia, velocidad de retiro y condiciones de bono justas, en ese orden de importancia.',
 		) ),
 );
 
 foreach ( $guide_defs as $g ) {
 	$thumb_id = ww_seed_contextual_image( $g['title']['en'], sanitize_title( $g['title']['en'] ) . '-thumb', ww_image_keywords( $g['cat'] ), '#2b3245', $g['title']['en'] );
 	$per_lang = array();
-	foreach ( array( 'en', 'de', 'zh' ) as $lang ) {
+	foreach ( array( 'en', 'de', 'zh', 'es' ) as $lang ) {
 		$title = $g['title'][ $lang ];
 		$per_lang[ $lang ] = array(
 			'args' => array(
@@ -915,67 +952,75 @@ foreach ( $guide_defs as $g ) {
 
 $news_defs = array(
 	array( 'cat' => 'Regulation',
-		'title' => array( 'en' => 'New UKGC Rules Tighten Deposit Limits Starting August', 'de' => 'Neue UKGC-Regeln verschärfen Einzahlungslimits ab August', 'zh' => '英国博彩委员会新规8月起收紧存款限额' ),
+		'title' => array( 'en' => 'New UKGC Rules Tighten Deposit Limits Starting August', 'de' => 'Neue UKGC-Regeln verschärfen Einzahlungslimits ab August', 'zh' => '英国博彩委员会新规8月起收紧存款限额', 'es' => 'Nuevas Normas de la UKGC Endurecen los Límites de Depósito a partir de Agosto' ),
 		'body'  => array(
 			'en' => 'Operators licensed in the UK must implement affordability checks for deposits above £150/month under updated guidance.',
 			'de' => 'Im Vereinigten Königreich lizenzierte Anbieter müssen ab August Zahlungsfähigkeitsprüfungen für Einzahlungen über 150 £ pro Monat durchführen.',
 			'zh' => '根据最新指引，持有英国牌照的运营商须对每月超过150英镑的存款进行财务能力审查。',
+			'es' => 'Los operadores con licencia en el Reino Unido deberán implementar controles de solvencia para depósitos superiores a £150 al mes según la normativa actualizada.',
 		) ),
 	array( 'cat' => 'Industry',
-		'title' => array( 'en' => 'Vega Harbor Rolls Out Instant Crypto Withdrawals', 'de' => 'Vega Harbor führt sofortige Krypto-Auszahlungen ein', 'zh' => 'Vega Harbor推出即时加密货币提款' ),
+		'title' => array( 'en' => 'Vega Harbor Rolls Out Instant Crypto Withdrawals', 'de' => 'Vega Harbor führt sofortige Krypto-Auszahlungen ein', 'zh' => 'Vega Harbor推出即时加密货币提款', 'es' => 'Vega Harbor Lanza Retiros Instantáneos en Criptomonedas' ),
 		'body'  => array(
 			'en' => 'Vega Harbor now offers instant crypto withdrawals for all verified accounts, another step toward faster payout times across the industry.',
 			'de' => 'Vega Harbor führt ab sofort sofortige Krypto-Auszahlungen für alle verifizierten Konten ein, ein weiterer Schritt zu schnelleren Auszahlungszeiten in der Branche.',
 			'zh' => 'Vega Harbor现已为所有已验证账户开放即时加密货币提款，为行业提款速度树立新标杆。',
+			'es' => 'Vega Harbor ahora ofrece retiros instantáneos en criptomonedas para todas las cuentas verificadas, un paso más hacia tiempos de pago más rápidos en todo el sector.',
 		) ),
 	array( 'cat' => 'Product Launch',
-		'title' => array( 'en' => 'Nova Spins Adds 40 New Live-Dealer Tables This Month', 'de' => 'Nova Spins fügt diesen Monat 40 neue Live-Dealer-Tische hinzu', 'zh' => 'Nova Spins本月新增40张真人荷官桌' ),
+		'title' => array( 'en' => 'Nova Spins Adds 40 New Live-Dealer Tables This Month', 'de' => 'Nova Spins fügt diesen Monat 40 neue Live-Dealer-Tische hinzu', 'zh' => 'Nova Spins本月新增40张真人荷官桌', 'es' => 'Nova Spins Añade 40 Nuevas Mesas de Crupier en Vivo Este Mes' ),
 		'body'  => array(
 			'en' => 'Nova Spins is expanding its live casino offering with 40 new tables this month, adding extra language options for European players.',
 			'de' => 'Nova Spins erweitert sein Live-Casino-Angebot um 40 neue Tische, mit zusätzlichen Sprachoptionen für europäische Spieler.',
 			'zh' => 'Nova Spins将真人娱乐场新增40张桌台，并为欧洲玩家增加更多语言选项。',
+			'es' => 'Nova Spins amplía su oferta de casino en vivo con 40 nuevas mesas este mes, sumando opciones de idioma adicionales para jugadores europeos.',
 		) ),
 	array( 'cat' => 'Responsible Gambling',
-		'title' => array( 'en' => 'National Self-Exclusion Registry Expands to 6 More States', 'de' => 'Nationales Selbstausschlussregister auf 6 weitere Bundesstaaten ausgeweitet', 'zh' => '全国自我排除登记系统扩展至另外6个州' ),
+		'title' => array( 'en' => 'National Self-Exclusion Registry Expands to 6 More States', 'de' => 'Nationales Selbstausschlussregister auf 6 weitere Bundesstaaten ausgeweitet', 'zh' => '全国自我排除登记系统扩展至另外6个州', 'es' => 'El Registro Nacional de Autoexclusión se Amplía a 6 Estados Más' ),
 		'body'  => array(
 			'en' => 'The national self-exclusion registry for problem gamblers is now available in six additional states.',
 			'de' => 'Das nationale Selbstausschlussregister für Problemspieler steht ab sofort in sechs weiteren Bundesstaaten zur Verfügung.',
 			'zh' => '面向问题博彩者的全国自我排除登记系统现已扩展至另外6个州。',
+			'es' => 'El registro nacional de autoexclusión para jugadores con problemas de ludopatía ya está disponible en seis estados adicionales.',
 		) ),
 	array( 'cat' => 'Regulation',
-		'title' => array( 'en' => 'Curaçao Reforms Licensing Structure into Four Sub-Tiers', 'de' => 'Curaçao reformiert Lizenzstruktur in vier Untergruppen', 'zh' => '库拉索博彩牌照改革为四个子级别' ),
+		'title' => array( 'en' => 'Curaçao Reforms Licensing Structure into Four Sub-Tiers', 'de' => 'Curaçao reformiert Lizenzstruktur in vier Untergruppen', 'zh' => '库拉索博彩牌照改革为四个子级别', 'es' => 'Curazao Reforma su Estructura de Licencias en Cuatro Subniveles' ),
 		'body'  => array(
 			'en' => "Curaçao's new licensing structure is designed to improve transparency, splitting operators into four sub-tiers going forward.",
 			'de' => 'Die neue Lizenzstruktur aus Curaçao soll für mehr Transparenz sorgen und unterteilt Anbieter künftig in vier Kategorien.',
 			'zh' => '库拉索新牌照结构旨在提升透明度，将运营商划分为四个子级别。',
+			'es' => 'La nueva estructura de licencias de Curazao busca mejorar la transparencia, dividiendo a los operadores en cuatro subniveles a partir de ahora.',
 		) ),
 	array( 'cat' => 'Industry',
-		'title' => array( 'en' => 'Golden Reel Casino Named Payout Speed Leader for Q2', 'de' => 'Golden Reel Casino als Auszahlungsschnellster im 2. Quartal ausgezeichnet', 'zh' => 'Golden Reel Casino荣获第二季度提款速度冠军' ),
+		'title' => array( 'en' => 'Golden Reel Casino Named Payout Speed Leader for Q2', 'de' => 'Golden Reel Casino als Auszahlungsschnellster im 2. Quartal ausgezeichnet', 'zh' => 'Golden Reel Casino荣获第二季度提款速度冠军', 'es' => 'Golden Reel Casino Nombrado Líder en Velocidad de Pago del Segundo Trimestre' ),
 		'body'  => array(
 			'en' => 'Golden Reel Casino was named the fastest payer among all casinos in our quarterly evaluation.',
 			'de' => 'Golden Reel Casino wurde in unserer vierteljährlichen Auswertung als schnellster Auszahler unter allen bewerteten Casinos ausgezeichnet.',
 			'zh' => '在我们的季度评估中，Golden Reel Casino在所有评测赌场中提款速度最快。',
+			'es' => 'Golden Reel Casino fue nombrado el pagador más rápido entre todos los casinos en nuestra evaluación trimestral.',
 		) ),
 	array( 'cat' => 'Product Launch',
-		'title' => array( 'en' => 'Lucky Vault Opens Sportsbook Ahead of Football Season', 'de' => 'Lucky Vault eröffnet Sportwetten-Bereich vor der Fußballsaison', 'zh' => 'Lucky Vault在足球赛季前开设体育博彩' ),
+		'title' => array( 'en' => 'Lucky Vault Opens Sportsbook Ahead of Football Season', 'de' => 'Lucky Vault eröffnet Sportwetten-Bereich vor der Fußballsaison', 'zh' => 'Lucky Vault在足球赛季前开设体育博彩', 'es' => 'Lucky Vault Abre su Casa de Apuestas Deportivas Antes de la Temporada de Fútbol' ),
 		'body'  => array(
 			'en' => 'Lucky Vault opens a sportsbook ahead of football season, with competitive odds across major European leagues.',
 			'de' => 'Lucky Vault eröffnet rechtzeitig zur Fußballsaison einen neuen Sportwetten-Bereich mit wettbewerbsfähigen Quoten für die großen europäischen Ligen.',
 			'zh' => 'Lucky Vault在足球赛季开始前推出体育博彩板块，覆盖欧洲各大联赛，赔率具有竞争力。',
+			'es' => 'Lucky Vault abre una casa de apuestas deportivas antes de la temporada de fútbol, con cuotas competitivas en las principales ligas europeas.',
 		) ),
 	array( 'cat' => 'Industry',
-		'title' => array( 'en' => 'Nova Spins Named Best Live Dealer Experience of 2026', 'de' => 'Nova Spins zum besten Live-Dealer-Erlebnis 2026 gekürt', 'zh' => 'Nova Spins荣获2026年最佳真人荷官体验奖' ),
+		'title' => array( 'en' => 'Nova Spins Named Best Live Dealer Experience of 2026', 'de' => 'Nova Spins zum besten Live-Dealer-Erlebnis 2026 gekürt', 'zh' => 'Nova Spins荣获2026年最佳真人荷官体验奖', 'es' => 'Nova Spins Nombrado Mejor Experiencia de Crupier en Vivo de 2026' ),
 		'body'  => array(
 			'en' => 'Nova Spins was named best live dealer experience of 2026 in an independent industry survey covering dozens of licensed operators.',
 			'de' => 'Nova Spins wurde in einer unabhängigen Branchenumfrage unter Dutzenden lizenzierten Anbietern zum besten Live-Dealer-Erlebnis des Jahres 2026 gekürt.',
 			'zh' => '在覆盖数十家持牌运营商的独立行业调查中，Nova Spins荣获2026年最佳真人荷官体验奖。',
+			'es' => 'Nova Spins fue nombrado mejor experiencia de crupier en vivo de 2026 en una encuesta independiente del sector que abarcó a docenas de operadores con licencia.',
 		) ),
 );
 
 foreach ( $news_defs as $n ) {
 	$thumb_id = ww_seed_contextual_image( $n['title']['en'], sanitize_title( $n['title']['en'] ) . '-thumb', ww_image_keywords( $n['cat'] ), '#3a2b45', $n['title']['en'] );
 	$per_lang = array();
-	foreach ( array( 'en', 'de', 'zh' ) as $lang ) {
+	foreach ( array( 'en', 'de', 'zh', 'es' ) as $lang ) {
 		$title = $n['title'][ $lang ];
 		$per_lang[ $lang ] = array(
 			'args' => array(
@@ -999,52 +1044,52 @@ foreach ( $news_defs as $n ) {
 
 $review_defs = array(
 	array( 'casino' => 0,
-		'title'   => array( 'en' => 'Golden Reel Casino: Full Review', 'de' => 'Golden Reel Casino: Vollständiger Testbericht', 'zh' => 'Golden Reel Casino完整评测' ),
-		'verdict' => array( 'en' => 'A strong all-rounder for crypto players who value fast payouts.', 'de' => 'Ein starker Allrounder für Krypto-Spieler, die schnelle Auszahlungen schätzen.', 'zh' => '对重视快速提款的加密货币玩家而言，是全能型的优秀选择。' ),
+		'title'   => array( 'en' => 'Golden Reel Casino: Full Review', 'de' => 'Golden Reel Casino: Vollständiger Testbericht', 'zh' => 'Golden Reel Casino完整评测', 'es' => 'Golden Reel Casino: Reseña Completa' ),
+		'verdict' => array( 'en' => 'A strong all-rounder for crypto players who value fast payouts.', 'de' => 'Ein starker Allrounder für Krypto-Spieler, die schnelle Auszahlungen schätzen.', 'zh' => '对重视快速提款的加密货币玩家而言，是全能型的优秀选择。', 'es' => 'Una opción sólida y completa para jugadores de criptomonedas que valoran los pagos rápidos.' ),
 		'rating'  => 4.8,
-		'pros'    => array( 'en' => array( 'Fast crypto withdrawals', 'Huge slot library', 'Responsive support' ), 'de' => array( 'Schnelle Krypto-Auszahlungen', 'Riesige Slot-Bibliothek', 'Reaktionsschneller Support' ), 'zh' => array( '加密货币提款速度快', '老虎机种类丰富', '客服响应迅速' ) ),
-		'cons'    => array( 'en' => array( 'High wagering on welcome bonus' ), 'de' => array( 'Hohe Umsatzanforderung beim Willkommensbonus' ), 'zh' => array( '欢迎红利流水要求较高' ) ),
-		'body'    => array( 'en' => 'Our editorial team tested account creation, deposits, withdrawals, and support responsiveness over several weeks before finalizing this review.', 'de' => 'Unser Redaktionsteam hat über mehrere Wochen Kontoerstellung, Ein- und Auszahlungen sowie den Support getestet, bevor dieser Testbericht finalisiert wurde.', 'zh' => '我们的编辑团队在数周内测试了账户注册、存取款和客服响应速度，才最终完成本篇评测。' ) ),
+		'pros'    => array( 'en' => array( 'Fast crypto withdrawals', 'Huge slot library', 'Responsive support' ), 'de' => array( 'Schnelle Krypto-Auszahlungen', 'Riesige Slot-Bibliothek', 'Reaktionsschneller Support' ), 'zh' => array( '加密货币提款速度快', '老虎机种类丰富', '客服响应迅速' ), 'es' => array( 'Retiros rápidos en criptomonedas', 'Enorme biblioteca de tragamonedas', 'Soporte receptivo' ) ),
+		'cons'    => array( 'en' => array( 'High wagering on welcome bonus' ), 'de' => array( 'Hohe Umsatzanforderung beim Willkommensbonus' ), 'zh' => array( '欢迎红利流水要求较高' ), 'es' => array( 'Alto requisito de apuesta en el bono de bienvenida' ) ),
+		'body'    => array( 'en' => 'Our editorial team tested account creation, deposits, withdrawals, and support responsiveness over several weeks before finalizing this review.', 'de' => 'Unser Redaktionsteam hat über mehrere Wochen Kontoerstellung, Ein- und Auszahlungen sowie den Support getestet, bevor dieser Testbericht finalisiert wurde.', 'zh' => '我们的编辑团队在数周内测试了账户注册、存取款和客服响应速度，才最终完成本篇评测。', 'es' => 'Nuestro equipo editorial probó la creación de cuentas, los depósitos, los retiros y la capacidad de respuesta del soporte durante varias semanas antes de finalizar esta reseña.' ) ),
 	array( 'casino' => 1,
-		'title'   => array( 'en' => 'Royal Spin Palace: Full Review', 'de' => 'Royal Spin Palace: Vollständiger Testbericht', 'zh' => 'Royal Spin Palace完整评测' ),
-		'verdict' => array( 'en' => 'The live dealer lobby alone makes this worth a look.', 'de' => 'Allein die Live-Dealer-Lobby macht einen Blick wert.', 'zh' => '仅凭真人荷官大厅就值得一试。' ),
+		'title'   => array( 'en' => 'Royal Spin Palace: Full Review', 'de' => 'Royal Spin Palace: Vollständiger Testbericht', 'zh' => 'Royal Spin Palace完整评测', 'es' => 'Royal Spin Palace: Reseña Completa' ),
+		'verdict' => array( 'en' => 'The live dealer lobby alone makes this worth a look.', 'de' => 'Allein die Live-Dealer-Lobby macht einen Blick wert.', 'zh' => '仅凭真人荷官大厅就值得一试。', 'es' => 'Solo la sala de crupier en vivo ya hace que valga la pena echarle un vistazo.' ),
 		'rating'  => 4.6,
-		'pros'    => array( 'en' => array( 'Excellent live dealer lobby', 'UKGC licensed', 'Generous VIP program' ), 'de' => array( 'Exzellente Live-Dealer-Lobby', 'UKGC-lizenziert', 'Großzügiges VIP-Programm' ), 'zh' => array( '真人荷官大厅体验出色', '持有UKGC牌照', 'VIP计划丰厚' ) ),
-		'cons'    => array( 'en' => array( 'Slower verification process' ), 'de' => array( 'Langsamerer Verifizierungsprozess' ), 'zh' => array( '身份验证流程较慢' ) ),
-		'body'    => array( 'en' => 'Our editorial team tested account creation, deposits, withdrawals, and support responsiveness over several weeks before finalizing this review.', 'de' => 'Unser Redaktionsteam hat über mehrere Wochen Kontoerstellung, Ein- und Auszahlungen sowie den Support getestet, bevor dieser Testbericht finalisiert wurde.', 'zh' => '我们的编辑团队在数周内测试了账户注册、存取款和客服响应速度，才最终完成本篇评测。' ) ),
+		'pros'    => array( 'en' => array( 'Excellent live dealer lobby', 'UKGC licensed', 'Generous VIP program' ), 'de' => array( 'Exzellente Live-Dealer-Lobby', 'UKGC-lizenziert', 'Großzügiges VIP-Programm' ), 'zh' => array( '真人荷官大厅体验出色', '持有UKGC牌照', 'VIP计划丰厚' ), 'es' => array( 'Excelente sala de crupier en vivo', 'Con licencia de la UKGC', 'Programa VIP generoso' ) ),
+		'cons'    => array( 'en' => array( 'Slower verification process' ), 'de' => array( 'Langsamerer Verifizierungsprozess' ), 'zh' => array( '身份验证流程较慢' ), 'es' => array( 'Proceso de verificación más lento' ) ),
+		'body'    => array( 'en' => 'Our editorial team tested account creation, deposits, withdrawals, and support responsiveness over several weeks before finalizing this review.', 'de' => 'Unser Redaktionsteam hat über mehrere Wochen Kontoerstellung, Ein- und Auszahlungen sowie den Support getestet, bevor dieser Testbericht finalisiert wurde.', 'zh' => '我们的编辑团队在数周内测试了账户注册、存取款和客服响应速度，才最终完成本篇评测。', 'es' => 'Nuestro equipo editorial probó la creación de cuentas, los depósitos, los retiros y la capacidad de respuesta del soporte durante varias semanas antes de finalizar esta reseña.' ) ),
 	array( 'casino' => 2,
-		'title'   => array( 'en' => 'Lucky Vault: Full Review', 'de' => 'Lucky Vault: Vollständiger Testbericht', 'zh' => 'Lucky Vault完整评测' ),
-		'verdict' => array( 'en' => 'A solid mobile-first pick for casual players on a budget.', 'de' => 'Eine solide Mobile-First-Wahl für Gelegenheitsspieler mit kleinem Budget.', 'zh' => '预算有限的休闲玩家的可靠移动端优选。' ),
+		'title'   => array( 'en' => 'Lucky Vault: Full Review', 'de' => 'Lucky Vault: Vollständiger Testbericht', 'zh' => 'Lucky Vault完整评测', 'es' => 'Lucky Vault: Reseña Completa' ),
+		'verdict' => array( 'en' => 'A solid mobile-first pick for casual players on a budget.', 'de' => 'Eine solide Mobile-First-Wahl für Gelegenheitsspieler mit kleinem Budget.', 'zh' => '预算有限的休闲玩家的可靠移动端优选。', 'es' => 'Una opción sólida centrada en móvil para jugadores casuales con presupuesto limitado.' ),
 		'rating'  => 4.5,
-		'pros'    => array( 'en' => array( 'Great mobile app', 'Weekly cashback', 'Low min. deposit' ), 'de' => array( 'Hervorragende mobile App', 'Wöchentliches Cashback', 'Niedrige Mindesteinzahlung' ), 'zh' => array( '移动应用体验出色', '每周返现', '最低存款额度低' ) ),
-		'cons'    => array( 'en' => array( 'Smaller game library' ), 'de' => array( 'Kleinere Spielauswahl' ), 'zh' => array( '游戏库较小' ) ),
-		'body'    => array( 'en' => 'Our editorial team tested account creation, deposits, withdrawals, and support responsiveness over several weeks before finalizing this review.', 'de' => 'Unser Redaktionsteam hat über mehrere Wochen Kontoerstellung, Ein- und Auszahlungen sowie den Support getestet, bevor dieser Testbericht finalisiert wurde.', 'zh' => '我们的编辑团队在数周内测试了账户注册、存取款和客服响应速度，才最终完成本篇评测。' ) ),
+		'pros'    => array( 'en' => array( 'Great mobile app', 'Weekly cashback', 'Low min. deposit' ), 'de' => array( 'Hervorragende mobile App', 'Wöchentliches Cashback', 'Niedrige Mindesteinzahlung' ), 'zh' => array( '移动应用体验出色', '每周返现', '最低存款额度低' ), 'es' => array( 'Excelente aplicación móvil', 'Reembolso semanal', 'Depósito mínimo bajo' ) ),
+		'cons'    => array( 'en' => array( 'Smaller game library' ), 'de' => array( 'Kleinere Spielauswahl' ), 'zh' => array( '游戏库较小' ), 'es' => array( 'Biblioteca de juegos más pequeña' ) ),
+		'body'    => array( 'en' => 'Our editorial team tested account creation, deposits, withdrawals, and support responsiveness over several weeks before finalizing this review.', 'de' => 'Unser Redaktionsteam hat über mehrere Wochen Kontoerstellung, Ein- und Auszahlungen sowie den Support getestet, bevor dieser Testbericht finalisiert wurde.', 'zh' => '我们的编辑团队在数周内测试了账户注册、存取款和客服响应速度，才最终完成本篇评测。', 'es' => 'Nuestro equipo editorial probó la creación de cuentas, los depósitos, los retiros y la capacidad de respuesta del soporte durante varias semanas antes de finalizar esta reseña.' ) ),
 	array( 'casino' => 5,
-		'title'   => array( 'en' => 'Crimson Ace Casino: Full Review', 'de' => 'Crimson Ace Casino: Vollständiger Testbericht', 'zh' => 'Crimson Ace Casino完整评测' ),
-		'verdict' => array( 'en' => 'Great for slot fans who chase frequent free spin promos.', 'de' => 'Ideal für Slot-Fans, die häufige Freispiel-Aktionen suchen.', 'zh' => '适合喜欢频繁免费旋转活动的老虎机玩家。' ),
+		'title'   => array( 'en' => 'Crimson Ace Casino: Full Review', 'de' => 'Crimson Ace Casino: Vollständiger Testbericht', 'zh' => 'Crimson Ace Casino完整评测', 'es' => 'Crimson Ace Casino: Reseña Completa' ),
+		'verdict' => array( 'en' => 'Great for slot fans who chase frequent free spin promos.', 'de' => 'Ideal für Slot-Fans, die häufige Freispiel-Aktionen suchen.', 'zh' => '适合喜欢频繁免费旋转活动的老虎机玩家。', 'es' => 'Ideal para fans de las tragamonedas que buscan promociones frecuentes de giros gratis.' ),
 		'rating'  => 4.4,
-		'pros'    => array( 'en' => array( 'Huge slot library', 'Frequent free spin drops', 'Fast KYC verification' ), 'de' => array( 'Riesige Slot-Bibliothek', 'Häufige Freispiel-Aktionen', 'Schnelle KYC-Verifizierung' ), 'zh' => array( '老虎机种类丰富', '免费旋转活动频繁', 'KYC验证速度快' ) ),
-		'cons'    => array( 'en' => array( 'Withdrawal cap on weekends' ), 'de' => array( 'Auszahlungslimit am Wochenende' ), 'zh' => array( '周末提款有限额' ) ),
-		'body'    => array( 'en' => 'Our editorial team tested account creation, deposits, withdrawals, and support responsiveness over several weeks before finalizing this review.', 'de' => 'Unser Redaktionsteam hat über mehrere Wochen Kontoerstellung, Ein- und Auszahlungen sowie den Support getestet, bevor dieser Testbericht finalisiert wurde.', 'zh' => '我们的编辑团队在数周内测试了账户注册、存取款和客服响应速度，才最终完成本篇评测。' ) ),
+		'pros'    => array( 'en' => array( 'Huge slot library', 'Frequent free spin drops', 'Fast KYC verification' ), 'de' => array( 'Riesige Slot-Bibliothek', 'Häufige Freispiel-Aktionen', 'Schnelle KYC-Verifizierung' ), 'zh' => array( '老虎机种类丰富', '免费旋转活动频繁', 'KYC验证速度快' ), 'es' => array( 'Enorme biblioteca de tragamonedas', 'Entregas frecuentes de giros gratis', 'Verificación KYC rápida' ) ),
+		'cons'    => array( 'en' => array( 'Withdrawal cap on weekends' ), 'de' => array( 'Auszahlungslimit am Wochenende' ), 'zh' => array( '周末提款有限额' ), 'es' => array( 'Límite de retiro los fines de semana' ) ),
+		'body'    => array( 'en' => 'Our editorial team tested account creation, deposits, withdrawals, and support responsiveness over several weeks before finalizing this review.', 'de' => 'Unser Redaktionsteam hat über mehrere Wochen Kontoerstellung, Ein- und Auszahlungen sowie den Support getestet, bevor dieser Testbericht finalisiert wurde.', 'zh' => '我们的编辑团队在数周内测试了账户注册、存取款和客服响应速度，才最终完成本篇评测。', 'es' => 'Nuestro equipo editorial probó la creación de cuentas, los depósitos, los retiros y la capacidad de respuesta del soporte durante varias semanas antes de finalizar esta reseña.' ) ),
 	array( 'casino' => 7,
-		'title'   => array( 'en' => 'Nova Star Casino: Full Review', 'de' => 'Nova Star Casino: Vollständiger Testbericht', 'zh' => 'Nova Star Casino完整评测' ),
-		'verdict' => array( 'en' => 'A high roller\'s pick, provided you can clear the reload wagering.', 'de' => 'Eine Wahl für High Roller, sofern Sie die Reload-Umsatzanforderung erfüllen können.', 'zh' => '适合高额玩家，前提是能满足充值红利的流水要求。' ),
+		'title'   => array( 'en' => 'Nova Star Casino: Full Review', 'de' => 'Nova Star Casino: Vollständiger Testbericht', 'zh' => 'Nova Star Casino完整评测', 'es' => 'Nova Star Casino: Reseña Completa' ),
+		'verdict' => array( 'en' => 'A high roller\'s pick, provided you can clear the reload wagering.', 'de' => 'Eine Wahl für High Roller, sofern Sie die Reload-Umsatzanforderung erfüllen können.', 'zh' => '适合高额玩家，前提是能满足充值红利的流水要求。', 'es' => 'Una opción para grandes apostadores, siempre que puedas cumplir el requisito de apuesta de la recarga.' ),
 		'rating'  => 4.7,
-		'pros'    => array( 'en' => array( 'High table limits for VIPs', 'Personal account manager', 'Same-day payouts' ), 'de' => array( 'Hohe Tischlimits für VIPs', 'Persönlicher Kundenbetreuer', 'Auszahlung am selben Tag' ), 'zh' => array( 'VIP桌面游戏限额高', '专属客户经理', '当日到账提款' ) ),
-		'cons'    => array( 'en' => array( 'Steep wagering on reload bonuses' ), 'de' => array( 'Hohe Umsatzanforderung bei Reload-Boni' ), 'zh' => array( '充值红利流水要求较高' ) ),
-		'body'    => array( 'en' => 'Our editorial team tested account creation, deposits, withdrawals, and support responsiveness over several weeks before finalizing this review.', 'de' => 'Unser Redaktionsteam hat über mehrere Wochen Kontoerstellung, Ein- und Auszahlungen sowie den Support getestet, bevor dieser Testbericht finalisiert wurde.', 'zh' => '我们的编辑团队在数周内测试了账户注册、存取款和客服响应速度，才最终完成本篇评测。' ) ),
+		'pros'    => array( 'en' => array( 'High table limits for VIPs', 'Personal account manager', 'Same-day payouts' ), 'de' => array( 'Hohe Tischlimits für VIPs', 'Persönlicher Kundenbetreuer', 'Auszahlung am selben Tag' ), 'zh' => array( 'VIP桌面游戏限额高', '专属客户经理', '当日到账提款' ), 'es' => array( 'Límites de mesa altos para VIP', 'Gestor de cuenta personal', 'Pagos el mismo día' ) ),
+		'cons'    => array( 'en' => array( 'Steep wagering on reload bonuses' ), 'de' => array( 'Hohe Umsatzanforderung bei Reload-Boni' ), 'zh' => array( '充值红利流水要求较高' ), 'es' => array( 'Requisito de apuesta elevado en bonos de recarga' ) ),
+		'body'    => array( 'en' => 'Our editorial team tested account creation, deposits, withdrawals, and support responsiveness over several weeks before finalizing this review.', 'de' => 'Unser Redaktionsteam hat über mehrere Wochen Kontoerstellung, Ein- und Auszahlungen sowie den Support getestet, bevor dieser Testbericht finalisiert wurde.', 'zh' => '我们的编辑团队在数周内测试了账户注册、存取款和客服响应速度，才最终完成本篇评测。', 'es' => 'Nuestro equipo editorial probó la creación de cuentas, los depósitos, los retiros y la capacidad de respuesta del soporte durante varias semanas antes de finalizar esta reseña.' ) ),
 	array( 'casino' => 3,
-		'title'   => array( 'en' => 'Diamond Reign: Full Review', 'de' => 'Diamond Reign: Vollständiger Testbericht', 'zh' => 'Diamond Reign完整评测' ),
-		'verdict' => array( 'en' => 'Built for table-game high rollers, not casual slot players.', 'de' => 'Konzipiert für High Roller bei Tischspielen, weniger für gelegentliche Slot-Spieler.', 'zh' => '专为桌面游戏高额玩家打造，而非休闲老虎机玩家。' ),
+		'title'   => array( 'en' => 'Diamond Reign: Full Review', 'de' => 'Diamond Reign: Vollständiger Testbericht', 'zh' => 'Diamond Reign完整评测', 'es' => 'Diamond Reign: Reseña Completa' ),
+		'verdict' => array( 'en' => 'Built for table-game high rollers, not casual slot players.', 'de' => 'Konzipiert für High Roller bei Tischspielen, weniger für gelegentliche Slot-Spieler.', 'zh' => '专为桌面游戏高额玩家打造，而非休闲老虎机玩家。', 'es' => 'Diseñado para grandes apostadores de juegos de mesa, no para jugadores casuales de tragamonedas.' ),
 		'rating'  => 4.3,
-		'pros'    => array( 'en' => array( 'High table limits', 'Dedicated VIP host' ), 'de' => array( 'Hohe Tischlimits', 'Persönlicher VIP-Betreuer' ), 'zh' => array( '桌面游戏限额高', '专属VIP客户经理' ) ),
-		'cons'    => array( 'en' => array( 'Fewer slot providers', 'Wagering 45x' ), 'de' => array( 'Weniger Slot-Anbieter', '45-fache Umsatzanforderung' ), 'zh' => array( '老虎机供应商较少', '流水要求为45倍' ) ),
-		'body'    => array( 'en' => 'Our editorial team tested account creation, deposits, withdrawals, and support responsiveness over several weeks before finalizing this review.', 'de' => 'Unser Redaktionsteam hat über mehrere Wochen Kontoerstellung, Ein- und Auszahlungen sowie den Support getestet, bevor dieser Testbericht finalisiert wurde.', 'zh' => '我们的编辑团队在数周内测试了账户注册、存取款和客服响应速度，才最终完成本篇评测。' ) ),
+		'pros'    => array( 'en' => array( 'High table limits', 'Dedicated VIP host' ), 'de' => array( 'Hohe Tischlimits', 'Persönlicher VIP-Betreuer' ), 'zh' => array( '桌面游戏限额高', '专属VIP客户经理' ), 'es' => array( 'Límites de mesa altos', 'Anfitrión VIP dedicado' ) ),
+		'cons'    => array( 'en' => array( 'Fewer slot providers', 'Wagering 45x' ), 'de' => array( 'Weniger Slot-Anbieter', '45-fache Umsatzanforderung' ), 'zh' => array( '老虎机供应商较少', '流水要求为45倍' ), 'es' => array( 'Menos proveedores de tragamonedas', 'Requisito de apuesta de 45x' ) ),
+		'body'    => array( 'en' => 'Our editorial team tested account creation, deposits, withdrawals, and support responsiveness over several weeks before finalizing this review.', 'de' => 'Unser Redaktionsteam hat über mehrere Wochen Kontoerstellung, Ein- und Auszahlungen sowie den Support getestet, bevor dieser Testbericht finalisiert wurde.', 'zh' => '我们的编辑团队在数周内测试了账户注册、存取款和客服响应速度，才最终完成本篇评测。', 'es' => 'Nuestro equipo editorial probó la creación de cuentas, los depósitos, los retiros y la capacidad de respuesta del soporte durante varias semanas antes de finalizar esta reseña.' ) ),
 );
 
 foreach ( $review_defs as $r ) {
 	$per_lang = array();
-	foreach ( array( 'en', 'de', 'zh' ) as $lang ) {
+	foreach ( array( 'en', 'de', 'zh', 'es' ) as $lang ) {
 		$title = $r['title'][ $lang ];
 		$per_lang[ $lang ] = array(
 			'args' => array(
@@ -1074,19 +1119,19 @@ foreach ( $review_defs as $r ) {
 
 $tournament_defs = array(
 	array( 'casino' => 0, 'type' => 'Slot Race', 'entries' => '8,400',
-		'title'  => array( 'en' => '$50,000 Slot Race', 'de' => '50.000 $ Slot-Race', 'zh' => '5万美元老虎机竞赛' ),
-		'prize'  => array( 'en' => '$50,000', 'de' => '50.000 $', 'zh' => '5万美元' ),
-		'status' => array( 'en' => 'Ends in 2d 14h', 'de' => 'Endet in 2T 14Std', 'zh' => '2天14小时后结束' ),
+		'title'  => array( 'en' => '$50,000 Slot Race', 'de' => '50.000 $ Slot-Race', 'zh' => '5万美元老虎机竞赛', 'es' => 'Carrera de Tragamonedas de $50.000' ),
+		'prize'  => array( 'en' => '$50,000', 'de' => '50.000 $', 'zh' => '5万美元', 'es' => '$50.000' ),
+		'status' => array( 'en' => 'Ends in 2d 14h', 'de' => 'Endet in 2T 14Std', 'zh' => '2天14小时后结束', 'es' => 'Termina en 2d 14h' ),
 		'leaderboard' => array( 'PlayerX_92 | 184,200 | $10,000', 'SpinQueen | 171,900 | $6,000', 'ReelDeal88 | 160,440 | $4,000', 'LuckyStrike | 148,010 | $2,500', 'Vault_Runner | 139,770 | $1,500' ) ),
 	array( 'casino' => 2, 'type' => 'Table Game Ladder', 'entries' => '2,100',
-		'title'  => array( 'en' => 'Blackjack Ladder', 'de' => 'Blackjack-Rangliste', 'zh' => '21点排位赛' ),
-		'prize'  => array( 'en' => '$12,000', 'de' => '12.000 $', 'zh' => '1.2万美元' ),
-		'status' => array( 'en' => 'Ends in 5d 2h', 'de' => 'Endet in 5T 2Std', 'zh' => '5天2小时后结束' ),
+		'title'  => array( 'en' => 'Blackjack Ladder', 'de' => 'Blackjack-Rangliste', 'zh' => '21点排位赛', 'es' => 'Ranking de Blackjack' ),
+		'prize'  => array( 'en' => '$12,000', 'de' => '12.000 $', 'zh' => '1.2万美元', 'es' => '$12.000' ),
+		'status' => array( 'en' => 'Ends in 5d 2h', 'de' => 'Endet in 5T 2Std', 'zh' => '5天2小时后结束', 'es' => 'Termina en 5d 2h' ),
 		'leaderboard' => array() ),
 	array( 'casino' => 1, 'type' => 'Free Roll', 'entries' => '0',
-		'title'  => array( 'en' => 'Weekend Free Roll', 'de' => 'Wochenend-Freeroll', 'zh' => '周末免费锦标赛' ),
-		'prize'  => array( 'en' => 'Free entry', 'de' => 'Kostenlose Teilnahme', 'zh' => '免费参赛' ),
-		'status' => array( 'en' => 'Starts in 1d', 'de' => 'Startet in 1T', 'zh' => '1天后开始' ),
+		'title'  => array( 'en' => 'Weekend Free Roll', 'de' => 'Wochenend-Freeroll', 'zh' => '周末免费锦标赛', 'es' => 'Torneo Gratuito de Fin de Semana' ),
+		'prize'  => array( 'en' => 'Free entry', 'de' => 'Kostenlose Teilnahme', 'zh' => '免费参赛', 'es' => 'Entrada gratuita' ),
+		'status' => array( 'en' => 'Starts in 1d', 'de' => 'Startet in 1T', 'zh' => '1天后开始', 'es' => 'Comienza en 1d' ),
 		'leaderboard' => array() ),
 );
 
@@ -1094,12 +1139,13 @@ $tournament_body_tpl = array(
 	'en' => fn( $title, $casino ) => $title . ' is a leaderboard race at ' . $casino . '. Climb the leaderboard by playing eligible games during the tournament window — prizes are paid out automatically at the end.',
 	'de' => fn( $title, $casino ) => $title . ' ist ein Rangliste-Turnier bei ' . $casino . '. Klettern Sie die Rangliste hoch, indem Sie während des Turnierzeitraums teilnahmeberechtigte Spiele spielen — die Preise werden am Ende automatisch ausgezahlt.',
 	'zh' => fn( $title, $casino ) => $title . '是' . $casino . '举办的排行榜竞赛。在锦标赛期间参与符合条件的游戏即可提升排名——奖金将在结束时自动发放。',
+	'es' => fn( $title, $casino ) => $title . ' es una carrera de clasificación en ' . $casino . '. Sube en la clasificación jugando los juegos elegibles durante el período del torneo — los premios se pagan automáticamente al finalizar.',
 );
 
 foreach ( $tournament_defs as $t ) {
 	$thumb_id = ww_seed_contextual_image( $t['title']['en'], sanitize_title( $t['title']['en'] ) . '-thumb', ww_image_keywords( $t['type'] ), '#45332b', $t['title']['en'] );
 	$per_lang = array();
-	foreach ( array( 'en', 'de', 'zh' ) as $lang ) {
+	foreach ( array( 'en', 'de', 'zh', 'es' ) as $lang ) {
 		$title      = $t['title'][ $lang ];
 		$casino_id  = ww_casino_id( $casino_ids_i18n, $t['casino'], $lang );
 		$casino_nm  = $casino_id ? get_the_title( $casino_id ) : '';
@@ -1134,27 +1180,30 @@ $complaint_defs = array(
 			'en' => "Player's \$1,400 withdrawal, stuck for 19 days, was released after our team intervened.",
 			'de' => 'Die Auszahlung eines Spielers in Höhe von 1.400 $, die 19 Tage lang feststeckte, wurde nach Eingreifen unseres Teams freigegeben.',
 			'zh' => '一名玩家1400美元的提款申请被搁置19天，经我们团队介入后成功放行。',
+			'es' => "El retiro de \$1.400 de un jugador, atascado durante 19 días, fue liberado tras la intervención de nuestro equipo.",
 		),
-		'outcome' => array( 'en' => 'Full refund', 'de' => 'Vollständige Rückerstattung', 'zh' => '全额退还' ) ),
+		'outcome' => array( 'en' => 'Full refund', 'de' => 'Vollständige Rückerstattung', 'zh' => '全额退还', 'es' => 'Reembolso completo' ) ),
 	array( 'case' => '4798', 'casino' => 1, 'issue' => 'Bonus Dispute', 'amount' => '$300', 'recovered' => 300, 'filed_days_ago' => 20, 'resolved_days_ago' => 14,
 		'summary' => array(
 			'en' => "Wagering requirement was miscalculated by the casino's system; balance corrected in the player's favor.",
 			'de' => 'Die Umsatzanforderung wurde vom System des Casinos falsch berechnet; das Guthaben wurde zugunsten des Spielers korrigiert.',
 			'zh' => '赌场系统误算了流水要求；余额已按有利于玩家的方向更正。',
+			'es' => "El sistema del casino calculó mal el requisito de apuesta; el saldo fue corregido a favor del jugador.",
 		),
-		'outcome' => array( 'en' => 'Balance corrected', 'de' => 'Guthaben korrigiert', 'zh' => '余额已更正' ) ),
+		'outcome' => array( 'en' => 'Balance corrected', 'de' => 'Guthaben korrigiert', 'zh' => '余额已更正', 'es' => 'Saldo corregido' ) ),
 	array( 'case' => '4771', 'casino' => 2, 'issue' => 'Account Closure', 'amount' => '$0', 'recovered' => 0, 'filed_days_ago' => 35, 'resolved_days_ago' => 4,
 		'summary' => array(
 			'en' => 'Account was frozen pending KYC for over 30 days; documents were re-reviewed and the account reinstated.',
 			'de' => 'Das Konto war über 30 Tage lang wegen ausstehender KYC-Prüfung gesperrt; die Unterlagen wurden erneut geprüft und das Konto reaktiviert.',
 			'zh' => '账户因KYC审核搁置超过30天；文件经重新审核后账户已恢复。',
+			'es' => 'La cuenta estuvo congelada en espera de KYC durante más de 30 días; los documentos fueron revisados nuevamente y la cuenta fue restablecida.',
 		),
-		'outcome' => array( 'en' => 'Account reinstated', 'de' => 'Konto reaktiviert', 'zh' => '账户已恢复' ) ),
+		'outcome' => array( 'en' => 'Account reinstated', 'de' => 'Konto reaktiviert', 'zh' => '账户已恢复', 'es' => 'Cuenta restablecida' ) ),
 );
 
 foreach ( $complaint_defs as $c ) {
 	$per_lang = array();
-	foreach ( array( 'en', 'de', 'zh' ) as $lang ) {
+	foreach ( array( 'en', 'de', 'zh', 'es' ) as $lang ) {
 		$casino_id = ww_casino_id( $casino_ids_i18n, $c['casino'], $lang );
 		$per_lang[ $lang ] = array(
 			'args' => array(
@@ -1187,30 +1236,33 @@ foreach ( $complaint_defs as $c ) {
 
 $player_review_defs = array(
 	array( 'casino' => 0, 'rating' => 5,
-		'author' => array( 'en' => 'Marcus T.', 'de' => 'Markus T.', 'zh' => '陈先生' ),
+		'author' => array( 'en' => 'Marcus T.', 'de' => 'Markus T.', 'zh' => '陈先生', 'es' => 'Marcos T.' ),
 		'text'   => array(
 			'en' => 'Withdrew a large sum in under 24 hours with zero back-and-forth. Support actually answered in under 5 minutes.',
 			'de' => 'Habe eine große Summe in unter 24 Stunden ohne Rückfragen ausgezahlt bekommen. Der Support hat tatsächlich in unter 5 Minuten geantwortet.',
 			'zh' => '不到24小时就提现了一大笔钱，全程无需反复沟通。客服在5分钟内就回复了。',
+			'es' => 'Retiré una suma importante en menos de 24 horas sin ningún tipo de trámite adicional. El soporte respondió en menos de 5 minutos.',
 		) ),
 	array( 'casino' => 1, 'rating' => 4,
-		'author' => array( 'en' => 'Priya K.', 'de' => 'Petra K.', 'zh' => '李女士' ),
+		'author' => array( 'en' => 'Priya K.', 'de' => 'Petra K.', 'zh' => '李女士', 'es' => 'Paula K.' ),
 		'text'   => array(
 			'en' => 'Great game selection and live dealer tables. Deposit bonus terms were clear upfront, no surprise wagering traps.',
 			'de' => 'Tolle Spielauswahl und Live-Dealer-Tische. Die Bonusbedingungen für die Einzahlung waren von Anfang an klar, keine versteckten Umsatzfallen.',
 			'zh' => '游戏种类丰富，真人荷官桌台也不错。存款红利条款一开始就写得很清楚，没有隐藏的流水陷阱。',
+			'es' => 'Excelente selección de juegos y mesas de crupier en vivo. Las condiciones del bono de depósito quedaron claras desde el principio, sin trampas de apuesta inesperadas.',
 		) ),
 	array( 'casino' => 2, 'rating' => 3,
-		'author' => array( 'en' => 'Daniel W.', 'de' => 'Daniel W.', 'zh' => '王先生' ),
+		'author' => array( 'en' => 'Daniel W.', 'de' => 'Daniel W.', 'zh' => '王先生', 'es' => 'Daniel W.' ),
 		'text'   => array(
 			'en' => 'KYC took longer than advertised but support was responsive once I followed up.',
 			'de' => 'Die KYC-Prüfung dauerte länger als angekündigt, aber der Support war reaktionsschnell, sobald ich nachgefragt habe.',
 			'zh' => 'KYC审核时间比宣传的要长，但我主动跟进后客服反应还算及时。',
+			'es' => 'El KYC tardó más de lo anunciado, pero el soporte respondió rápido en cuanto hice seguimiento.',
 		) ),
 );
 
 foreach ( $player_review_defs as $r ) {
-	foreach ( array( 'en', 'de', 'zh' ) as $lang ) {
+	foreach ( array( 'en', 'de', 'zh', 'es' ) as $lang ) {
 		$casino_id = ww_casino_id( $casino_ids_i18n, $r['casino'], $lang );
 		if ( ! $casino_id ) {
 			continue;
@@ -1241,30 +1293,35 @@ $home_ids = ww_seed_post_i18n( array(
 	'en' => array( 'args' => array( 'post_type' => 'page', 'post_title' => 'Home', 'post_content' => wagerwise_homepage_pattern_markup(), 'post_status' => 'publish', 'post_name' => 'home' ) ),
 	'de' => array( 'args' => array( 'post_type' => 'page', 'post_title' => 'Startseite', 'post_content' => wagerwise_homepage_pattern_markup( 'de' ), 'post_status' => 'publish', 'post_name' => 'startseite' ) ),
 	'zh' => array( 'args' => array( 'post_type' => 'page', 'post_title' => '首页', 'post_content' => wagerwise_homepage_pattern_markup( 'zh' ), 'post_status' => 'publish', 'post_name' => sanitize_title( '首页' ) ) ),
+	'es' => array( 'args' => array( 'post_type' => 'page', 'post_title' => 'Inicio', 'post_content' => wagerwise_homepage_pattern_markup( 'es' ), 'post_status' => 'publish', 'post_name' => 'inicio' ) ),
 ) );
 
 ww_seed_post_i18n( array(
 	'en' => array( 'args' => array( 'post_type' => 'page', 'post_title' => 'Guide', 'post_content' => wagerwise_guide_page_markup(), 'post_status' => 'publish', 'post_name' => 'guide' ) ),
 	'de' => array( 'args' => array( 'post_type' => 'page', 'post_title' => 'Ratgeber', 'post_content' => wagerwise_guide_page_markup( 'de' ), 'post_status' => 'publish', 'post_name' => 'ratgeber' ) ),
 	'zh' => array( 'args' => array( 'post_type' => 'page', 'post_title' => '指南', 'post_content' => wagerwise_guide_page_markup( 'zh' ), 'post_status' => 'publish', 'post_name' => sanitize_title( '指南' ) ) ),
+	'es' => array( 'args' => array( 'post_type' => 'page', 'post_title' => 'Guía', 'post_content' => wagerwise_guide_page_markup( 'es' ), 'post_status' => 'publish', 'post_name' => 'guia' ) ),
 ) );
 
 ww_seed_post_i18n( array(
 	'en' => array( 'args' => array( 'post_type' => 'page', 'post_title' => 'News', 'post_content' => wagerwise_news_page_markup(), 'post_status' => 'publish', 'post_name' => 'news' ) ),
 	'de' => array( 'args' => array( 'post_type' => 'page', 'post_title' => 'Neuigkeiten', 'post_content' => wagerwise_news_page_markup( 'de' ), 'post_status' => 'publish', 'post_name' => 'neuigkeiten' ) ),
 	'zh' => array( 'args' => array( 'post_type' => 'page', 'post_title' => '资讯', 'post_content' => wagerwise_news_page_markup( 'zh' ), 'post_status' => 'publish', 'post_name' => sanitize_title( '资讯' ) ) ),
+	'es' => array( 'args' => array( 'post_type' => 'page', 'post_title' => 'Noticias', 'post_content' => wagerwise_news_page_markup( 'es' ), 'post_status' => 'publish', 'post_name' => 'noticias' ) ),
 ) );
 
 ww_seed_post_i18n( array(
 	'en' => array( 'args' => array( 'post_type' => 'page', 'post_title' => 'Reviews', 'post_content' => wagerwise_reviews_page_markup(), 'post_status' => 'publish', 'post_name' => 'reviews' ) ),
 	'de' => array( 'args' => array( 'post_type' => 'page', 'post_title' => 'Testberichte', 'post_content' => wagerwise_reviews_page_markup( 'de' ), 'post_status' => 'publish', 'post_name' => 'testberichte' ) ),
 	'zh' => array( 'args' => array( 'post_type' => 'page', 'post_title' => '评测', 'post_content' => wagerwise_reviews_page_markup( 'zh' ), 'post_status' => 'publish', 'post_name' => sanitize_title( '评测' ) ) ),
+	'es' => array( 'args' => array( 'post_type' => 'page', 'post_title' => 'Reseñas', 'post_content' => wagerwise_reviews_page_markup( 'es' ), 'post_status' => 'publish', 'post_name' => 'resenas' ) ),
 ) );
 
 ww_seed_post_i18n( array(
 	'en' => array( 'args' => array( 'post_type' => 'page', 'post_title' => 'Complaints', 'post_content' => wagerwise_complaints_page_markup(), 'post_status' => 'publish', 'post_name' => 'complaints' ) ),
 	'de' => array( 'args' => array( 'post_type' => 'page', 'post_title' => 'Beschwerden', 'post_content' => wagerwise_complaints_page_markup( 'de' ), 'post_status' => 'publish', 'post_name' => 'beschwerden' ) ),
 	'zh' => array( 'args' => array( 'post_type' => 'page', 'post_title' => '投诉', 'post_content' => wagerwise_complaints_page_markup( 'zh' ), 'post_status' => 'publish', 'post_name' => sanitize_title( '投诉' ) ) ),
+	'es' => array( 'args' => array( 'post_type' => 'page', 'post_title' => 'Quejas', 'post_content' => wagerwise_complaints_page_markup( 'es' ), 'post_status' => 'publish', 'post_name' => 'quejas' ) ),
 ) );
 
 $legal_pages = array(
@@ -1272,37 +1329,43 @@ $legal_pages = array(
 		'en' => array( 'title' => 'About Us', 'content' => '<p>CasinoRadar is an independent casino review site. Our mission is to help players find trustworthy, well-regulated online casinos through honest, thoroughly researched reviews.</p>' ),
 		'de' => array( 'title' => 'Über Uns', 'content' => '<p>CasinoRadar ist eine unabhängige Casino-Bewertungsseite. Unsere Mission ist es, Spielern zu helfen, vertrauenswürdige, gut regulierte Online-Casinos durch ehrliche, gründlich recherchierte Testberichte zu finden.</p>' ),
 		'zh' => array( 'title' => '关于我们', 'content' => '<p>CasinoRadar是一家独立的赌场评测网站。我们的使命是通过诚实、深入调研的评测，帮助玩家找到值得信赖、监管完善的在线赌场。</p>' ),
+		'es' => array( 'title' => 'Sobre Nosotros', 'content' => '<p>CasinoRadar es un sitio independiente de reseñas de casinos. Nuestra misión es ayudar a los jugadores a encontrar casinos online confiables y bien regulados a través de reseñas honestas y exhaustivamente investigadas.</p>' ),
 	),
 	'How We Review Casinos' => array(
 		'en' => array( 'title' => 'How We Review Casinos', 'content' => "<p>Every casino listed on CasinoRadar goes through the same evaluation process before it earns a rating. We look at licensing and regulation, the speed and reliability of withdrawals, the fairness of bonus terms and wagering requirements, the breadth of the game library, and the responsiveness of customer support.</p><p>Our rating is a starting point for your own research, not a guarantee — always read a casino's current terms and conditions directly before depositing.</p>" ),
 		'de' => array( 'title' => 'Wie Wir Casinos Bewerten', 'content' => '<p>Jedes auf CasinoRadar gelistete Casino durchläuft denselben Bewertungsprozess, bevor es eine Wertung erhält. Wir prüfen Lizenzierung und Regulierung, die Geschwindigkeit und Zuverlässigkeit von Auszahlungen, die Fairness der Bonusbedingungen und Umsatzanforderungen, die Breite der Spielbibliothek sowie die Reaktionsfähigkeit des Kundensupports.</p><p>Unsere Bewertung ist ein Ausgangspunkt für Ihre eigene Recherche, keine Garantie — lesen Sie immer die aktuellen Geschäftsbedingungen eines Casinos direkt, bevor Sie einzahlen.</p>' ),
 		'zh' => array( 'title' => '我们的评测方式', 'content' => '<p>每一家在CasinoRadar上架的赌场，都需经过相同的评估流程才能获得评级。我们考察牌照与监管、提款速度与可靠性、红利条款与流水要求的公平性、游戏库的丰富程度，以及客服的响应速度。</p><p>我们的评级仅作为您自行研究的起点，而非保证——存款前请务必直接查阅赌场当前的条款与条件。</p>' ),
+		'es' => array( 'title' => 'Cómo Evaluamos los Casinos', 'content' => "<p>Cada casino listado en CasinoRadar pasa por el mismo proceso de evaluación antes de recibir una calificación. Analizamos la licencia y regulación, la velocidad y fiabilidad de los retiros, la equidad de las condiciones de bono y los requisitos de apuesta, la amplitud de la biblioteca de juegos y la capacidad de respuesta del servicio de atención al cliente.</p><p>Nuestra calificación es un punto de partida para tu propia investigación, no una garantía — lee siempre los términos y condiciones actuales de un casino directamente antes de depositar.</p>" ),
 	),
 	'Responsible Gambling' => array(
 		'en' => array( 'title' => 'Responsible Gambling', 'content' => '<p>Gambling should always be fun, not a way to make money. If you feel you may have a gambling problem, resources like BeGambleAware and GamCare are available to help. Must be 18+.</p>' ),
 		'de' => array( 'title' => 'Verantwortungsvolles Spielen', 'content' => '<p>Glücksspiel sollte immer Unterhaltung sein, kein Weg, um Geld zu verdienen. Wenn Sie glauben, ein Glücksspielproblem zu haben, stehen Ihnen Angebote wie die BZgA-Beratung zur Verfügung. Nur ab 18 Jahren.</p>' ),
 		'zh' => array( 'title' => '负责任博彩', 'content' => '<p>博彩应始终以娱乐为目的，而非赚钱的手段。如果您认为自己可能有博彩问题，可寻求相关求助资源的帮助。仅限18岁以上人士参与。</p>' ),
+		'es' => array( 'title' => 'Juego Responsable', 'content' => '<p>El juego siempre debe ser diversión, no una forma de ganar dinero. Si crees que puedes tener un problema de ludopatía, existen recursos disponibles para ayudarte. Debes ser mayor de 18 años.</p>' ),
 	),
 	'Privacy Policy' => array(
 		'en' => array( 'title' => 'Privacy Policy', 'content' => '<p>This page describes how CasinoRadar collects and uses information. Replace this placeholder with your actual privacy policy before launch.</p>' ),
 		'de' => array( 'title' => 'Datenschutzerklärung', 'content' => '<p>Diese Seite beschreibt, wie CasinoRadar Informationen erhebt und verwendet. Ersetzen Sie diesen Platzhalter vor dem Launch durch Ihre tatsächliche Datenschutzerklärung.</p>' ),
 		'zh' => array( 'title' => '隐私政策', 'content' => '<p>本页面说明CasinoRadar如何收集和使用信息。上线前请将此占位内容替换为实际的隐私政策。</p>' ),
+		'es' => array( 'title' => 'Política de Privacidad', 'content' => '<p>Esta página describe cómo CasinoRadar recopila y utiliza la información. Reemplaza este contenido de marcador de posición con tu política de privacidad real antes del lanzamiento.</p>' ),
 	),
 	'Terms & Affiliate Disclosure' => array(
 		'en' => array( 'title' => 'Terms & Affiliate Disclosure', 'content' => "<p>CasinoRadar may receive a commission when you sign up with an operator through links on this site. This never affects the objectivity of our reviews or rankings.</p>" ),
 		'de' => array( 'title' => 'Bedingungen & Partnerprogramm-Offenlegung', 'content' => '<p>CasinoRadar erhält möglicherweise eine Provision, wenn Sie sich über Links auf dieser Seite bei einem Anbieter anmelden. Dies beeinflusst niemals die Objektivität unserer Testberichte oder Rankings.</p>' ),
 		'zh' => array( 'title' => '条款与联盟披露', 'content' => '<p>当您通过本网站的链接在运营商处注册时，CasinoRadar可能会获得佣金。这绝不会影响我们评测或排名的客观性。</p>' ),
+		'es' => array( 'title' => 'Términos y Divulgación de Afiliados', 'content' => '<p>CasinoRadar puede recibir una comisión cuando te registras con un operador a través de los enlaces de este sitio. Esto nunca afecta la objetividad de nuestras reseñas ni clasificaciones.</p>' ),
 	),
 	'Contact' => array(
 		'en' => array( 'title' => 'Contact', 'content' => '<p>Have a question or found an error in a review? Reach out to our editorial team — we read every message.</p>' ),
 		'de' => array( 'title' => 'Kontakt', 'content' => '<p>Haben Sie eine Frage oder einen Fehler in einem Testbericht gefunden? Kontaktieren Sie unser Redaktionsteam — wir lesen jede Nachricht.</p>' ),
 		'zh' => array( 'title' => '联系我们', 'content' => '<p>有任何疑问，或在评测中发现错误？请联系我们的编辑团队——我们会阅读每一条留言。</p>' ),
+		'es' => array( 'title' => 'Contacto', 'content' => '<p>¿Tienes una pregunta o encontraste un error en una reseña? Contacta a nuestro equipo editorial — leemos cada mensaje.</p>' ),
 	),
 );
 
 foreach ( $legal_pages as $key => $variants ) {
 	$per_lang = array();
-	foreach ( array( 'en', 'de', 'zh' ) as $lang ) {
+	foreach ( array( 'en', 'de', 'zh', 'es' ) as $lang ) {
 		$v = $variants[ $lang ];
 		$per_lang[ $lang ] = array(
 			'args' => array(
@@ -1334,31 +1397,31 @@ if ( false === get_option( 'ww_site_disclaimer', false ) ) {
 
 if ( class_exists( 'PLL_MO' ) && function_exists( 'pll_register_string' ) ) {
 	$ui_strings = array(
-		'Home'                     => array( 'de' => 'Startseite', 'zh' => '首页' ),
-		'Online Casinos'           => array( 'de' => 'Online Casinos', 'zh' => '在线赌场' ),
-		'Games'                    => array( 'de' => 'Spiele', 'zh' => '游戏' ),
-		'Bonuses'                  => array( 'de' => 'Boni', 'zh' => '红利' ),
-		'Guide'                    => array( 'de' => 'Ratgeber', 'zh' => '指南' ),
-		'Complaints'               => array( 'de' => 'Beschwerden', 'zh' => '投诉' ),
-		'Reviews'                  => array( 'de' => 'Testberichte', 'zh' => '评测' ),
-		'Tournaments'              => array( 'de' => 'Turniere', 'zh' => '锦标赛' ),
-		'News'                     => array( 'de' => 'Neuigkeiten', 'zh' => '资讯' ),
-		'Join Free'                => array( 'de' => 'Kostenlos Beitreten', 'zh' => '免费加入' ),
-		'Play Now'                 => array( 'de' => 'Jetzt Spielen', 'zh' => '立即游玩' ),
-		'Claim Bonus'              => array( 'de' => 'Bonus Sichern', 'zh' => '领取红利' ),
-		'Visit Casino'             => array( 'de' => 'Casino Besuchen', 'zh' => '访问赌场' ),
-		'Are you 18 or older?'     => array( 'de' => 'Sind Sie 18 Jahre oder älter?', 'zh' => '您是否年满18岁？' ),
-		"Yes, I'm 18+"             => array( 'de' => 'Ja, ich bin 18+', 'zh' => '是的，我已满18岁' ),
-		'Leave Site'               => array( 'de' => 'Seite Verlassen', 'zh' => '离开网站' ),
-		'© 2026 CasinoRadar. 18+. Play responsibly.' => array( 'de' => '© 2026 CasinoRadar. 18+. Bitte verantwortungsvoll spielen.', 'zh' => '© 2026 CasinoRadar。18岁以上。请理性博彩。' ),
-		'No featured picks in this category yet.' => array( 'de' => 'In dieser Kategorie noch keine Top-Empfehlungen.', 'zh' => '该类别暂无精选推荐。' ),
+		'Home'                     => array( 'de' => 'Startseite', 'zh' => '首页', 'es' => 'Inicio' ),
+		'Online Casinos'           => array( 'de' => 'Online Casinos', 'zh' => '在线赌场', 'es' => 'Casinos Online' ),
+		'Games'                    => array( 'de' => 'Spiele', 'zh' => '游戏', 'es' => 'Juegos' ),
+		'Bonuses'                  => array( 'de' => 'Boni', 'zh' => '红利', 'es' => 'Bonos' ),
+		'Guide'                    => array( 'de' => 'Ratgeber', 'zh' => '指南', 'es' => 'Guía' ),
+		'Complaints'               => array( 'de' => 'Beschwerden', 'zh' => '投诉', 'es' => 'Quejas' ),
+		'Reviews'                  => array( 'de' => 'Testberichte', 'zh' => '评测', 'es' => 'Reseñas' ),
+		'Tournaments'              => array( 'de' => 'Turniere', 'zh' => '锦标赛', 'es' => 'Torneos' ),
+		'News'                     => array( 'de' => 'Neuigkeiten', 'zh' => '资讯', 'es' => 'Noticias' ),
+		'Join Free'                => array( 'de' => 'Kostenlos Beitreten', 'zh' => '免费加入', 'es' => 'Únete Gratis' ),
+		'Play Now'                 => array( 'de' => 'Jetzt Spielen', 'zh' => '立即游玩', 'es' => 'Jugar Ahora' ),
+		'Claim Bonus'              => array( 'de' => 'Bonus Sichern', 'zh' => '领取红利', 'es' => 'Reclamar Bono' ),
+		'Visit Casino'             => array( 'de' => 'Casino Besuchen', 'zh' => '访问赌场', 'es' => 'Visitar Casino' ),
+		'Are you 18 or older?'     => array( 'de' => 'Sind Sie 18 Jahre oder älter?', 'zh' => '您是否年满18岁？', 'es' => '¿Tienes 18 años o más?' ),
+		"Yes, I'm 18+"             => array( 'de' => 'Ja, ich bin 18+', 'zh' => '是的，我已满18岁', 'es' => 'Sí, tengo 18+' ),
+		'Leave Site'               => array( 'de' => 'Seite Verlassen', 'zh' => '离开网站', 'es' => 'Salir del Sitio' ),
+		'© 2026 CasinoRadar. 18+. Play responsibly.' => array( 'de' => '© 2026 CasinoRadar. 18+. Bitte verantwortungsvoll spielen.', 'zh' => '© 2026 CasinoRadar。18岁以上。请理性博彩。', 'es' => '© 2026 CasinoRadar. 18+. Juega con responsabilidad.' ),
+		'No featured picks in this category yet.' => array( 'de' => 'In dieser Kategorie noch keine Top-Empfehlungen.', 'zh' => '该类别暂无精选推荐。', 'es' => 'Aún no hay opciones destacadas en esta categoría.' ),
 	);
 
 	foreach ( $ui_strings as $en_string => $translations ) {
 		pll_register_string( 'wagerwise-' . sanitize_title( $en_string ), $en_string, 'WagerWise', false );
 	}
 
-	foreach ( array( 'de', 'zh' ) as $lang_slug ) {
+	foreach ( array( 'de', 'zh', 'es' ) as $lang_slug ) {
 		$language = PLL()->model->get_language( $lang_slug );
 		if ( ! $language ) {
 			continue;
