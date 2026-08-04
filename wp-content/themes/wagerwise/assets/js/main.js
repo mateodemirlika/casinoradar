@@ -240,7 +240,7 @@
 			if ( ! links.length ) {
 				return;
 			}
-			links[ Math.max( 0, Math.min( index, links.length - 1 ) ) ].focus();
+			focusNoScroll( links[ Math.max( 0, Math.min( index, links.length - 1 ) ) ] );
 		};
 
 		var filterList = function ( query ) {
@@ -256,13 +256,52 @@
 			}
 		};
 
+		// Toggling .is-open flips .ww-header's transform/backdrop-filter to
+		// `none` (via the :has() rule in main.css, so the switcher's mobile
+		// sheet — position:fixed — doesn't get re-anchored to a transformed/
+		// filtered ancestor instead of the viewport). That rule also turns
+		// off .ww-header's transition while .is-open is present, which
+		// suppresses the fade on the way IN — but the instant .is-open is
+		// removed again on close, :has() stops matching and the header's
+		// NORMAL (animated) transition takes back over right as the value
+		// changes back, fading the blur/transform back in. Suspending the
+		// header's transition here, symmetrically, around BOTH the add and
+		// the remove closes that gap without touching how it animates on
+		// an actual scroll the rest of the time.
+		// The header is position:sticky, so it's already fully visible
+		// on-screen at any scroll position — but a plain .focus() call
+		// still triggers the browser's default "scroll the element into
+		// view" behavior based on where it WOULD sit in normal document
+		// flow (i.e. the very top of the page), snapping scrollY to 0 out
+		// from under the visitor. Confirmed directly: calling
+		// trigger.focus() alone, with no other code involved, moved
+		// scrollY from 400 to 0. { preventScroll: true } is exactly the
+		// browser-native way to keep the focus move without that side
+		// effect, so every focus() call in this component uses it.
+		var focusNoScroll = function ( el ) {
+			if ( el ) {
+				el.focus( { preventScroll: true } );
+			}
+		};
+
+		var toggleOpenClass = function ( shouldBeOpen ) {
+			if ( header ) {
+				header.style.transition = 'none';
+			}
+			root.classList.toggle( 'is-open', shouldBeOpen );
+			if ( header ) {
+				void header.offsetWidth; // eslint-disable-line no-void -- force a reflow so the instant state above actually commits before transitions are restored
+				header.style.transition = '';
+			}
+		};
+
 		var open = function () {
 			if ( isOpen ) {
 				return;
 			}
 			isOpen = true;
 			openWidth = window.innerWidth;
-			root.classList.add( 'is-open' );
+			toggleOpenClass( true );
 			trigger.setAttribute( 'aria-expanded', 'true' );
 			if ( search ) {
 				search.value = '';
@@ -271,11 +310,11 @@
 				// Safari doesn't jump-scroll the page to bring the
 				// about-to-be-focused (still translating into place) input
 				// into view.
-				window.setTimeout( function () { search.focus(); }, 60 );
+				window.setTimeout( function () { focusNoScroll( search ); }, 60 );
 			} else {
 				var current = root.querySelector( '.ww-lang-switcher__item.is-active a' ) || visibleLinks()[ 0 ];
 				if ( current ) {
-					window.setTimeout( function () { current.focus(); }, 60 );
+					window.setTimeout( function () { focusNoScroll( current ); }, 60 );
 				}
 			}
 		};
@@ -285,10 +324,10 @@
 				return;
 			}
 			isOpen = false;
-			root.classList.remove( 'is-open' );
+			toggleOpenClass( false );
 			trigger.setAttribute( 'aria-expanded', 'false' );
 			if ( false !== returnFocus ) {
-				trigger.focus();
+				focusNoScroll( trigger );
 			}
 		};
 
@@ -337,10 +376,10 @@
 				var last = focusable[ focusable.length - 1 ];
 				if ( e.shiftKey && document.activeElement === first ) {
 					e.preventDefault();
-					last.focus();
+					focusNoScroll( last );
 				} else if ( ! e.shiftKey && document.activeElement === last ) {
 					e.preventDefault();
-					first.focus();
+					focusNoScroll( first );
 				}
 				return;
 			}
@@ -358,7 +397,7 @@
 			} else if ( 'ArrowUp' === e.key ) {
 				e.preventDefault();
 				if ( index <= 0 ) {
-					search ? search.focus() : focusAt( links.length - 1, links ); // eslint-disable-line no-unused-expressions
+					search ? focusNoScroll( search ) : focusAt( links.length - 1, links ); // eslint-disable-line no-unused-expressions
 				} else {
 					focusAt( index - 1, links );
 				}
