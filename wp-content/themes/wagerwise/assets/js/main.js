@@ -30,20 +30,34 @@
 	var backToTop = document.getElementById( 'ww-back-to-top' );
 	if ( header ) {
 		var lastScrollY = window.scrollY;
+		// Scroll events fire on every pixel of movement, and real scroll
+		// gestures are never perfectly monotonic — momentum scrolling,
+		// rubber-banding at the top/bottom, even ordinary trackpad jitter
+		// all produce brief 1-2px reversals mid-gesture. Comparing every
+		// tick straight against the last one made the header flip
+		// hidden/shown on those reversals — visible as "slides down, then
+		// immediately flickers/snaps" when scrolling up through the
+		// middle of a page. Only reacting once the accumulated delta
+		// clears a small threshold absorbs that noise while staying
+		// responsive to an actual scroll-direction change.
+		var SCROLL_DIRECTION_THRESHOLD = 10;
 		var updateHeaderScrollState = function () {
 			var currentScrollY = window.scrollY;
 			header.classList.toggle( 'is-scrolled', currentScrollY > 8 );
 
 			var navIsOpen = primaryNav && primaryNav.classList.contains( 'is-open' );
 			var langSwitcherIsOpen = !! header.querySelector( '.ww-lang-switcher.is-open' );
+			var delta = currentScrollY - lastScrollY;
 			if ( currentScrollY <= header.offsetHeight || navIsOpen || langSwitcherIsOpen ) {
 				header.classList.remove( 'ww-header--hidden' );
-			} else if ( currentScrollY > lastScrollY ) {
+				lastScrollY = currentScrollY;
+			} else if ( delta > SCROLL_DIRECTION_THRESHOLD ) {
 				header.classList.add( 'ww-header--hidden' );
-			} else if ( currentScrollY < lastScrollY ) {
+				lastScrollY = currentScrollY;
+			} else if ( delta < -SCROLL_DIRECTION_THRESHOLD ) {
 				header.classList.remove( 'ww-header--hidden' );
+				lastScrollY = currentScrollY;
 			}
-			lastScrollY = currentScrollY;
 
 			if ( backToTop ) {
 				backToTop.classList.toggle( 'is-visible', header.classList.contains( 'ww-header--hidden' ) );
