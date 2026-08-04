@@ -29,6 +29,18 @@ function wagerwise_bootstrap_polylang_languages(): void {
 		array( 'slug' => 'de', 'locale' => 'de_DE', 'name' => 'Deutsch', 'flag' => 'de', 'rtl' => 0 ),
 		array( 'slug' => 'zh', 'locale' => 'zh_CN', 'name' => '中文', 'flag' => 'cn', 'rtl' => 0 ),
 		array( 'slug' => 'es', 'locale' => 'es_ES', 'name' => 'Español', 'flag' => 'es', 'rtl' => 0 ),
+		array( 'slug' => 'pt', 'locale' => 'pt_PT', 'name' => 'Português', 'flag' => 'pt', 'rtl' => 0 ),
+		array( 'slug' => 'fr', 'locale' => 'fr_FR', 'name' => 'Français', 'flag' => 'fr', 'rtl' => 0 ),
+		array( 'slug' => 'it', 'locale' => 'it_IT', 'name' => 'Italiano', 'flag' => 'it', 'rtl' => 0 ),
+		array( 'slug' => 'sv', 'locale' => 'sv_SE', 'name' => 'Svenska', 'flag' => 'se', 'rtl' => 0 ),
+		array( 'slug' => 'nb', 'locale' => 'nb_NO', 'name' => 'Norsk', 'flag' => 'no', 'rtl' => 0 ),
+		array( 'slug' => 'fi', 'locale' => 'fi', 'name' => 'Suomi', 'flag' => 'fi', 'rtl' => 0 ),
+		array( 'slug' => 'nl', 'locale' => 'nl_NL', 'name' => 'Nederlands', 'flag' => 'nl', 'rtl' => 0 ),
+		array( 'slug' => 'ja', 'locale' => 'ja', 'name' => '日本語', 'flag' => 'jp', 'rtl' => 0 ),
+		array( 'slug' => 'pl', 'locale' => 'pl_PL', 'name' => 'Polski', 'flag' => 'pl', 'rtl' => 0 ),
+		array( 'slug' => 'cs', 'locale' => 'cs_CZ', 'name' => 'Čeština', 'flag' => 'cz', 'rtl' => 0 ),
+		array( 'slug' => 'ro', 'locale' => 'ro_RO', 'name' => 'Română', 'flag' => 'ro', 'rtl' => 0 ),
+		array( 'slug' => 'el', 'locale' => 'el', 'name' => 'Ελληνικά', 'flag' => 'gr', 'rtl' => 0 ),
 	);
 
 	$existing_list  = PLL()->model->get_languages_list();
