@@ -126,6 +126,28 @@ header.wp-block-template-part {
 .ww-nav-toggle[aria-expanded="true"] .ww-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* ---------- Language switcher ---------- */
+/* The mobile bottom sheet below is position:fixed, anchored to the
+   viewport — but .ww-lang-switcher lives inside .ww-header, and a
+   `transform` OR `backdrop-filter` on ANY ancestor establishes a new
+   containing block for fixed descendants, silently re-anchoring them to
+   that ancestor's box instead. .ww-header picks up backdrop-filter the
+   moment the page scrolls past 8px (.is-scrolled, for its frosted-glass
+   look) and transform whenever it hides on scroll-down — both essentially
+   guaranteed the instant someone actually scrolls — so without this, the
+   sheet would end up positioned against the (possibly off-screen) header
+   instead of the viewport. Neutralizing both here, scoped to only while
+   the switcher is actually open, keeps the header's own effects intact
+   the rest of the time.
+   Belt-and-suspenders with the equivalent guard in main.js, which stops
+   .ww-header--hidden from being applied at all while the switcher is
+   open — that keeps the header from visibly trying to slide away
+   mid-interaction; this rule is what guarantees correct positioning even
+   if some other trigger transforms/filters the header regardless. */
+.ww-header:has(.ww-lang-switcher.is-open) {
+	transform: none;
+	backdrop-filter: none;
+	-webkit-backdrop-filter: none;
+}
 /* Trigger: compact globe + code pill, sized to sit comfortably next to Join
    Free in both the desktop actions row and the mobile row-2 layout. */
 .ww-lang-switcher { position: relative; }

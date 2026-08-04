@@ -15,6 +15,14 @@
 	// the header's own height — sticky elements don't reflow content into
 	// their space when hidden via transform, so hiding any earlier leaves
 	// a blank gap the size of the not-yet-scrolled-past remainder.
+	//
+	// Also skipped while the language switcher is open: its mobile panel is
+	// position:fixed, anchored to the viewport — but a `transform` on ANY
+	// ancestor (which .ww-header--hidden applies, to slide the header away)
+	// creates a new containing block for fixed descendants, so if that class
+	// lands while the switcher's already open, the panel would suddenly
+	// reposition itself relative to the (now off-screen) header instead of
+	// the viewport, i.e. break.
 	var header = document.querySelector( '.ww-header' );
 	// Back-to-top button: appears the moment the header hides (same signal,
 	// so it shows up right as the nav's screen space frees up), scrolls
@@ -27,7 +35,8 @@
 			header.classList.toggle( 'is-scrolled', currentScrollY > 8 );
 
 			var navIsOpen = primaryNav && primaryNav.classList.contains( 'is-open' );
-			if ( currentScrollY <= header.offsetHeight || navIsOpen ) {
+			var langSwitcherIsOpen = !! header.querySelector( '.ww-lang-switcher.is-open' );
+			if ( currentScrollY <= header.offsetHeight || navIsOpen || langSwitcherIsOpen ) {
 				header.classList.remove( 'ww-header--hidden' );
 			} else if ( currentScrollY > lastScrollY ) {
 				header.classList.add( 'ww-header--hidden' );
@@ -188,6 +197,7 @@
 		}
 
 		var isOpen = false;
+		var openWidth = null;
 
 		var visibleLinks = function () {
 			return items.filter( function ( li ) { return ! li.hidden; } )
@@ -220,6 +230,7 @@
 				return;
 			}
 			isOpen = true;
+			openWidth = window.innerWidth;
 			root.classList.add( 'is-open' );
 			trigger.setAttribute( 'aria-expanded', 'true' );
 			if ( search ) {
@@ -265,8 +276,14 @@
 			}
 		} );
 
+		// Width-only check: focusing the search input below pops the on-
+		// screen keyboard on touch devices, which fires a resize event too
+		// (viewport height shrinks) — closing the panel the instant it
+		// opened. A real orientation change or window resize changes the
+		// width, which the keyboard never does, so that's what this
+		// actually needs to react to.
 		window.addEventListener( 'resize', function () {
-			if ( isOpen ) {
+			if ( isOpen && window.innerWidth !== openWidth ) {
 				close( false );
 			}
 		} );
