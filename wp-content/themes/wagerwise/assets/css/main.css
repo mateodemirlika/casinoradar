@@ -434,6 +434,24 @@ header.wp-block-template-part {
    above meta/body copy than page-level headers, so a step down from the
    full xx-large archive/page treatment. */
 .ww-single-post > .wp-block-post-title { font-size: var(--wp--preset--font-size--x-large); margin-top: 20px; }
+/* xx-large (44px) has no room to breathe below the 1024px nav-burger
+   breakpoint — on an actual phone it wrapped a short "Archives: Casinos"
+   onto two lines, and even at tablet widths it read oversized and sat
+   flush against the edge. Scaling down in step with the same breakpoints
+   the header itself already uses. */
+@media (max-width: 1024px) {
+	.ww-main > .wp-block-post-title,
+	.ww-main > .wp-block-query-title {
+		font-size: var(--wp--preset--font-size--x-large);
+	}
+	.ww-single-post > .wp-block-post-title { font-size: var(--wp--preset--font-size--large); }
+}
+@media (max-width: 782px) {
+	.ww-main > .wp-block-post-title,
+	.ww-main > .wp-block-query-title {
+		font-size: var(--wp--preset--font-size--large);
+	}
+}
 
 /* ---------- Sections ---------- */
 .ww-section { padding: 40px 24px; }
