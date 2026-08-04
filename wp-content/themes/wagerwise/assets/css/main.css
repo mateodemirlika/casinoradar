@@ -904,8 +904,15 @@ header.wp-block-template-part {
 		justify-content: space-between;
 	}
 
-	.ww-header__nav {
-		display: none;
+	/* #ww-primary-nav (not the bare .ww-header__nav class, which the footer
+	   also uses for its own, always-visible, non-toggleable nav) — scoped
+	   to the unique id so this dropdown-specific animation can't leak
+	   into that unrelated instance. display:none/flex used to toggle this
+	   instantly; opacity/transform/visibility instead lets it actually
+	   animate, same treatment as the language switcher's own dropdown —
+	   fades and slides down from the header on open, back up on close. */
+	#ww-primary-nav {
+		display: flex;
 		position: absolute;
 		top: 100%;
 		left: 0;
@@ -918,8 +925,22 @@ header.wp-block-template-part {
 		padding: 8px 24px 16px;
 		box-shadow: var(--ww-shadow);
 		z-index: 99;
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		transform: translateY(-8px);
+		/* Closing is slower with an ease-out curve than opening — the
+		   language switcher's own close felt abrupt at the same speed as
+		   its open, this avoids repeating that. */
+		transition: opacity 0.22s ease-out, transform 0.22s ease-out, visibility 0s linear 0.22s;
 	}
-	.ww-header__nav.is-open { display: flex; }
+	#ww-primary-nav.is-open {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+		transform: translateY(0);
+		transition: opacity 0.16s ease, transform 0.16s ease, visibility 0s linear 0s;
+	}
 	.ww-header__nav a { padding: 10px 0; border-bottom: 1px solid var(--wp--preset--color--border); }
 	.ww-header__nav a:last-child { border-bottom: none; }
 }
