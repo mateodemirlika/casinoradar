@@ -41,9 +41,26 @@
 		// clears a small threshold absorbs that noise while staying
 		// responsive to an actual scroll-direction change.
 		var SCROLL_DIRECTION_THRESHOLD = 10;
+		// is-scrolled (the frosted-glass background/blur) had the exact same
+		// problem one level down: a single hard line at 8px with no slack
+		// either side of it, toggled on every tick. Settling near the top
+		// after scrolling up sits scrollY right on top of that line, and the
+		// natural jitter of a real scroll gesture crosses it back and forth
+		// — each crossing re-fades the background/blur in or out, which is
+		// the actual "fade one way then immediately the opposite" being
+		// reported (not the slide, which the threshold above already
+		// covers). A Schmitt-trigger-style gap — turn on above 24px, only
+		// turn back off below 8px — means once either state is reached,
+		// jitter has to travel through that whole gap to flip it again.
+		var SCROLLED_ON_AT = 24;
+		var SCROLLED_OFF_AT = 8;
 		var updateHeaderScrollState = function () {
 			var currentScrollY = window.scrollY;
-			header.classList.toggle( 'is-scrolled', currentScrollY > 8 );
+			if ( currentScrollY > SCROLLED_ON_AT ) {
+				header.classList.add( 'is-scrolled' );
+			} else if ( currentScrollY < SCROLLED_OFF_AT ) {
+				header.classList.remove( 'is-scrolled' );
+			}
 
 			var navIsOpen = primaryNav && primaryNav.classList.contains( 'is-open' );
 			var langSwitcherIsOpen = !! header.querySelector( '.ww-lang-switcher.is-open' );
