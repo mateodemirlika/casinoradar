@@ -126,28 +126,6 @@ header.wp-block-template-part {
 .ww-nav-toggle[aria-expanded="true"] .ww-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* ---------- Language switcher ---------- */
-/* The mobile bottom sheet below is position:fixed, anchored to the
-   viewport — but .ww-lang-switcher lives inside .ww-header, and a
-   `transform` OR `backdrop-filter` on ANY ancestor establishes a new
-   containing block for fixed descendants, silently re-anchoring them to
-   that ancestor's box instead. .ww-header picks up backdrop-filter the
-   moment the page scrolls past 8px (.is-scrolled, for its frosted-glass
-   look) and transform whenever it hides on scroll-down — both essentially
-   guaranteed the instant someone actually scrolls — so without this, the
-   sheet would end up positioned against the (possibly off-screen) header
-   instead of the viewport. Neutralizing both here, scoped to only while
-   the switcher is actually open, keeps the header's own effects intact
-   the rest of the time.
-   Belt-and-suspenders with the equivalent guard in main.js, which stops
-   .ww-header--hidden from being applied at all while the switcher is
-   open — that keeps the header from visibly trying to slide away
-   mid-interaction; this rule is what guarantees correct positioning even
-   if some other trigger transforms/filters the header regardless. */
-.ww-header:has(.ww-lang-switcher.is-open) {
-	transform: none;
-	backdrop-filter: none;
-	-webkit-backdrop-filter: none;
-}
 /* Trigger: compact globe + code pill, sized to sit comfortably next to Join
    Free in both the desktop actions row and the mobile row-2 layout. */
 .ww-lang-switcher { position: relative; }
@@ -270,7 +248,24 @@ header.wp-block-template-part {
 
 @media (max-width: 782px) {
 	/* Bottom sheet: same panel, same .is-open toggle — only the position,
-	   shape and motion direction change. */
+	   shape and motion direction change. Only below this breakpoint,
+	   because it's the only place .ww-lang-switcher__panel actually uses
+	   position:fixed — above it, it's position:absolute anchored to
+	   .ww-lang-switcher itself (already position:relative), which is a
+	   closer containing block than .ww-header regardless of what the
+	   header's own transform/backdrop-filter are doing. Scoping it here
+	   means the desktop dropdown is never affected by this at all. */
+	.ww-header:has(.ww-lang-switcher.is-open) {
+		transform: none;
+		backdrop-filter: none;
+		-webkit-backdrop-filter: none;
+		/* .ww-header's own transition (background-color/backdrop-filter/
+		   transform, all 0.2-0.3s) would otherwise animate THIS change
+		   too — visibly fading the header's frosted-glass background out
+		   the instant the switcher opens, then back in when it closes.
+		   This has nothing to do with scrolling and needs to be instant. */
+		transition: none;
+	}
 	.ww-lang-switcher__backdrop { display: block; }
 	.ww-lang-switcher.is-open .ww-lang-switcher__backdrop { opacity: 1; pointer-events: auto; }
 	.ww-lang-switcher__panel {
