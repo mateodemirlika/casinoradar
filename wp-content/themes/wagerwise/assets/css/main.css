@@ -191,7 +191,12 @@ header.wp-block-template-part {
 	visibility: hidden;
 	pointer-events: none;
 	transform: scale(0.96) translateY(-6px);
-	transition: opacity 0.16s ease, transform 0.16s ease, visibility 0s linear 0.16s;
+	/* Closing gets a touch longer than opening (220ms vs 160ms) with an
+	   ease-out curve — opening snappy feels responsive, but closing at the
+	   same speed read as an abrupt snap rather than a fade. visibility's
+	   delay is kept in step with the duration above it, so the panel stays
+	   hit-testable/focusable for exactly as long as it's still visible. */
+	transition: opacity 0.22s ease-out, transform 0.22s ease-out, visibility 0s linear 0.22s;
 }
 .ww-lang-switcher.is-open .ww-lang-switcher__panel {
 	opacity: 1;
