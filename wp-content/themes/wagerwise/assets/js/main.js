@@ -324,6 +324,17 @@
 				return;
 			}
 			isOpen = false;
+			// Whatever's focused inside the panel (almost always the search
+			// input) is about to become visibility:hidden along with the
+			// rest of it. Blurring it explicitly, as its own step before
+			// that happens, matters most on touch devices: it dismisses the
+			// on-screen keyboard right here, on its own, instead of letting
+			// that (and whatever scroll/viewport adjustment the OS ties to
+			// it) get bundled into the same instant as the panel's own
+			// close transition below.
+			if ( root.contains( document.activeElement ) ) {
+				document.activeElement.blur();
+			}
 			toggleOpenClass( false );
 			trigger.setAttribute( 'aria-expanded', 'false' );
 			if ( false !== returnFocus ) {
