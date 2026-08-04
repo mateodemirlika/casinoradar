@@ -413,11 +413,35 @@ header.wp-block-template-part {
 }
 .ww-hero-search button:hover { background: var(--wp--preset--color--primary-dark); box-shadow: var(--ww-glow-primary); }
 
+/* ---------- Page / archive / post titles ---------- */
+/* Every archive/page/single template starts with a bare core block
+   (wp:query-title or wp:post-title) — no theme styling ever applied, so
+   they rendered at WP's small block-library default size, flush to the
+   left edge with no real presence on the page. Sized and spaced to match
+   the rest of this design system's prominent headings instead. */
+.ww-main > .wp-block-post-title,
+.ww-main > .wp-block-query-title {
+	font-size: var(--wp--preset--font-size--xx-large);
+	line-height: 1.15;
+	margin: 8px 0 14px;
+}
+/* Core wraps the archived term/post-type name in its own <span> (e.g.
+   "Archives: <span>Casinos</span>") — accenting just that part draws the
+   eye to what's actually different about this page, the same way the
+   hero badge and stat numbers already use this color as an accent. */
+.wp-block-query-title > span { color: var(--wp--preset--color--primary); }
+/* Single posts (guide/review/news articles) read more like headlines
+   above meta/body copy than page-level headers, so a step down from the
+   full xx-large archive/page treatment. */
+.ww-single-post > .wp-block-post-title { font-size: var(--wp--preset--font-size--x-large); margin-top: 20px; }
+
 /* ---------- Sections ---------- */
 .ww-section { padding: 40px 24px; }
 .ww-section--alt { background: var(--wp--preset--color--surface-alt); border-radius: var(--ww-radius); }
 .ww-section--tight { padding: 0 24px 8px; }
-.ww-page-subtitle { color: var(--wp--preset--color--ink-light); font-size: var(--wp--preset--font-size--medium); margin-top: -12px; }
+/* The -12px used to compensate for the h1's own default bottom margin
+   before the rule above started setting it explicitly; now redundant. */
+.ww-page-subtitle { color: var(--wp--preset--color--ink-light); font-size: var(--wp--preset--font-size--medium); }
 
 /* ---------- Single post (single.html, single-guide/-review/-news.html) ---------- */
 .ww-single-post .wp-block-post-featured-image {
