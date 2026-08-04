@@ -81,6 +81,37 @@ function wagerwise_pll__( string $string ): string {
 	return function_exists( 'pll__' ) ? pll__( $string ) : $string;
 }
 
+/**
+ * Rank Math's own breadcrumb trail only inserts a post-type-archive crumb
+ * for CPTs registered with has_archive — guide/review/news/complaint
+ * deliberately don't have one (post-types.php: each is surfaced through a
+ * composed Page instead, e.g. /guide/), so on their own it jumps straight
+ * from Home to the post itself, skipping the listing page entirely. Fills
+ * in that missing middle crumb, reusing the exact same nav-label strings
+ * (already translated in all 16 languages) rather than introducing new
+ * untranslated ones.
+ */
+// Rank Math's Hooker::do_filter() prefixes every hook with 'rank_math/' —
+// the actual fired filter is 'rank_math/frontend/breadcrumb/items', not
+// the bare 'frontend/breadcrumb/items' its own get_breadcrumb() docblock
+// might suggest at a glance.
+add_filter( 'rank_math/frontend/breadcrumb/items', 'wagerwise_fill_composed_page_breadcrumb', 10, 1 );
+function wagerwise_fill_composed_page_breadcrumb( array $crumbs ): array {
+	$map = array(
+		'guide'     => array( 'guide', 'Guide' ),
+		'review'    => array( 'reviews', 'Reviews' ),
+		'news'      => array( 'news', 'News' ),
+		'complaint' => array( 'complaints', 'Complaints' ),
+	);
+	$post_type = get_post_type();
+	if ( ! is_singular( array_keys( $map ) ) || ! isset( $map[ $post_type ] ) || count( $crumbs ) < 2 ) {
+		return $crumbs;
+	}
+	list( $slug, $label ) = $map[ $post_type ];
+	array_splice( $crumbs, 1, 0, array( array( wagerwise_pll__( $label ), wagerwise_lang_page_url( $slug ), 'hide_in_schema' => false ) ) );
+	return $crumbs;
+}
+
 function wagerwise_star_rating_html( float $rating ): string {
 	$rating = max( 0, min( 5, $rating ) );
 	$full   = (int) floor( $rating );

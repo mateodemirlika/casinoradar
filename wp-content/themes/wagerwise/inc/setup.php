@@ -18,6 +18,12 @@ function wagerwise_theme_setup(): void {
 		'flex-height' => true,
 		'flex-width'  => true,
 	) );
+	// Opts into Rank Math's own breadcrumb trail generation (full post-type/
+	// taxonomy hierarchy, translation-aware) instead of hand-rolling one —
+	// the documented way a theme signals support without touching Rank
+	// Math's own settings. Rendered via wagerwise_breadcrumbs(), wired up
+	// as the wagerwise/breadcrumbs block (see wagerwise-core/blocks.php).
+	add_theme_support( 'rank-math-breadcrumbs' );
 
 	add_image_size( 'casino-logo', 240, 120, false );
 	add_image_size( 'casino-card', 400, 260, true );

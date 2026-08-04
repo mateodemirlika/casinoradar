@@ -118,6 +118,21 @@ function wagerwise_disclaimer_bar(): void {
 	echo '<div class="ww-disclaimer-bar"><p>' . esc_html( $text ) . '</p></div>';
 }
 
+/**
+ * Breadcrumb trail via Rank Math (add_theme_support('rank-math-breadcrumbs')
+ * in inc/setup.php is what turns this on) — full post-type/taxonomy
+ * hierarchy and translation/locale-aware labels come from Rank Math itself,
+ * nothing hand-rolled here. Skipped on the front page, where "Home" on its
+ * own isn't useful wayfinding, and gracefully no-ops if Rank Math isn't
+ * active.
+ */
+function wagerwise_breadcrumbs(): void {
+	if ( is_front_page() || ! function_exists( 'rank_math_the_breadcrumbs' ) ) {
+		return;
+	}
+	rank_math_the_breadcrumbs();
+}
+
 function wagerwise_footer_social_links(): void {
 	$links = array(
 		'facebook'  => get_option( 'ww_social_facebook' ),

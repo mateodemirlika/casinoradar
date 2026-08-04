@@ -205,6 +205,10 @@ function wagerwise_register_blocks(): void {
 			'render_callback' => fn() => wagerwise_capture( 'wagerwise_footer_copyright' ),
 			'attributes'      => array(),
 		),
+		'breadcrumbs'             => array(
+			'render_callback' => fn() => wagerwise_capture( 'wagerwise_breadcrumbs' ),
+			'attributes'      => array(),
+		),
 	);
 
 	foreach ( $blocks as $name => $config ) {

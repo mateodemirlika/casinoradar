@@ -413,6 +413,18 @@ header.wp-block-template-part {
 }
 .ww-hero-search button:hover { background: var(--wp--preset--color--primary-dark); box-shadow: var(--ww-glow-primary); }
 
+/* ---------- Breadcrumbs (wagerwise/breadcrumbs -> Rank Math) ---------- */
+.rank-math-breadcrumb { margin: 4px 0 0; }
+.rank-math-breadcrumb p { margin: 0; font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--ink-light); }
+.rank-math-breadcrumb a { color: var(--wp--preset--color--ink-light); text-decoration: none; transition: color 0.15s ease; }
+.rank-math-breadcrumb a:hover { color: var(--wp--preset--color--primary); }
+.rank-math-breadcrumb .separator { margin: 0 4px; opacity: 0.5; }
+.rank-math-breadcrumb .last { color: var(--wp--preset--color--ink); font-weight: 600; }
+/* The title/subtitle above are centered — a left-aligned trail sitting
+   directly above them reads as its own, separate wayfinding element
+   rather than part of that centered block, matching how most sites keep
+   breadcrumbs regardless of how the heading below them is aligned. */
+
 /* ---------- Page / archive / post titles ---------- */
 /* Every archive/page/single template starts with a bare core block
    (wp:query-title or wp:post-title) — no theme styling ever applied, so
