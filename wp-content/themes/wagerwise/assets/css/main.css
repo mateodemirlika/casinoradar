@@ -61,6 +61,14 @@ header.wp-block-template-part {
    of the page. */
 .ww-main {
 	margin-block-start: 0;
+	/* Content only ever got a horizontal gutter on desktop as a side effect
+	   of the 1200px content max-width being narrower than the viewport —
+	   below that width (any mobile or tablet), nothing constrains it, so
+	   titles, text and grids ran edge-to-edge with zero breathing room.
+	   Explicit padding here guarantees a minimum gutter at every width,
+	   matching the 24px already used by .ww-hero/.ww-section. */
+	padding-left: 24px;
+	padding-right: 24px;
 }
 .ww-header {
 	padding: 16px 32px;
