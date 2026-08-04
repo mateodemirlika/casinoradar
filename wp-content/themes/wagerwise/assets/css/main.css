@@ -540,7 +540,13 @@ header.wp-block-template-part {
 .ww-category-pill.is-active {
 	background: linear-gradient(90deg, var(--wp--preset--color--primary), var(--wp--preset--color--accent));
 	color: #12121e;
-	border-color: transparent;
+	/* Was border-color: transparent — kept as an explicit 1px transparent
+	   border (not none) so becoming active doesn't shrink the pill by 2px
+	   against its inactive neighbors, which still carry a real 1px border.
+	   background-clip matches .ww-btn--primary's established fix for the
+	   same gradient-background-behind-a-border situation. */
+	border: 1px solid transparent;
+	background-clip: padding-box;
 	font-weight: 700;
 }
 .ww-category-pill__count {
