@@ -503,24 +503,31 @@ function wagerwise_render_block_blog_grid( array $attrs ): string {
 }
 
 function wagerwise_render_block_hero_search( array $attrs ): string {
-	$heading    = $attrs['heading'] ?: get_option( 'ww_hero_heading' );
-	$subheading = $attrs['subheading'] ?: get_option( 'ww_hero_subheading' );
+	// wagerwise_pll__() wraps the STOCK default text (registered + translated
+	// via Polylang in seed.php), so it resolves per-language automatically.
+	// If an admin has customized the option away from that default in
+	// WagerWise Settings, there's no registered translation for whatever
+	// they typed, so it falls back to showing their custom text as-is in
+	// every language — a deliberate, graceful degrade rather than silently
+	// discarding an intentional admin override.
+	$heading    = $attrs['heading'] ?: wagerwise_pll__( get_option( 'ww_hero_heading' ) );
+	$subheading = $attrs['subheading'] ?: wagerwise_pll__( get_option( 'ww_hero_subheading' ) );
 	$casinos    = (int) wp_count_posts( 'casino' )->publish;
 	ob_start();
 	?>
 	<div class="ww-hero">
 		<?php if ( $casinos ) : ?>
-			<span class="ww-hero__badge"><?php echo esc_html( sprintf( __( 'Updated daily · %d+ casinos reviewed', 'wagerwise' ), $casinos ) ); ?></span>
+			<span class="ww-hero__badge"><?php echo esc_html( sprintf( wagerwise_pll__( 'Updated daily · %d+ casinos reviewed' ), $casinos ) ); ?></span>
 		<?php endif; ?>
 		<h1><?php echo esc_html( $heading ); ?></h1>
 		<p><?php echo esc_html( $subheading ); ?></p>
 		<div class="ww-hero__ctas">
-			<a class="ww-btn ww-btn--primary ww-btn--large" href="<?php echo esc_url( wagerwise_lang_archive_url( 'casino' ) ); ?>"><?php esc_html_e( 'Explore Casinos', 'wagerwise' ); ?></a>
-			<a class="ww-btn ww-btn--ghost ww-btn--large" href="<?php echo esc_url( wagerwise_lang_archive_url( 'tournament' ) ); ?>"><?php esc_html_e( "This Week's Tournaments", 'wagerwise' ); ?></a>
+			<a class="ww-btn ww-btn--primary ww-btn--large" href="<?php echo esc_url( wagerwise_lang_archive_url( 'casino' ) ); ?>"><?php echo esc_html( wagerwise_pll__( 'Explore Casinos' ) ); ?></a>
+			<a class="ww-btn ww-btn--ghost ww-btn--large" href="<?php echo esc_url( wagerwise_lang_archive_url( 'tournament' ) ); ?>"><?php echo esc_html( wagerwise_pll__( "This Week's Tournaments" ) ); ?></a>
 		</div>
 		<form class="ww-hero-search" action="<?php echo esc_url( wagerwise_lang_home_url() ); ?>" method="get">
-			<input type="search" name="s" placeholder="<?php esc_attr_e( 'Search casinos, bonuses, guides…', 'wagerwise' ); ?>" />
-			<button type="submit"><?php esc_html_e( 'Search', 'wagerwise' ); ?></button>
+			<input type="search" name="s" placeholder="<?php echo esc_attr( wagerwise_pll__( 'Search casinos, bonuses, guides…' ) ); ?>" />
+			<button type="submit"><?php echo esc_html( wagerwise_pll__( 'Search' ) ); ?></button>
 		</form>
 	</div>
 	<?php
