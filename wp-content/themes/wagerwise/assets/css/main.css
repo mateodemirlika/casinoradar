@@ -65,10 +65,12 @@ header.wp-block-template-part {
 	   of the 1200px content max-width being narrower than the viewport —
 	   below that width (any mobile or tablet), nothing constrains it, so
 	   titles, text and grids ran edge-to-edge with zero breathing room.
-	   Explicit padding here guarantees a minimum gutter at every width,
-	   matching the 24px already used by .ww-hero/.ww-section. */
-	padding-left: 24px;
-	padding-right: 24px;
+	   Explicit padding here guarantees a minimum gutter at every width —
+	   kept smaller than .ww-hero/.ww-section's 24px on purpose, since this
+	   applies globally (including mobile/tablet, where screen width is
+	   already tight) rather than to one deliberately-spacious section. */
+	padding-left: 12px;
+	padding-right: 12px;
 }
 .ww-header {
 	padding: 16px 32px;
