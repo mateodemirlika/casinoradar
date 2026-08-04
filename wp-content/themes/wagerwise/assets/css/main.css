@@ -425,6 +425,17 @@ header.wp-block-template-part {
 	line-height: 1.15;
 	margin: 8px 0 14px;
 }
+/* Left-aligned read as unbalanced sitting on their own above the page's
+   actual content — centered instead, the same treatment the hero
+   heading/subheading already use. Archive/page titles only: a single
+   short label centers cleanly, but a single-post's article headline
+   (below) can run to two or three lines, where centered multi-line text
+   gets harder to read, so that one stays left-aligned. */
+.ww-page > .wp-block-post-title,
+.ww-main > .wp-block-query-title {
+	text-align: center;
+}
+.ww-page-subtitle { text-align: center; }
 /* Core wraps the archived term/post-type name in its own <span> (e.g.
    "Archives: <span>Casinos</span>") — accenting just that part draws the
    eye to what's actually different about this page, the same way the
