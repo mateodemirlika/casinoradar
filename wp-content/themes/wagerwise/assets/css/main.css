@@ -126,17 +126,150 @@ header.wp-block-template-part {
 .ww-nav-toggle[aria-expanded="true"] .ww-nav-toggle__bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* ---------- Language switcher ---------- */
-.ww-lang-switcher ul { list-style: none; display: flex; gap: 4px; margin: 0; padding: 4px; background: var(--wp--preset--color--surface-alt); border-radius: 999px; border: 1px solid var(--wp--preset--color--border); }
-.ww-lang-switcher a {
-	font-size: var(--wp--preset--font-size--small);
-	font-weight: 600;
-	color: var(--wp--preset--color--ink-light);
-	text-decoration: none;
-	padding: 4px 10px;
+/* Trigger: compact globe + code pill, sized to sit comfortably next to Join
+   Free in both the desktop actions row and the mobile row-2 layout. */
+.ww-lang-switcher { position: relative; }
+.ww-lang-switcher__trigger {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 8px 12px;
+	background: var(--wp--preset--color--surface-alt);
+	border: 1px solid var(--wp--preset--color--border);
 	border-radius: 999px;
-	display: inline-block;
+	color: var(--wp--preset--color--ink);
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 700;
+	font-family: inherit;
+	line-height: 1;
+	cursor: pointer;
+	transition: border-color 0.15s ease, color 0.15s ease;
 }
-.ww-lang-switcher li.is-active a { color: #04140B; background: var(--wp--preset--color--primary); }
+.ww-lang-switcher__trigger:hover { border-color: var(--wp--preset--color--primary); color: var(--wp--preset--color--primary); }
+.ww-lang-switcher__trigger:focus-visible { outline: 2px solid var(--wp--preset--color--primary); outline-offset: 2px; }
+.ww-lang-switcher__globe { flex-shrink: 0; }
+.ww-lang-switcher__current { letter-spacing: 0.03em; }
+.ww-lang-switcher__chevron { flex-shrink: 0; transition: transform 0.2s ease; }
+.ww-lang-switcher.is-open .ww-lang-switcher__trigger { border-color: var(--wp--preset--color--primary); color: var(--wp--preset--color--primary); }
+.ww-lang-switcher.is-open .ww-lang-switcher__chevron { transform: rotate(180deg); }
+
+/* Dimming layer behind the mobile bottom sheet only — desktop's dropdown is
+   compact enough not to need the whole page dimmed, and outside-click-to-
+   close is handled in JS regardless of this element. */
+.ww-lang-switcher__backdrop {
+	display: none;
+	position: fixed;
+	inset: 0;
+	background: rgba(4, 8, 14, 0.6);
+	z-index: 150;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.2s ease;
+}
+
+/* Panel: floating dropdown by default (desktop/tablet). Kept out of the
+   [hidden]/display:none dance on purpose — animating a fade + scale needs
+   opacity/transform to be transitionable the instant .is-open is toggled,
+   and visibility (rather than display) still fully removes it from hit-
+   testing, focus order and assistive tech while closed. */
+.ww-lang-switcher__panel {
+	position: absolute;
+	top: calc(100% + 10px);
+	right: 0;
+	z-index: 160;
+	width: 280px;
+	max-height: min(420px, 70vh);
+	display: flex;
+	flex-direction: column;
+	background: var(--wp--preset--color--surface);
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: var(--ww-radius);
+	box-shadow: var(--ww-shadow-hover);
+	overflow: hidden;
+	transform-origin: top right;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transform: scale(0.96) translateY(-6px);
+	transition: opacity 0.16s ease, transform 0.16s ease, visibility 0s linear 0.16s;
+}
+.ww-lang-switcher.is-open .ww-lang-switcher__panel {
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
+	transform: scale(1) translateY(0);
+	transition: opacity 0.16s ease, transform 0.16s ease, visibility 0s linear 0s;
+}
+.ww-lang-switcher__handle { display: none; }
+
+.ww-lang-switcher__search-wrap { position: relative; flex-shrink: 0; padding: 10px; border-bottom: 1px solid var(--wp--preset--color--border); }
+.ww-lang-switcher__search-icon { position: absolute; left: 22px; top: 50%; transform: translateY(-50%); color: var(--wp--preset--color--ink-light); pointer-events: none; }
+.ww-lang-switcher__search {
+	width: 100%;
+	padding: 9px 10px 9px 34px;
+	background: var(--wp--preset--color--surface-alt);
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: var(--ww-radius-sm);
+	color: var(--wp--preset--color--ink);
+	font-size: var(--wp--preset--font-size--small);
+	font-family: inherit;
+}
+.ww-lang-switcher__search::placeholder { color: var(--wp--preset--color--ink-light); }
+.ww-lang-switcher__search:focus { outline: none; border-color: var(--wp--preset--color--primary); }
+/* Suppress native search-input decorations so it matches the other form
+   controls in this design system pixel-for-pixel. */
+.ww-lang-switcher__search::-webkit-search-cancel-button { -webkit-appearance: none; }
+
+.ww-lang-switcher__list { list-style: none; margin: 0; padding: 6px; overflow-y: auto; overscroll-behavior: contain; }
+.ww-lang-switcher__item[hidden] { display: none; }
+.ww-lang-switcher__item a {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 9px 10px;
+	border-radius: var(--ww-radius-sm);
+	color: var(--wp--preset--color--ink);
+	text-decoration: none;
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 500;
+	transition: background 0.12s ease;
+}
+.ww-lang-switcher__item a:hover,
+.ww-lang-switcher__item a:focus-visible { background: var(--wp--preset--color--surface-alt); }
+.ww-lang-switcher__item a:focus-visible { outline: 2px solid var(--wp--preset--color--primary); outline-offset: -2px; }
+.ww-lang-switcher__item.is-active a { color: var(--wp--preset--color--primary); font-weight: 700; }
+.ww-lang-switcher__flag { flex-shrink: 0; width: 20px; height: 15px; object-fit: cover; border-radius: 3px; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08); }
+.ww-lang-switcher__name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ww-lang-switcher__check { flex-shrink: 0; color: var(--wp--preset--color--primary); }
+/* Shown/hidden via its native [hidden] attribute, toggled in JS as the
+   search result count changes — no animation here, so no need for the
+   visibility-based approach the panel itself uses above. */
+.ww-lang-switcher__empty { margin: 0; padding: 24px 16px; text-align: center; color: var(--wp--preset--color--ink-light); font-size: var(--wp--preset--font-size--small); }
+
+@media (max-width: 782px) {
+	/* Bottom sheet: same panel, same .is-open toggle — only the position,
+	   shape and motion direction change. */
+	.ww-lang-switcher__backdrop { display: block; }
+	.ww-lang-switcher.is-open .ww-lang-switcher__backdrop { opacity: 1; pointer-events: auto; }
+	.ww-lang-switcher__panel {
+		position: fixed;
+		top: auto;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		width: auto;
+		max-height: 75vh;
+		border-radius: 20px 20px 0 0;
+		transform-origin: bottom center;
+		transform: translateY(100%);
+		box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.45);
+	}
+	.ww-lang-switcher.is-open .ww-lang-switcher__panel { transform: translateY(0); }
+	.ww-lang-switcher__handle { display: block; width: 36px; height: 4px; flex-shrink: 0; border-radius: 999px; background: var(--wp--preset--color--border); margin: 10px auto 2px; }
+	/* Larger tap targets on touch. */
+	.ww-lang-switcher__item a { padding: 13px 12px; font-size: var(--wp--preset--font-size--medium); }
+	.ww-lang-switcher__search { padding-top: 11px; padding-bottom: 11px; }
+}
 
 /* ---------- Buttons ---------- */
 .ww-btn {

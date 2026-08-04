@@ -2,27 +2,109 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Polylang language switcher, gracefully no-ops if Polylang isn't active
- * (e.g. before the first admin visit runs the mu-plugin bootstrap).
+ * Language switcher — a compact trigger that opens a floating dropdown on
+ * desktop / a bottom sheet on mobile, listing every language Polylang has
+ * configured. Entirely data-driven from pll_the_languages(): no language
+ * names, codes, or flags are hardcoded here, so adding/removing a language
+ * in Languages → Languages is all it takes to change what this renders.
+ * Gracefully no-ops if Polylang isn't active (e.g. before the first admin
+ * visit runs the mu-plugin bootstrap) or only one language is configured.
  */
 function wagerwise_language_switcher(): void {
 	if ( ! function_exists( 'pll_the_languages' ) ) {
 		return;
 	}
 	$languages = pll_the_languages( array( 'raw' => 1 ) );
-	if ( empty( $languages ) ) {
+	if ( count( $languages ) < 2 ) {
 		return;
 	}
-	echo '<nav class="ww-lang-switcher" aria-label="' . esc_attr__( 'Language switcher', 'wagerwise' ) . '"><ul>';
+
+	$current = null;
 	foreach ( $languages as $lang ) {
-		printf(
-			'<li class="%s"><a href="%s">%s</a></li>',
-			$lang['current_lang'] ? 'is-active' : '',
-			esc_url( $lang['url'] ),
-			esc_html( strtoupper( $lang['slug'] ) )
-		);
+		if ( $lang['current_lang'] ) {
+			$current = $lang;
+			break;
+		}
 	}
-	echo '</ul></nav>';
+	$current = $current ?: reset( $languages );
+
+	// A dropdown of 16 (and growing) languages is hard to scan — a search
+	// field earns its keep once there are enough entries to make scrolling
+	// slower than typing; below that it'd just be a tap target no one uses.
+	$show_search  = count( $languages ) > 8;
+	$select_label = wagerwise_pll__( 'Select language' );
+	?>
+	<div class="ww-lang-switcher" data-ww-lang-switcher>
+		<button
+			type="button"
+			class="ww-lang-switcher__trigger"
+			aria-haspopup="menu"
+			aria-expanded="false"
+			aria-controls="ww-lang-menu"
+			aria-label="<?php echo esc_attr( $select_label ); ?>"
+		>
+			<svg class="ww-lang-switcher__globe" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<circle cx="12" cy="12" r="9" />
+				<path d="M3 12h18" />
+				<path d="M12 3c2.5 2.7 3.8 6 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-6-3.8-9s1.3-6.3 3.8-9Z" />
+			</svg>
+			<span class="ww-lang-switcher__current"><?php echo esc_html( strtoupper( $current['slug'] ) ); ?></span>
+			<svg class="ww-lang-switcher__chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<path d="M6 9l6 6 6-6" />
+			</svg>
+		</button>
+
+		<div class="ww-lang-switcher__backdrop" data-ww-lang-backdrop></div>
+
+		<div class="ww-lang-switcher__panel">
+			<div class="ww-lang-switcher__handle" aria-hidden="true"></div>
+			<?php if ( $show_search ) : ?>
+				<div class="ww-lang-switcher__search-wrap">
+					<svg class="ww-lang-switcher__search-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						<circle cx="11" cy="11" r="7" />
+						<path d="m21 21-4.3-4.3" />
+					</svg>
+					<input
+						type="search"
+						class="ww-lang-switcher__search"
+						placeholder="<?php echo esc_attr( wagerwise_pll__( 'Search languages' ) ); ?>"
+						aria-label="<?php echo esc_attr( wagerwise_pll__( 'Search languages' ) ); ?>"
+						autocomplete="off"
+					/>
+				</div>
+			<?php endif; ?>
+			<ul class="ww-lang-switcher__list" id="ww-lang-menu" role="menu" aria-label="<?php echo esc_attr( $select_label ); ?>">
+				<?php foreach ( $languages as $lang ) : ?>
+					<li
+						class="ww-lang-switcher__item<?php echo $lang['current_lang'] ? ' is-active' : ''; ?>"
+						role="none"
+						data-search="<?php echo esc_attr( mb_strtolower( $lang['name'] . ' ' . $lang['slug'] . ' ' . $lang['locale'] ) ); ?>"
+					>
+						<a
+							href="<?php echo esc_url( $lang['url'] ); ?>"
+							role="menuitem"
+							lang="<?php echo esc_attr( $lang['slug'] ); ?>"
+							<?php echo $lang['current_lang'] ? 'aria-current="true"' : ''; ?>
+						>
+							<?php if ( ! empty( $lang['flag'] ) ) : ?>
+								<img class="ww-lang-switcher__flag" src="<?php echo esc_url( $lang['flag'] ); ?>" alt="" width="20" height="15" loading="lazy" decoding="async" />
+							<?php endif; ?>
+							<span class="ww-lang-switcher__name"><?php echo esc_html( $lang['name'] ); ?></span>
+							<?php if ( $lang['current_lang'] ) : ?>
+								<svg class="ww-lang-switcher__check" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+									<path d="M5 13l4 4L19 7" />
+								</svg>
+							<?php endif; ?>
+						</a>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+			<?php if ( $show_search ) : ?>
+				<p class="ww-lang-switcher__empty" hidden><?php echo esc_html( wagerwise_pll__( 'No languages found' ) ); ?></p>
+			<?php endif; ?>
+		</div>
+	</div>
+	<?php
 }
 
 /**

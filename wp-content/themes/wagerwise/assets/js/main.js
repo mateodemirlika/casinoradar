@@ -171,4 +171,160 @@
 	initCategoryFilter( '.ww-archive-bonus', 'bonus_type', '.ww-bonus-grid', '.ww-bonus-card', 'data-bonus-types' );
 	initCategoryFilter( '.ww-archive-casino', 'casino_category', '.ww-top-casinos', '.ww-casino-card', 'data-casino-categories' );
 	initCategoryFilter( '.ww-front-page', 'casino_category', '.ww-top-casinos', '.ww-casino-card', 'data-casino-categories' );
+
+	// Language switcher: floating dropdown on desktop, bottom sheet on
+	// mobile (CSS handles which, based on viewport — this only drives the
+	// shared .is-open toggle, focus management, keyboard nav and the
+	// optional search filter). The language list itself is rendered
+	// server-side from Polylang's configured languages, nothing here is
+	// hardcoded to a specific language or count.
+	document.querySelectorAll( '[data-ww-lang-switcher]' ).forEach( function ( root ) {
+		var trigger = root.querySelector( '.ww-lang-switcher__trigger' );
+		var search = root.querySelector( '.ww-lang-switcher__search' );
+		var emptyMsg = root.querySelector( '.ww-lang-switcher__empty' );
+		var items = Array.prototype.slice.call( root.querySelectorAll( '.ww-lang-switcher__item' ) );
+		if ( ! trigger || ! items.length ) {
+			return;
+		}
+
+		var isOpen = false;
+
+		var visibleLinks = function () {
+			return items.filter( function ( li ) { return ! li.hidden; } )
+				.map( function ( li ) { return li.querySelector( 'a' ); } );
+		};
+
+		var focusAt = function ( index, links ) {
+			links = links || visibleLinks();
+			if ( ! links.length ) {
+				return;
+			}
+			links[ Math.max( 0, Math.min( index, links.length - 1 ) ) ].focus();
+		};
+
+		var filterList = function ( query ) {
+			query = query.trim().toLowerCase();
+			var count = 0;
+			items.forEach( function ( li ) {
+				var isMatch = ! query || ( li.getAttribute( 'data-search' ) || '' ).indexOf( query ) !== -1;
+				li.hidden = ! isMatch;
+				count += isMatch ? 1 : 0;
+			} );
+			if ( emptyMsg ) {
+				emptyMsg.hidden = count !== 0;
+			}
+		};
+
+		var open = function () {
+			if ( isOpen ) {
+				return;
+			}
+			isOpen = true;
+			root.classList.add( 'is-open' );
+			trigger.setAttribute( 'aria-expanded', 'true' );
+			if ( search ) {
+				search.value = '';
+				filterList( '' );
+				// Wait for the open transition to be under way so mobile
+				// Safari doesn't jump-scroll the page to bring the
+				// about-to-be-focused (still translating into place) input
+				// into view.
+				window.setTimeout( function () { search.focus(); }, 60 );
+			} else {
+				var current = root.querySelector( '.ww-lang-switcher__item.is-active a' ) || visibleLinks()[ 0 ];
+				if ( current ) {
+					window.setTimeout( function () { current.focus(); }, 60 );
+				}
+			}
+		};
+
+		var close = function ( returnFocus ) {
+			if ( ! isOpen ) {
+				return;
+			}
+			isOpen = false;
+			root.classList.remove( 'is-open' );
+			trigger.setAttribute( 'aria-expanded', 'false' );
+			if ( false !== returnFocus ) {
+				trigger.focus();
+			}
+		};
+
+		trigger.addEventListener( 'click', function () {
+			isOpen ? close() : open(); // eslint-disable-line no-unused-expressions
+		} );
+
+		var backdrop = root.querySelector( '[data-ww-lang-backdrop]' );
+		if ( backdrop ) {
+			backdrop.addEventListener( 'click', function () { close(); } );
+		}
+
+		document.addEventListener( 'click', function ( e ) {
+			if ( isOpen && ! root.contains( e.target ) ) {
+				close( false );
+			}
+		} );
+
+		window.addEventListener( 'resize', function () {
+			if ( isOpen ) {
+				close( false );
+			}
+		} );
+
+		document.addEventListener( 'keydown', function ( e ) {
+			if ( ! isOpen ) {
+				return;
+			}
+			if ( 'Escape' === e.key ) {
+				e.preventDefault();
+				close();
+				return;
+			}
+			if ( 'Tab' === e.key ) {
+				var focusable = ( search ? [ search ] : [] ).concat( visibleLinks() );
+				if ( ! focusable.length ) {
+					return;
+				}
+				var first = focusable[ 0 ];
+				var last = focusable[ focusable.length - 1 ];
+				if ( e.shiftKey && document.activeElement === first ) {
+					e.preventDefault();
+					last.focus();
+				} else if ( ! e.shiftKey && document.activeElement === last ) {
+					e.preventDefault();
+					first.focus();
+				}
+				return;
+			}
+			// Everything below is list navigation — let the search input
+			// handle its own normal typing/caret movement, except
+			// ArrowDown, which hands focus off to the first result.
+			if ( document.activeElement === search && 'ArrowDown' !== e.key ) {
+				return;
+			}
+			var links = visibleLinks();
+			var index = links.indexOf( document.activeElement );
+			if ( 'ArrowDown' === e.key ) {
+				e.preventDefault();
+				focusAt( index + 1, links );
+			} else if ( 'ArrowUp' === e.key ) {
+				e.preventDefault();
+				if ( index <= 0 ) {
+					search ? search.focus() : focusAt( links.length - 1, links ); // eslint-disable-line no-unused-expressions
+				} else {
+					focusAt( index - 1, links );
+				}
+			} else if ( 'Home' === e.key ) {
+				e.preventDefault();
+				focusAt( 0, links );
+			} else if ( 'End' === e.key ) {
+				e.preventDefault();
+				focusAt( links.length - 1, links );
+			}
+		} );
+
+		if ( search ) {
+			search.addEventListener( 'input', function () { filterList( search.value ); } );
+		}
+	} );
 } )();

@@ -85,6 +85,28 @@ function wagerwise_bootstrap_polylang_languages(): void {
 			update_option( 'polylang', array_merge( (array) get_option( 'polylang', array() ), array( 'default_lang' => 'en' ) ) );
 		}
 	}
+
+	wagerwise_bootstrap_browser_language_detection();
+}
+
+/**
+ * Turns on Polylang's own "detect browser language" redirect for first-time
+ * visitors (falls back to the default language when the browser's preferred
+ * language isn't one of ours), so the language switcher doesn't need to
+ * reimplement that logic in JS. Gated by its own one-time flag rather than
+ * $is_first_run above, so it also reaches sites that were already
+ * bootstrapped before this existed — but only ever sets it once, so an admin
+ * is free to turn it back off from Languages → Settings afterward without
+ * this silently re-enabling it on a later run.
+ */
+function wagerwise_bootstrap_browser_language_detection(): void {
+	if ( get_option( 'ww_browser_lang_detect_bootstrapped' ) ) {
+		return;
+	}
+	$options            = (array) get_option( 'polylang', array() );
+	$options['browser'] = true;
+	update_option( 'polylang', $options );
+	update_option( 'ww_browser_lang_detect_bootstrapped', 1 );
 }
 
 /**
