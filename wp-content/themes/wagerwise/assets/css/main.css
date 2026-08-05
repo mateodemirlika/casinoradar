@@ -61,19 +61,30 @@ header.wp-block-template-part {
    of the page. */
 .ww-main {
 	margin-block-start: 0;
-	/* Content only ever got a horizontal gutter on desktop as a side effect
-	   of the 1200px content max-width being narrower than the viewport —
-	   below that width (any mobile or tablet), nothing constrains it, so
-	   titles, text and grids ran edge-to-edge with zero breathing room.
-	   Explicit padding here guarantees a minimum gutter at every width —
-	   kept smaller than .ww-hero/.ww-section's 24px on purpose, since this
-	   applies globally (including mobile/tablet, where screen width is
-	   already tight) rather than to one deliberately-spacious section. */
-	padding-left: 12px;
-	padding-right: 12px;
+}
+/* Content only ever got a horizontal gutter on desktop as a side effect of
+   the 1200px content max-width being narrower than the viewport — below
+   that width (any mobile or tablet), nothing constrains it, so titles,
+   text and grids ran edge-to-edge with zero breathing room. Explicit
+   padding here guarantees a minimum gutter below 1200px — kept smaller
+   than .ww-hero/.ww-section's 24px on purpose, since this applies
+   globally (including mobile/tablet, where screen width is already
+   tight) rather than to one deliberately-spacious section. Scoped to
+   max-width so desktop (>1200px) stays exactly as bare as the 1200px
+   centering already leaves it — no added inset on top of that. */
+@media (max-width: 1200px) {
+	.ww-main {
+		padding-left: 12px;
+		padding-right: 12px;
+	}
 }
 .ww-header {
 	padding: 16px 32px;
+	/* Below 1024px this 32px sits directly above .ww-main's own 12px gutter
+	   (see below) — the logo/actions end up inset 20px further than the
+	   breadcrumb, title and every other piece of content under them,
+	   producing a visibly jagged left edge between header and page. See
+	   the ".ww-header" override under Responsive for the mobile/tablet fix. */
 	border-bottom: 1px solid var(--wp--preset--color--border);
 	background: var(--wp--preset--color--surface);
 	flex-wrap: wrap;
@@ -424,16 +435,14 @@ header.wp-block-template-part {
 .ww-hero-search button:hover { background: var(--wp--preset--color--primary-dark); box-shadow: var(--ww-glow-primary); }
 
 /* ---------- Breadcrumbs (wagerwise/breadcrumbs -> Rank Math) ---------- */
-.rank-math-breadcrumb { margin: 4px 0 0; }
+/* Room to breathe below the header — 4px read as flush/accidental rather
+   than a deliberate gap. */
+.rank-math-breadcrumb { margin: 20px 0 0; }
 .rank-math-breadcrumb p { margin: 0; font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--ink-light); }
 .rank-math-breadcrumb a { color: var(--wp--preset--color--ink-light); text-decoration: none; transition: color 0.15s ease; }
 .rank-math-breadcrumb a:hover { color: var(--wp--preset--color--primary); }
 .rank-math-breadcrumb .separator { margin: 0 4px; opacity: 0.5; }
 .rank-math-breadcrumb .last { color: var(--wp--preset--color--ink); font-weight: 600; }
-/* The title/subtitle above are centered — a left-aligned trail sitting
-   directly above them reads as its own, separate wayfinding element
-   rather than part of that centered block, matching how most sites keep
-   breadcrumbs regardless of how the heading below them is aligned. */
 
 /* ---------- Page / archive / post titles ---------- */
 /* Every archive/page/single template starts with a bare core block
@@ -447,17 +456,10 @@ header.wp-block-template-part {
 	line-height: 1.15;
 	margin: 8px 0 14px;
 }
-/* Left-aligned read as unbalanced sitting on their own above the page's
-   actual content — centered instead, the same treatment the hero
-   heading/subheading already use. Archive/page titles only: a single
-   short label centers cleanly, but a single-post's article headline
-   (below) can run to two or three lines, where centered multi-line text
-   gets harder to read, so that one stays left-aligned. */
-.ww-page > .wp-block-post-title,
-.ww-main > .wp-block-query-title {
-	text-align: center;
-}
-.ww-page-subtitle { text-align: center; }
+/* Left-aligned, starting from the same edge as the breadcrumb trail
+   directly above — so the title reads as a continuation of that line
+   instead of a separately-centered block. */
+.ww-page-subtitle { text-align: left; }
 /* Core wraps the archived term/post-type name in its own <span> (e.g.
    "Archives: <span>Casinos</span>") — accenting just that part draws the
    eye to what's actually different about this page, the same way the
@@ -490,6 +492,25 @@ header.wp-block-template-part {
 .ww-section { padding: 40px 24px; }
 .ww-section--alt { background: var(--wp--preset--color--surface-alt); border-radius: var(--ww-radius); }
 .ww-section--tight { padding: 0 24px 8px; }
+/* .ww-section already carries its own 24px horizontal gutter, but it's
+   not the only thing under .ww-main — the breadcrumb and a bare
+   wp:post-title above it get *only* .ww-main's own gutter (12px below
+   1200px, 0 above it — see .ww-main). Left in place, .ww-section's 24px
+   either stacks on top of that (36px combined below 1200px) or, above
+   1200px where .ww-main no longer adds anything of its own, simply sits
+   24px further right than the breadcrumb/title beside it. Either way it
+   reads as a second, inconsistent edge on the same page, at every width
+   — so it's zeroed out unconditionally here, deferring entirely to
+   .ww-main's own gutter.
+   .ww-section--alt is excluded: unlike the plain variants, it has a
+   visible card background, so its 24px is internal card padding (paired
+   with .ww-main's own gutter as the outer margin to the card), the same
+   deliberate design as .ww-casino-hero/.ww-pros-cons, not a stray gutter. */
+.ww-section:not(.ww-section--alt),
+.ww-section--tight {
+	padding-left: 0;
+	padding-right: 0;
+}
 /* The -12px used to compensate for the h1's own default bottom margin
    before the rule above started setting it explicitly; now redundant. */
 .ww-page-subtitle { color: var(--wp--preset--color--ink-light); font-size: var(--wp--preset--font-size--medium); }
@@ -510,7 +531,10 @@ header.wp-block-template-part {
 .ww-post-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 20px; color: var(--wp--preset--color--ink-light); font-size: var(--wp--preset--font-size--small); }
 
 /* ---------- List meta (showing count / sort) ---------- */
-.ww-list-meta { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin: 0 24px 16px; font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--ink-light); }
+/* No horizontal margin here — .ww-main already supplies the page gutter.
+   This used to add its own 24px on top, indenting it further than the
+   category-strip/grid it sits between and reading as a doubled gutter. */
+.ww-list-meta { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--ink-light); }
 .ww-list-meta strong { color: var(--wp--preset--color--primary); }
 
 /* ---------- Star rating ---------- */
@@ -895,6 +919,11 @@ header.wp-block-template-part {
    needs to take over well before content-grid layouts do. */
 @media (max-width: 1024px) {
 	.ww-nav-toggle { display: flex; }
+
+	/* Match .ww-main's own 12px gutter so the logo/actions line up with the
+	   breadcrumb, titles and every other piece of page content beneath the
+	   header instead of sitting 20px further in. */
+	.ww-header { padding-left: 12px; padding-right: 12px; }
 
 	/* Logo + burger share the first row (.ww-header's own space-between
 	   handles that); the language switcher and Join Free button drop to a
