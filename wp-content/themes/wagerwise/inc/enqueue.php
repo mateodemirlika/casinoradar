@@ -52,8 +52,11 @@ function wagerwise_enqueue_assets(): void {
  * icon, a web app manifest (192x192 + 512x512 icons, required for Android
  * "add to home screen"), and the iOS home-screen label. The actual
  * /favicon.ico file is served as a static asset directly by nginx (see
- * nginx/prod/templates/wagerwise.conf.template) rather than through PHP,
- * so it isn't handled here.
+ * nginx/prod/templates/wagerwise.conf.template) rather than through PHP —
+ * it's still explicitly <link>ed below, though, since that file only
+ * existing at the implicit /favicon.ico convention (no <link> pointing to
+ * it anywhere in <head>) is exactly what search engines/crawlers checking
+ * the page source for a declared icon won't find.
  *
  * The small icon is 48x48, not the more common 16x16 — a favicon checker
  * flagged a genuine 16x16 file as "under recommended 48x48" (some contexts,
@@ -64,6 +67,7 @@ function wagerwise_enqueue_assets(): void {
 add_action( 'wp_head', 'wagerwise_extra_favicon_tags', 5 );
 function wagerwise_extra_favicon_tags(): void {
 	$images_uri = WAGERWISE_THEME_URI . '/assets/images';
+	printf( '<link rel="icon" href="%s" sizes="32x32" />' . "\n", esc_url( $images_uri . '/favicon.ico' ) );
 	printf( '<link rel="icon" href="%s/favicon.svg" type="image/svg+xml" />' . "\n", esc_url( $images_uri ) );
 	printf( '<link rel="icon" href="%s/favicon-48x48.png" sizes="48x48" type="image/png" />' . "\n", esc_url( $images_uri ) );
 	printf( '<link rel="icon" href="%s/favicon-96x96.png" sizes="96x96" type="image/png" />' . "\n", esc_url( $images_uri ) );
