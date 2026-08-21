@@ -374,5 +374,14 @@ function wagerwise_get_reviews( int $number = 6, ?int $casino_id = null ): array
 		$args['meta_value'] = $casino_id;
 	}
 
+	// See wagerwise_get_top_casinos() for why 'lang' is passed explicitly
+	// rather than relying on Polylang's implicit per-request filtering.
+	if ( function_exists( 'pll_current_language' ) ) {
+		$lang = pll_current_language();
+		if ( $lang ) {
+			$args['lang'] = $lang;
+		}
+	}
+
 	return get_posts( $args );
 }

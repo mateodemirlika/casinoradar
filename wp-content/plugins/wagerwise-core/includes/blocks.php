@@ -595,7 +595,11 @@ function wagerwise_render_block_stats_strip(): string {
 		array( 'label' => __( 'Free Games', 'wagerwise' ), 'count' => wagerwise_count_published_posts( 'game' ) ),
 		array( 'label' => __( 'Guides & Articles', 'wagerwise' ), 'count' => wagerwise_count_published_posts( 'post' ) ),
 	);
-	if ( array_sum( wp_list_pluck( $stats, 'count' ) ) === 0 ) {
+	// Drop individual zero-count stats rather than only checking the sum —
+	// a stat rendering as "0+" (e.g. no bonuses published yet) looks broken,
+	// not simply "not applicable", so it's worse than not showing it at all.
+	$stats = array_values( array_filter( $stats, static fn( array $stat ): bool => $stat['count'] > 0 ) );
+	if ( empty( $stats ) ) {
 		return '';
 	}
 	ob_start();
