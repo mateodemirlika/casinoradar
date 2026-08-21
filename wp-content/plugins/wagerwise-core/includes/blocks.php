@@ -859,7 +859,16 @@ function wagerwise_render_block_taxonomy_results(): string {
 			return wagerwise_render_block_game_grid( array( 'number' => 24, 'categoryId' => $term->term_id ) );
 
 		case 'casino_category':
-			return wagerwise_render_casino_cards( wagerwise_get_top_casinos( 24, $term->term_id ), 'list' );
+			// Real pagination (same wagerwise_get_top_casinos_paged() used by
+			// the main casino archive), not a hardcoded top-24 with no way
+			// to see the rest — no category happens to exceed 24 yet, but
+			// this stops the same "silently truncated, no page 2" bug from
+			// recurring here once one does.
+			$paged  = max( 1, (int) get_query_var( 'paged' ) );
+			$result = wagerwise_get_top_casinos_paged( 20, $paged, $term->term_id );
+			$html   = wagerwise_render_casino_cards( $result['items'], 'list', ( $paged - 1 ) * 20 );
+			$html  .= wagerwise_render_pagination( $paged, $result['max_num_pages'] );
+			return $html;
 
 		case 'payment_method':
 		case 'licence':

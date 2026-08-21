@@ -209,7 +209,16 @@
 	};
 
 	initCategoryFilter( '.ww-archive-bonus', 'bonus_type', '.ww-bonus-grid', '.ww-bonus-card', 'data-bonus-types' );
-	initCategoryFilter( '.ww-archive-casino', 'casino_category', '.ww-top-casinos', '.ww-casino-card', 'data-casino-categories' );
+	// NOT applied to '.ww-archive-casino': that page is paginated
+	// server-side (wagerwise/top-casinos {paginate:true}), so a client-side
+	// filter of only the current page's cards would silently miss most of
+	// a category's results on other pages, and clicking a page-2/3 link
+	// would drop the filter entirely with no way to recover it — clicking a
+	// category pill there now does what its href already always pointed to:
+	// a real navigation to that category's own (also paginated) taxonomy
+	// archive. The homepage's small curated "Top Picks" grid has no
+	// pagination to conflict with, so client-side filtering still applies
+	// there.
 	initCategoryFilter( '.ww-front-page', 'casino_category', '.ww-top-casinos', '.ww-casino-card', 'data-casino-categories' );
 
 	// Language switcher: floating dropdown on desktop, bottom sheet on
