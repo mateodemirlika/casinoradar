@@ -671,20 +671,16 @@ function wagerwise_taxonomy_default_post_type( string $taxonomy ): string {
 }
 
 function wagerwise_render_block_category_strip( array $attrs ): string {
+	// taxonomy.html (the generic template shared by every taxonomy archive)
+	// deliberately places two explicit instances of this block — one for
+	// casino_category, one for country — so a visitor can pivot between
+	// either filter dimension from any archive page. Each instance's
+	// $attrs['taxonomy'] says which one it is; is_tax() below (per
+	// instance) then correctly marks only the one actually being viewed as
+	// active, rather than one shared "auto-detected" strip trying to be
+	// both at once.
 	$taxonomy = $attrs['taxonomy'] ?? 'casino_category';
-	// taxonomy.html is a single generic template shared by every taxonomy
-	// archive (casino_category, bonus_type, game_category, payment_method,
-	// licence, country, software_provider) — when actually viewing one of
-	// them, show ITS strip instead of whatever this block's static
-	// attribute default says, since a shared template can't hardcode a
-	// different taxonomy per archive type.
-	if ( is_tax() ) {
-		$current = get_queried_object();
-		if ( $current instanceof WP_Term ) {
-			$taxonomy = $current->taxonomy;
-		}
-	}
-	$style = $attrs['style'] ?? 'chip';
+	$style    = $attrs['style'] ?? 'chip';
 	$terms    = get_terms( array(
 		'taxonomy'   => $taxonomy,
 		'hide_empty' => true,
@@ -701,8 +697,16 @@ function wagerwise_render_block_category_strip( array $attrs ): string {
 		<?php endif; ?>
 		<?php foreach ( $terms as $term ) :
 			$active = is_tax( $taxonomy ) && (int) get_queried_object_id() === $term->term_id;
+			// PHP's ternary binds looser than '.', so
+			// `$cond ? 'a' : 'b' . $c` parses as `$cond ? 'a' : ( 'b' . $c )`
+			// — spelled out fully here since that previously meant the tile
+			// style's "true" branch never got the is-active class appended
+			// at all (only the chip style's "false" branch did).
+			$link_class = 'tile' === $style
+				? 'ww-category-tile' . ( $active ? ' is-active' : '' )
+				: 'ww-category-pill' . ( $active ? ' is-active' : '' );
 			?>
-			<a class="<?php echo 'tile' === $style ? 'ww-category-tile' : 'ww-category-pill' . ( $active ? ' is-active' : '' ); ?>" href="<?php echo esc_url( get_term_link( $term ) ); ?>" data-term-slug="<?php echo esc_attr( $term->slug ); ?>">
+			<a class="<?php echo esc_attr( $link_class ); ?>" href="<?php echo esc_url( get_term_link( $term ) ); ?>" data-term-slug="<?php echo esc_attr( $term->slug ); ?>">
 				<?php if ( 'tile' === $style ) : ?>
 					<span class="ww-category-tile__icon" aria-hidden="true"></span>
 					<span class="ww-category-tile__name"><?php echo esc_html( $term->name ); ?></span>
@@ -899,21 +903,19 @@ function wagerwise_render_block_taxonomy_results(): string {
 			return wagerwise_render_block_game_grid( array( 'number' => 24, 'categoryId' => $term->term_id ) );
 
 		case 'casino_category':
-			// Real pagination (same wagerwise_get_top_casinos_paged() used by
-			// the main casino archive), not a hardcoded top-24 with no way
-			// to see the rest — no category happens to exceed 24 yet, but
-			// this stops the same "silently truncated, no page 2" bug from
-			// recurring here once one does.
-			$paged  = max( 1, (int) get_query_var( 'paged' ) );
-			$result = wagerwise_get_top_casinos_paged( 20, $paged, $term->term_id );
-			$html   = wagerwise_render_casino_cards( $result['items'], 'list', ( $paged - 1 ) * 20 );
-			$html  .= wagerwise_render_pagination( $paged, $result['max_num_pages'] );
-			return $html;
-
 		case 'payment_method':
 		case 'licence':
 		case 'country':
-			return wagerwise_render_casino_cards( wagerwise_get_casinos_by_taxonomy( $term->taxonomy, $term->term_id, 24 ), 'list' );
+			// Real pagination (wagerwise_get_top_casinos_paged(), shared with
+			// the main casino archive), not a hardcoded top-24 with no way to
+			// see the rest — no term happens to exceed 24 yet (United Kingdom
+			// is the closest, at 14), but this stops the same "silently
+			// truncated, no page 2" bug from recurring here once one does.
+			$paged  = max( 1, (int) get_query_var( 'paged' ) );
+			$result = wagerwise_get_top_casinos_paged( 20, $paged, $term->term_id, $term->taxonomy );
+			$html   = wagerwise_render_casino_cards( $result['items'], 'list', ( $paged - 1 ) * 20 );
+			$html  .= wagerwise_render_pagination( $paged, $result['max_num_pages'] );
+			return $html;
 
 		case 'software_provider':
 			ob_start();

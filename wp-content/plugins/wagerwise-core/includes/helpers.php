@@ -322,13 +322,15 @@ function wagerwise_get_top_casinos( int $number = 10, ?int $category_term_id = n
  * Same ranking/filtering as wagerwise_get_top_casinos(), but paginated and
  * returning the pagination metadata (found_posts/max_num_pages) needed to
  * render real page links — used by the casino archive's top-casinos block
- * instance. Explicitly passes 'lang' rather than relying on Polylang's
- * implicit per-request query filtering, so found_posts/max_num_pages are
- * guaranteed correct for the current language even in contexts where
- * Polylang's current-language detection may not have run yet (e.g. block
- * editor preview, REST render).
+ * instance and by any taxonomy archive (category, country, licence,
+ * payment method) via wagerwise_render_block_taxonomy_results(); $taxonomy
+ * says which one $category_term_id belongs to. Explicitly passes 'lang'
+ * rather than relying on Polylang's implicit per-request query filtering,
+ * so found_posts/max_num_pages are guaranteed correct for the current
+ * language even in contexts where Polylang's current-language detection may
+ * not have run yet (e.g. block editor preview, REST render).
  */
-function wagerwise_get_top_casinos_paged( int $number, int $paged, ?int $category_term_id = null ): array {
+function wagerwise_get_top_casinos_paged( int $number, int $paged, ?int $category_term_id = null, string $taxonomy = 'casino_category' ): array {
 	$args = array(
 		'post_type'      => 'casino',
 		'posts_per_page' => $number,
@@ -348,7 +350,7 @@ function wagerwise_get_top_casinos_paged( int $number, int $paged, ?int $categor
 
 	if ( $category_term_id ) {
 		$args['tax_query'] = array(
-			array( 'taxonomy' => 'casino_category', 'field' => 'term_id', 'terms' => $category_term_id ),
+			array( 'taxonomy' => $taxonomy, 'field' => 'term_id', 'terms' => $category_term_id ),
 		);
 	}
 

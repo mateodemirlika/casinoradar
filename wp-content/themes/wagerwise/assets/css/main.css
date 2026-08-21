@@ -701,6 +701,7 @@ header.wp-block-template-part {
 	transition: border-color 0.15s ease, transform 0.15s ease;
 }
 .ww-category-tile:hover { border-color: var(--wp--preset--color--primary); transform: translateY(-2px); }
+.ww-category-tile.is-active { border-color: var(--wp--preset--color--primary); box-shadow: var(--ww-glow-primary); }
 .ww-category-tile__icon {
 	width: 44px;
 	height: 44px;

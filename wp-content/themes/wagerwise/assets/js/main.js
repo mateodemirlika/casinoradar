@@ -234,11 +234,26 @@
 		var ARCHIVE_SWAP_SELECTORS = [
 			'.wp-block-query-title',
 			'[aria-label="breadcrumbs"]',
-			'.ww-category-strip',
 			'.ww-list-meta',
 			'.ww-top-casinos',
 			'.ww-pagination',
 		];
+
+		// Two independent category-strip instances can be on the same page
+		// at once (casino_category + country), each its own filter
+		// dimension — matched up by data-taxonomy rather than by a plain
+		// selector, which would only ever find the first one and leave the
+		// second (e.g. the active/inactive pill state on the country
+		// strip) stale after navigating.
+		var swapCategoryStrips = function ( doc ) {
+			document.querySelectorAll( '.ww-category-strip' ).forEach( function ( current ) {
+				var taxonomy = current.getAttribute( 'data-taxonomy' );
+				var incoming = doc.querySelector( '.ww-category-strip[data-taxonomy="' + taxonomy + '"]' );
+				if ( incoming ) {
+					current.replaceWith( document.adoptNode( incoming ) );
+				}
+			} );
+		};
 
 		var loadArchive = function ( url, push ) {
 			archiveMain.classList.add( 'is-loading' );
@@ -251,6 +266,7 @@
 				} )
 				.then( function ( html ) {
 					var doc = new DOMParser().parseFromString( html, 'text/html' );
+					swapCategoryStrips( doc );
 					ARCHIVE_SWAP_SELECTORS.forEach( function ( selector ) {
 						var current = document.querySelector( selector );
 						var incoming = doc.querySelector( selector );
