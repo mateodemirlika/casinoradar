@@ -238,6 +238,45 @@ function wagerwise_get_first_bonus_for_casino( int $casino_id ): ?WP_Post {
 }
 
 /**
+ * Real casino logo if one's been uploaded as the featured image, otherwise a
+ * deterministic colored initial-letter badge (same idea as Gmail/Slack's
+ * fallback avatars) instead of the plain unstyled empty space that used to
+ * show through the card's placeholder-texture background. None of the ~50
+ * real casino reviews have a logo uploaded yet — this is a stand-in until
+ * they do, not a replacement for real artwork.
+ *
+ * The color is keyed off the casino's ENGLISH translation ID rather than
+ * $casino_id itself, so the same casino gets the same color on every
+ * language's page rather than a different color per language (each
+ * translation is a separate post with a different ID).
+ */
+function wagerwise_casino_logo_html( int $casino_id, string $image_size = 'medium' ): string {
+	$thumbnail = get_the_post_thumbnail( $casino_id, $image_size );
+	if ( $thumbnail ) {
+		return $thumbnail;
+	}
+
+	$title = get_the_title( $casino_id );
+	if ( ! $title ) {
+		return '';
+	}
+
+	$color_seed_id = $casino_id;
+	if ( function_exists( 'pll_get_post' ) ) {
+		$en_id = pll_get_post( $casino_id, 'en' );
+		if ( $en_id ) {
+			$color_seed_id = $en_id;
+		}
+	}
+
+	$palette = array( '#22C567', '#3B82F6', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899', '#14B8A6', '#F97316' );
+	$color   = $palette[ $color_seed_id % count( $palette ) ];
+	$letter  = mb_strtoupper( mb_substr( trim( $title ), 0, 1 ) );
+
+	return '<span class="ww-casino-logo-fallback" style="background:' . esc_attr( $color ) . ';" aria-hidden="true">' . esc_html( $letter ) . '</span>';
+}
+
+/**
  * Ranked casino query, reused by the top-casinos block and archive templates.
  *
  * Passes 'lang' explicitly rather than relying on Polylang's automatic

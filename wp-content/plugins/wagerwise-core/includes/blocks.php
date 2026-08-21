@@ -292,7 +292,7 @@ function wagerwise_render_casino_cards( array $casinos, string $layout = 'grid',
 			<div class="ww-casino-card" data-casino-categories="<?php echo esc_attr( $cat_slugs ); ?>" data-rank="<?php echo (int) $rank; ?>">
 				<span class="ww-rank<?php echo esc_attr( $rank_class ); ?>">#<?php echo (int) $rank; ?></span>
 				<a class="ww-casino-card__logo" href="<?php echo esc_url( get_permalink( $casino ) ); ?>">
-					<?php echo get_the_post_thumbnail( $casino, 'medium' ); ?>
+					<?php echo wagerwise_casino_logo_html( $casino->ID, 'medium' ); ?>
 				</a>
 				<div class="ww-casino-card__body">
 					<a class="ww-casino-card__name" href="<?php echo esc_url( get_permalink( $casino ) ); ?>"><?php echo esc_html( get_the_title( $casino ) ); ?></a>
@@ -453,7 +453,7 @@ function wagerwise_render_block_casino_hero(): string {
 	ob_start();
 	?>
 	<div class="ww-casino-hero">
-		<div class="ww-casino-hero__logo"><?php echo get_the_post_thumbnail( $post_id, 'casino-logo' ); ?></div>
+		<div class="ww-casino-hero__logo"><?php echo wagerwise_casino_logo_html( $post_id, 'casino-logo' ); ?></div>
 		<div class="ww-casino-hero__body">
 			<h1><?php echo esc_html( get_the_title( $post_id ) ); ?></h1>
 			<?php echo wagerwise_star_rating_html( $rating ); ?>
@@ -488,7 +488,7 @@ function wagerwise_render_block_bonus_hero(): string {
 	?>
 	<div class="ww-bonus-hero">
 		<?php if ( $casino_id ) : ?>
-			<div class="ww-bonus-hero__logo"><?php echo get_the_post_thumbnail( $casino_id, 'casino-logo' ); ?></div>
+			<div class="ww-bonus-hero__logo"><?php echo wagerwise_casino_logo_html( $casino_id, 'casino-logo' ); ?></div>
 		<?php endif; ?>
 		<div class="ww-bonus-hero__body">
 			<h1><?php echo esc_html( get_the_title( $post_id ) ); ?></h1>
