@@ -649,24 +649,43 @@ header.wp-block-template-part {
 }
 .ww-provider-tile:hover { border-color: var(--wp--preset--color--primary); color: var(--wp--preset--color--primary); transform: translateY(-2px); }
 
+/* ---------- Filters row: category strip (left) + country dropdown (right) ---------- */
+/* Explicit flex rules (not just relying on the block editor's own
+   layout:"flex" styles) so this degrades predictably regardless of
+   whatever WP core's generated is-layout-flex defaults happen to be. */
+.ww-filters-row {
+	display: flex !important;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	gap: 24px;
+	margin: 0 0 16px;
+}
+@media (max-width: 1024px) {
+	.ww-filters-row { flex-direction: column; align-items: stretch; }
+}
+
 /* ---------- Category strip: chip (filter row) + tile (icon grid) + dropdown (select) ---------- */
 .ww-category-strip--chip { display: flex; flex-wrap: wrap; gap: 10px; }
-.ww-category-strip--dropdown { margin: 0 0 8px; }
+/* Styled to match .ww-lang-switcher__trigger's pill-button look (same
+   shape/background/border/weight) since a native <select> can't share
+   its markup, only its appearance. */
 .ww-category-dropdown {
 	appearance: none;
-	background: var(--wp--preset--color--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9' fill='none'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 14px center;
+	display: inline-flex;
+	background: var(--wp--preset--color--surface-alt) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 14px center;
 	border: 1px solid var(--wp--preset--color--border);
-	border-radius: var(--ww-radius-sm);
+	border-radius: 999px;
 	color: var(--wp--preset--color--ink);
 	font-size: var(--wp--preset--font-size--small);
-	font-weight: 600;
-	padding: 10px 38px 10px 16px;
-	min-width: 220px;
+	font-weight: 700;
+	line-height: 1;
+	padding: 10px 34px 10px 16px;
 	max-width: 100%;
 	cursor: pointer;
-	transition: border-color 0.15s ease;
+	transition: border-color 0.15s ease, color 0.15s ease;
 }
-.ww-category-dropdown:hover, .ww-category-dropdown:focus { border-color: var(--wp--preset--color--primary); outline: none; }
+.ww-category-dropdown:hover, .ww-category-dropdown:focus { border-color: var(--wp--preset--color--primary); color: var(--wp--preset--color--primary); outline: none; }
 .ww-category-pill {
 	display: inline-flex;
 	align-items: center;
