@@ -12,19 +12,9 @@
 
 	<!-- wp:wagerwise/category-strip /-->
 
-	<!-- wp:wagerwise/list-meta {"postType":"casino"} /-->
+	<!-- wp:wagerwise/list-meta {"postType":"casino","perPage":20} /-->
 
-	<!-- wp:wagerwise/top-casinos {"number":20,"layout":"grid"} /-->
-
-	<!-- wp:query {"query":{"inherit":true},"className":"ww-hidden-query"} -->
-	<div class="wp-block-query ww-hidden-query">
-		<!-- wp:query-pagination -->
-			<!-- wp:query-pagination-previous /-->
-			<!-- wp:query-pagination-numbers /-->
-			<!-- wp:query-pagination-next /-->
-		<!-- /wp:query-pagination -->
-	</div>
-	<!-- /wp:query -->
+	<!-- wp:wagerwise/top-casinos {"number":20,"layout":"grid","paginate":true} /-->
 
 </main>
 <!-- /wp:group -->

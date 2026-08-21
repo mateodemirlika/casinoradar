@@ -579,11 +579,34 @@ header.wp-block-template-part {
 	border-radius: 999px;
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
-.ww-casino-card:nth-child(2) .ww-rank,
+.ww-rank.ww-rank--2,
 .ww-comparison-table tbody tr:nth-child(2) .ww-rank { background: var(--wp--preset--color--accent); }
-.ww-casino-card:nth-child(n+3) .ww-rank { background: var(--wp--preset--color--ink-light); color: var(--wp--preset--color--bg); }
+.ww-rank.ww-rank--other { background: var(--wp--preset--color--ink-light); color: var(--wp--preset--color--bg); }
 .ww-casino-card__logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .ww-casino-card__name { font-weight: 700; color: var(--wp--preset--color--ink); text-decoration: none; font-size: var(--wp--preset--font-size--large); }
+
+/* ---------- Pagination (paginated custom-block listings, e.g. the casino archive) ---------- */
+.ww-pagination { margin: 32px 0 0; display: flex; justify-content: center; }
+.ww-pagination__list { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; list-style: none; margin: 0; padding: 0; }
+.ww-pagination__list .page-numbers {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 40px;
+	height: 40px;
+	padding: 0 12px;
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: var(--ww-radius-sm);
+	background: var(--wp--preset--color--surface);
+	color: var(--wp--preset--color--ink);
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 600;
+	text-decoration: none;
+	transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+.ww-pagination__list a.page-numbers:hover { border-color: var(--wp--preset--color--primary); color: var(--wp--preset--color--primary); }
+.ww-pagination__list .page-numbers.current { background: var(--wp--preset--color--primary); border-color: var(--wp--preset--color--primary); color: #12121e; }
+.ww-pagination__list .page-numbers.dots { border-color: transparent; background: transparent; }
 
 /* ---------- Stats strip ---------- */
 .ww-stats-strip {

@@ -239,14 +239,22 @@ function wagerwise_get_first_bonus_for_casino( int $casino_id ): ?WP_Post {
 
 /**
  * Ranked casino query, reused by the top-casinos block and archive templates.
+ *
+ * Passes 'lang' explicitly rather than relying on Polylang's automatic
+ * per-request query filtering: that filtering keys off Polylang's detected
+ * "current language" for the in-flight request, which is only reliably set
+ * during a real frontend HTTP request. In other contexts (WP-CLI, cron, a
+ * block-editor preview render) it can be empty, and the query silently
+ * returns a mix of every language's posts instead of just one — confirmed
+ * directly: an unfiltered call returned Czech- and Spanish-language posts
+ * for what should have been an English-only result.
  */
 function wagerwise_get_top_casinos( int $number = 10, ?int $category_term_id = null, bool $featured_only = false ): array {
 	$args = array(
 		'post_type'      => 'casino',
 		'posts_per_page' => $number,
 		'meta_key'       => 'ww_rating',
-		'orderby'        => 'meta_value_num',
-		'order'          => 'DESC',
+		'orderby'        => array( 'meta_value_num' => 'DESC', 'title' => 'ASC' ),
 	);
 
 	if ( $featured_only ) {
@@ -261,7 +269,91 @@ function wagerwise_get_top_casinos( int $number = 10, ?int $category_term_id = n
 		);
 	}
 
+	if ( function_exists( 'pll_current_language' ) ) {
+		$lang = pll_current_language();
+		if ( $lang ) {
+			$args['lang'] = $lang;
+		}
+	}
+
 	return get_posts( $args );
+}
+
+/**
+ * Same ranking/filtering as wagerwise_get_top_casinos(), but paginated and
+ * returning the pagination metadata (found_posts/max_num_pages) needed to
+ * render real page links — used by the casino archive's top-casinos block
+ * instance. Explicitly passes 'lang' rather than relying on Polylang's
+ * implicit per-request query filtering, so found_posts/max_num_pages are
+ * guaranteed correct for the current language even in contexts where
+ * Polylang's current-language detection may not have run yet (e.g. block
+ * editor preview, REST render).
+ */
+function wagerwise_get_top_casinos_paged( int $number, int $paged, ?int $category_term_id = null ): array {
+	$args = array(
+		'post_type'      => 'casino',
+		'posts_per_page' => $number,
+		'paged'          => max( 1, $paged ),
+		'meta_key'       => 'ww_rating',
+		// Tied ratings are common (many casinos share the same value), and
+		// MySQL doesn't guarantee a stable order for ties across separate
+		// LIMIT/OFFSET queries — without a deterministic tiebreaker, the
+		// same casino could appear on two different pages (or get skipped
+		// entirely) depending on how ties happened to be ordered on each
+		// request. title ASC as a secondary key makes page boundaries
+		// consistent, confirmed by comparing page 1 vs page 2 results
+		// (previously "BingoPlus" appeared as both the last card on page 1
+		// and the first on page 2).
+		'orderby'        => array( 'meta_value_num' => 'DESC', 'title' => 'ASC' ),
+	);
+
+	if ( $category_term_id ) {
+		$args['tax_query'] = array(
+			array( 'taxonomy' => 'casino_category', 'field' => 'term_id', 'terms' => $category_term_id ),
+		);
+	}
+
+	if ( function_exists( 'pll_current_language' ) ) {
+		$lang = pll_current_language();
+		if ( $lang ) {
+			$args['lang'] = $lang;
+		}
+	}
+
+	$query = new WP_Query( $args );
+
+	return array(
+		'items'         => $query->posts,
+		'total'         => (int) $query->found_posts,
+		'max_num_pages' => (int) $query->max_num_pages,
+	);
+}
+
+/**
+ * Polylang-aware published-post count for a translated CPT/post type.
+ * wp_count_posts() runs a raw SQL query grouped only by post_status — it
+ * never goes through WP_Query, so it never picks up Polylang's automatic
+ * per-language query filtering (hooked on 'parse_query'), and always counts
+ * every language's posts combined. This runs a real (cheap, ids-only)
+ * WP_Query instead, so "X casinos reviewed"-style stats match whichever
+ * language is currently being viewed.
+ */
+function wagerwise_count_published_posts( string $post_type ): int {
+	$args = array(
+		'post_type'      => $post_type,
+		'post_status'    => 'publish',
+		'posts_per_page' => 1,
+		'fields'         => 'ids',
+	);
+
+	if ( function_exists( 'pll_current_language' ) ) {
+		$lang = pll_current_language();
+		if ( $lang ) {
+			$args['lang'] = $lang;
+		}
+	}
+
+	return (int) ( new WP_Query( $args ) )->found_posts;
 }
 
 /**

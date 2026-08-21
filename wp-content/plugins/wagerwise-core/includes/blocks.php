@@ -21,6 +21,7 @@ function wagerwise_register_blocks(): void {
 				'categoryId'   => array( 'type' => 'number', 'default' => 0 ),
 				'featuredOnly' => array( 'type' => 'boolean', 'default' => false ),
 				'layout'       => array( 'type' => 'string', 'default' => 'list' ),
+				'paginate'     => array( 'type' => 'boolean', 'default' => false ),
 			),
 		),
 		'casino-comparison-table' => array(
@@ -112,6 +113,7 @@ function wagerwise_register_blocks(): void {
 			'attributes'      => array(
 				'postType' => array( 'type' => 'string', 'default' => 'casino' ),
 				'sortLabel' => array( 'type' => 'string', 'default' => 'Rating (high to low)' ),
+				'perPage'  => array( 'type' => 'number', 'default' => 0 ),
 			),
 		),
 		'footer-links'            => array(
@@ -264,7 +266,7 @@ function wagerwise_resolve_category_id( array $attrs ): ?int {
 	return null;
 }
 
-function wagerwise_render_casino_cards( array $casinos, string $layout = 'grid' ): string {
+function wagerwise_render_casino_cards( array $casinos, string $layout = 'grid', int $rank_offset = 0 ): string {
 	if ( empty( $casinos ) ) {
 		return '';
 	}
@@ -279,9 +281,16 @@ function wagerwise_render_casino_cards( array $casinos, string $layout = 'grid' 
 			$cat_name  = ( is_array( $cat_terms ) && ! empty( $cat_terms ) ) ? $cat_terms[0]->name : '';
 			$cat_slugs = ( is_array( $cat_terms ) && ! empty( $cat_terms ) ) ? implode( ' ', wp_list_pluck( $cat_terms, 'slug' ) ) : '';
 			$bonus     = wagerwise_get_first_bonus_for_casino( $casino->ID );
+			$rank      = $rank_offset + $i + 1;
+			// Gold/silver/"other" rank-badge styling is keyed off the actual
+			// rank number via this class, not DOM position (:nth-child) —
+			// with pagination, a card's position in the DOM (1st, 2nd, 3rd
+			// on the page) no longer matches its real rank once you're past
+			// page 1, so :nth-child would wrongly re-paint e.g. rank #21 gold.
+			$rank_class = 1 === $rank ? '' : ( 2 === $rank ? ' ww-rank--2' : ' ww-rank--other' );
 			?>
-			<div class="ww-casino-card" data-casino-categories="<?php echo esc_attr( $cat_slugs ); ?>">
-				<span class="ww-rank">#<?php echo (int) $i + 1; ?></span>
+			<div class="ww-casino-card" data-casino-categories="<?php echo esc_attr( $cat_slugs ); ?>" data-rank="<?php echo (int) $rank; ?>">
+				<span class="ww-rank<?php echo esc_attr( $rank_class ); ?>">#<?php echo (int) $rank; ?></span>
 				<a class="ww-casino-card__logo" href="<?php echo esc_url( get_permalink( $casino ) ); ?>">
 					<?php echo get_the_post_thumbnail( $casino, 'medium' ); ?>
 				</a>
@@ -301,8 +310,44 @@ function wagerwise_render_casino_cards( array $casinos, string $layout = 'grid' 
 }
 
 function wagerwise_render_block_top_casinos( array $attrs ): string {
-	$casinos = wagerwise_get_top_casinos( $attrs['number'] ?? 5, wagerwise_resolve_category_id( $attrs ), ! empty( $attrs['featuredOnly'] ) );
+	$number = (int) ( $attrs['number'] ?? 5 );
+
+	if ( ! empty( $attrs['paginate'] ) ) {
+		$paged  = max( 1, (int) get_query_var( 'paged' ) );
+		$result = wagerwise_get_top_casinos_paged( $number, $paged, wagerwise_resolve_category_id( $attrs ) );
+		$html   = wagerwise_render_casino_cards( $result['items'], $attrs['layout'] ?? 'list', ( $paged - 1 ) * $number );
+		$html  .= wagerwise_render_pagination( $paged, $result['max_num_pages'] );
+		return $html;
+	}
+
+	$casinos = wagerwise_get_top_casinos( $number, wagerwise_resolve_category_id( $attrs ), ! empty( $attrs['featuredOnly'] ) );
 	return wagerwise_render_casino_cards( $casinos, $attrs['layout'] ?? 'list' );
+}
+
+/**
+ * Pagination controls for paginated custom-block listings. Native WP_Query
+ * pagination blocks (wp:query-pagination) can't drive this listing since the
+ * cards themselves are rendered by a dynamic PHP block, not a `wp:query`
+ * loop — paginate_links() reuses core's own URL-building (respecting the
+ * current permalink structure, including any Polylang language prefix)
+ * rather than reinventing it.
+ */
+function wagerwise_render_pagination( int $current, int $total_pages ): string {
+	if ( $total_pages < 2 ) {
+		return '';
+	}
+	$links = paginate_links( array(
+		'current'   => $current,
+		'total'     => $total_pages,
+		'prev_text' => wagerwise_pll__( '‹ Previous' ),
+		'next_text' => wagerwise_pll__( 'Next ›' ),
+		'type'      => 'array',
+	) );
+	if ( ! $links ) {
+		return '';
+	}
+	return '<nav class="ww-pagination" aria-label="' . esc_attr__( 'Pagination', 'wagerwise' ) . '"><ul class="ww-pagination__list"><li>'
+		. implode( '</li><li>', $links ) . '</li></ul></nav>';
 }
 
 function wagerwise_render_block_comparison_table( array $attrs ): string {
@@ -516,7 +561,7 @@ function wagerwise_render_block_hero_search( array $attrs ): string {
 	// discarding an intentional admin override.
 	$heading    = $attrs['heading'] ?: wagerwise_pll__( get_option( 'ww_hero_heading' ) );
 	$subheading = $attrs['subheading'] ?: wagerwise_pll__( get_option( 'ww_hero_subheading' ) );
-	$casinos    = (int) wp_count_posts( 'casino' )->publish;
+	$casinos    = wagerwise_count_published_posts( 'casino' );
 	ob_start();
 	?>
 	<div class="ww-hero">
@@ -545,10 +590,10 @@ function wagerwise_render_block_hero_search( array $attrs ): string {
  */
 function wagerwise_render_block_stats_strip(): string {
 	$stats = array(
-		array( 'label' => __( 'Casinos Reviewed', 'wagerwise' ), 'count' => (int) wp_count_posts( 'casino' )->publish ),
-		array( 'label' => __( 'Active Bonuses', 'wagerwise' ), 'count' => (int) wp_count_posts( 'bonus' )->publish ),
-		array( 'label' => __( 'Free Games', 'wagerwise' ), 'count' => (int) wp_count_posts( 'game' )->publish ),
-		array( 'label' => __( 'Guides & Articles', 'wagerwise' ), 'count' => (int) wp_count_posts( 'post' )->publish ),
+		array( 'label' => __( 'Casinos Reviewed', 'wagerwise' ), 'count' => wagerwise_count_published_posts( 'casino' ) ),
+		array( 'label' => __( 'Active Bonuses', 'wagerwise' ), 'count' => wagerwise_count_published_posts( 'bonus' ) ),
+		array( 'label' => __( 'Free Games', 'wagerwise' ), 'count' => wagerwise_count_published_posts( 'game' ) ),
+		array( 'label' => __( 'Guides & Articles', 'wagerwise' ), 'count' => wagerwise_count_published_posts( 'post' ) ),
 	);
 	if ( array_sum( wp_list_pluck( $stats, 'count' ) ) === 0 ) {
 		return '';
@@ -769,12 +814,21 @@ function wagerwise_render_block_list_meta( array $attrs ): string {
 	if ( ! $post_type_obj ) {
 		return '';
 	}
-	$total     = (int) wp_count_posts( $post_type )->publish;
+	$total      = wagerwise_count_published_posts( $post_type );
+	$per_page   = (int) ( $attrs['perPage'] ?? 0 );
 	$sort_label = $attrs['sortLabel'] ?? __( 'Rating (high to low)', 'wagerwise' );
+
+	if ( $per_page > 0 && $per_page < $total ) {
+		$paged = max( 1, (int) get_query_var( 'paged' ) );
+		$shown = max( 0, min( $per_page, $total - ( $paged - 1 ) * $per_page ) );
+	} else {
+		$shown = $total;
+	}
+
 	ob_start();
 	?>
 	<div class="ww-list-meta">
-		<span><?php echo esc_html( sprintf( __( 'Showing %1$d of %1$d %2$s', 'wagerwise' ), $total, strtolower( $post_type_obj->labels->name ) ) ); ?></span>
+		<span><?php echo esc_html( sprintf( __( 'Showing %1$d of %2$d %3$s', 'wagerwise' ), $shown, $total, strtolower( $post_type_obj->labels->name ) ) ); ?></span>
 		<span><?php esc_html_e( 'Sort:', 'wagerwise' ); ?> <strong><?php echo esc_html( $sort_label ); ?></strong></span>
 	</div>
 	<?php
