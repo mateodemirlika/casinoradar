@@ -58,17 +58,21 @@ function wagerwise_enqueue_assets(): void {
  * it anywhere in <head>) is exactly what search engines/crawlers checking
  * the page source for a declared icon won't find.
  *
- * The small icon is 48x48, not the more common 16x16 — a favicon checker
- * flagged a genuine 16x16 file as "under recommended 48x48" (some contexts,
- * e.g. Windows taskbar pins, request that size hint at higher DPI than its
- * label implies), so this serves a real 48x48 image under that sizes
- * attribute rather than a literal 16-pixel one.
+ * Also serves dedicated 16x16 and 32x32 PNG tags alongside the 48x48/96x96
+ * pair above: a different favicon checker specifically wants standard
+ * <link rel="icon" type="image/png"> tags at those two canonical sizes
+ * (browser tabs and HiDPI tabs read them directly), which the 32x32 tag
+ * pointing at favicon.ico doesn't satisfy since it isn't type="image/png".
+ * The 48x48 rationale above still stands for the "under recommended 48x48"
+ * check — these are additive, not a replacement.
  */
 add_action( 'wp_head', 'wagerwise_extra_favicon_tags', 5 );
 function wagerwise_extra_favicon_tags(): void {
 	$images_uri = WAGERWISE_THEME_URI . '/assets/images';
 	printf( '<link rel="icon" href="%s" sizes="32x32" />' . "\n", esc_url( $images_uri . '/favicon.ico' ) );
 	printf( '<link rel="icon" href="%s/favicon.svg" type="image/svg+xml" />' . "\n", esc_url( $images_uri ) );
+	printf( '<link rel="icon" href="%s/favicon-16x16.png" sizes="16x16" type="image/png" />' . "\n", esc_url( $images_uri ) );
+	printf( '<link rel="icon" href="%s/favicon-32x32.png" sizes="32x32" type="image/png" />' . "\n", esc_url( $images_uri ) );
 	printf( '<link rel="icon" href="%s/favicon-48x48.png" sizes="48x48" type="image/png" />' . "\n", esc_url( $images_uri ) );
 	printf( '<link rel="icon" href="%s/favicon-96x96.png" sizes="96x96" type="image/png" />' . "\n", esc_url( $images_uri ) );
 	printf( '<link rel="manifest" href="%s/site.webmanifest" />' . "\n", esc_url( $images_uri ) );

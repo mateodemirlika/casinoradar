@@ -1170,7 +1170,7 @@ function wagerwise_render_block_complaint_form(): string {
 
 /** Curated footer link row — About / Responsible Gambling / Contact / Privacy. */
 function wagerwise_render_block_footer_links(): string {
-	$slugs = array( 'about-us', 'responsible-gambling', 'contact', 'privacy-policy', 'terms-of-use', 'cookies-policy', 'imprint' );
+	$slugs = array( 'about-us', 'methodology', 'responsible-gambling', 'contact', 'privacy-policy', 'terms-of-use', 'cookies-policy', 'imprint' );
 	ob_start();
 	?>
 	<nav class="ww-footer__nav">
