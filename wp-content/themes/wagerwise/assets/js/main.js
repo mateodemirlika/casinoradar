@@ -258,6 +258,18 @@
 							current.replaceWith( document.adoptNode( incoming ) );
 						} else if ( current && ! incoming ) {
 							current.remove();
+						} else if ( ! current && incoming ) {
+							// Wasn't on the page before (e.g. leaving a
+							// small, single-page category with no
+							// pagination nav for one that needs it) — insert
+							// right after .ww-top-casinos, since that's
+							// always its immediate preceding sibling in the
+							// server-rendered markup (both come from the
+							// same block's output).
+							var anchor = document.querySelector( '.ww-top-casinos' );
+							if ( anchor ) {
+								anchor.insertAdjacentElement( 'afterend', document.adoptNode( incoming ) );
+							}
 						}
 					} );
 					document.title = doc.title;
