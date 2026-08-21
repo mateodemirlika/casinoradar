@@ -648,12 +648,12 @@ function wagerwise_render_block_provider_strip( array $attrs ): string {
  * archive-casino.html term view.
  */
 function wagerwise_taxonomy_archive_url( string $taxonomy ): string {
-	return match ( $taxonomy ) {
-		'casino_category' => wagerwise_lang_archive_url( 'casino' ),
-		'bonus_type'       => wagerwise_lang_archive_url( 'bonus' ),
-		'game_category'    => wagerwise_lang_archive_url( 'game' ),
-		default            => wagerwise_lang_home_url(),
-	};
+	// Reuses wagerwise_taxonomy_default_post_type() rather than a second,
+	// separately-maintained taxonomy => post-type mapping — this one used
+	// to only know about casino_category/bonus_type/game_category and
+	// silently sent country/licence/payment_method's "All" link to the
+	// homepage instead of the casino archive.
+	return wagerwise_lang_archive_url( wagerwise_taxonomy_default_post_type( $taxonomy ) );
 }
 
 /**
@@ -690,6 +690,22 @@ function wagerwise_render_block_category_strip( array $attrs ): string {
 	}
 	$is_current_archive = ! is_tax( $taxonomy );
 	ob_start();
+
+	if ( 'dropdown' === $style ) :
+		?>
+		<div class="ww-category-strip ww-category-strip--dropdown" data-taxonomy="<?php echo esc_attr( $taxonomy ); ?>">
+			<select class="ww-category-dropdown" data-taxonomy="<?php echo esc_attr( $taxonomy ); ?>" aria-label="<?php echo esc_attr( get_taxonomy( $taxonomy )->labels->singular_name ?? __( 'Filter', 'wagerwise' ) ); ?>">
+				<option value="<?php echo esc_url( wagerwise_taxonomy_archive_url( $taxonomy ) ); ?>"<?php selected( $is_current_archive ); ?>><?php esc_html_e( 'All', 'wagerwise' ); ?></option>
+				<?php foreach ( $terms as $term ) :
+					$active = is_tax( $taxonomy ) && (int) get_queried_object_id() === $term->term_id;
+					?>
+					<option value="<?php echo esc_url( get_term_link( $term ) ); ?>"<?php selected( $active ); ?>><?php echo esc_html( $term->name ); ?> (<?php echo (int) $term->count; ?>)</option>
+				<?php endforeach; ?>
+			</select>
+		</div>
+		<?php
+		return (string) ob_get_clean();
+	endif;
 	?>
 	<div class="ww-category-strip ww-category-strip--<?php echo esc_attr( $style ); ?>" data-taxonomy="<?php echo esc_attr( $taxonomy ); ?>">
 		<?php if ( 'chip' === $style ) : ?>

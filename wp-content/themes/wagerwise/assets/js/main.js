@@ -311,6 +311,11 @@
 					loadArchive( link.href, true );
 				} );
 			} );
+			archiveMain.querySelectorAll( '.ww-category-dropdown' ).forEach( function ( select ) {
+				select.addEventListener( 'change', function () {
+					loadArchive( select.value, true );
+				} );
+			} );
 		};
 
 		bindArchiveLinks();

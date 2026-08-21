@@ -649,8 +649,24 @@ header.wp-block-template-part {
 }
 .ww-provider-tile:hover { border-color: var(--wp--preset--color--primary); color: var(--wp--preset--color--primary); transform: translateY(-2px); }
 
-/* ---------- Category strip: chip (filter row) + tile (icon grid) ---------- */
+/* ---------- Category strip: chip (filter row) + tile (icon grid) + dropdown (select) ---------- */
 .ww-category-strip--chip { display: flex; flex-wrap: wrap; gap: 10px; }
+.ww-category-strip--dropdown { margin: 0 0 8px; }
+.ww-category-dropdown {
+	appearance: none;
+	background: var(--wp--preset--color--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9' fill='none'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 14px center;
+	border: 1px solid var(--wp--preset--color--border);
+	border-radius: var(--ww-radius-sm);
+	color: var(--wp--preset--color--ink);
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 600;
+	padding: 10px 38px 10px 16px;
+	min-width: 220px;
+	max-width: 100%;
+	cursor: pointer;
+	transition: border-color 0.15s ease;
+}
+.ww-category-dropdown:hover, .ww-category-dropdown:focus { border-color: var(--wp--preset--color--primary); outline: none; }
 .ww-category-pill {
 	display: inline-flex;
 	align-items: center;
