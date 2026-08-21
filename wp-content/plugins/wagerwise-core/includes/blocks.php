@@ -656,9 +656,35 @@ function wagerwise_taxonomy_archive_url( string $taxonomy ): string {
 	};
 }
 
+/**
+ * Which post type a given taxonomy's archive listing is "about" — used by
+ * blocks shared across taxonomy.html's single generic template (every
+ * taxonomy archive) to know what to count/query without needing a static
+ * per-taxonomy attribute value baked into that one shared template.
+ */
+function wagerwise_taxonomy_default_post_type( string $taxonomy ): string {
+	return match ( $taxonomy ) {
+		'bonus_type' => 'bonus',
+		'game_category', 'software_provider' => 'game',
+		default => 'casino',
+	};
+}
+
 function wagerwise_render_block_category_strip( array $attrs ): string {
 	$taxonomy = $attrs['taxonomy'] ?? 'casino_category';
-	$style    = $attrs['style'] ?? 'chip';
+	// taxonomy.html is a single generic template shared by every taxonomy
+	// archive (casino_category, bonus_type, game_category, payment_method,
+	// licence, country, software_provider) — when actually viewing one of
+	// them, show ITS strip instead of whatever this block's static
+	// attribute default says, since a shared template can't hardcode a
+	// different taxonomy per archive type.
+	if ( is_tax() ) {
+		$current = get_queried_object();
+		if ( $current instanceof WP_Term ) {
+			$taxonomy = $current->taxonomy;
+		}
+	}
+	$style = $attrs['style'] ?? 'chip';
 	$terms    = get_terms( array(
 		'taxonomy'   => $taxonomy,
 		'hide_empty' => true,
@@ -813,12 +839,26 @@ function wagerwise_render_block_site_nav(): string {
  * "Showing X of Y / Sorted by …" meta row above an archive listing.
  */
 function wagerwise_render_block_list_meta( array $attrs ): string {
-	$post_type   = $attrs['postType'] ?? 'casino';
+	$post_type = $attrs['postType'] ?? 'casino';
+	// On a taxonomy archive, count within that term and post type rather
+	// than across the whole site — this block (like category-strip) is
+	// shared between the main casino archive and taxonomy.html's generic
+	// template covering every taxonomy, and "Showing 20 of 50 casinos"
+	// would be wrong on, say, a 23-casino category page or a bonus_type
+	// archive.
+	$term = null;
+	if ( is_tax() ) {
+		$queried = get_queried_object();
+		if ( $queried instanceof WP_Term ) {
+			$term      = $queried;
+			$post_type = wagerwise_taxonomy_default_post_type( $queried->taxonomy );
+		}
+	}
 	$post_type_obj = get_post_type_object( $post_type );
 	if ( ! $post_type_obj ) {
 		return '';
 	}
-	$total      = wagerwise_count_published_posts( $post_type );
+	$total      = wagerwise_count_published_posts( $post_type, $term );
 	$per_page   = (int) ( $attrs['perPage'] ?? 0 );
 	$sort_label = $attrs['sortLabel'] ?? __( 'Rating (high to low)', 'wagerwise' );
 

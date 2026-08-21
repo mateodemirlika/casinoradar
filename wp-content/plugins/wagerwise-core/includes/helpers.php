@@ -377,13 +377,19 @@ function wagerwise_get_top_casinos_paged( int $number, int $paged, ?int $categor
  * WP_Query instead, so "X casinos reviewed"-style stats match whichever
  * language is currently being viewed.
  */
-function wagerwise_count_published_posts( string $post_type ): int {
+function wagerwise_count_published_posts( string $post_type, ?WP_Term $term = null ): int {
 	$args = array(
 		'post_type'      => $post_type,
 		'post_status'    => 'publish',
 		'posts_per_page' => 1,
 		'fields'         => 'ids',
 	);
+
+	if ( $term ) {
+		$args['tax_query'] = array(
+			array( 'taxonomy' => $term->taxonomy, 'field' => 'term_id', 'terms' => $term->term_id ),
+		);
+	}
 
 	if ( function_exists( 'pll_current_language' ) ) {
 		$lang = pll_current_language();

@@ -221,6 +221,77 @@
 	// there.
 	initCategoryFilter( '.ww-front-page', 'casino_category', '.ww-top-casinos', '.ww-casino-card', 'data-casino-categories' );
 
+	// Instant-feeling category browsing on the casino archive and its
+	// taxonomy pages: category-strip and pagination links stay real,
+	// separately-navigable, crawlable URLs (so nothing is lost for SEO or
+	// no-JS visitors — a fetch() failure below falls through to a normal
+	// navigation), but a click is intercepted to fetch the destination in
+	// the background and swap just the relevant section of the page in
+	// place, instead of a full reload. Cheap here since the whole catalog
+	// is small enough that even the "full" archive response is lightweight.
+	var archiveMain = document.querySelector( '.ww-archive-casino, .ww-taxonomy-archive' );
+	if ( archiveMain ) {
+		var ARCHIVE_SWAP_SELECTORS = [
+			'.wp-block-query-title',
+			'[aria-label="breadcrumbs"]',
+			'.ww-category-strip',
+			'.ww-list-meta',
+			'.ww-top-casinos',
+			'.ww-pagination',
+		];
+
+		var loadArchive = function ( url, push ) {
+			archiveMain.classList.add( 'is-loading' );
+			fetch( url )
+				.then( function ( response ) {
+					if ( ! response.ok ) {
+						throw new Error( 'ww-archive-ajax: bad response' );
+					}
+					return response.text();
+				} )
+				.then( function ( html ) {
+					var doc = new DOMParser().parseFromString( html, 'text/html' );
+					ARCHIVE_SWAP_SELECTORS.forEach( function ( selector ) {
+						var current = document.querySelector( selector );
+						var incoming = doc.querySelector( selector );
+						if ( current && incoming ) {
+							current.replaceWith( document.adoptNode( incoming ) );
+						} else if ( current && ! incoming ) {
+							current.remove();
+						}
+					} );
+					document.title = doc.title;
+					if ( push ) {
+						window.history.pushState( { wwArchiveAjax: true }, '', url );
+					}
+					archiveMain.classList.remove( 'is-loading' );
+					bindArchiveLinks();
+					archiveMain.scrollIntoView( { behavior: 'smooth', block: 'start' } );
+				} )
+				.catch( function () {
+					window.location.href = url; // fetch/parse failed — fall back to a real navigation
+				} );
+		};
+
+		var bindArchiveLinks = function () {
+			archiveMain.querySelectorAll( '.ww-category-strip a, .ww-pagination a.page-numbers' ).forEach( function ( link ) {
+				link.addEventListener( 'click', function ( e ) {
+					if ( e.metaKey || e.ctrlKey || e.shiftKey || e.altKey ) {
+						return; // leave "open in new tab"/"open in new window" etc. to the browser
+					}
+					e.preventDefault();
+					loadArchive( link.href, true );
+				} );
+			} );
+		};
+
+		bindArchiveLinks();
+
+		window.addEventListener( 'popstate', function () {
+			loadArchive( window.location.href, false );
+		} );
+	}
+
 	// Language switcher: floating dropdown on desktop, bottom sheet on
 	// mobile (CSS handles which, based on viewport — this only drives the
 	// shared .is-open toggle, focus management, keyboard nav and the
