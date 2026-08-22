@@ -818,7 +818,7 @@ header.wp-block-template-part {
 .ww-cons h4 { color: var(--wp--preset--color--danger); margin-top: 0; }
 
 /* ---------- Casino / bonus hero ---------- */
-.ww-casino-hero, .ww-bonus-hero {
+.ww-casino-hero, .ww-bonus-hero, .ww-tournament-hero {
 	display: flex;
 	align-items: center;
 	gap: 24px;
@@ -829,11 +829,11 @@ header.wp-block-template-part {
 	padding: 32px;
 	margin-bottom: 32px;
 }
-.ww-casino-hero__logo, .ww-bonus-hero__logo { background: #fff; border-radius: var(--ww-radius-sm); padding: 12px; display: inline-flex; }
-.ww-casino-hero__logo img, .ww-bonus-hero__logo img { max-height: 80px; }
-.ww-casino-hero__logo .ww-casino-logo-fallback, .ww-bonus-hero__logo .ww-casino-logo-fallback { width: 80px; height: 80px; font-size: 36px; }
-.ww-casino-hero__body, .ww-bonus-hero__body { flex: 1; min-width: 240px; }
-.ww-casino-hero__facts { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 16px; color: var(--wp--preset--color--ink-light); font-size: var(--wp--preset--font-size--small); }
+.ww-casino-hero__logo, .ww-bonus-hero__logo, .ww-tournament-hero__logo { background: #fff; border-radius: var(--ww-radius-sm); padding: 12px; display: inline-flex; }
+.ww-casino-hero__logo img, .ww-bonus-hero__logo img, .ww-tournament-hero__logo img { max-height: 80px; }
+.ww-casino-hero__logo .ww-casino-logo-fallback, .ww-bonus-hero__logo .ww-casino-logo-fallback, .ww-tournament-hero__logo .ww-casino-logo-fallback { width: 80px; height: 80px; font-size: 36px; }
+.ww-casino-hero__body, .ww-bonus-hero__body, .ww-tournament-hero__body { flex: 1; min-width: 240px; }
+.ww-casino-hero__facts, .ww-tournament-hero__facts { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 16px; color: var(--wp--preset--color--ink-light); font-size: var(--wp--preset--font-size--small); }
 .ww-bonus-hero__value { font-size: var(--wp--preset--font-size--xx-large); font-weight: 800; color: var(--wp--preset--color--primary); margin: 8px 0; }
 
 /* ---------- Blog grid ---------- */

@@ -761,6 +761,26 @@ function ww_casino_id( array $casino_ids_i18n, int $index, string $lang ): int {
 	return (int) ( $row[ $lang ] ?? $row['en'] ?? 0 );
 }
 
+/**
+ * Fetch the translated ID of one of the real, individually-seeded casinos
+ * (looked up by its English post_name, e.g. 'leovegas') for a given language.
+ * Uses Polylang's own translation link rather than guessing a "$slug-$lang"
+ * pattern, since some of these casinos have a translated, country-specific
+ * name (e.g. "Betano Peru" -> "Betano Pérou" in French, slug "betano-perou")
+ * whose per-language slug doesn't follow that pattern.
+ */
+function ww_seeded_casino_id( string $english_slug, string $lang ): int {
+	$en_post = get_page_by_path( $english_slug, OBJECT, 'casino' );
+	if ( ! $en_post ) {
+		return 0;
+	}
+	if ( 'en' === $lang || ! function_exists( 'pll_get_post' ) ) {
+		return $en_post->ID;
+	}
+	$translated_id = pll_get_post( $en_post->ID, $lang );
+	return $translated_id ? (int) $translated_id : $en_post->ID;
+}
+
 // -----------------------------------------------------------------------------
 // Real, individually-researched casinos (as opposed to the fictional demo
 // casinos above). Each one is hand-seeded — NOT part of the $casino_defs loop,
@@ -142236,33 +142256,36 @@ ww_link_post_translations( array(
 // -----------------------------------------------------------------------------
 
 $bonus_defs = array(
-	array( 'casino' => 0, 'type' => 'Welcome Bonus', 'code' => 'WELCOME500',
-		'title' => array( 'en' => '100% Welcome Bonus up to $500', 'de' => '100% Willkommensbonus bis zu 500 $', 'zh' => '100%欢迎红利，最高500美元', 'es' => '100% de Bono de Bienvenida hasta $500' , 'pt' => '100% de Bónus de Boas-Vindas até $500', 'fr' => '100% de Bonus de Bienvenue jusqu\'à 500 $', 'it' => '100% di Bonus di Benvenuto fino a $500', 'sv' => '100% Välkomstbonus upp till $500', 'nb' => '100% Velkomstbonus opptil $500', 'fi' => '100 % Tervetuliaisbonus jopa $500 asti', 'nl' => '100% Welkomstbonus tot $500', 'ja' => '100%ウェルカムボーナス最大$500', 'pl' => '100% Bonusu Powitalnego do $500', 'cs' => '100% Uvítací bonus až do $500', 'ro' => '100% Bonus de Bun Venit până la $500', 'el' => '100% Μπόνους Καλωσορίσματος έως $500' ),
+	array( 'casino_slug' => 'leovegas', 'type' => 'Welcome Bonus', 'code' => '',
+		'title' => array( 'en' => '100% Welcome Bonus up to $1,500', 'de' => '100% Willkommensbonus bis zu 1.500 $', 'zh' => '100%欢迎红利，最高1500美元', 'es' => '100% de Bono de Bienvenida hasta $1.500', 'pt' => '100% de Bónus de Boas-Vindas até $1.500', 'fr' => '100% de Bonus de Bienvenue jusqu\'à 1 500 $', 'it' => '100% di Bonus di Benvenuto fino a $1.500', 'sv' => '100% Välkomstbonus upp till $1 500', 'nb' => '100% Velkomstbonus opptil $1 500', 'fi' => '100 % Tervetuliaisbonus jopa $1 500 asti', 'nl' => '100% Welkomstbonus tot $1.500', 'ja' => '100%ウェルカムボーナス最大$1,500', 'pl' => '100% Bonusu Powitalnego do $1500', 'cs' => '100% Uvítací bonus až do $1500', 'ro' => '100% Bonus de Bun Venit până la $1.500', 'el' => '100% Μπόνους Καλωσορίσματος έως $1.500' ),
+		'value' => array( 'en' => '100% up to $1,500', 'de' => '100% bis 1.500 $', 'zh' => '100%，最高1500美元', 'es' => '100% hasta $1.500', 'pt' => '100% até $1.500', 'fr' => '100% jusqu\'à 1 500 $', 'it' => '100% fino a $1.500', 'sv' => '100% upp till $1 500', 'nb' => '100% opptil $1 500', 'fi' => '100 % jopa $1 500 asti', 'nl' => '100% tot $1.500', 'ja' => '最大$1,500の100%', 'pl' => '100% do $1500', 'cs' => '100% až do $1500', 'ro' => '100% până la $1.500', 'el' => '100% έως $1.500' ) ),
+	array( 'casino_slug' => '888casino', 'type' => 'Welcome Bonus', 'code' => '',
+		'title' => array( 'en' => '100% Welcome Bonus up to $500', 'de' => '100% Willkommensbonus bis zu 500 $', 'zh' => '100%欢迎红利，最高500美元', 'es' => '100% de Bono de Bienvenida hasta $500', 'pt' => '100% de Bónus de Boas-Vindas até $500', 'fr' => '100% de Bonus de Bienvenue jusqu\'à 500 $', 'it' => '100% di Bonus di Benvenuto fino a $500', 'sv' => '100% Välkomstbonus upp till $500', 'nb' => '100% Velkomstbonus opptil $500', 'fi' => '100 % Tervetuliaisbonus jopa $500 asti', 'nl' => '100% Welkomstbonus tot $500', 'ja' => '100%ウェルカムボーナス最大$500', 'pl' => '100% Bonusu Powitalnego do $500', 'cs' => '100% Uvítací bonus až do $500', 'ro' => '100% Bonus de Bun Venit până la $500', 'el' => '100% Μπόνους Καλωσορίσματος έως $500' ),
 		'value' => array( 'en' => '100% up to $500', 'de' => '100% bis 500 $', 'zh' => '100%，最高500美元', 'es' => '100% hasta $500', 'pt' => '100% até $500', 'fr' => '100% jusqu\'à 500 $', 'it' => '100% fino a $500', 'sv' => '100% upp till $500', 'nb' => '100% opptil $500', 'fi' => '100 % jopa $500 asti', 'nl' => '100% tot $500', 'ja' => '最大$500の100%', 'pl' => '100% do $500', 'cs' => '100% až do $500', 'ro' => '100% până la $500', 'el' => '100% έως $500' ) ),
-	array( 'casino' => 1, 'type' => 'Free Spins', 'code' => 'SPIN50',
-		'title' => array( 'en' => '50 Free Spins on Sign-Up', 'de' => '50 Freispiele bei Anmeldung', 'zh' => '注册即送50次免费旋转', 'es' => '50 Giros Gratis al Registrarte' , 'pt' => '50 Giros Grátis no Registo', 'fr' => '50 Tours Gratuits à l\'Inscription', 'it' => '50 Giri Gratuiti alla Registrazione', 'sv' => '50 Free Spins vid Registrering', 'nb' => '50 Free Spins ved Registrering', 'fi' => '50 Ilmaiskierrosta Rekisteröitymisestä', 'nl' => '50 Gratis Spins bij Registratie', 'ja' => '登録で50回フリースピン', 'pl' => '50 Darmowych Spinów za Rejestrację', 'cs' => '50 Volných Zatočení za Registraci', 'ro' => '50 Rotiri Gratuite la Înregistrare', 'el' => '50 Δωρεάν Περιστροφές κατά την Εγγραφή' ),
-		'value' => array( 'en' => '50 Free Spins', 'de' => '50 Freispiele', 'zh' => '50次免费旋转', 'es' => '50 Giros Gratis', 'pt' => '50 Giros Grátis', 'fr' => '50 Tours Gratuits', 'it' => '50 Giri Gratuiti', 'sv' => '50 Free Spins', 'nb' => '50 Free Spins', 'fi' => '50 Ilmaiskierrosta', 'nl' => '50 Gratis Spins', 'ja' => '50回フリースピン', 'pl' => '50 Darmowych Spinów', 'cs' => '50 Volných Zatočení', 'ro' => '50 Rotiri Gratuite', 'el' => '50 Δωρεάν Περιστροφές' ) ),
-	array( 'casino' => 2, 'type' => 'No Deposit', 'code' => 'FREE25',
-		'title' => array( 'en' => '$25 No Deposit Bonus', 'de' => '25 $ Bonus ohne Einzahlung', 'zh' => '25美元免存款红利', 'es' => 'Bono Sin Depósito de $25' , 'pt' => 'Bónus Sem Depósito de $25', 'fr' => 'Bonus Sans Dépôt de 25 $', 'it' => 'Bonus Senza Deposito di $25', 'sv' => '25 $ Bonus Utan Insättning', 'nb' => '25 $ Bonus Uten Innskudd', 'fi' => '25 $ Bonus Ilman Talletusta', 'nl' => '$25 Bonus Zonder Storting', 'ja' => '入金不要ボーナス$25', 'pl' => 'Bonus Bez Depozytu $25', 'cs' => 'Bonus Bez Vkladu $25', 'ro' => 'Bonus Fără Depunere de $25', 'el' => 'Μπόνους Χωρίς Κατάθεση $25' ),
-		'value' => array( 'en' => '$25 Free', 'de' => '25 $ gratis', 'zh' => '25美元免费', 'es' => '$25 Gratis', 'pt' => '$25 Grátis', 'fr' => '25 $ Gratuits', 'it' => '$25 Gratis', 'sv' => '25 $ Gratis', 'nb' => '25 $ Gratis', 'fi' => '25 $ Ilmaiseksi', 'nl' => '$25 Gratis', 'ja' => '$25無料', 'pl' => '$25 Gratis', 'cs' => '$25 Zdarma', 'ro' => '$25 Gratis', 'el' => '$25 Δωρεάν' ) ),
-	array( 'casino' => 3, 'type' => 'Cashback', 'code' => '',
-		'title' => array( 'en' => '10% Weekly Cashback', 'de' => '10% wöchentliches Cashback', 'zh' => '每周10%返现', 'es' => '10% de Reembolso Semanal' , 'pt' => '10% de Cashback Semanal', 'fr' => '10% de Cashback Hebdomadaire', 'it' => '10% di Cashback Settimanale', 'sv' => '10% Veckovis Cashback', 'nb' => '10% Ukentlig Cashback', 'fi' => '10 % Viikoittainen Cashback', 'nl' => '10% Wekelijkse Cashback', 'ja' => '毎週10%キャッシュバック', 'pl' => '10% Cotygodniowy Cashback', 'cs' => '10% Týdenní Cashback', 'ro' => '10% Cashback Săptămânal', 'el' => '10% Εβδομαδιαίο Cashback' ),
-		'value' => array( 'en' => '10% Cashback', 'de' => '10% Cashback', 'zh' => '10%返现', 'es' => '10% de Reembolso', 'pt' => '10% de Cashback', 'fr' => '10% de Cashback', 'it' => '10% di Cashback', 'sv' => '10% Cashback', 'nb' => '10% Cashback', 'fi' => '10 % Cashback', 'nl' => '10% Cashback', 'ja' => '10%キャッシュバック', 'pl' => '10% Cashback', 'cs' => '10% Cashback', 'ro' => '10% Cashback', 'el' => '10% Cashback' ) ),
-	array( 'casino' => 4, 'type' => 'Reload Bonus', 'code' => 'RELOAD75',
-		'title' => array( 'en' => '75% Reload Bonus', 'de' => '75% Reload-Bonus', 'zh' => '75%充值红利', 'es' => '75% de Bono de Recarga' , 'pt' => 'Bónus de Recarga de 75%', 'fr' => 'Bonus de Rechargement de 75%', 'it' => 'Bonus di Ricarica del 75%', 'sv' => '75% Reload-bonus', 'nb' => '75% Reload-bonus', 'fi' => '75 % Reload-bonus', 'nl' => '75% Reload-bonus', 'ja' => '75%リロードボーナス', 'pl' => '75% Bonus Reload', 'cs' => '75% Reload Bonus', 'ro' => '75% Bonus de Reîncărcare', 'el' => '75% Μπόνους Επαναφόρτισης' ),
-		'value' => array( 'en' => '75% up to $200', 'de' => '75% bis 200 $', 'zh' => '75%，最高200美元', 'es' => '75% hasta $200', 'pt' => '75% até $200', 'fr' => '75% jusqu\'à 200 $', 'it' => '75% fino a $200', 'sv' => '75% upp till $200', 'nb' => '75% opptil $200', 'fi' => '75 % jopa $200 asti', 'nl' => '75% tot $200', 'ja' => '最大$200の75%', 'pl' => '75% do $200', 'cs' => '75% až do $200', 'ro' => '75% până la $200', 'el' => '75% έως $200' ) ),
-	array( 'casino' => 5, 'type' => 'Welcome Bonus', 'code' => 'CRYPTO200',
-		'title' => array( 'en' => '200% Crypto Deposit Match', 'de' => '200% Krypto-Einzahlungsbonus', 'zh' => '200%加密货币存款红利', 'es' => '200% de Bono por Depósito en Cripto' , 'pt' => '200% de Bónus por Depósito em Cripto', 'fr' => '200% de Bonus de Dépôt en Crypto', 'it' => '200% di Bonus per Deposito in Crypto', 'sv' => '200% Kryptoinsättningsbonus', 'nb' => '200% Kryptoinnskuddsbonus', 'fi' => '200 % Kryptotalletusbonus', 'nl' => '200% Cryptostortingsbonus', 'ja' => '仮想通貨入金200%ボーナス', 'pl' => '200% Bonusu za Depozyt w Kryptowalucie', 'cs' => '200% Bonus za Vklad v Kryptoměně', 'ro' => '200% Bonus la Depunere în Criptomonede', 'el' => '200% Μπόνους Κατάθεσης σε Κρυπτονομίσματα' ),
-		'value' => array( 'en' => '200% up to 1 BTC', 'de' => '200% bis 1 BTC', 'zh' => '200%，最高1个比特币', 'es' => '200% hasta 1 BTC', 'pt' => '200% até 1 BTC', 'fr' => '200% jusqu\'à 1 BTC', 'it' => '200% fino a 1 BTC', 'sv' => '200% upp till 1 BTC', 'nb' => '200% opptil 1 BTC', 'fi' => '200 % jopa 1 BTC asti', 'nl' => '200% tot 1 BTC', 'ja' => '最大1BTCの200%', 'pl' => '200% do 1 BTC', 'cs' => '200% až do 1 BTC', 'ro' => '200% până la 1 BTC', 'el' => '200% έως 1 BTC' ) ),
-	array( 'casino' => 6, 'type' => 'Free Spins', 'code' => 'ACE30',
-		'title' => array( 'en' => '30 Free Spins on Sign-Up', 'de' => '30 Freispiele bei Anmeldung', 'zh' => '注册即送30次免费旋转', 'es' => '30 Giros Gratis al Registrarte' , 'pt' => '30 Giros Grátis no Registo', 'fr' => '30 Tours Gratuits à l\'Inscription', 'it' => '30 Giri Gratuiti alla Registrazione', 'sv' => '30 Free Spins vid Registrering', 'nb' => '30 Free Spins ved Registrering', 'fi' => '30 Ilmaiskierrosta Rekisteröitymisestä', 'nl' => '30 Gratis Spins bij Registratie', 'ja' => '登録で30回フリースピン', 'pl' => '30 Darmowych Spinów za Rejestrację', 'cs' => '30 Volných Zatočení za Registraci', 'ro' => '30 Rotiri Gratuite la Înregistrare', 'el' => '30 Δωρεάν Περιστροφές κατά την Εγγραφή' ),
-		'value' => array( 'en' => '30 Free Spins', 'de' => '30 Freispiele', 'zh' => '30次免费旋转', 'es' => '30 Giros Gratis', 'pt' => '30 Giros Grátis', 'fr' => '30 Tours Gratuits', 'it' => '30 Giri Gratuiti', 'sv' => '30 Free Spins', 'nb' => '30 Free Spins', 'fi' => '30 Ilmaiskierrosta', 'nl' => '30 Gratis Spins', 'ja' => '30回フリースピン', 'pl' => '30 Darmowych Spinów', 'cs' => '30 Volných Zatočení', 'ro' => '30 Rotiri Gratuite', 'el' => '30 Δωρεάν Περιστροφές' ) ),
-	array( 'casino' => 7, 'type' => 'No Deposit', 'code' => 'TRY10',
-		'title' => array( 'en' => '$10 No Deposit Bonus', 'de' => '10 $ Bonus ohne Einzahlung', 'zh' => '10美元免存款红利', 'es' => 'Bono Sin Depósito de $10' , 'pt' => 'Bónus Sem Depósito de $10', 'fr' => 'Bonus Sans Dépôt de 10 $', 'it' => 'Bonus Senza Deposito di $10', 'sv' => '10 $ Bonus Utan Insättning', 'nb' => '10 $ Bonus Uten Innskudd', 'fi' => '10 $ Bonus Ilman Talletusta', 'nl' => '$10 Bonus Zonder Storting', 'ja' => '入金不要ボーナス$10', 'pl' => 'Bonus Bez Depozytu $10', 'cs' => 'Bonus Bez Vkladu $10', 'ro' => 'Bonus Fără Depunere de $10', 'el' => 'Μπόνους Χωρίς Κατάθεση $10' ),
-		'value' => array( 'en' => '$10 Free', 'de' => '10 $ gratis', 'zh' => '10美元免费', 'es' => '$10 Gratis', 'pt' => '$10 Grátis', 'fr' => '10 $ Gratuits', 'it' => '$10 Gratis', 'sv' => '10 $ Gratis', 'nb' => '10 $ Gratis', 'fi' => '10 $ Ilmaiseksi', 'nl' => '$10 Gratis', 'ja' => '$10無料', 'pl' => '$10 Gratis', 'cs' => '$10 Zdarma', 'ro' => '$10 Gratis', 'el' => '$10 Δωρεάν' ) ),
-	array( 'casino' => 0, 'type' => 'Reload Bonus', 'code' => 'VIP50',
-		'title' => array( 'en' => 'VIP 50% Weekly Reload', 'de' => 'VIP 50% wöchentlicher Reload', 'zh' => 'VIP每周50%充值红利', 'es' => 'Recarga Semanal VIP del 50%' , 'pt' => 'Recarga Semanal VIP de 50%', 'fr' => 'Rechargement Hebdomadaire VIP de 50%', 'it' => 'Ricarica Settimanale VIP del 50%', 'sv' => 'VIP 50% Veckovis Reload', 'nb' => 'VIP 50% Ukentlig Reload', 'fi' => 'VIP 50 % Viikoittainen Reload', 'nl' => 'VIP 50% Wekelijkse Reload', 'ja' => 'VIP週間50%リロード', 'pl' => 'VIP Cotygodniowy Reload 50%', 'cs' => 'VIP Týdenní Reload 50%', 'ro' => 'Reîncărcare Săptămânală VIP de 50%', 'el' => 'VIP Εβδομαδιαίο Reload 50%' ),
-		'value' => array( 'en' => '50% up to $1,000', 'de' => '50% bis 1.000 $', 'zh' => '50%，最高1000美元', 'es' => '50% hasta $1.000', 'pt' => '50% até $1.000', 'fr' => '50% jusqu\'à 1 000 $', 'it' => '50% fino a $1.000', 'sv' => '50% upp till $1 000', 'nb' => '50% opptil $1 000', 'fi' => '50 % jopa $1 000 asti', 'nl' => '50% tot $1.000', 'ja' => '最大$1,000の50%', 'pl' => '50% do $1000', 'cs' => '50% až do $1000', 'ro' => '50% până la $1.000', 'el' => '50% έως $1.000' ) ),
+	array( 'casino_slug' => 'betway', 'type' => 'Welcome Bonus', 'code' => '',
+		'title' => array( 'en' => '100% Welcome Bonus up to $1,000', 'de' => '100% Willkommensbonus bis zu 1.000 $', 'zh' => '100%欢迎红利，最高1000美元', 'es' => '100% de Bono de Bienvenida hasta $1.000', 'pt' => '100% de Bónus de Boas-Vindas até $1.000', 'fr' => '100% de Bonus de Bienvenue jusqu\'à 1 000 $', 'it' => '100% di Bonus di Benvenuto fino a $1.000', 'sv' => '100% Välkomstbonus upp till $1 000', 'nb' => '100% Velkomstbonus opptil $1 000', 'fi' => '100 % Tervetuliaisbonus jopa $1 000 asti', 'nl' => '100% Welkomstbonus tot $1.000', 'ja' => '100%ウェルカムボーナス最大$1,000', 'pl' => '100% Bonusu Powitalnego do $1000', 'cs' => '100% Uvítací bonus až do $1000', 'ro' => '100% Bonus de Bun Venit până la $1.000', 'el' => '100% Μπόνους Καλωσορίσματος έως $1.000' ),
+		'value' => array( 'en' => '100% up to $1,000', 'de' => '100% bis 1.000 $', 'zh' => '100%，最高1000美元', 'es' => '100% hasta $1.000', 'pt' => '100% até $1.000', 'fr' => '100% jusqu\'à 1 000 $', 'it' => '100% fino a $1.000', 'sv' => '100% upp till $1 000', 'nb' => '100% opptil $1 000', 'fi' => '100 % jopa $1 000 asti', 'nl' => '100% tot $1.000', 'ja' => '最大$1,000の100%', 'pl' => '100% do $1000', 'cs' => '100% až do $1000', 'ro' => '100% până la $1.000', 'el' => '100% έως $1.000' ) ),
+	array( 'casino_slug' => '32red', 'type' => 'Welcome Bonus', 'code' => '',
+		'title' => array( 'en' => '150% Welcome Bonus up to £150', 'de' => '150% Willkommensbonus bis zu 150 £', 'zh' => '150%欢迎红利，最高150英镑', 'es' => '150% de Bono de Bienvenida hasta £150', 'pt' => '150% de Bónus de Boas-Vindas até £150', 'fr' => '150% de Bonus de Bienvenue jusqu\'à 150 £', 'it' => '150% di Bonus di Benvenuto fino a £150', 'sv' => '150% Välkomstbonus upp till £150', 'nb' => '150% Velkomstbonus opptil £150', 'fi' => '150 % Tervetuliaisbonus jopa £150 asti', 'nl' => '150% Welkomstbonus tot £150', 'ja' => '150%ウェルカムボーナス最大£150', 'pl' => '150% Bonusu Powitalnego do £150', 'cs' => '150% Uvítací bonus až do £150', 'ro' => '150% Bonus de Bun Venit până la £150', 'el' => '150% Μπόνους Καλωσορίσματος έως £150' ),
+		'value' => array( 'en' => '150% up to £150', 'de' => '150% bis 150 £', 'zh' => '150%，最高150英镑', 'es' => '150% hasta £150', 'pt' => '150% até £150', 'fr' => '150% jusqu\'à 150 £', 'it' => '150% fino a £150', 'sv' => '150% upp till £150', 'nb' => '150% opptil £150', 'fi' => '150 % jopa £150 asti', 'nl' => '150% tot £150', 'ja' => '最大£150の150%', 'pl' => '150% do £150', 'cs' => '150% až do £150', 'ro' => '150% până la £150', 'el' => '150% έως £150' ) ),
+	array( 'casino_slug' => 'casumo', 'type' => 'Welcome Bonus', 'code' => '',
+		'title' => array( 'en' => '100% Welcome Bonus up to $1,000 + 100 Free Spins', 'de' => '100% Willkommensbonus bis zu 1.000 $ + 100 Freispiele', 'zh' => '100%欢迎红利，最高1000美元 + 100次免费旋转', 'es' => '100% de Bono de Bienvenida hasta $1.000 + 100 Giros Gratis', 'pt' => '100% de Bónus de Boas-Vindas até $1.000 + 100 Giros Grátis', 'fr' => '100% de Bonus de Bienvenue jusqu\'à 1 000 $ + 100 Tours Gratuits', 'it' => '100% di Bonus di Benvenuto fino a $1.000 + 100 Giri Gratuiti', 'sv' => '100% Välkomstbonus upp till $1 000 + 100 Free Spins', 'nb' => '100% Velkomstbonus opptil $1 000 + 100 Free Spins', 'fi' => '100 % Tervetuliaisbonus jopa $1 000 asti + 100 Ilmaiskierrosta', 'nl' => '100% Welkomstbonus tot $1.000 + 100 Gratis Spins', 'ja' => '100%ウェルカムボーナス最大$1,000 + フリースピン100回', 'pl' => '100% Bonusu Powitalnego do $1000 + 100 Darmowych Spinów', 'cs' => '100% Uvítací bonus až do $1000 + 100 Volných Zatočení', 'ro' => '100% Bonus de Bun Venit până la $1.000 + 100 Rotiri Gratuite', 'el' => '100% Μπόνους Καλωσορίσματος έως $1.000 + 100 Δωρεάν Περιστροφές' ),
+		'value' => array( 'en' => '100% up to $1,000 + 100 Free Spins', 'de' => '100% bis 1.000 $ + 100 Freispiele', 'zh' => '100%，最高1000美元 + 100次免费旋转', 'es' => '100% hasta $1.000 + 100 Giros Gratis', 'pt' => '100% até $1.000 + 100 Giros Grátis', 'fr' => '100% jusqu\'à 1 000 $ + 100 Tours Gratuits', 'it' => '100% fino a $1.000 + 100 Giri Gratuiti', 'sv' => '100% upp till $1 000 + 100 Free Spins', 'nb' => '100% opptil $1 000 + 100 Free Spins', 'fi' => '100 % jopa $1 000 asti + 100 Ilmaiskierrosta', 'nl' => '100% tot $1.000 + 100 Gratis Spins', 'ja' => '最大$1,000の100% + フリースピン100回', 'pl' => '100% do $1000 + 100 Darmowych Spinów', 'cs' => '100% až do $1000 + 100 Volných Zatočení', 'ro' => '100% până la $1.000 + 100 Rotiri Gratuite', 'el' => '100% έως $1.000 + 100 Δωρεάν Περιστροφές' ) ),
+	array( 'casino_slug' => 'unibet', 'type' => 'Free Spins', 'code' => '',
+		'title' => array( 'en' => '200 Free Spins – Big Bass Bonanza', 'de' => '200 Freispiele – Big Bass Bonanza', 'zh' => '200次免费旋转 – Big Bass Bonanza', 'es' => '200 Giros Gratis – Big Bass Bonanza', 'pt' => '200 Giros Grátis – Big Bass Bonanza', 'fr' => '200 Tours Gratuits – Big Bass Bonanza', 'it' => '200 Giri Gratuiti – Big Bass Bonanza', 'sv' => '200 Free Spins – Big Bass Bonanza', 'nb' => '200 Free Spins – Big Bass Bonanza', 'fi' => '200 Ilmaiskierrosta – Big Bass Bonanza', 'nl' => '200 Gratis Spins – Big Bass Bonanza', 'ja' => 'フリースピン200回 – Big Bass Bonanza', 'pl' => '200 Darmowych Spinów – Big Bass Bonanza', 'cs' => '200 Volných Zatočení – Big Bass Bonanza', 'ro' => '200 Rotiri Gratuite – Big Bass Bonanza', 'el' => '200 Δωρεάν Περιστροφές – Big Bass Bonanza' ),
+		'value' => array( 'en' => '200 Free Spins', 'de' => '200 Freispiele', 'zh' => '200次免费旋转', 'es' => '200 Giros Gratis', 'pt' => '200 Giros Grátis', 'fr' => '200 Tours Gratuits', 'it' => '200 Giri Gratuiti', 'sv' => '200 Free Spins', 'nb' => '200 Free Spins', 'fi' => '200 Ilmaiskierrosta', 'nl' => '200 Gratis Spins', 'ja' => 'フリースピン200回', 'pl' => '200 Darmowych Spinów', 'cs' => '200 Volných Zatočení', 'ro' => '200 Rotiri Gratuite', 'el' => '200 Δωρεάν Περιστροφές' ) ),
+	array( 'casino_slug' => 'mr-green', 'type' => 'No Deposit', 'code' => '',
+		'title' => array( 'en' => '25 Free Spins – No Deposit Bonus', 'de' => '25 Freispiele – Ohne Einzahlung', 'zh' => '25次免费旋转 – 免存款红利', 'es' => '25 Giros Gratis – Sin Depósito', 'pt' => '25 Giros Grátis – Sem Depósito', 'fr' => '25 Tours Gratuits – Sans Dépôt', 'it' => '25 Giri Gratuiti – Senza Deposito', 'sv' => '25 Free Spins – Utan Insättning', 'nb' => '25 Free Spins – Uten Innskudd', 'fi' => '25 Ilmaiskierrosta – Ei Talletusta', 'nl' => '25 Gratis Spins – Zonder Storting', 'ja' => 'フリースピン25回 – 入金不要', 'pl' => '25 Darmowych Spinów – Bez Depozytu', 'cs' => '25 Volných Zatočení – Bez Vkladu', 'ro' => '25 Rotiri Gratuite – Fără Depunere', 'el' => '25 Δωρεάν Περιστροφές – Χωρίς Κατάθεση' ),
+		'value' => array( 'en' => '25 Free Spins', 'de' => '25 Freispiele', 'zh' => '25次免费旋转', 'es' => '25 Giros Gratis', 'pt' => '25 Giros Grátis', 'fr' => '25 Tours Gratuits', 'it' => '25 Giri Gratuiti', 'sv' => '25 Free Spins', 'nb' => '25 Free Spins', 'fi' => '25 Ilmaiskierrosta', 'nl' => '25 Gratis Spins', 'ja' => 'フリースピン25回', 'pl' => '25 Darmowych Spinów', 'cs' => '25 Volných Zatočení', 'ro' => '25 Rotiri Gratuite', 'el' => '25 Δωρεάν Περιστροφές' ) ),
+	array( 'casino_slug' => 'dafabet', 'type' => 'Welcome Bonus', 'code' => '',
+		'title' => array( 'en' => '100% Welcome Bonus up to €130', 'de' => '100% Willkommensbonus bis zu 130 €', 'zh' => '100%欢迎红利，最高130欧元', 'es' => '100% de Bono de Bienvenida hasta €130', 'pt' => '100% de Bónus de Boas-Vindas até €130', 'fr' => '100% de Bonus de Bienvenue jusqu\'à 130 €', 'it' => '100% di Bonus di Benvenuto fino a €130', 'sv' => '100% Välkomstbonus upp till €130', 'nb' => '100% Velkomstbonus opptil €130', 'fi' => '100 % Tervetuliaisbonus jopa €130 asti', 'nl' => '100% Welkomstbonus tot €130', 'ja' => '100%ウェルカムボーナス最大€130', 'pl' => '100% Bonusu Powitalnego do €130', 'cs' => '100% Uvítací bonus až do €130', 'ro' => '100% Bonus de Bun Venit până la €130', 'el' => '100% Μπόνους Καλωσορίσματος έως €130' ),
+		'value' => array( 'en' => '100% up to €130', 'de' => '100% bis 130 €', 'zh' => '100%，最高130欧元', 'es' => '100% hasta €130', 'pt' => '100% até €130', 'fr' => '100% jusqu\'à 130 €', 'it' => '100% fino a €130', 'sv' => '100% upp till €130', 'nb' => '100% opptil €130', 'fi' => '100 % jopa €130 asti', 'nl' => '100% tot €130', 'ja' => '最大€130の100%', 'pl' => '100% do €130', 'cs' => '100% až do €130', 'ro' => '100% până la €130', 'el' => '100% έως €130' ) ),
+	array( 'casino_slug' => 'stake-argentina', 'type' => 'Welcome Bonus', 'code' => '',
+		'title' => array( 'en' => '200% Welcome Bonus up to $2,000', 'de' => '200% Willkommensbonus bis zu 2.000 $', 'zh' => '200%欢迎红利，最高2000美元', 'es' => '200% de Bono de Bienvenida hasta $2.000', 'pt' => '200% de Bónus de Boas-Vindas até $2.000', 'fr' => '200% de Bonus de Bienvenue jusqu\'à 2 000 $', 'it' => '200% di Bonus di Benvenuto fino a $2.000', 'sv' => '200% Välkomstbonus upp till $2 000', 'nb' => '200% Velkomstbonus opptil $2 000', 'fi' => '200 % Tervetuliaisbonus jopa $2 000 asti', 'nl' => '200% Welkomstbonus tot $2.000', 'ja' => '200%ウェルカムボーナス最大$2,000', 'pl' => '200% Bonusu Powitalnego do $2000', 'cs' => '200% Uvítací bonus až do $2000', 'ro' => '200% Bonus de Bun Venit până la $2.000', 'el' => '200% Μπόνους Καλωσορίσματος έως $2.000' ),
+		'value' => array( 'en' => '200% up to $2,000', 'de' => '200% bis 2.000 $', 'zh' => '200%，最高2000美元', 'es' => '200% hasta $2.000', 'pt' => '200% até $2.000', 'fr' => '200% jusqu\'à 2 000 $', 'it' => '200% fino a $2.000', 'sv' => '200% upp till $2 000', 'nb' => '200% opptil $2 000', 'fi' => '200 % jopa $2 000 asti', 'nl' => '200% tot $2.000', 'ja' => '最大$2,000の200%', 'pl' => '200% do $2000', 'cs' => '200% až do $2000', 'ro' => '200% până la $2.000', 'el' => '200% έως $2.000' ) ),
+	array( 'casino_slug' => 'betano-peru', 'type' => 'Welcome Bonus', 'code' => '',
+		'title' => array( 'en' => '100% Welcome Bonus up to $500 + 100 Free Spins', 'de' => '100% Willkommensbonus bis zu 500 $ + 100 Freispiele', 'zh' => '100%欢迎红利，最高500美元 + 100次免费旋转', 'es' => '100% de Bono de Bienvenida hasta $500 + 100 Giros Gratis', 'pt' => '100% de Bónus de Boas-Vindas até $500 + 100 Giros Grátis', 'fr' => '100% de Bonus de Bienvenue jusqu\'à 500 $ + 100 Tours Gratuits', 'it' => '100% di Bonus di Benvenuto fino a $500 + 100 Giri Gratuiti', 'sv' => '100% Välkomstbonus upp till $500 + 100 Free Spins', 'nb' => '100% Velkomstbonus opptil $500 + 100 Free Spins', 'fi' => '100 % Tervetuliaisbonus jopa $500 asti + 100 Ilmaiskierrosta', 'nl' => '100% Welkomstbonus tot $500 + 100 Gratis Spins', 'ja' => '100%ウェルカムボーナス最大$500 + フリースピン100回', 'pl' => '100% Bonusu Powitalnego do $500 + 100 Darmowych Spinów', 'cs' => '100% Uvítací bonus až do $500 + 100 Volných Zatočení', 'ro' => '100% Bonus de Bun Venit până la $500 + 100 Rotiri Gratuite', 'el' => '100% Μπόνους Καλωσορίσματος έως $500 + 100 Δωρεάν Περιστροφές' ),
+		'value' => array( 'en' => '100% up to $500 + 100 Free Spins', 'de' => '100% bis 500 $ + 100 Freispiele', 'zh' => '100%，最高500美元 + 100次免费旋转', 'es' => '100% hasta $500 + 100 Giros Gratis', 'pt' => '100% até $500 + 100 Giros Grátis', 'fr' => '100% jusqu\'à 500 $ + 100 Tours Gratuits', 'it' => '100% fino a $500 + 100 Giri Gratuiti', 'sv' => '100% upp till $500 + 100 Free Spins', 'nb' => '100% opptil $500 + 100 Free Spins', 'fi' => '100 % jopa $500 asti + 100 Ilmaiskierrosta', 'nl' => '100% tot $500 + 100 Gratis Spins', 'ja' => '最大$500の100% + フリースピン100回', 'pl' => '100% do $500 + 100 Darmowych Spinów', 'cs' => '100% až do $500 + 100 Volných Zatočení', 'ro' => '100% până la $500 + 100 Rotiri Gratuite', 'el' => '100% έως $500 + 100 Δωρεάν Περιστροφές' ) ),
 );
 
 // Real bonus types carry genuinely different terms — free spin winnings are
@@ -142372,8 +142395,13 @@ $bonus_body_tpl = array(
 
 foreach ( $bonus_defs as $i => $b ) {
 	$per_lang = array();
+	$thumb_id = 0;
 	foreach ( array( 'en', 'de', 'zh', 'es', 'pt', 'fr', 'it', 'sv', 'nb', 'fi', 'nl', 'ja', 'pl', 'cs', 'ro', 'el' ) as $lang ) {
-		$title = $b['title'][ $lang ];
+		$title       = $b['title'][ $lang ];
+		$casino_id   = ww_seeded_casino_id( $b['casino_slug'], $lang );
+		if ( 'en' === $lang && $casino_id ) {
+			$thumb_id = get_post_thumbnail_id( $casino_id );
+		}
 		$per_lang[ $lang ] = array(
 			'args' => array(
 				'post_type'    => 'bonus',
@@ -142383,18 +142411,18 @@ foreach ( $bonus_defs as $i => $b ) {
 				'post_name'    => sanitize_title( $title ),
 			),
 			'meta' => array(
-				'ww_related_casino' => ww_casino_id( $casino_ids_i18n, $b['casino'], $lang ),
+				'ww_related_casino' => $casino_id,
 				'ww_bonus_value'    => $b['value'][ $lang ],
 				'ww_promo_code'     => $b['code'],
 				'ww_terms_summary'  => $bonus_terms_summary[ $b['type'] ][ $lang ],
 				'ww_expiry_date'    => gmdate( 'Y-m-d', strtotime( '+60 days' ) ),
-				'ww_affiliate_link' => '#',
+				'ww_affiliate_link' => $casino_id ? get_post_meta( $casino_id, 'ww_affiliate_link', true ) : '#',
 				'ww_cta_label'      => array( 'en' => 'Claim Bonus', 'de' => 'Bonus Sichern', 'zh' => '领取红利', 'es' => 'Reclamar Bono', 'pt' => 'Resgatar Bónus', 'fr' => 'Réclamer le Bonus', 'it' => 'Richiedi Bonus', 'sv' => 'Hämta Bonus', 'nb' => 'Hent Bonus', 'fi' => 'Lunasta Bonus', 'nl' => 'Bonus Claimen', 'ja' => 'ボーナスを受け取る', 'pl' => 'Odbierz Bonus', 'cs' => 'Získat Bonus', 'ro' => 'Revendică Bonusul', 'el' => 'Διεκδικήστε το Μπόνους' )[ $lang ],
 			),
 			'tax' => array( 'bonus_type' => array( $bonus_types[ $b['type'] ][ $lang ] ) ),
 		);
 	}
-	ww_seed_post_i18n( $per_lang, get_post_thumbnail_id( ww_casino_id( $casino_ids_i18n, $b['casino'], 'en' ) ) );
+	ww_seed_post_i18n( $per_lang, $thumb_id );
 }
 
 // -----------------------------------------------------------------------------
@@ -143114,15 +143142,15 @@ $tournament_body_tpl = array(
 	'el' => fn( $title, $casino ) => $title . ' είναι ένας αγώνας κατάταξης στο ' . $casino . '. Ανεβείτε στην κατάταξη παίζοντας επιλέξιμα παιχνίδια κατά τη διάρκεια του τουρνουά — τα έπαθλα καταβάλλονται αυτόματα στο τέλος.',
 );
 
+$tournament_cta_labels = array( 'en' => 'Join Tournament', 'de' => 'Turnier Beitreten', 'zh' => '加入锦标赛', 'es' => 'Unirse al Torneo', 'pt' => 'Entrar no Torneio', 'fr' => 'Rejoindre le Tournoi', 'it' => 'Partecipa al Torneo', 'sv' => 'Gå med i Turneringen', 'nb' => 'Bli med i Turneringen', 'fi' => 'Liity Turnaukseen', 'nl' => 'Deelnemen aan Toernooi', 'ja' => 'トーナメントに参加', 'pl' => 'Dołącz do Turnieju', 'cs' => 'Připojit se k Turnaji', 'ro' => 'Alătură-te Turneului', 'el' => 'Συμμετοχή στο Τουρνουά' );
+
 foreach ( $tournament_defs as $t ) {
 	$thumb_id = ww_seed_contextual_image( $t['title']['en'], sanitize_title( $t['title']['en'] ) . '-thumb', ww_image_keywords( $t['type'] ), '#45332b', $t['title']['en'] );
 	$per_lang = array();
 	foreach ( array( 'en', 'de', 'zh', 'es', 'pt', 'fr', 'it', 'sv', 'nb', 'fi', 'nl', 'ja', 'pl', 'cs', 'ro', 'el' ) as $lang ) {
 		$title      = $t['title'][ $lang ];
-		$casino_slug = $t['casino_slug'] . ( 'en' === $lang ? '' : '-' . $lang );
-		$casino_post = get_page_by_path( $casino_slug, OBJECT, 'casino' );
-		$casino_id  = $casino_post ? $casino_post->ID : 0;
-		$casino_nm  = $casino_post ? $casino_post->post_title : '';
+		$casino_id  = ww_seeded_casino_id( $t['casino_slug'], $lang );
+		$casino_nm  = $casino_id ? get_the_title( $casino_id ) : '';
 		$per_lang[ $lang ] = array(
 			'args' => array(
 				'post_type'    => 'tournament',
@@ -143137,6 +143165,8 @@ foreach ( $tournament_defs as $t ) {
 				'ww_entries'        => $t['entries'],
 				'ww_status_label'   => $t['status'][ $lang ],
 				'ww_leaderboard'    => $t['leaderboard'],
+				'ww_affiliate_link' => $casino_id ? get_post_meta( $casino_id, 'ww_affiliate_link', true ) : '#',
+				'ww_cta_label'      => $tournament_cta_labels[ $lang ],
 			),
 			'tax' => array( 'tournament_type' => array( $tournament_types[ $t['type'] ][ $lang ] ) ),
 		);

@@ -211,6 +211,8 @@ function wagerwise_meta_schema(): array {
 			'ww_entries'        => array( 'type' => 'string', 'label' => __( 'Entries', 'wagerwise' ), 'field' => 'text' ),
 			'ww_status_label'   => array( 'type' => 'string', 'label' => __( 'Status (e.g. "Ends in 2d 14h")', 'wagerwise' ), 'field' => 'text' ),
 			'ww_leaderboard'    => array( 'type' => 'array', 'label' => __( 'Leaderboard (one row per line: Rank, Player, Points, Prize)', 'wagerwise' ), 'field' => 'repeater' ),
+			'ww_affiliate_link' => array( 'type' => 'string', 'label' => __( 'Affiliate Link', 'wagerwise' ), 'field' => 'url' ),
+			'ww_cta_label'      => array( 'type' => 'string', 'label' => __( 'CTA Button Label', 'wagerwise' ), 'field' => 'text', 'default' => __( 'Join Tournament', 'wagerwise' ) ),
 		),
 		'complaint' => array(
 			'ww_case_number'      => array( 'type' => 'string', 'label' => __( 'Case Number', 'wagerwise' ), 'field' => 'text' ),

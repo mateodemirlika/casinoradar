@@ -130,6 +130,10 @@ function wagerwise_register_blocks(): void {
 			'render_callback' => 'wagerwise_render_block_tournament_leaderboard',
 			'attributes'      => array(),
 		),
+		'tournament-hero'         => array(
+			'render_callback' => 'wagerwise_render_block_tournament_hero',
+			'attributes'      => array(),
+		),
 		'news-featured'           => array(
 			'render_callback' => 'wagerwise_render_block_news_featured',
 			'attributes'      => array(
@@ -977,6 +981,40 @@ function wagerwise_render_block_tournament_grid( array $attrs ): string {
 				</span>
 			</a>
 		<?php endforeach; ?>
+	</div>
+	<?php
+	return (string) ob_get_clean();
+}
+
+function wagerwise_render_block_tournament_hero(): string {
+	$post_id = get_the_ID();
+	if ( ! $post_id || 'tournament' !== get_post_type( $post_id ) ) {
+		return '';
+	}
+
+	$casino_id = (int) get_post_meta( $post_id, 'ww_related_casino', true );
+	$prize     = get_post_meta( $post_id, 'ww_prize_pool', true );
+	$entries   = get_post_meta( $post_id, 'ww_entries', true );
+	$status    = get_post_meta( $post_id, 'ww_status_label', true );
+	$link      = get_post_meta( $post_id, 'ww_affiliate_link', true );
+	$cta       = get_post_meta( $post_id, 'ww_cta_label', true ) ?: __( 'Join Tournament', 'wagerwise' );
+
+	ob_start();
+	?>
+	<div class="ww-tournament-hero">
+		<?php if ( $casino_id ) : ?>
+			<div class="ww-tournament-hero__logo"><?php echo wagerwise_casino_logo_html( $casino_id, 'casino-logo' ); ?></div>
+		<?php endif; ?>
+		<div class="ww-tournament-hero__body">
+			<h1><?php echo esc_html( get_the_title( $post_id ) ); ?></h1>
+			<ul class="ww-tournament-hero__facts">
+				<?php if ( $casino_id ) : ?><li><?php esc_html_e( 'Casino', 'wagerwise' ); ?>: <?php echo esc_html( get_the_title( $casino_id ) ); ?></li><?php endif; ?>
+				<?php if ( $prize ) : ?><li><?php esc_html_e( 'Prize Pool', 'wagerwise' ); ?>: <?php echo esc_html( $prize ); ?></li><?php endif; ?>
+				<?php if ( $entries ) : ?><li><?php esc_html_e( 'Entries', 'wagerwise' ); ?>: <?php echo esc_html( $entries ); ?></li><?php endif; ?>
+				<?php if ( $status ) : ?><li><?php echo esc_html( $status ); ?></li><?php endif; ?>
+			</ul>
+		</div>
+		<div class="ww-tournament-hero__cta"><?php echo wagerwise_cta_button_html( $link, $cta, 'ww-btn ww-btn--primary ww-btn--large' ); ?></div>
 	</div>
 	<?php
 	return (string) ob_get_clean();
