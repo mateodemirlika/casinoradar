@@ -155,7 +155,8 @@ function wagerwise_register_blocks(): void {
 		'guide-list'              => array(
 			'render_callback' => 'wagerwise_render_block_guide_list',
 			'attributes'      => array(
-				'number' => array( 'type' => 'number', 'default' => 8 ),
+				'number'     => array( 'type' => 'number', 'default' => 8 ),
+				'categoryId' => array( 'type' => 'number', 'default' => 0 ),
 			),
 		),
 		'reviews-list'            => array(
@@ -922,6 +923,9 @@ function wagerwise_render_block_taxonomy_results(): string {
 		case 'game_category':
 			return wagerwise_render_block_game_grid( array( 'number' => 24, 'categoryId' => $term->term_id ) );
 
+		case 'guide_category':
+			return wagerwise_render_block_guide_list( array( 'number' => 24, 'categoryId' => $term->term_id ) );
+
 		case 'casino_category':
 		case 'payment_method':
 		case 'licence':
@@ -1082,12 +1086,17 @@ function wagerwise_render_block_guide_featured(): string {
 }
 
 function wagerwise_render_block_guide_list( array $attrs ): string {
-	$featured = get_posts( array( 'post_type' => 'guide', 'posts_per_page' => 1, 'fields' => 'ids' ) );
-	$posts    = get_posts( array(
+	$category_id = (int) ( $attrs['categoryId'] ?? 0 );
+	$args        = array(
 		'post_type'      => 'guide',
 		'posts_per_page' => $attrs['number'] ?? 8,
-		'post__not_in'   => $featured,
-	) );
+	);
+	if ( $category_id ) {
+		$args['tax_query'] = array( array( 'taxonomy' => 'guide_category', 'field' => 'term_id', 'terms' => $category_id ) );
+	} else {
+		$args['post__not_in'] = get_posts( array( 'post_type' => 'guide', 'posts_per_page' => 1, 'fields' => 'ids' ) );
+	}
+	$posts = get_posts( $args );
 	if ( empty( $posts ) ) {
 		return '';
 	}
