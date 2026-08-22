@@ -43,7 +43,12 @@ $WP rewrite structure '/%postname%/' --hard
 $WP rewrite flush --hard
 
 echo "==> Seeding demo content"
-$WP eval-file /var/www/html/wp-cli-scripts/seed.php
+# `wp eval-file` runs the script through PHP's eval(), which silently no-ops
+# on this file: it's grown to 17MB+ of inline seed data, past whatever limit
+# eval() tolerates before it fails without any error output at all — exit 0,
+# no WP_CLI::success, nothing seeded. `wp eval "require '...';"` runs it via
+# a real require() instead and works correctly at this size.
+$WP eval "require '/var/www/html/wp-cli-scripts/seed.php';"
 
 # seed.php can register a new Polylang language (wagerwise_bootstrap_polylang_
 # languages(), called directly at its top) — its URL prefix (e.g. /es/) needs
