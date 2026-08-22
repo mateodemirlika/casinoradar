@@ -252,6 +252,7 @@ function ww_seed_post( array $args, array $meta = array(), array $tax = array(),
 		'posts_per_page' => 1,
 		'fields'         => 'ids',
 	) );
+	$matched_by_title_fallback = false;
 	if ( empty( $existing ) && empty( $args['post_name'] ) ) {
 		// Fall back to a title match only when no explicit slug was given
 		// (e.g. WordPress's own auto-created "Privacy Policy" draft page).
@@ -262,6 +263,7 @@ function ww_seed_post( array $args, array $meta = array(), array $tax = array(),
 			'posts_per_page' => 1,
 			'fields'         => 'ids',
 		) );
+		$matched_by_title_fallback = ! empty( $existing );
 	}
 	if ( ! empty( $existing ) ) {
 		$existing_id = (int) $existing[0];
@@ -284,8 +286,14 @@ function ww_seed_post( array $args, array $meta = array(), array $tax = array(),
 
 		// WordPress core auto-creates a draft "Privacy Policy" page on
 		// install; adopt (and publish) it rather than skipping, so the seed
-		// still results in a live page instead of a 404.
-		if ( 'publish' !== get_post_status( $existing_id ) && 'publish' === ( $args['post_status'] ?? '' ) ) {
+		// still results in a live page instead of a 404. Scoped to the
+		// title-fallback match only (no explicit post_name given) — every
+		// piece of our own seeded content passes an explicit slug and is
+		// matched above by post_name instead, so this must never re-publish
+		// a slug-matched post that an editor deliberately unpublished (e.g.
+		// the 8 retired fictional demo casinos) just because this file still
+		// defines that same slug with 'publish'.
+		if ( $matched_by_title_fallback && 'publish' !== get_post_status( $existing_id ) && 'publish' === ( $args['post_status'] ?? '' ) ) {
 			wp_update_post( array( 'ID' => $existing_id, 'post_status' => 'publish', 'post_content' => $args['post_content'] ?? '' ) );
 		}
 		// Backfill a missing thumbnail on re-runs (e.g. a related casino's
