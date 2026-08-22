@@ -200,10 +200,11 @@ function wagerwise_meta_schema(): array {
 			'ww_cta_label'       => array( 'type' => 'string', 'label' => __( 'CTA Button Label', 'wagerwise' ), 'field' => 'text', 'default' => __( 'Claim Bonus', 'wagerwise' ) ),
 		),
 		'game'   => array(
-			'ww_rtp'        => array( 'type' => 'string', 'label' => __( 'RTP %', 'wagerwise' ), 'field' => 'text' ),
-			'ww_min_bet'    => array( 'type' => 'string', 'label' => __( 'Min Bet', 'wagerwise' ), 'field' => 'text' ),
-			'ww_max_win'    => array( 'type' => 'string', 'label' => __( 'Max Win', 'wagerwise' ), 'field' => 'text' ),
-			'ww_demo_link'  => array( 'type' => 'string', 'label' => __( 'Demo Play Link', 'wagerwise' ), 'field' => 'url' ),
+			'ww_rtp'            => array( 'type' => 'string', 'label' => __( 'RTP %', 'wagerwise' ), 'field' => 'text' ),
+			'ww_min_bet'        => array( 'type' => 'string', 'label' => __( 'Min Bet', 'wagerwise' ), 'field' => 'text' ),
+			'ww_max_win'        => array( 'type' => 'string', 'label' => __( 'Max Win', 'wagerwise' ), 'field' => 'text' ),
+			'ww_related_casino' => array( 'type' => 'integer', 'label' => __( 'Play At Casino', 'wagerwise' ), 'field' => 'post_select', 'post_type' => 'casino' ),
+			'ww_demo_link'      => array( 'type' => 'string', 'label' => __( 'Play Link', 'wagerwise' ), 'field' => 'url' ),
 		),
 		'tournament' => array(
 			'ww_related_casino' => array( 'type' => 'integer', 'label' => __( 'Casino', 'wagerwise' ), 'field' => 'post_select', 'post_type' => 'casino' ),

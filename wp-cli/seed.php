@@ -142430,7 +142430,7 @@ foreach ( $bonus_defs as $i => $b ) {
 // -----------------------------------------------------------------------------
 
 $game_defs = array(
-	array( 'name' => 'Book of Dead', 'colour' => '#C97A1F', 'rtp' => '96.21%', 'min_bet' => '€0.01', 'max_win' => '5,000x', 'provider' => 4, 'category' => 'Slots',
+	array( 'name' => 'Book of Dead', 'casino_slug' => 'casumo', 'colour' => '#C97A1F', 'rtp' => '96.21%', 'min_bet' => '€0.01', 'max_win' => '5,000x', 'provider' => 4, 'category' => 'Slots',
 		'desc' => array(
 			'en' => "Book of Dead is a high-volatility slot from Play'n GO with a published RTP of 96.21% and a maximum win of 5,000x the stake, built around an expanding-symbol free spins feature.",
 			'de' => "Book of Dead ist ein hochvolatiler Spielautomat von Play'n GO mit einer veröffentlichten Auszahlungsquote von 96,21 % und einem Höchstgewinn von 5.000-fachem Einsatz, aufgebaut um ein Freispiel-Feature mit expandierenden Symbolen.",
@@ -142449,7 +142449,7 @@ $game_defs = array(
 			'ro' => "Book of Dead este un slot cu volatilitate ridicată de la Play'n GO, cu un RTP publicat de 96,21% și un câștig maxim de 5.000x miza, construit în jurul unei funcții de rotiri gratuite cu simboluri extensibile.",
 			'el' => "Το Book of Dead είναι ένα φρουτάκι υψηλής μεταβλητότητας από την Play'n GO με δημοσιευμένο RTP 96,21% και μέγιστη νίκη 5.000x του στοιχήματος, χτισμένο γύρω από ένα χαρακτηριστικό δωρεάν περιστροφών με επεκτεινόμενα σύμβολα.",
 		) ),
-	array( 'name' => 'European Roulette', 'colour' => '#1F2C39', 'rtp' => '97.30%', 'min_bet' => '$0.10', 'max_win' => '35:1', 'provider' => 0, 'category' => 'Roulette',
+	array( 'name' => 'European Roulette', 'casino_slug' => 'leovegas', 'colour' => '#1F2C39', 'rtp' => '97.30%', 'min_bet' => '$0.10', 'max_win' => '35:1', 'provider' => 0, 'category' => 'Roulette',
 		'desc' => array(
 			'en' => 'European Roulette by NetEnt is a single-zero roulette variant with a mathematically fixed RTP of 97.30%, paying 35 to 1 on a winning straight-up number bet.',
 			'de' => 'European Roulette von NetEnt ist eine Roulette-Variante mit einer Null mit einer mathematisch festen Auszahlungsquote von 97,30 %, die bei einer gewonnenen Vollzahl-Wette 35 zu 1 auszahlt.',
@@ -142468,7 +142468,7 @@ $game_defs = array(
 			'ro' => 'European Roulette de la NetEnt este o variantă de ruletă cu un singur zero, cu un RTP fixat matematic de 97,30%, plătind 35 la 1 pentru un pariu câștigător pe număr plin.',
 			'el' => 'Το European Roulette της NetEnt είναι μια παραλλαγή ρουλέτας μονού μηδενικού με μαθηματικά σταθερό RTP 97,30%, που πληρώνει 35 προς 1 σε ένα νικηφόρο στοίχημα πλήρους αριθμού.',
 		) ),
-	array( 'name' => 'Blackjack Classic', 'colour' => '#0F5132', 'rtp' => '99.50%', 'min_bet' => '$1', 'max_win' => '3:2', 'provider' => 0, 'category' => 'Blackjack',
+	array( 'name' => 'Blackjack Classic', 'casino_slug' => 'betway', 'colour' => '#0F5132', 'rtp' => '99.50%', 'min_bet' => '$1', 'max_win' => '3:2', 'provider' => 0, 'category' => 'Blackjack',
 		'desc' => array(
 			'en' => 'Blackjack Classic by NetEnt follows standard blackjack rules with a basic-strategy RTP of 99.5%, paying 3 to 2 on a natural blackjack.',
 			'de' => 'Blackjack Classic von NetEnt folgt den Standardregeln von Blackjack mit einer Auszahlungsquote von 99,5 % bei Basisstrategie und zahlt 3 zu 2 bei einem natürlichen Blackjack aus.',
@@ -142487,7 +142487,7 @@ $game_defs = array(
 			'ro' => 'Blackjack Classic de la NetEnt urmează regulile standard de blackjack cu un RTP de 99,5% la strategie de bază, plătind 3 la 2 pentru un blackjack natural.',
 			'el' => 'Το Blackjack Classic της NetEnt ακολουθεί τους τυπικούς κανόνες του μπλάκτζακ με RTP 99,5% με βασική στρατηγική, πληρώνοντας 3 προς 2 σε φυσικό μπλάκτζακ.',
 		) ),
-	array( 'name' => 'Jacks or Better (9/6)', 'colour' => '#7A1FA2', 'rtp' => '99.54%', 'min_bet' => '$0.25', 'max_win' => '800x', 'provider' => 1, 'category' => 'Video Poker',
+	array( 'name' => 'Jacks or Better (9/6)', 'casino_slug' => '888casino', 'colour' => '#7A1FA2', 'rtp' => '99.54%', 'min_bet' => '$0.25', 'max_win' => '800x', 'provider' => 1, 'category' => 'Video Poker',
 		'desc' => array(
 			'en' => 'Jacks or Better is a video poker variant whose full-pay 9/6 table returns a published 99.54% RTP with optimal strategy at max coins, topping out at 800x the stake for a royal flush.',
 			'de' => 'Jacks or Better ist eine Video-Poker-Variante, deren vollausgezahlte 9/6-Tabelle bei optimaler Strategie und maximalem Münzeinsatz eine veröffentlichte Auszahlungsquote von 99,54 % erreicht, mit einem Höchstgewinn von 800-fachem Einsatz für einen Royal Flush.',
@@ -142506,7 +142506,7 @@ $game_defs = array(
 			'ro' => 'Jacks or Better este o variantă de video poker a cărei tabelă de plăți completă 9/6 oferă un RTP publicat de 99,54% cu strategie optimă și monede maxime, culminând cu 800x miza pentru un chintă royal.',
 			'el' => 'Το Jacks or Better είναι μια παραλλαγή βίντεο πόκερ της οποίας ο πλήρης πίνακας πληρωμών 9/6 αποδίδει δημοσιευμένο RTP 99,54% με βέλτιστη στρατηγική και μέγιστα κέρματα, φτάνοντας τα 800x του στοιχήματος για ρουαγιάλ φλας.',
 		) ),
-	array( 'name' => 'Live Lightning Baccarat', 'colour' => '#A21F3D', 'rtp' => '98.76%', 'min_bet' => '$1', 'max_win' => '512x', 'provider' => 3, 'category' => 'Live Games',
+	array( 'name' => 'Live Lightning Baccarat', 'casino_slug' => 'unibet', 'colour' => '#A21F3D', 'rtp' => '98.76%', 'min_bet' => '$1', 'max_win' => '512x', 'provider' => 3, 'category' => 'Live Games',
 		'desc' => array(
 			'en' => 'Live Lightning Baccarat is a real-money live dealer game from Evolution Gaming with a published RTP of 98.76%, applying random lightning multipliers of up to 8x to boost winning Player or Banker bets.',
 			'de' => 'Live Lightning Baccarat ist ein Live-Dealer-Spiel um echtes Geld von Evolution Gaming mit einer veröffentlichten Auszahlungsquote von 98,76 %, das zufällige Blitzmultiplikatoren von bis zu 8-fach auf gewinnende Player- oder Banker-Wetten anwendet.',
@@ -142525,7 +142525,7 @@ $game_defs = array(
 			'ro' => 'Live Lightning Baccarat este un joc cu crupier live pe bani reali de la Evolution Gaming, cu un RTP publicat de 98,76%, aplicând multiplicatori fulger aleatorii de până la 8x pentru a spori pariurile câștigătoare pe Jucător sau Bancă.',
 			'el' => 'Το Live Lightning Baccarat είναι ένα παιχνίδι ζωντανού ντίλερ με πραγματικά χρήματα από την Evolution Gaming με δημοσιευμένο RTP 98,76%, εφαρμόζοντας τυχαίους πολλαπλασιαστές κεραυνού έως 8x για ενίσχυση των νικηφόρων στοιχημάτων Παίκτη ή Τράπεζας.',
 		) ),
-	array( 'name' => '90 Ball Bingo', 'colour' => '#B3941F', 'rtp' => '~80-93% (varies by operator)', 'min_bet' => '$0.10', 'max_win' => 'Varies (jackpot-dependent)', 'provider' => 6, 'category' => 'Bingo',
+	array( 'name' => '90 Ball Bingo', 'casino_slug' => 'mr-green', 'colour' => '#B3941F', 'rtp' => '~80-93% (varies by operator)', 'min_bet' => '$0.10', 'max_win' => 'Varies (jackpot-dependent)', 'provider' => 6, 'category' => 'Bingo',
 		'desc' => array(
 			'en' => '90 Ball Bingo is a standard online bingo variant. Unlike slots, published bingo RTP figures vary by operator and specific game, commonly cited in the 80-93% range rather than one fixed number.',
 			'de' => '90 Ball Bingo ist eine Standard-Bingo-Variante für das Internet. Anders als bei Spielautomaten variieren die veröffentlichten Bingo-Auszahlungsquoten je nach Anbieter und konkretem Spiel und liegen üblicherweise im Bereich von 80-93 % statt bei einer festen Zahl.',
@@ -142544,7 +142544,7 @@ $game_defs = array(
 			'ro' => '90 Ball Bingo este o variantă standard de bingo online. Spre deosebire de sloturi, cifrele RTP publicate pentru bingo variază în funcție de operator și de jocul specific, fiind de obicei menționate în intervalul 80-93% mai degrabă decât un număr fix.',
 			'el' => 'Το 90 Ball Bingo είναι μια τυπική διαδικτυακή παραλλαγή μπίνγκο. Σε αντίθεση με τα φρουτάκια, τα δημοσιευμένα ποσοστά RTP για το μπίνγκο ποικίλλουν ανά φορέα εκμετάλλευσης και συγκεκριμένο παιχνίδι, αναφερόμενα συνήθως στο εύρος 80-93% αντί για έναν σταθερό αριθμό.',
 		) ),
-	array( 'name' => 'Gates of Olympus', 'colour' => '#8A4B1F', 'rtp' => '96.50%', 'min_bet' => '$0.20', 'max_win' => '5,000x', 'provider' => 2, 'category' => 'Slots',
+	array( 'name' => 'Gates of Olympus', 'casino_slug' => 'dafabet', 'colour' => '#8A4B1F', 'rtp' => '96.50%', 'min_bet' => '$0.20', 'max_win' => '5,000x', 'provider' => 2, 'category' => 'Slots',
 		'desc' => array(
 			'en' => 'Gates of Olympus is a Greek-mythology-themed slot from Pragmatic Play with a published RTP of 96.5% and a maximum win of 5,000x the stake, using a tumbling-reels mechanic instead of fixed paylines.',
 			'de' => 'Gates of Olympus ist ein Spielautomat von Pragmatic Play im Stil der griechischen Mythologie mit einer veröffentlichten Auszahlungsquote von 96,5 % und einem Höchstgewinn von 5.000-fachem Einsatz, der einen Tumbling-Reels-Mechanismus anstelle fester Gewinnlinien verwendet.',
@@ -142563,7 +142563,7 @@ $game_defs = array(
 			'ro' => 'Gates of Olympus este un slot cu tematică din mitologia greacă de la Pragmatic Play, cu un RTP publicat de 96,5% și un câștig maxim de 5.000x miza, folosind un mecanism de role în cascadă în locul liniilor de plată fixe.',
 			'el' => 'Το Gates of Olympus είναι ένα φρουτάκι με θέμα την ελληνική μυθολογία από την Pragmatic Play με δημοσιευμένο RTP 96,5% και μέγιστη νίκη 5.000x του στοιχήματος, χρησιμοποιώντας μηχανισμό κυλιόμενων τροχών αντί για σταθερές γραμμές πληρωμής.',
 		) ),
-	array( 'name' => 'Starburst', 'colour' => '#1F7A6C', 'rtp' => '96.10%', 'min_bet' => '$0.10', 'max_win' => '500x', 'provider' => 0, 'category' => 'Slots',
+	array( 'name' => 'Starburst', 'casino_slug' => '32red', 'colour' => '#1F7A6C', 'rtp' => '96.10%', 'min_bet' => '$0.10', 'max_win' => '500x', 'provider' => 0, 'category' => 'Slots',
 		'desc' => array(
 			'en' => 'Starburst is one of NetEnt\'s most recognizable slots, with a published RTP of 96.1% and a maximum win commonly cited at 500x the stake, built around a space-gem theme with win-both-ways reels.',
 			'de' => 'Starburst ist einer der bekanntesten Spielautomaten von NetEnt mit einer veröffentlichten Auszahlungsquote von 96,1 % und einem Höchstgewinn, der üblicherweise mit dem 500-fachen Einsatz angegeben wird, aufgebaut um ein Weltraum-Edelstein-Thema mit beidseitig gewinnenden Walzen.',
@@ -142588,6 +142588,7 @@ foreach ( $game_defs as $g ) {
 	$logo_id = ww_seed_contextual_image( $g['name'], sanitize_title( $g['name'] ) . '-thumb', ww_image_keywords( $g['category'] ), $g['colour'], $g['name'] . ' thumbnail' );
 	$per_lang = array();
 	foreach ( array( 'en', 'de', 'zh', 'es', 'pt', 'fr', 'it', 'sv', 'nb', 'fi', 'nl', 'ja', 'pl', 'cs', 'ro', 'el' ) as $lang ) {
+		$casino_id = ww_seeded_casino_id( $g['casino_slug'], $lang );
 		$per_lang[ $lang ] = array(
 			'args' => array(
 				'post_type'    => 'game',
@@ -142597,10 +142598,11 @@ foreach ( $game_defs as $g ) {
 				'post_name'    => sanitize_title( $g['name'] ) . ( 'en' === $lang ? '' : '-' . $lang ),
 			),
 			'meta' => array(
-				'ww_rtp'       => $g['rtp'],
-				'ww_min_bet'   => $g['min_bet'],
-				'ww_max_win'   => $g['max_win'],
-				'ww_demo_link' => '#',
+				'ww_rtp'            => $g['rtp'],
+				'ww_min_bet'        => $g['min_bet'],
+				'ww_max_win'        => $g['max_win'],
+				'ww_related_casino' => $casino_id,
+				'ww_demo_link'      => $casino_id ? get_post_meta( $casino_id, 'ww_affiliate_link', true ) : '#',
 			),
 			'tax' => array(
 				'software_provider' => array( ww_lang_ids( $providers, $lang )[ $g['provider'] ] ),

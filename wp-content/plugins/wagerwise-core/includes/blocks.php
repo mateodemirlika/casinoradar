@@ -779,7 +779,7 @@ function wagerwise_render_block_game_grid( array $attrs ): string {
 					<?php if ( $provider ) : ?><span class="ww-game-card__provider"><?php echo esc_html( $provider ); ?></span><?php endif; ?>
 				</div>
 				<?php if ( $demo_link ) : ?>
-					<a class="ww-btn ww-btn--ghost ww-btn--small" href="<?php echo esc_url( $demo_link ); ?>" rel="noopener" target="_blank"><?php esc_html_e( 'Play Demo', 'wagerwise' ); ?></a>
+					<a class="ww-btn ww-btn--ghost ww-btn--small" href="<?php echo esc_url( $demo_link ); ?>" rel="noopener" target="_blank"><?php esc_html_e( 'Play Now', 'wagerwise' ); ?></a>
 				<?php endif; ?>
 			</div>
 		<?php endforeach; ?>
@@ -816,7 +816,7 @@ function wagerwise_render_block_game_hero(): string {
 		</div>
 		<?php if ( $demo_link ) : ?>
 			<div class="ww-casino-hero__cta">
-				<a class="ww-btn ww-btn--primary ww-btn--large" href="<?php echo esc_url( $demo_link ); ?>" rel="noopener" target="_blank"><?php esc_html_e( 'Play Demo', 'wagerwise' ); ?></a>
+				<a class="ww-btn ww-btn--primary ww-btn--large" href="<?php echo esc_url( $demo_link ); ?>" rel="noopener" target="_blank"><?php esc_html_e( 'Play Now', 'wagerwise' ); ?></a>
 			</div>
 		<?php endif; ?>
 	</div>
