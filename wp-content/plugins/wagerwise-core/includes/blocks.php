@@ -297,7 +297,7 @@ function wagerwise_render_casino_cards( array $casinos, string $layout = 'grid',
 			<div class="ww-casino-card" data-casino-categories="<?php echo esc_attr( $cat_slugs ); ?>" data-rank="<?php echo (int) $rank; ?>">
 				<span class="ww-rank<?php echo esc_attr( $rank_class ); ?>">#<?php echo (int) $rank; ?></span>
 				<a class="ww-casino-card__logo" href="<?php echo esc_url( get_permalink( $casino ) ); ?>">
-					<?php echo wagerwise_casino_logo_html( $casino->ID, 'medium' ); ?>
+					<?php echo wagerwise_casino_logo_html( $casino->ID, 'casino-logo' ); ?>
 				</a>
 				<div class="ww-casino-card__body">
 					<a class="ww-casino-card__name" href="<?php echo esc_url( get_permalink( $casino ) ); ?>"><?php echo esc_html( get_the_title( $casino ) ); ?></a>
