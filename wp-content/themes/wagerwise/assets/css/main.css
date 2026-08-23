@@ -558,8 +558,7 @@ header.wp-block-template-part {
 	transition: box-shadow 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
 }
 .ww-casino-card:hover { box-shadow: var(--ww-shadow-hover), var(--ww-glow-primary); border-color: var(--wp--preset--color--primary); transform: translateY(-2px); }
-.ww-casino-card__logo { display: block; border-radius: var(--ww-radius-sm); overflow: hidden; margin-bottom: 14px; height: 80px; padding: 10px; box-sizing: border-box; background: #fff; }
-.ww-casino-card__logo:has(.ww-casino-logo-fallback) { padding: 0; background: repeating-linear-gradient(45deg, var(--wp--preset--color--surface-alt), var(--wp--preset--color--surface-alt) 6px, var(--wp--preset--color--surface) 6px, var(--wp--preset--color--surface) 12px); }
+.ww-casino-card__logo { display: block; border-radius: var(--ww-radius-sm); overflow: hidden; margin-bottom: 14px; height: 80px; background: repeating-linear-gradient(45deg, var(--wp--preset--color--surface-alt), var(--wp--preset--color--surface-alt) 6px, var(--wp--preset--color--surface) 6px, var(--wp--preset--color--surface) 12px); }
 /* Deterministic colored initial-letter badge shown in place of a real logo
    (wagerwise_casino_logo_html()) until one's uploaded — covers the striped
    placeholder background above entirely so it never shows through. */
