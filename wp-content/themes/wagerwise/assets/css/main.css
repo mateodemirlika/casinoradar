@@ -558,7 +558,11 @@ header.wp-block-template-part {
 	transition: box-shadow 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
 }
 .ww-casino-card:hover { box-shadow: var(--ww-shadow-hover), var(--ww-glow-primary); border-color: var(--wp--preset--color--primary); transform: translateY(-2px); }
-.ww-casino-card__logo { display: flex; align-items: center; justify-content: center; align-self: center; width: 200px; max-width: 100%; height: 100px; border-radius: var(--ww-radius-sm); overflow: hidden; margin-bottom: 14px; padding: 10px; box-sizing: border-box; }
+/* Sizing/positioning only — the actual logo look (white tile, padding,
+   natural proportions via max-height) comes from the shared
+   .ww-casino-hero__logo rule below, which .ww-casino-card__logo is now
+   part of, so both places render a logo identically. */
+.ww-casino-card__logo { align-self: center; margin-bottom: 14px; }
 /* Deterministic colored initial-letter badge shown in place of a real logo
    (wagerwise_casino_logo_html()) until one's uploaded. */
 .ww-casino-logo-fallback { display: flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: var(--ww-radius-sm); color: #fff; font-weight: 800; font-size: 34px; letter-spacing: 0.5px; }
@@ -585,7 +589,6 @@ header.wp-block-template-part {
 .ww-rank.ww-rank--2,
 .ww-comparison-table tbody tr:nth-child(2) .ww-rank { background: var(--wp--preset--color--accent); }
 .ww-rank.ww-rank--other { background: var(--wp--preset--color--ink-light); color: var(--wp--preset--color--bg); }
-.ww-casino-card__logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
 .ww-casino-card__name { font-weight: 700; color: var(--wp--preset--color--ink); text-decoration: none; font-size: var(--wp--preset--font-size--large); }
 
 /* ---------- Instant archive/category navigation (main.js loadArchive()) ---------- */
@@ -828,8 +831,8 @@ header.wp-block-template-part {
 	padding: 32px;
 	margin-bottom: 32px;
 }
-.ww-casino-hero__logo, .ww-bonus-hero__logo, .ww-tournament-hero__logo { background: #fff; border-radius: var(--ww-radius-sm); padding: 12px; display: inline-flex; }
-.ww-casino-hero__logo img, .ww-bonus-hero__logo img, .ww-tournament-hero__logo img { max-height: 80px; }
+.ww-casino-hero__logo, .ww-bonus-hero__logo, .ww-tournament-hero__logo, .ww-casino-card__logo { background: #fff; border-radius: var(--ww-radius-sm); padding: 12px; display: inline-flex; }
+.ww-casino-hero__logo img, .ww-bonus-hero__logo img, .ww-tournament-hero__logo img, .ww-casino-card__logo img { max-height: 80px; }
 .ww-casino-hero__logo .ww-casino-logo-fallback, .ww-bonus-hero__logo .ww-casino-logo-fallback, .ww-tournament-hero__logo .ww-casino-logo-fallback { width: 80px; height: 80px; font-size: 36px; }
 .ww-casino-hero__body, .ww-bonus-hero__body, .ww-tournament-hero__body { flex: 1; min-width: 240px; }
 .ww-casino-hero__facts, .ww-tournament-hero__facts { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 16px; color: var(--wp--preset--color--ink-light); font-size: var(--wp--preset--font-size--small); }
