@@ -558,10 +558,10 @@ header.wp-block-template-part {
 	transition: box-shadow 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
 }
 .ww-casino-card:hover { box-shadow: var(--ww-shadow-hover), var(--ww-glow-primary); border-color: var(--wp--preset--color--primary); transform: translateY(-2px); }
-.ww-casino-card__logo { display: flex; align-items: center; justify-content: center; border-radius: var(--ww-radius-sm); overflow: hidden; margin-bottom: 14px; height: 80px; padding: 10px; box-sizing: border-box; background: #fff; }
+.ww-casino-card__logo { display: flex; align-items: center; justify-content: center; border-radius: var(--ww-radius-sm); overflow: hidden; margin-bottom: 14px; height: 104px; padding: 12px; box-sizing: border-box; background: #fff; }
 /* Deterministic colored initial-letter badge shown in place of a real logo
    (wagerwise_casino_logo_html()) until one's uploaded. */
-.ww-casino-logo-fallback { display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: var(--ww-radius-sm); color: #fff; font-weight: 800; font-size: 28px; letter-spacing: 0.5px; }
+.ww-casino-logo-fallback { display: flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: var(--ww-radius-sm); color: #fff; font-weight: 800; font-size: 34px; letter-spacing: 0.5px; }
 .ww-casino-card__meta { margin: 4px 0; font-size: var(--wp--preset--font-size--small); color: var(--wp--preset--color--ink-light); }
 .ww-casino-card__bonus { margin: 0 0 10px; font-size: var(--wp--preset--font-size--medium); font-weight: 600; color: var(--wp--preset--color--primary); }
 .ww-casino-card > .ww-btn { margin-top: auto; text-align: center; }
