@@ -21,6 +21,14 @@ COPY docker/php/opcache-prod.ini /usr/local/etc/php/conf.d/zz-opcache.ini
 COPY wp-content/ /usr/src/wp-content-dist/
 COPY wp-config.php /var/www/html/wp-config.php
 
+# Standalone affiliate redirect endpoints living outside wp-content, at
+# /cr and /rftr on the site root. Same dist+rsync treatment as wp-content
+# above: /var/www/html is the volume-backed wp_core volume, which Docker
+# will NOT repopulate from a rebuilt image once it already exists, so
+# these have to be synced in by the entrypoint on every start too.
+COPY cr/ /usr/src/cr-dist/
+COPY rftr/ /usr/src/rftr-dist/
+
 COPY docker/wordpress/entrypoint-prod.sh /usr/local/bin/entrypoint-prod.sh
 RUN chmod +x /usr/local/bin/entrypoint-prod.sh
 

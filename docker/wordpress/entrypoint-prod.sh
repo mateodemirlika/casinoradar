@@ -24,4 +24,10 @@ rsync -a --delete \
 mkdir -p /var/www/html/wp-content/uploads
 chown -R www-data:www-data /var/www/html/wp-content
 
+# Same story for the standalone /cr and /rftr redirect endpoints (outside
+# wp-content, no uploads to preserve there).
+rsync -a --delete /usr/src/cr-dist/ /var/www/html/cr/
+rsync -a --delete /usr/src/rftr-dist/ /var/www/html/rftr/
+chown -R www-data:www-data /var/www/html/cr /var/www/html/rftr
+
 exec docker-entrypoint.sh "$@"
