@@ -596,6 +596,7 @@ function wagerwise_render_block_hero_search( array $attrs ): string {
 function wagerwise_render_block_stats_strip(): string {
 	$stats = array(
 		array( 'label' => __( 'Casinos Reviewed', 'wagerwise' ), 'count' => wagerwise_count_published_posts( 'casino' ) ),
+		array( 'label' => __( 'Sportsbooks Reviewed', 'wagerwise' ), 'count' => wagerwise_count_published_posts( 'sportsbook' ) ),
 		array( 'label' => __( 'Active Bonuses', 'wagerwise' ), 'count' => wagerwise_count_published_posts( 'bonus' ) ),
 		array( 'label' => __( 'Free Games', 'wagerwise' ), 'count' => wagerwise_count_published_posts( 'game' ) ),
 		array( 'label' => __( 'Guides & Articles', 'wagerwise' ), 'count' => wagerwise_count_published_posts( 'post' ) ),
