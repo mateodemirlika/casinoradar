@@ -594,12 +594,16 @@ function wagerwise_render_block_hero_search( array $attrs ): string {
  * casino review sites, computed live from actual post counts (no fake data).
  */
 function wagerwise_render_block_stats_strip(): string {
+	// wagerwise_pll__(), not __() — this project never compiles per-locale
+	// .mo files, so plain gettext calls silently stay English in every
+	// language (same issue hero-search's heading/subheading had before it
+	// was moved to this same Polylang string-translation mechanism).
 	$stats = array(
-		array( 'label' => __( 'Casinos Reviewed', 'wagerwise' ), 'count' => wagerwise_count_published_posts( 'casino' ) ),
-		array( 'label' => __( 'Sportsbooks Reviewed', 'wagerwise' ), 'count' => wagerwise_count_published_posts( 'sportsbook' ) ),
-		array( 'label' => __( 'Active Bonuses', 'wagerwise' ), 'count' => wagerwise_count_published_posts( 'bonus' ) ),
-		array( 'label' => __( 'Free Games', 'wagerwise' ), 'count' => wagerwise_count_published_posts( 'game' ) ),
-		array( 'label' => __( 'Guides & Articles', 'wagerwise' ), 'count' => wagerwise_count_published_posts( 'post' ) ),
+		array( 'label' => wagerwise_pll__( 'Casinos Reviewed' ), 'count' => wagerwise_count_published_posts( 'casino' ) ),
+		array( 'label' => wagerwise_pll__( 'Sportsbooks Reviewed' ), 'count' => wagerwise_count_published_posts( 'sportsbook' ) ),
+		array( 'label' => wagerwise_pll__( 'Active Bonuses' ), 'count' => wagerwise_count_published_posts( 'bonus' ) ),
+		array( 'label' => wagerwise_pll__( 'Free Games' ), 'count' => wagerwise_count_published_posts( 'game' ) ),
+		array( 'label' => wagerwise_pll__( 'Guides & Articles' ), 'count' => wagerwise_count_published_posts( 'post' ) ),
 	);
 	// Drop individual zero-count stats rather than only checking the sum —
 	// a stat rendering as "0+" (e.g. no bonuses published yet) looks broken,
