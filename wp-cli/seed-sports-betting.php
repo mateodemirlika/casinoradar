@@ -613,24 +613,39 @@ foreach ( $sportsbooks as $key => $sb ) {
 }
 
 // -----------------------------------------------------------------------------
-// Nav label as a Polylang UI string, mirroring seed.php's existing
-// $ui_strings mechanism exactly (same group, same wagerwise_pll__() reader —
-// see includes/blocks.php's nav item for "Sports Betting").
+// Static UI strings — nav label + the homepage teaser block's heading/
+// subtitle/CTA — as Polylang UI strings, mirroring seed.php's existing
+// $ui_strings mechanism exactly (same group, same wagerwise_pll__() reader).
+// The teaser block (includes/sports-betting.php,
+// wagerwise_sb_render_block_homepage_teaser()) lives in front-page.html
+// itself rather than in each language's Home page content, so these strings
+// are all it needs to render correctly in every language with no per-page
+// content edits.
 // -----------------------------------------------------------------------------
 
 if ( class_exists( 'PLL_MO' ) && function_exists( 'pll_register_string' ) ) {
-	pll_register_string( 'wagerwise-sports-betting', 'Sports Betting', 'WagerWise', false );
+	$ui_strings = array(
+		'Sports Betting' => array( 'de' => 'Sportwetten', 'zh' => '体育博彩', 'es' => 'Apuestas Deportivas', 'pt' => 'Apostas Desportivas', 'fr' => 'Paris Sportifs', 'it' => 'Scommesse Sportive', 'sv' => 'Sportspel', 'nb' => 'Sportsspill', 'fi' => 'Vedonlyönti', 'nl' => 'Sportweddenschappen', 'ja' => 'スポーツベッティング', 'pl' => 'Zakłady Sportowe', 'cs' => 'Sportovní Sázení', 'ro' => 'Pariuri Sportive', 'el' => 'Αθλητικό Στοίχημα' ),
+		'Compare odds, bonuses, and markets across top-rated sportsbooks.' => array( 'de' => 'Vergleiche Quoten, Boni und Wettmärkte der bestbewerteten Buchmacher.', 'zh' => '比较各大顶级体育博彩平台的赔率、红利与投注市场。', 'es' => 'Compara cuotas, bonos y mercados entre las mejores casas de apuestas.', 'pt' => 'Compare odds, bónus e mercados entre as casas de apostas mais bem avaliadas.', 'fr' => 'Comparez les cotes, les bonus et les marchés des meilleurs bookmakers.', 'it' => 'Confronta quote, bonus e mercati tra i migliori bookmaker.', 'sv' => 'Jämför odds, bonusar och marknader hos de bäst rankade spelbolagen.', 'nb' => 'Sammenlign odds, bonuser og markeder hos de best rangerte spillselskapene.', 'fi' => 'Vertaile parhaiten arvioitujen vedonlyöntisivustojen kertoimia, bonuksia ja markkinoita.', 'nl' => 'Vergelijk quoteringen, bonussen en markten van de best beoordeelde bookmakers.', 'ja' => '評価の高いブックメーカーのオッズ、ボーナス、マーケットを比較しましょう。', 'pl' => 'Porównaj kursy, bonusy i rynki najlepiej ocenianych bukmacherów.', 'cs' => 'Porovnejte kurzy, bonusy a trhy nejlépe hodnocených sázkových kanceláří.', 'ro' => 'Compară cotele, bonusurile și piețele celor mai bine cotate case de pariuri.', 'el' => 'Συγκρίνετε αποδόσεις, μπόνους και αγορές μεταξύ των κορυφαίων οίκων στοιχημάτων.' ),
+		'View All Sportsbooks' => array( 'de' => 'Alle Wettanbieter Ansehen', 'zh' => '查看全部体育博彩平台', 'es' => 'Ver Todas las Casas de Apuestas', 'pt' => 'Ver Todas as Casas de Apostas', 'fr' => 'Voir Tous les Bookmakers', 'it' => 'Vedi Tutti i Bookmaker', 'sv' => 'Visa Alla Spelbolag', 'nb' => 'Se Alle Spillselskaper', 'fi' => 'Näytä Kaikki Vedonlyöntisivustot', 'nl' => 'Bekijk Alle Bookmakers', 'ja' => 'すべてのブックメーカーを見る', 'pl' => 'Zobacz Wszystkich Bukmacherów', 'cs' => 'Zobrazit Všechny Sázkové Kanceláře', 'ro' => 'Vezi Toate Casele de Pariuri', 'el' => 'Δείτε Όλους τους Οίκους Στοιχημάτων' ),
+	);
 
-	$nav_translations = array( 'de' => 'Sportwetten', 'zh' => '体育博彩', 'es' => 'Apuestas Deportivas', 'pt' => 'Apostas Desportivas', 'fr' => 'Paris Sportifs', 'it' => 'Scommesse Sportive', 'sv' => 'Sportspel', 'nb' => 'Sportsspill', 'fi' => 'Vedonlyönti', 'nl' => 'Sportweddenschappen', 'ja' => 'スポーツベッティング', 'pl' => 'Zakłady Sportowe', 'cs' => 'Sportovní Sázení', 'ro' => 'Pariuri Sportive', 'el' => 'Αθλητικό Στοίχημα' );
+	foreach ( $ui_strings as $en_string => $translations ) {
+		pll_register_string( 'wagerwise-' . sanitize_title( $en_string ), $en_string, 'WagerWise', false );
+	}
 
-	foreach ( $nav_translations as $lang_slug => $translation ) {
+	foreach ( array( 'de', 'zh', 'es', 'pt', 'fr', 'it', 'sv', 'nb', 'fi', 'nl', 'ja', 'pl', 'cs', 'ro', 'el' ) as $lang_slug ) {
 		$language = function_exists( 'PLL' ) ? PLL()->model->get_language( $lang_slug ) : null;
 		if ( ! $language ) {
 			continue;
 		}
 		$mo = new PLL_MO();
 		$mo->import_from_db( $language );
-		$mo->add_entry( $mo->make_entry( 'Sports Betting', $translation ) );
+		foreach ( $ui_strings as $en_string => $translations ) {
+			if ( ! empty( $translations[ $lang_slug ] ) ) {
+				$mo->add_entry( $mo->make_entry( $en_string, $translations[ $lang_slug ] ) );
+			}
+		}
 		$mo->export_to_db( $language );
 	}
 }

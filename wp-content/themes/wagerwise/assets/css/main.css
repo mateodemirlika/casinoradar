@@ -1064,3 +1064,4 @@ header.wp-block-template-part {
 .ww-sportsbook-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
 .ww-sportsbook-tag { display: inline-block; }
 .ww-sportsbook-payments { color: var(--wp--preset--color--ink-light); font-size: var(--wp--preset--font-size--small); }
+.ww-homepage-sportsbook-teaser__cta { text-align: center; margin-top: 24px; }

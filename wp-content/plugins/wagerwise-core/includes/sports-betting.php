@@ -144,6 +144,12 @@ function wagerwise_sb_register_blocks(): void {
 			'render_callback' => 'wagerwise_sb_render_block_bonus_hero',
 			'attributes'      => array(),
 		),
+		'homepage-teaser'        => array(
+			'render_callback' => 'wagerwise_sb_render_block_homepage_teaser',
+			'attributes'      => array(
+				'number' => array( 'type' => 'number', 'default' => 3 ),
+			),
+		),
 	);
 
 	foreach ( $blocks as $name => $config ) {
@@ -214,6 +220,42 @@ function wagerwise_sb_render_block_sportsbook_grid( array $attrs ): string {
 				</div>
 			</div>
 		<?php endforeach; ?>
+	</div>
+	<?php
+	return (string) ob_get_clean();
+}
+
+/**
+ * Homepage teaser — a short "some of our sportsbooks + link to the full
+ * list" section, self-contained in a template (front-page.html) rather than
+ * baked into each language's Home page content: the Home page's own content
+ * lives per-language in the database (translated at seed time), and editing
+ * 16 of those rows in place to splice in a new section is exactly the kind
+ * of per-language content surgery that already caused real damage once this
+ * project (see the guide-page slug collision). Living in the template
+ * instead means it renders identically, immediately, in every language with
+ * zero content migration, using the same dynamic wagerwise_pll__()/
+ * wagerwise_lang_page_url() mechanism the header/hero-search already rely on.
+ */
+function wagerwise_sb_render_block_homepage_teaser( array $attrs ): string {
+	$heading = wagerwise_pll__( 'Sports Betting' );
+	$sub     = wagerwise_pll__( 'Compare odds, bonuses, and markets across top-rated sportsbooks.' );
+	$cta     = wagerwise_pll__( 'View All Sportsbooks' );
+	$grid    = wagerwise_sb_render_block_sportsbook_grid( array( 'number' => $attrs['number'] ?? 3 ) );
+
+	if ( ! $grid ) {
+		return '';
+	}
+
+	ob_start();
+	?>
+	<div class="ww-section ww-homepage-sportsbook-teaser">
+		<h2><?php echo esc_html( $heading ); ?></h2>
+		<p class="ww-page-subtitle"><?php echo esc_html( $sub ); ?></p>
+		<?php echo $grid; ?>
+		<div class="ww-homepage-sportsbook-teaser__cta">
+			<a class="ww-btn ww-btn--primary ww-btn--large" href="<?php echo esc_url( wagerwise_lang_page_url( 'sports-betting' ) ); ?>"><?php echo esc_html( $cta ); ?></a>
+		</div>
 	</div>
 	<?php
 	return (string) ob_get_clean();
