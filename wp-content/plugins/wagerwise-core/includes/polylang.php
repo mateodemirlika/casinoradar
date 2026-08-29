@@ -9,14 +9,16 @@ defined( 'ABSPATH' ) || exit;
 
 add_filter( 'pll_get_post_types', function ( array $post_types, bool $is_settings ): array {
 	if ( ! $is_settings ) {
-		$post_types['casino']     = 'casino';
-		$post_types['bonus']      = 'bonus';
-		$post_types['game']       = 'game';
-		$post_types['tournament'] = 'tournament';
-		$post_types['complaint']  = 'complaint';
-		$post_types['guide']      = 'guide';
-		$post_types['review']     = 'review';
-		$post_types['news']       = 'news';
+		$post_types['casino']           = 'casino';
+		$post_types['bonus']            = 'bonus';
+		$post_types['game']             = 'game';
+		$post_types['tournament']       = 'tournament';
+		$post_types['complaint']        = 'complaint';
+		$post_types['guide']            = 'guide';
+		$post_types['review']           = 'review';
+		$post_types['news']             = 'news';
+		$post_types['sportsbook']       = 'sportsbook';
+		$post_types['sportsbook_bonus'] = 'sportsbook_bonus';
 	}
 	return $post_types;
 }, 10, 2 );

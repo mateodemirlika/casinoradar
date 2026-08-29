@@ -834,6 +834,7 @@ function wagerwise_render_block_site_nav(): string {
 	$items = array(
 		array( 'label' => wagerwise_pll__( 'Home' ), 'url' => wagerwise_lang_home_url(), 'active' => is_front_page() ),
 		array( 'label' => wagerwise_pll__( 'Online Casinos' ), 'url' => wagerwise_lang_archive_url( 'casino' ), 'active' => is_post_type_archive( 'casino' ) || is_singular( 'casino' ) || is_tax( 'casino_category' ) ),
+		array( 'label' => wagerwise_pll__( 'Sports Betting' ), 'url' => wagerwise_lang_page_url( 'sports-betting' ), 'active' => is_post_type_archive( array( 'sportsbook', 'sportsbook_bonus' ) ) || is_singular( array( 'sportsbook', 'sportsbook_bonus' ) ) || wagerwise_is_lang_page( 'sports-betting' ) || wagerwise_is_lang_page( 'sports-betting/guides' ) ),
 		array( 'label' => wagerwise_pll__( 'Games' ), 'url' => wagerwise_lang_archive_url( 'game' ), 'active' => is_post_type_archive( 'game' ) || is_singular( 'game' ) || is_tax( 'game_category' ) ),
 		array( 'label' => wagerwise_pll__( 'Bonuses' ), 'url' => wagerwise_lang_archive_url( 'bonus' ), 'active' => is_post_type_archive( 'bonus' ) || is_singular( 'bonus' ) || is_tax( 'bonus_type' ) ),
 		array( 'label' => wagerwise_pll__( 'Guide' ), 'url' => wagerwise_lang_page_url( 'guide' ), 'active' => wagerwise_is_lang_page( 'guide' ) || is_singular( 'guide' ) || is_tax( 'guide_category' ) ),

@@ -177,7 +177,11 @@ function wagerwise_register_post_types(): void {
  * never drift apart.
  */
 function wagerwise_meta_schema(): array {
-	return array(
+	// Filterable so other includes (e.g. sports-betting.php) can register meta
+	// fields for their own post types without editing this schema directly —
+	// meta-boxes.php's renderer/saver and wagerwise_register_post_meta() below
+	// both already key off this function generically per post type.
+	return apply_filters( 'wagerwise_meta_schema', array(
 		'casino' => array(
 			'ww_rating'            => array( 'type' => 'number', 'label' => __( 'Rating (0–5)', 'wagerwise' ), 'field' => 'number', 'step' => '0.1', 'min' => 0, 'max' => 5 ),
 			'ww_year_established'  => array( 'type' => 'integer', 'label' => __( 'Year Established', 'wagerwise' ), 'field' => 'number' ),
@@ -233,7 +237,7 @@ function wagerwise_meta_schema(): array {
 			'ww_pros'           => array( 'type' => 'array', 'label' => __( 'Pros', 'wagerwise' ), 'field' => 'repeater' ),
 			'ww_cons'           => array( 'type' => 'array', 'label' => __( 'Cons', 'wagerwise' ), 'field' => 'repeater' ),
 		),
-	);
+	) );
 }
 
 add_action( 'init', 'wagerwise_register_post_meta' );

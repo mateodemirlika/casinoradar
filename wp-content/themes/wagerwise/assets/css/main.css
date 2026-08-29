@@ -543,7 +543,11 @@ header.wp-block-template-part {
 .ww-rating-number { margin-left: 6px; font-weight: 700; color: var(--wp--preset--color--ink); font-size: var(--wp--preset--font-size--small); }
 
 /* ---------- Top casinos ---------- */
-.ww-top-casinos { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+/* auto-fit (not auto-fill): a partial last row's cards stretch to fill the
+   row instead of leaving empty reserved tracks dangling on the right — no
+   visible difference when a row is fully packed, e.g. every full page of
+   the main casino archive. */
+.ww-top-casinos { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
 .ww-casino-card.is-hidden { display: none; }
 .ww-filter-empty { color: var(--wp--preset--color--ink-light); }
 .ww-casino-card {
@@ -781,7 +785,7 @@ header.wp-block-template-part {
 .ww-comparison-table tbody tr:last-child td { border-bottom: none; }
 
 /* ---------- Bonus grid ---------- */
-.ww-bonus-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+.ww-bonus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
 .ww-bonus-card.is-hidden { display: none; }
 .ww-bonus-card {
 	background: var(--wp--preset--color--surface);
@@ -935,7 +939,7 @@ header.wp-block-template-part {
 #respond, .comment-form-rating select { background: var(--wp--preset--color--surface); color: var(--wp--preset--color--ink); border: 1px solid var(--wp--preset--color--border); border-radius: 6px; padding: 6px; }
 
 /* ---------- Editorial review grid (the `review` CPT — "Editor's Reviews") ---------- */
-.ww-review-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin: 16px 0 32px; }
+.ww-review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 16px 0 32px; }
 .ww-review-grid-card {
 	display: flex;
 	flex-direction: column;
@@ -1049,3 +1053,14 @@ header.wp-block-template-part {
 	.ww-featured-guide { grid-template-columns: 1fr; }
 	.ww-leaderboard__row { grid-template-columns: 40px 1.5fr 1fr 1fr; padding: 12px; }
 }
+
+/* ---------- Sports Betting ----------
+   Everything else (cards, buttons, stars, pros/cons, badges) reuses the
+   existing rules above as-is; these are only the bits with no existing
+   analog — the dual Visit Site/Read Review CTA row on a sportsbook card,
+   and the sports/payment-methods lines on a single sportsbook's hero. */
+.ww-sportsbook-card__ctas { margin-top: auto; display: flex; flex-direction: column; gap: 8px; }
+.ww-sportsbook-card__ctas .ww-btn { width: 100%; box-sizing: border-box; text-align: center; }
+.ww-sportsbook-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+.ww-sportsbook-tag { display: inline-block; }
+.ww-sportsbook-payments { color: var(--wp--preset--color--ink-light); font-size: var(--wp--preset--font-size--small); }

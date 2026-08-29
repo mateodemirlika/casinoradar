@@ -24,6 +24,7 @@ require_once WAGERWISE_CORE_DIR . '/includes/blocks.php';
 require_once WAGERWISE_CORE_DIR . '/includes/polylang.php';
 require_once WAGERWISE_CORE_DIR . '/includes/forms.php';
 require_once WAGERWISE_CORE_DIR . '/includes/reviews.php';
+require_once WAGERWISE_CORE_DIR . '/includes/sports-betting.php';
 
 register_activation_hook( __FILE__, 'wagerwise_core_activate' );
 
