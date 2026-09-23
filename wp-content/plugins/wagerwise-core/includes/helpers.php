@@ -172,6 +172,72 @@ function wagerwise_cta_button_html( string $url, string $label, string $class = 
 	);
 }
 
+/**
+ * Third-party ad creatives shipped as static files in the theme (not media
+ * library uploads) — keyed by the value stored in the ad-banner block's
+ * `image` attribute. Add new creatives here when new files are dropped into
+ * assets/images/.
+ */
+function wagerwise_ad_banner_images(): array {
+	return array(
+		'barca-skyscraper' => array( 'file' => 'ad-barca-skyscraper-160x600.gif', 'width' => 160, 'height' => 600, 'alt' => 'Join us with Barça' ),
+		'barca-leaderboard' => array( 'file' => 'ad-barca-leaderboard-990x90.gif', 'width' => 990, 'height' => 90, 'alt' => 'Join us with Barça' ),
+		'1xbet-cricket' => array( 'file' => 'ad-1xbet-cricket-810x150.gif', 'width' => 810, 'height' => 150, 'alt' => '1xBet — thousands of cricket matches live' ),
+		'matches-live' => array( 'file' => 'ad-matches-live-300x250.gif', 'width' => 300, 'height' => 250, 'alt' => 'Thousands of matches live' ),
+	);
+}
+
+function wagerwise_ad_banner_html( string $image_key, string $url, string $extra_class = '' ): string {
+	$images = wagerwise_ad_banner_images();
+	if ( empty( $url ) || ! isset( $images[ $image_key ] ) ) {
+		return '';
+	}
+	$image = $images[ $image_key ];
+	$src   = get_theme_file_uri( 'assets/images/' . $image['file'] );
+
+	return sprintf(
+		'<div class="ww-ad-banner%1$s"><a class="ww-ad-banner__link" href="%2$s" %3$s><img class="ww-ad-banner__img" src="%4$s" width="%5$d" height="%6$d" alt="%7$s" loading="lazy" /></a></div>',
+		$extra_class ? ' ' . esc_attr( $extra_class ) : '',
+		esc_url( $url ),
+		wagerwise_affiliate_link_atts(),
+		esc_url( $src ),
+		$image['width'],
+		$image['height'],
+		esc_attr( $image['alt'] )
+	);
+}
+
+/**
+ * Ad card to interleave into a post/casino/etc. grid loop, landing after
+ * every complete row of $per_row items — NOT an alternating/uneven count:
+ * an uneven cadence (e.g. 4 cards, ad, 3 cards, ad) breaks the row grid,
+ * since the ad spans the full row width (see .ww-ad-banner--in-grid) and a
+ * partial row above it looks misaligned. $per_row should match the grid's
+ * actual column count at desktop width (see each `.ww-*-grid` rule in
+ * main.css) so the ad always closes out a full row cleanly. Cycles through
+ * all of wagerwise_ad_banner_images() in order (rather than repeating one)
+ * so a long grid mixes every creative instead of showing the same banner
+ * repeatedly. The rotation is tracked with a static counter shared across
+ * every call on the page (PHP resets statics at the start of each request),
+ * not derived from $position — a page with several separate grids (e.g. the
+ * homepage's Top Picks, Latest Reviews, etc.) would otherwise have every
+ * grid restart at creative #1 and repeat it, instead of continuing the mix
+ * across sections. Call from inside a foreach with a 1-based position (e.g.
+ * `$i + 1`); returns '' on every position that isn't a full-row boundary.
+ */
+function wagerwise_grid_ad_slot( int $position, int $per_row = 4 ): string {
+	if ( $per_row < 1 || 0 !== $position % $per_row ) {
+		return '';
+	}
+	static $slot_number = 0;
+	++$slot_number;
+
+	$image_keys = array_keys( wagerwise_ad_banner_images() );
+	$image      = $image_keys[ ( $slot_number - 1 ) % count( $image_keys ) ];
+
+	return wagerwise_ad_banner_html( $image, get_option( 'ww_ad_network_url' ), 'ww-ad-banner--in-grid' );
+}
+
 function wagerwise_pros_cons_html( array $pros, array $cons ): string {
 	if ( empty( $pros ) && empty( $cons ) ) {
 		return '';

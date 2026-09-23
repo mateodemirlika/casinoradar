@@ -14,6 +14,7 @@
 	var TextControl = wp.components.TextControl;
 	var RangeControl = wp.components.RangeControl;
 	var ToggleControl = wp.components.ToggleControl;
+	var SelectControl = wp.components.SelectControl;
 	var __ = wp.i18n.__;
 
 	function withServerPreview( name, controlsFn ) {
@@ -133,6 +134,38 @@
 				} ),
 				el( TextControl, {
 					label: __( 'URL (blank = use casino affiliate link)', 'wagerwise' ),
+					value: props.attributes.url,
+					onChange: function ( value ) { props.setAttributes( { url: value } ); },
+				} )
+			);
+		} ),
+		save: function () { return null; },
+	} );
+
+	registerBlockType( 'wagerwise/ad-banner', {
+		title: __( 'Ad Banner', 'wagerwise' ),
+		category: 'widgets',
+		attributes: {
+			image: { type: 'string', default: 'matches-live' },
+			url: { type: 'string', default: '' },
+		},
+		edit: withServerPreview( 'wagerwise/ad-banner', function ( props ) {
+			return el(
+				PanelBody,
+				{ title: __( 'Ad Banner', 'wagerwise' ) },
+				el( SelectControl, {
+					label: __( 'Creative', 'wagerwise' ),
+					value: props.attributes.image,
+					options: [
+						{ label: __( 'Barça — skyscraper (160×600)', 'wagerwise' ), value: 'barca-skyscraper' },
+						{ label: __( 'Barça — leaderboard (990×90)', 'wagerwise' ), value: 'barca-leaderboard' },
+						{ label: __( '1xBet cricket — wide (810×150)', 'wagerwise' ), value: '1xbet-cricket' },
+						{ label: __( 'Matches live — rectangle (300×250)', 'wagerwise' ), value: 'matches-live' },
+					],
+					onChange: function ( value ) { props.setAttributes( { image: value } ); },
+				} ),
+				el( TextControl, {
+					label: __( 'URL (blank = use default ad network link)', 'wagerwise' ),
 					value: props.attributes.url,
 					onChange: function ( value ) { props.setAttributes( { url: value } ); },
 				} )

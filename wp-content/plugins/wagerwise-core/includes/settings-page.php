@@ -38,6 +38,9 @@ function wagerwise_settings_schema(): array {
 		'ww_hero_heading'             => array( __( 'Hero Heading', 'wagerwise' ), 'text', 'homepage', __( 'Every Casino Bonus Worth Chasing', 'wagerwise' ) ),
 		'ww_hero_subheading'          => array( __( 'Hero Subheading', 'wagerwise' ), 'text', 'homepage', __( 'Verified bonus codes and payout-speed rankings, built for players who actually read the terms.', 'wagerwise' ) ),
 
+		// Advertising
+		'ww_ad_network_url'   => array( __( 'Default Ad Banner Link', 'wagerwise' ), 'url', 'advertising', 'https://reffpa.com/L?tag=d_6060841m_97c_&site=6060841&ad=97' ),
+
 		// Social
 		'ww_social_facebook'  => array( __( 'Facebook URL', 'wagerwise' ), 'url', 'social', '' ),
 		'ww_social_twitter'   => array( __( 'X / Twitter URL', 'wagerwise' ), 'url', 'social', '' ),
@@ -73,10 +76,11 @@ function wagerwise_register_setting_options(): void {
 
 function wagerwise_register_settings_ui(): void {
 	$sections = array(
-		'general'  => __( 'General', 'wagerwise' ),
-		'homepage' => __( 'Homepage', 'wagerwise' ),
-		'social'   => __( 'Social Links', 'wagerwise' ),
-		'tracking' => __( 'Tracking & Ad Codes', 'wagerwise' ),
+		'general'     => __( 'General', 'wagerwise' ),
+		'homepage'    => __( 'Homepage', 'wagerwise' ),
+		'advertising' => __( 'Advertising', 'wagerwise' ),
+		'social'      => __( 'Social Links', 'wagerwise' ),
+		'tracking'    => __( 'Tracking & Ad Codes', 'wagerwise' ),
 	);
 
 	foreach ( $sections as $id => $label ) {

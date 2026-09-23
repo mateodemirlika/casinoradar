@@ -1064,4 +1064,12 @@ header.wp-block-template-part {
 .ww-sportsbook-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
 .ww-sportsbook-tag { display: inline-block; }
 .ww-sportsbook-payments { color: var(--wp--preset--color--ink-light); font-size: var(--wp--preset--font-size--small); }
+
+/* ---------- Ad Banners ---------- */
+.ww-ad-banner { display: flex; justify-content: center; margin: 24px auto; }
+.ww-ad-banner__link { display: block; line-height: 0; }
+.ww-ad-banner__img { max-width: 100%; height: auto; border-radius: var(--ww-radius-sm); }
+/* Interleaved into a CSS-grid card loop (top casinos, bonuses, games, etc.) —
+   spans every column so it doesn't get squeezed into one card's width. */
+.ww-ad-banner--in-grid { grid-column: 1 / -1; margin: 4px auto; }
 .ww-homepage-sportsbook-teaser__cta { text-align: center; margin-top: 24px; }

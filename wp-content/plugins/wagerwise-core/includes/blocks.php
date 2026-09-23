@@ -57,6 +57,13 @@ function wagerwise_register_blocks(): void {
 				'label' => array( 'type' => 'string', 'default' => 'Play Now' ),
 			),
 		),
+		'ad-banner'               => array(
+			'render_callback' => 'wagerwise_render_block_ad_banner',
+			'attributes'      => array(
+				'image' => array( 'type' => 'string', 'default' => 'matches-live' ),
+				'url'   => array( 'type' => 'string', 'default' => '' ),
+			),
+		),
 		'blog-grid'               => array(
 			'render_callback' => 'wagerwise_render_block_blog_grid',
 			'attributes'      => array(
@@ -308,6 +315,7 @@ function wagerwise_render_casino_cards( array $casinos, string $layout = 'grid',
 				</div>
 				<?php echo wagerwise_cta_button_html( $link, $cta ); ?>
 			</div>
+			<?php echo wagerwise_grid_ad_slot( $i + 1 ); ?>
 		<?php endforeach; ?>
 	</div>
 	<?php
@@ -413,7 +421,7 @@ function wagerwise_render_block_bonus_grid( array $attrs ): string {
 	ob_start();
 	?>
 	<div class="ww-bonus-grid">
-		<?php foreach ( $bonuses as $bonus ) :
+		<?php foreach ( $bonuses as $i => $bonus ) :
 			$casino_id  = (int) get_post_meta( $bonus->ID, 'ww_related_casino', true );
 			$value      = get_post_meta( $bonus->ID, 'ww_bonus_value', true );
 			$code       = get_post_meta( $bonus->ID, 'ww_promo_code', true );
@@ -435,6 +443,7 @@ function wagerwise_render_block_bonus_grid( array $attrs ): string {
 				<?php endif; ?>
 				<?php echo wagerwise_cta_button_html( $link, $cta ); ?>
 			</div>
+			<?php echo wagerwise_grid_ad_slot( $i + 1 ); ?>
 		<?php endforeach; ?>
 	</div>
 	<?php
@@ -529,6 +538,15 @@ function wagerwise_render_block_cta_button( array $attrs ): string {
 	return wagerwise_cta_button_html( $url, $label );
 }
 
+function wagerwise_render_block_ad_banner( array $attrs ): string {
+	$image = $attrs['image'] ?? '';
+	$url   = $attrs['url'] ?? '';
+	if ( empty( $url ) ) {
+		$url = get_option( 'ww_ad_network_url' );
+	}
+	return wagerwise_ad_banner_html( $image, $url );
+}
+
 function wagerwise_render_block_blog_grid( array $attrs ): string {
 	$args = array(
 		'post_type'      => 'post',
@@ -544,12 +562,13 @@ function wagerwise_render_block_blog_grid( array $attrs ): string {
 	ob_start();
 	?>
 	<div class="ww-blog-grid">
-		<?php foreach ( $posts as $p ) : ?>
+		<?php foreach ( $posts as $i => $p ) : ?>
 			<a class="ww-blog-card" href="<?php echo esc_url( get_permalink( $p ) ); ?>">
 				<?php echo get_the_post_thumbnail( $p, 'medium_large' ); ?>
 				<h4><?php echo esc_html( get_the_title( $p ) ); ?></h4>
 				<p><?php echo esc_html( wp_trim_words( $p->post_excerpt ?: $p->post_content, 18 ) ); ?></p>
 			</a>
+			<?php echo wagerwise_grid_ad_slot( $i + 1 ); ?>
 		<?php endforeach; ?>
 	</div>
 	<?php
@@ -769,7 +788,7 @@ function wagerwise_render_block_game_grid( array $attrs ): string {
 	ob_start();
 	?>
 	<div class="ww-game-grid">
-		<?php foreach ( $games as $game ) :
+		<?php foreach ( $games as $i => $game ) :
 			$rtp        = get_post_meta( $game->ID, 'ww_rtp', true );
 			$demo_link  = get_post_meta( $game->ID, 'ww_demo_link', true );
 			$providers  = get_the_terms( $game, 'software_provider' );
@@ -788,6 +807,7 @@ function wagerwise_render_block_game_grid( array $attrs ): string {
 					<a class="ww-btn ww-btn--ghost ww-btn--small" href="<?php echo esc_url( $demo_link ); ?>" rel="noopener" target="_blank"><?php esc_html_e( 'Play Now', 'wagerwise' ); ?></a>
 				<?php endif; ?>
 			</div>
+			<?php echo wagerwise_grid_ad_slot( $i + 1, 5 ); ?>
 		<?php endforeach; ?>
 	</div>
 	<?php
@@ -976,7 +996,7 @@ function wagerwise_render_block_tournament_grid( array $attrs ): string {
 	ob_start();
 	?>
 	<div class="ww-tournament-grid">
-		<?php foreach ( $tournaments as $t ) :
+		<?php foreach ( $tournaments as $i => $t ) :
 			$status    = get_post_meta( $t->ID, 'ww_status_label', true );
 			$entries   = get_post_meta( $t->ID, 'ww_entries', true );
 			$casino_id = (int) get_post_meta( $t->ID, 'ww_related_casino', true );
@@ -990,6 +1010,7 @@ function wagerwise_render_block_tournament_grid( array $attrs ): string {
 					<?php echo $entries ? esc_html( sprintf( __( '%s entries', 'wagerwise' ), $entries ) ) : ''; ?>
 				</span>
 			</a>
+			<?php echo wagerwise_grid_ad_slot( $i + 1, 5 ); ?>
 		<?php endforeach; ?>
 	</div>
 	<?php
@@ -1109,7 +1130,7 @@ function wagerwise_render_block_guide_list( array $attrs ): string {
 	ob_start();
 	?>
 	<div class="ww-guide-list">
-		<?php foreach ( $posts as $post ) :
+		<?php foreach ( $posts as $i => $post ) :
 			$terms = get_the_terms( $post, 'guide_category' );
 			$cat   = ( is_array( $terms ) && ! empty( $terms ) ) ? $terms[0]->name : '';
 			?>
@@ -1120,6 +1141,7 @@ function wagerwise_render_block_guide_list( array $attrs ): string {
 					<span class="ww-guide-row__meta"><?php echo esc_html( $cat ); ?> · <?php echo (int) wagerwise_reading_time( $post->post_content ); ?> <?php esc_html_e( 'min read', 'wagerwise' ); ?></span>
 				</span>
 			</a>
+			<?php echo wagerwise_grid_ad_slot( $i + 1 ); ?>
 		<?php endforeach; ?>
 	</div>
 	<?php
@@ -1165,7 +1187,7 @@ function wagerwise_render_block_news_grid( array $attrs ): string {
 	ob_start();
 	?>
 	<div class="ww-news-grid">
-		<?php foreach ( $posts as $post ) :
+		<?php foreach ( $posts as $i => $post ) :
 			$terms = get_the_terms( $post, 'news_category' );
 			$cat   = ( is_array( $terms ) && ! empty( $terms ) ) ? $terms[0]->name : '';
 			?>
@@ -1174,6 +1196,7 @@ function wagerwise_render_block_news_grid( array $attrs ): string {
 				<span class="ww-news-card__title"><?php echo esc_html( get_the_title( $post ) ); ?></span>
 				<span class="ww-news-card__date"><?php echo esc_html( get_the_date( '', $post ) ); ?></span>
 			</a>
+			<?php echo wagerwise_grid_ad_slot( $i + 1 ); ?>
 		<?php endforeach; ?>
 	</div>
 	<?php
@@ -1190,7 +1213,7 @@ function wagerwise_render_block_review_grid( array $attrs ): string {
 	ob_start();
 	?>
 	<div class="ww-review-grid">
-		<?php foreach ( $reviews as $post ) :
+		<?php foreach ( $reviews as $i => $post ) :
 			$casino_id = (int) get_post_meta( $post->ID, 'ww_related_casino', true );
 			$rating    = (float) get_post_meta( $post->ID, 'ww_rating', true );
 			$verdict   = get_post_meta( $post->ID, 'ww_verdict', true );
@@ -1204,6 +1227,7 @@ function wagerwise_render_block_review_grid( array $attrs ): string {
 					<?php if ( $verdict ) : ?><p class="ww-review-grid-card__verdict"><?php echo esc_html( $verdict ); ?></p><?php endif; ?>
 				</div>
 			</a>
+			<?php echo wagerwise_grid_ad_slot( $i + 1 ); ?>
 		<?php endforeach; ?>
 	</div>
 	<?php

@@ -219,6 +219,7 @@ function wagerwise_sb_render_block_sportsbook_grid( array $attrs ): string {
 					<a class="ww-btn ww-btn--ghost ww-btn--small" href="<?php echo esc_url( get_permalink( $sb ) ); ?>"><?php esc_html_e( 'Read Review', 'wagerwise' ); ?></a>
 				</div>
 			</div>
+			<?php echo wagerwise_grid_ad_slot( $i + 1 ); ?>
 		<?php endforeach; ?>
 	</div>
 	<?php
@@ -283,7 +284,7 @@ function wagerwise_sb_render_block_review_grid( array $attrs ): string {
 	ob_start();
 	?>
 	<div class="ww-review-grid">
-		<?php foreach ( $sportsbooks as $sb ) :
+		<?php foreach ( $sportsbooks as $i => $sb ) :
 			$rating = (float) get_post_meta( $sb->ID, 'ww_rating', true );
 			$bonus  = get_post_meta( $sb->ID, 'ww_bonus_value', true );
 			?>
@@ -298,6 +299,7 @@ function wagerwise_sb_render_block_review_grid( array $attrs ): string {
 					<?php if ( $bonus ) : ?><p class="ww-review-grid-card__verdict"><?php echo esc_html( $bonus ); ?></p><?php endif; ?>
 				</div>
 			</a>
+			<?php echo wagerwise_grid_ad_slot( $i + 1 ); ?>
 		<?php endforeach; ?>
 	</div>
 	<?php
@@ -366,7 +368,7 @@ function wagerwise_sb_render_block_bonus_grid( array $attrs ): string {
 	ob_start();
 	?>
 	<div class="ww-bonus-grid">
-		<?php foreach ( $bonuses as $bonus ) :
+		<?php foreach ( $bonuses as $i => $bonus ) :
 			$sportsbook_id = (int) get_post_meta( $bonus->ID, 'ww_related_sportsbook', true );
 			$value         = get_post_meta( $bonus->ID, 'ww_bonus_value', true );
 			$code          = get_post_meta( $bonus->ID, 'ww_promo_code', true );
@@ -384,6 +386,7 @@ function wagerwise_sb_render_block_bonus_grid( array $attrs ): string {
 				<?php endif; ?>
 				<?php echo wagerwise_cta_button_html( $link, $cta ); ?>
 			</div>
+			<?php echo wagerwise_grid_ad_slot( $i + 1 ); ?>
 		<?php endforeach; ?>
 	</div>
 	<?php
