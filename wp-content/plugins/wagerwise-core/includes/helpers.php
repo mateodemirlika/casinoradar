@@ -187,6 +187,19 @@ function wagerwise_ad_banner_images(): array {
 	);
 }
 
+/**
+ * Rotation order for inline grid ads — NOT a straight cycle through
+ * wagerwise_ad_banner_images(), because two of the four creatives
+ * ('barca-skyscraper' and 'barca-leaderboard') are both the same Barça
+ * sponsor; an even 1-of-4 rotation would put Barça creatives in front of
+ * visitors 50% of the time. This 8-slot sequence gives each Barça creative
+ * 1/8 (12.5%, 25% combined) and splits the rest between the two non-Barça
+ * creatives (37.5% each).
+ */
+function wagerwise_ad_banner_rotation(): array {
+	return array( '1xbet-cricket', 'matches-live', 'barca-skyscraper', '1xbet-cricket', 'matches-live', 'barca-leaderboard', '1xbet-cricket', 'matches-live' );
+}
+
 function wagerwise_ad_banner_html( string $image_key, string $url, string $extra_class = '' ): string {
 	$images = wagerwise_ad_banner_images();
 	if ( empty( $url ) || ! isset( $images[ $image_key ] ) ) {
@@ -195,8 +208,13 @@ function wagerwise_ad_banner_html( string $image_key, string $url, string $extra
 	$image = $images[ $image_key ];
 	$src   = get_theme_file_uri( 'assets/images/' . $image['file'] );
 
+	// The per-creative class (e.g. ww-ad-banner--matches-live) lets CSS
+	// target one specific image across every placement — a static banner,
+	// an inline grid ad, the homepage backfill — without touching PHP; see
+	// main.css for the desktop-only hide on the near-square creative.
 	return sprintf(
-		'<div class="ww-ad-banner%1$s"><a class="ww-ad-banner__link" href="%2$s" %3$s><img class="ww-ad-banner__img" src="%4$s" width="%5$d" height="%6$d" alt="%7$s" loading="lazy" /></a></div>',
+		'<div class="ww-ad-banner ww-ad-banner--%1$s%2$s"><a class="ww-ad-banner__link" href="%3$s" %4$s><img class="ww-ad-banner__img" src="%5$s" width="%6$d" height="%7$d" alt="%8$s" loading="lazy" /></a></div>',
+		esc_attr( $image_key ),
 		$extra_class ? ' ' . esc_attr( $extra_class ) : '',
 		esc_url( $url ),
 		wagerwise_affiliate_link_atts(),
@@ -208,34 +226,82 @@ function wagerwise_ad_banner_html( string $image_key, string $url, string $extra
 }
 
 /**
+ * The single source of truth for "which creative comes next" — shared by
+ * every ad placement on a page (inline grid ads, the homepage's backfilled
+ * section banners, and the plain ad-banner/page-ad-banner blocks whenever
+ * they're left to auto-pick). Each of those used to hardcode its own image
+ * independently, so an inline ad and a static banner would often land right
+ * next to each other showing the exact same creative. Routing all of them
+ * through one static counter (PHP resets statics at the start of every
+ * request) guarantees the sequence keeps advancing across the whole page,
+ * regardless of which mechanism placed a given ad — no two ads in a row
+ * ever repeat.
+ */
+function wagerwise_next_ad_rotation_image( bool $exclude_square = false ): string {
+	static $slot_number = null;
+	static $last_image  = '';
+
+	$rotation = wagerwise_ad_banner_rotation();
+	if ( null === $slot_number ) {
+		// PHP resets statics at the start of every request, so without this,
+		// $slot_number would always start counting from the same spot (0) on
+		// every single page load — meaning the FIRST ad on every page a
+		// visitor lands on would always be the exact same creative. That
+		// reads as "the same ad keeps repeating" when browsing from page to
+		// page, even though a given page's own sequence never repeats back
+		// to back. Randomizing where each fresh page load starts fixes that
+		// without needing any cross-request storage.
+		$slot_number = wp_rand( 0, count( $rotation ) - 1 );
+	}
+	++$slot_number;
+
+	if ( $exclude_square ) {
+		// 'matches-live' is a near-square 300×250 unit — an IAB "sidebar"
+		// size, wrong for a full-width single-column slot (a static banner,
+		// or the comparison-table backfill). Only pass true for those —
+		// NOT for card grids like Top Picks/Latest Reviews, which render it
+		// exactly like /casinos/ does (fine there). Dropping it from every
+		// homepage draw left only 3 usable creatives, 1xbet-cricket among
+		// them, which then dominated — the opposite of an even mix.
+		$rotation = array_values( array_diff( $rotation, array( 'matches-live' ) ) );
+	}
+	$image = $rotation[ ( $slot_number - 1 ) % count( $rotation ) ];
+	// The sequence wrapping back to position 0 can land on the same
+	// creative it just showed at the end (e.g. filtering 'matches-live' out
+	// above can leave a shorter list that both starts and ends on the same
+	// image) — checking against what was actually shown last, rather than
+	// trusting the sequence's design alone, catches that regardless of how
+	// the list gets filtered or reordered later. A single-step retry isn't
+	// always enough: two different call sites can hand this function two
+	// different-length filtered rotations back to back, and the second one
+	// can have its OWN adjacent (wrap-around) duplicate right where the
+	// retry lands — so this loops until it actually finds a different
+	// image, capped at the rotation's own length so it can't spin forever
+	// on a (degenerate, currently never-happens) single-creative rotation.
+	for ( $attempts = 0; $image === $last_image && $attempts < count( $rotation ); $attempts++ ) {
+		++$slot_number;
+		$image = $rotation[ ( $slot_number - 1 ) % count( $rotation ) ];
+	}
+	$last_image = $image;
+	return $image;
+}
+
+/**
  * Ad card to interleave into a post/casino/etc. grid loop, landing after
  * every complete row of $per_row items — NOT an alternating/uneven count:
  * an uneven cadence (e.g. 4 cards, ad, 3 cards, ad) breaks the row grid,
  * since the ad spans the full row width (see .ww-ad-banner--in-grid) and a
  * partial row above it looks misaligned. $per_row should match the grid's
  * actual column count at desktop width (see each `.ww-*-grid` rule in
- * main.css) so the ad always closes out a full row cleanly. Cycles through
- * all of wagerwise_ad_banner_images() in order (rather than repeating one)
- * so a long grid mixes every creative instead of showing the same banner
- * repeatedly. The rotation is tracked with a static counter shared across
- * every call on the page (PHP resets statics at the start of each request),
- * not derived from $position — a page with several separate grids (e.g. the
- * homepage's Top Picks, Latest Reviews, etc.) would otherwise have every
- * grid restart at creative #1 and repeat it, instead of continuing the mix
- * across sections. Call from inside a foreach with a 1-based position (e.g.
- * `$i + 1`); returns '' on every position that isn't a full-row boundary.
+ * main.css) so the ad always closes out a full row cleanly. Call from
+ * inside a foreach with a 1-based position (e.g. `$i + 1`); returns '' on
+ * every position that isn't a full-row boundary.
  */
 function wagerwise_grid_ad_slot( int $position, int $per_row = 4 ): string {
 	if ( $per_row < 1 || 0 !== $position % $per_row ) {
 		return '';
 	}
-	static $slot_number = 0;
-	++$slot_number;
-
-	$image_keys = array_keys( wagerwise_ad_banner_images() );
-	$image      = $image_keys[ ( $slot_number - 1 ) % count( $image_keys ) ];
-
-	return wagerwise_ad_banner_html( $image, get_option( 'ww_ad_network_url' ), 'ww-ad-banner--in-grid' );
+	return wagerwise_ad_banner_html( wagerwise_next_ad_rotation_image(), get_option( 'ww_ad_network_url' ), 'ww-ad-banner--in-grid' );
 }
 
 function wagerwise_pros_cons_html( array $pros, array $cons ): string {

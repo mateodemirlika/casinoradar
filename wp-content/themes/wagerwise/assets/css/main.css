@@ -1072,4 +1072,10 @@ header.wp-block-template-part {
 /* Interleaved into a CSS-grid card loop (top casinos, bonuses, games, etc.) —
    spans every column so it doesn't get squeezed into one card's width. */
 .ww-ad-banner--in-grid { grid-column: 1 / -1; margin: 4px auto; }
+/* The near-square 300×250 creative reads as a sidebar ad unit; this layout
+   has no sidebar, so it only ever gets shown on mobile, where every section
+   is already a single narrow column anyway and a small square fits fine. */
+@media (min-width: 783px) {
+	.ww-ad-banner--matches-live { display: none; }
+}
 .ww-homepage-sportsbook-teaser__cta { text-align: center; margin-top: 24px; }

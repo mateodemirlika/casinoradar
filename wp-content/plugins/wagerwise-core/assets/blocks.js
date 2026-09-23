@@ -146,7 +146,7 @@
 		title: __( 'Ad Banner', 'wagerwise' ),
 		category: 'widgets',
 		attributes: {
-			image: { type: 'string', default: 'matches-live' },
+			image: { type: 'string', default: '' },
 			url: { type: 'string', default: '' },
 		},
 		edit: withServerPreview( 'wagerwise/ad-banner', function ( props ) {
@@ -157,6 +157,7 @@
 					label: __( 'Creative', 'wagerwise' ),
 					value: props.attributes.image,
 					options: [
+						{ label: __( 'Auto (rotate with the rest of the page)', 'wagerwise' ), value: '' },
 						{ label: __( 'Barça — skyscraper (160×600)', 'wagerwise' ), value: 'barca-skyscraper' },
 						{ label: __( 'Barça — leaderboard (990×90)', 'wagerwise' ), value: 'barca-leaderboard' },
 						{ label: __( '1xBet cricket — wide (810×150)', 'wagerwise' ), value: '1xbet-cricket' },
@@ -178,7 +179,7 @@
 		title: __( 'Page Ad Banner (conditional)', 'wagerwise' ),
 		category: 'widgets',
 		attributes: {
-			image: { type: 'string', default: 'matches-live' },
+			image: { type: 'string', default: '' },
 			url: { type: 'string', default: '' },
 			requiredBlock: { type: 'string', default: '' },
 		},
@@ -195,6 +196,7 @@
 					label: __( 'Creative', 'wagerwise' ),
 					value: props.attributes.image,
 					options: [
+						{ label: __( 'Auto (rotate with the rest of the page)', 'wagerwise' ), value: '' },
 						{ label: __( 'Barça — skyscraper (160×600)', 'wagerwise' ), value: 'barca-skyscraper' },
 						{ label: __( 'Barça — leaderboard (990×90)', 'wagerwise' ), value: 'barca-leaderboard' },
 						{ label: __( '1xBet cricket — wide (810×150)', 'wagerwise' ), value: '1xbet-cricket' },

@@ -60,14 +60,17 @@ function wagerwise_register_blocks(): void {
 		'ad-banner'               => array(
 			'render_callback' => 'wagerwise_render_block_ad_banner',
 			'attributes'      => array(
-				'image' => array( 'type' => 'string', 'default' => 'matches-live' ),
+				// Empty default (not a fixed creative) = auto-pick the next
+				// image in the shared page-wide rotation; see
+				// wagerwise_render_block_ad_banner().
+				'image' => array( 'type' => 'string', 'default' => '' ),
 				'url'   => array( 'type' => 'string', 'default' => '' ),
 			),
 		),
 		'page-ad-banner'          => array(
 			'render_callback' => 'wagerwise_render_block_page_ad_banner',
 			'attributes'      => array(
-				'image'         => array( 'type' => 'string', 'default' => 'matches-live' ),
+				'image'         => array( 'type' => 'string', 'default' => '' ),
 				'url'           => array( 'type' => 'string', 'default' => '' ),
 				'requiredBlock' => array( 'type' => 'string', 'default' => '' ),
 			),
@@ -547,8 +550,20 @@ function wagerwise_render_block_cta_button( array $attrs ): string {
 }
 
 function wagerwise_render_block_ad_banner( array $attrs ): string {
+	// Empty/omitted 'image' auto-picks the next creative in the shared
+	// page-wide rotation (see wagerwise_next_ad_rotation_image()) instead of
+	// a fixed one — a hardcoded image on a static template placement is how
+	// it used to end up sitting right next to an inline grid ad showing the
+	// exact same creative. Pass an explicit image only to force one.
 	$image = $attrs['image'] ?? '';
-	$url   = $attrs['url'] ?? '';
+	if ( empty( $image ) ) {
+		// This block is always a static, single-column, full-width slot
+		// (never inside a card grid) — exclude the near-square creative on
+		// the homepage specifically, where it never sits well full-width;
+		// it's fine as a static banner on every other template.
+		$image = wagerwise_next_ad_rotation_image( is_front_page() );
+	}
+	$url = $attrs['url'] ?? '';
 	if ( empty( $url ) ) {
 		$url = get_option( 'ww_ad_network_url' );
 	}
@@ -573,6 +588,54 @@ function wagerwise_render_block_page_ad_banner( array $attrs ): string {
 		return '';
 	}
 	return wagerwise_render_block_ad_banner( $attrs );
+}
+
+add_filter( 'render_block', 'wagerwise_homepage_backfill_ad_banner', 10, 2 );
+
+/**
+ * The homepage's Home page content (Top Picks, Live Tournaments, Latest
+ * Reviews, Compare Top Casinos, Why Trust, Latest News) lives in a single
+ * opaque wp:post-content block per patterns.php/wagerwise_homepage_pattern_
+ * markup() — front-page.html has no way to insert a banner *between* two of
+ * those sections without editing that stored (per-language!) content, which
+ * this project has deliberately avoided before (see the homepage-teaser
+ * comment in sports-betting.php re: the guide-page slug collision). Some of
+ * those sections only ever show 2-4 items, too few to trigger their own
+ * grid's inline ad (wagerwise_grid_ad_slot()), and Compare Top Casinos is a
+ * <table>, which has no inline-ad mechanism at all — so several sections in
+ * a row render with zero ads. This hooks render-time instead: for specific
+ * listing blocks, if rendering them didn't already produce an inline ad,
+ * tack one on right after — language-agnostic (matches by block name, not
+ * translated heading text) and scoped to the front page only, so it can't
+ * affect /tournaments/, single-tournament.html, etc., which are already
+ * covered by their own inline ads or a manually-placed static banner.
+ */
+function wagerwise_homepage_backfill_ad_banner( string $block_content, array $block ): string {
+	if ( empty( $block_content ) || ! is_front_page() ) {
+		return $block_content;
+	}
+	// No 'wagerwise/news-grid' entry: front-page.html already places a
+	// static banner right after post-content, which lands immediately after
+	// this Latest News section (the last thing in post-content) —
+	// backfilling one here too stacked two ads back to back.
+	//
+	// tournament-grid is an actual CSS grid (same as /casinos/'s cards), so
+	// the near-square creative is fine there; casino-comparison-table is a
+	// literal single-column <table>, where it isn't — see
+	// wagerwise_next_ad_rotation_image()'s $exclude_square param.
+	$targets = array(
+		'wagerwise/tournament-grid'         => false,
+		'wagerwise/casino-comparison-table' => true,
+	);
+	$name = $block['blockName'] ?? '';
+	if ( ! isset( $targets[ $name ] ) || str_contains( $block_content, 'ww-ad-banner' ) ) {
+		return $block_content;
+	}
+	// Draws from the same shared rotation as every other ad on the page
+	// (see wagerwise_next_ad_rotation_image()), not a fixed image per block
+	// type, so this can't land showing the same creative as the ad right
+	// before or after it.
+	return $block_content . wagerwise_ad_banner_html( wagerwise_next_ad_rotation_image( $targets[ $name ] ), get_option( 'ww_ad_network_url' ) );
 }
 
 function wagerwise_render_block_blog_grid( array $attrs ): string {
