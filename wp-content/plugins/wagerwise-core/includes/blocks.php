@@ -64,6 +64,14 @@ function wagerwise_register_blocks(): void {
 				'url'   => array( 'type' => 'string', 'default' => '' ),
 			),
 		),
+		'page-ad-banner'          => array(
+			'render_callback' => 'wagerwise_render_block_page_ad_banner',
+			'attributes'      => array(
+				'image'         => array( 'type' => 'string', 'default' => 'matches-live' ),
+				'url'           => array( 'type' => 'string', 'default' => '' ),
+				'requiredBlock' => array( 'type' => 'string', 'default' => '' ),
+			),
+		),
 		'blog-grid'               => array(
 			'render_callback' => 'wagerwise_render_block_blog_grid',
 			'attributes'      => array(
@@ -545,6 +553,26 @@ function wagerwise_render_block_ad_banner( array $attrs ): string {
 		$url = get_option( 'ww_ad_network_url' );
 	}
 	return wagerwise_ad_banner_html( $image, $url );
+}
+
+/**
+ * Same as wagerwise/ad-banner, but silent unless the current page's own
+ * content contains $attrs['requiredBlock'] — for placing a banner in
+ * page.html (the ONE generic template shared by every WP Page, in every
+ * language: Sports Betting and Guide/News/Reviews hub pages, but also
+ * Privacy Policy, Responsible Gambling, Methodology, Contact…). A plain
+ * ad-banner in page.html would show on the compliance pages too, which
+ * undercuts trust; this only fires on pages actually composed with a
+ * commercial listing block, and — since has_block() checks post content,
+ * not the slug — it works identically across all 16 language versions of a
+ * given page without any per-language editing.
+ */
+function wagerwise_render_block_page_ad_banner( array $attrs ): string {
+	$post = get_post();
+	if ( ! $post || empty( $attrs['requiredBlock'] ) || ! has_block( $attrs['requiredBlock'], $post ) ) {
+		return '';
+	}
+	return wagerwise_render_block_ad_banner( $attrs );
 }
 
 function wagerwise_render_block_blog_grid( array $attrs ): string {
