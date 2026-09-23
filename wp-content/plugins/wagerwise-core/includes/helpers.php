@@ -282,7 +282,17 @@ function wagerwise_next_ad_rotation_image( bool $exclude_square = false ): strin
 		++$slot_number;
 		$image = $rotation[ ( $slot_number - 1 ) % count( $rotation ) ];
 	}
-	$last_image = $image;
+	// 'matches-live' is CSS-hidden above the mobile breakpoint (see
+	// main.css), so on desktop it's an invisible slot, not a visible ad —
+	// if it sat between two identical *other* creatives, a visitor would
+	// see those two land right next to each other on screen even though
+	// this function never technically picked the same image twice in a
+	// row. Not updating $last_image for it means the NEXT real pick still
+	// gets checked against the last one actually visible, regardless of
+	// how many invisible slots came in between.
+	if ( 'matches-live' !== $image ) {
+		$last_image = $image;
+	}
 	return $image;
 }
 
